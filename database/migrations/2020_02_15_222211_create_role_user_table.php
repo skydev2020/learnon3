@@ -17,7 +17,6 @@ class CreateRoleUserTable extends Migration
             $table->bigIncrements('id');
             $table->integer('role_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->timestamps();
         });
     }
 
