@@ -53,7 +53,7 @@ class User extends Authenticatable
 
     public function hasRole($roleName) {
         if ($this->roles()->where('name', $roleName)->first()) {
-            return;
+            return true;
         }
 
         return false;
