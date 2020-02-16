@@ -25,10 +25,10 @@
                                 <td scope="col">{{$user->email}}</td>
                                 <td scope="col">{{implode(', ', $user->roles()->get()->pluck('name')->toArray())}}</td>
                                 <td scope="col">
-                                    @can('edit_users')
+                                    @can('edit-users')
                                         <a href="{{route('admin.users.edit', $user->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
                                     @endcan
-                                    @can('delete_users')
+                                    @can('delete-users')
                                     <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="float-left">
                                         @csrf
                                         {{method_field('DELETE')}}
