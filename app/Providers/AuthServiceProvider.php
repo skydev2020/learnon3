@@ -62,8 +62,30 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('manage-tutoring-resource', function($user) {
-            return $user->hasRole('admin, student');
+            return $user->hasAnyRoles(['admin','tutor']);
         });
-        //
+
+
+        // Tutor Related
+        Gate::define('manage-payment-records', function($user) {
+            return $user->hasRole('tutor');
+        });
+
+        Gate::define('manage-tutor-students', function($user) {
+            return $user->hasRole('tutor');
+        });
+
+        Gate::define('manage-essay', function($user) {
+            return $user->hasRole('tutor');
+        });
+
+        Gate::define('manage-sessions', function($user) {
+            return $user->hasRole('tutor');
+        });
+
+        Gate::define('manage-report-cards', function($user) {
+            // return $user->hasRole('tutor');
+            return $user->hasAnyRoles(['tutor','student']);
+        });
     }
 }

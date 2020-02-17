@@ -84,6 +84,16 @@
                                 </div>
                             </li>
                             @endcan
+                            @can('manage-payment-records')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Payment Records</a>
+                            </li>
+                            @endcan
+                            @can('manage-tutor-students')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">List Students</a>
+                            </li>
+                            @endcan
                             @can('manage-cms')
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -100,6 +110,11 @@
                                 </div>
                             </li>
                             @endcan
+                            @can('manage-essay')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Essays</a>
+                            </li>
+                            @endcan
                             @can('manage-reports')
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -112,6 +127,11 @@
                                     <a class="dropdown-item" href="#">Tutor Report</a>
                                     <a class="dropdown-item" href="#">Student Report</a>
                                 </div>
+                            </li>
+                            @endcan
+                            @can('manage-sessions')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Sessions</a>
                             </li>
                             @endcan
                             @can('manage-system')
@@ -131,12 +151,17 @@
                                 </div>
                             </li>
                             @endcan
+                            @can('manage-report-cards')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Report Records</a>
+                            </li>
+                            @endcan
                             @can('manage-tutoring-resource')
                             <li class="nav-item">
                                 <a class="nav-link" target="_blank" href="http://learnon.ca/tutor-help-center/">Tutoring Resources</a>
                             </li>
                             @endcan
-                            <li class="nav-item">
+                                <li class="nav-item">
                                 <a class="nav-link" href="#">Help</a>
                             </li>
                         @endauth
