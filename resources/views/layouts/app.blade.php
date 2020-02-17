@@ -39,26 +39,85 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">My Profile</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Students</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Students
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Student Assignment</a>
+                                <a class="dropdown-item" href="#">Student Packages</a>
+                                <a class="dropdown-item" href="#">Packages</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tutors
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Sessions</a>
+                                <a class="dropdown-item" href="#">Tutor Assignment</a>
+                                <a class="dropdown-item" href="#">Homework Assignments</a>
+                                <a class="dropdown-item" href="#">Rejected Tutors</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Payments
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Billing Process</a>
+                                <a class="dropdown-item" href="#">Student Invoices</a>
+                                <a class="dropdown-item" href="#">Tutors Paycheques</a>
+                                <a class="dropdown-item" href="#">Payment Received</a>
+                                <a class="dropdown-item" href="#">Monthly Expenses</a>
+                                <a class="dropdown-item" href="#">Other Income</a>
+                                <a class="dropdown-item" href="#">CSV Upload</a>
+                                <a class="dropdown-item" href="#">Base Invoice Rates</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                CMS
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Information</a>
+                                <a class="dropdown-item" href="#">Coupons</a>
+                                <a class="dropdown-item" href="#">Email Templates</a>
+                                <a class="dropdown-item" href="#">Mail Log</a>
+                                <a class="dropdown-item" href="#">Activity Log</a>
+                                <a class="dropdown-item" href="#">Send Email</a>
+                                <a class="dropdown-item" href="#">Send Notification</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Reports
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Report Cards</a>
+                                <a class="dropdown-item" href="#">View Monthly Data</a>
+                                <a class="dropdown-item" href="#">Email Templates</a>
+                                <a class="dropdown-item" href="#">Tutor Report</a>
+                                <a class="dropdown-item" href="#">Student Report</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                System
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Settings</a>
+                                <a class="dropdown-item" href="#">Users</a>
+                                <a class="dropdown-item" href="#">Countries</a>
+                                <a class="dropdown-item" href="#">Province / State</a>
+                                <a class="dropdown-item" href="#">Subjects</a>
+                                <a class="dropdown-item" href="#">Grades</a>
+                                <a class="dropdown-item" href="#">Error Logs</a>
+                                <a class="dropdown-item" href="#">Backup / Restore</a>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Tutors</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Payments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">CMS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Reports</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">System</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Tutoring Resources</a>
+                            <a class="nav-link" target="_blank" href="http://learnon.ca/tutor-help-center/">Tutoring Resources</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Help</a>
