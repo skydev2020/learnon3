@@ -44,6 +44,7 @@
                                 Students
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Student List</a>
                                 <a class="dropdown-item" href="#">Student Assignment</a>
                                 <a class="dropdown-item" href="#">Student Packages</a>
                                 <a class="dropdown-item" href="#">Packages</a>
@@ -54,6 +55,7 @@
                                 Tutors
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Tutors List</a>
                                 <a class="dropdown-item" href="#">Sessions</a>
                                 <a class="dropdown-item" href="#">Tutor Assignment</a>
                                 <a class="dropdown-item" href="#">Homework Assignments</a>
