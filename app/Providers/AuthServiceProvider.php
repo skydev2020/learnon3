@@ -87,5 +87,22 @@ class AuthServiceProvider extends ServiceProvider
             // return $user->hasRole('tutor');
             return $user->hasAnyRoles(['tutor','student']);
         });
+
+        // Student Related
+        Gate::define('manage-student-tutors', function($user) {
+            return $user->hasRole('student');
+        });
+
+        Gate::define('manage-invoices', function($user) {
+            return $user->hasRole('student');
+        });
+
+        Gate::define('manage-add-student', function($user) {
+            return $user->hasRole('student');
+        });
+
+        Gate::define('manage-discount-package', function($user) {
+            return $user->hasRole('student');
+        });
     }
 }

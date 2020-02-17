@@ -94,6 +94,21 @@
                                 <a class="nav-link" href="#">List Students</a>
                             </li>
                             @endcan
+                            @can('manage-student-tutors')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">My Tutors</a>
+                            </li>
+                            @endcan
+                            @can('manage-invoices')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Invoices</a>
+                            </li>
+                            @endcan
+                            @can('manage-add-student')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Add Student</a>
+                            </li>
+                            @endcan
                             @can('manage-cms')
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -149,6 +164,11 @@
                                     <a class="dropdown-item" href="#">Error Logs</a>
                                     <a class="dropdown-item" href="#">Backup / Restore</a>
                                 </div>
+                            </li>
+                            @endcan
+                            @can('manage-discount-package')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Buy Discount Package</a>
                             </li>
                             @endcan
                             @can('manage-report-cards')
