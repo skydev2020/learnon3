@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Config;
 use Config;
 /**
  * StudentsController is working with Students
@@ -19,15 +21,16 @@ class StudentsController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource of ROLE_STUDEN
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
-        $students = User::find(Config::get('app.STUDENT_ROLE_ID'))->get();
-        // dd($students);
+        // dd(config('global.STUDENT_ROLE_ID'));
+        // $allStudents = Role::find(config('global.STUDENT_ROLE_ID'))->users;
+
+        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->where('email','like', '%learnon%')->get();
         return view('admin.students.index')->with('students', $students);
     }
 
