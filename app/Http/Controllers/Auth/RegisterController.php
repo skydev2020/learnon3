@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use App\Role;
+use App\Country;
+use App\State;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -51,9 +53,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'home_phone' => ['required', 'string'],
+            'cell_phone' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'state' => ['required', 'string'],
+            'pcode' => ['required', 'string'],
+            'country' => ['required', 'string'],
         ]);
     }
 
@@ -65,14 +75,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        $country = Country::select('id')->where('name', $data['country'])->first();
+        $state = State::select('id')->where('name', $data['state'])->first();
+
         $user = User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'home_phone' => $data['home_phone'],
+            'cell_phone' => $data['cell_phone'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'state_id' => $state->id,
+            'pcode' => $data['pcode'],
+            'country_id' => $country->id,
         ]);
 
-        $role = Role::select('id')->where('name', 'user')->first();
-
+        $role = Role::select('id')->where('name', 'Student')->first();
         $user->roles()->attach($role);
         return $user;
     }

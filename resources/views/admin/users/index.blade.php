@@ -21,7 +21,7 @@
                         @foreach ($users as $user)
                             <tr>
                                 <th scope="row">{{$user->id}}</th>
-                                <td scope="col">{{$user->name}}</td>
+                                <td scope="col">{{$user->first_name . $user->last_name}}</td>
                                 <td scope="col">{{$user->email}}</td>
                                 <td scope="col">{{implode(', ', $user->roles()->get()->pluck('name')->toArray())}}</td>
                                 <td scope="col">

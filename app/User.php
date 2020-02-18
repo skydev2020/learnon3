@@ -16,7 +16,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'password', 'home_phone', 'cell_phone', 'address', 'city', 'state_id', 'pcode',
+         'country_id'
     ];
 
     /**
@@ -57,5 +58,13 @@ class User extends Authenticatable
         }
 
         return false;
+    }
+
+    public function country(){
+        return $this->belongsTo('App\Country');
+    }
+
+    public function state(){
+        return $this->belongsTo('App\State');
     }
 }
