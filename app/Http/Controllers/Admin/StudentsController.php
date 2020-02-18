@@ -27,9 +27,6 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        // dd(config('global.STUDENT_ROLE_ID'));
-        // $allStudents = Role::find(config('global.STUDENT_ROLE_ID'))->users;
-
         $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->where('email','like', '%learnon%')->get();
         return view('admin.students.index')->with('students', $students);
     }
