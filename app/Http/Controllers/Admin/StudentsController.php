@@ -3,27 +3,32 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Role;
 use App\User;
+use App\Role;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
+// use Illuminate\Support\Facades\Config;
+use Config;
+/**
+ * StudentsController is working with Students
+ * Student is a User whose Role is Student
+ */
 
-class UsersController extends Controller
+class StudentsController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-
     }
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource of ROLE_STUDEN
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $users = User::all();
-        return view('admin.users.index')->with('users', $users);
+        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->where('email','like', '%learnon%')->get();
+        return view('admin.students.index')->with('students', $students);
     }
 
     /**
@@ -34,6 +39,7 @@ class UsersController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -66,15 +72,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        if (Gate::denies('edit-users')) {
-            return redirect(route('admin.users.index'));
-        }
-
-        $roles = Role::all();
-        return view('admin.users.edit')->with([
-            'user' => $user,
-            'roles' => $roles
-        ]);
+        //
     }
 
     /**
@@ -86,20 +84,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->roles()->sync($request->roles);
-
-        $user->first_name = $request->name;
-        $user->email = $request->email;
-
-        if ($user->save()){
-            $request->session()->flash('success', $user->first_name . ' has been updated');
-        } else {
-            $request->session()->flash('error', 'There was an error updating the user');
-        }
-
-
-
-        return redirect()->route('admin.users.index');
+        //
     }
 
     /**
@@ -110,14 +95,6 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-
-        if (Gate::denies('delete-users')) {
-            return redirect(route('admin.users.index'));
-        }
-
-        $user->roles()->detach();
-        $user->delete();
-
-        return redirect()->route('admin.users.index');
+        //
     }
 }
