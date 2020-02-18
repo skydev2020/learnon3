@@ -33,7 +33,158 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">My Profile</a>
+                            </li>
+                            @can('manage-students')
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Students
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Student List</a>
+                                    <a class="dropdown-item" href="#">Student Assignment</a>
+                                    <a class="dropdown-item" href="#">Student Packages</a>
+                                    <a class="dropdown-item" href="#">Packages</a>
+                                </div>
+                            </li>
+                            @endcan
+                            @can('manage-tutors')
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Tutors
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Tutors List</a>
+                                    <a class="dropdown-item" href="#">Sessions</a>
+                                    <a class="dropdown-item" href="#">Tutor Assignment</a>
+                                    <a class="dropdown-item" href="#">Homework Assignments</a>
+                                    <a class="dropdown-item" href="#">Rejected Tutors</a>
+                                </div>
+                            </li>
+                            @endcan
+                            @can('manage-payments')
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Payments
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Billing Process</a>
+                                    <a class="dropdown-item" href="#">Student Invoices</a>
+                                    <a class="dropdown-item" href="#">Tutors Paycheques</a>
+                                    <a class="dropdown-item" href="#">Payment Received</a>
+                                    <a class="dropdown-item" href="#">Monthly Expenses</a>
+                                    <a class="dropdown-item" href="#">Other Income</a>
+                                    <a class="dropdown-item" href="#">CSV Upload</a>
+                                    <a class="dropdown-item" href="#">Base Invoice Rates</a>
+                                </div>
+                            </li>
+                            @endcan
+                            @can('manage-payment-records')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Payment Records</a>
+                            </li>
+                            @endcan
+                            @can('manage-tutor-students')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">List Students</a>
+                            </li>
+                            @endcan
+                            @can('manage-student-tutors')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">My Tutors</a>
+                            </li>
+                            @endcan
+                            @can('manage-invoices')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Invoices</a>
+                            </li>
+                            @endcan
+                            @can('manage-add-student')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Add Student</a>
+                            </li>
+                            @endcan
+                            @can('manage-cms')
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    CMS
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Information</a>
+                                    <a class="dropdown-item" href="#">Coupons</a>
+                                    <a class="dropdown-item" href="#">Email Templates</a>
+                                    <a class="dropdown-item" href="#">Mail Log</a>
+                                    <a class="dropdown-item" href="#">Activity Log</a>
+                                    <a class="dropdown-item" href="#">Send Email</a>
+                                    <a class="dropdown-item" href="#">Send Notification</a>
+                                </div>
+                            </li>
+                            @endcan
+                            @can('manage-essay')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Essays</a>
+                            </li>
+                            @endcan
+                            @can('manage-reports')
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Reports
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Report Cards</a>
+                                    <a class="dropdown-item" href="#">View Monthly Data</a>
+                                    <a class="dropdown-item" href="#">Email Templates</a>
+                                    <a class="dropdown-item" href="#">Tutor Report</a>
+                                    <a class="dropdown-item" href="#">Student Report</a>
+                                </div>
+                            </li>
+                            @endcan
+                            @can('manage-sessions')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Sessions</a>
+                            </li>
+                            @endcan
+                            @can('manage-system')
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    System
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Settings</a>
+                                    <a class="dropdown-item" href="#">Users</a>
+                                    <a class="dropdown-item" href="#">Countries</a>
+                                    <a class="dropdown-item" href="#">Province / State</a>
+                                    <a class="dropdown-item" href="#">Subjects</a>
+                                    <a class="dropdown-item" href="#">Grades</a>
+                                    <a class="dropdown-item" href="#">Error Logs</a>
+                                    <a class="dropdown-item" href="#">Backup / Restore</a>
+                                </div>
+                            </li>
+                            @endcan
+                            @can('manage-discount-package')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Buy Discount Package</a>
+                            </li>
+                            @endcan
+                            @can('manage-report-cards')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Report Records</a>
+                            </li>
+                            @endcan
+                            @can('manage-tutoring-resource')
+                            <li class="nav-item">
+                                <a class="nav-link" target="_blank" href="http://learnon.ca/tutor-help-center/">Tutoring Resources</a>
+                            </li>
+                            @endcan
+                                <li class="nav-item">
+                                <a class="nav-link" href="#">Help</a>
+                            </li>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->
