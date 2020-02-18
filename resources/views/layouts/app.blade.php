@@ -46,7 +46,7 @@
                                     Students
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Student List</a>
+                                    <a class="dropdown-item" href="{{route('admin.students.index')}}">Student List</a>
                                     <a class="dropdown-item" href="#">Student Assignment</a>
                                     <a class="dropdown-item" href="#">Student Packages</a>
                                     <a class="dropdown-item" href="#">Packages</a>
@@ -173,7 +173,7 @@
                             @endcan
                             @can('manage-report-cards')
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Report Records</a>
+                                <a class="nav-link" href="#">Report Cards</a>
                             </li>
                             @endcan
                             @can('manage-tutoring-resource')
