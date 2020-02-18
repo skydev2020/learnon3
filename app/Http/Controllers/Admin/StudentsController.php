@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Config;
 /**
  * StudentsController is working with Students
  * Student is a User whose Role is Student
@@ -25,7 +26,7 @@ class StudentsController extends Controller
     public function index()
     {
         //
-        $students = User::all();
+        $students = User::find(Config::get('app.STUDENT_ROLE_ID'))->get();
         // dd($students);
         return view('admin.students.index')->with('students', $students);
     }
