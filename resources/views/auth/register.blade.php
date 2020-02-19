@@ -141,15 +141,23 @@
                             <label for="state" class="col-md-4 col-form-label text-md-right">{{ __('State') }}</label>
 
                             <div class="col-md-6">
+                                <input type="hidden" name="selected_index" value="" id="select_index_fld" />
                                 <select name="state" id="state">
                                     <?php use App\State;
                                     $states = State::all();
                                     ?>
                                     @foreach($states as $state)
-                                        <option> {{ $state->name }}</option>
+                                        <option value = {{$state->id}}> {{ $state->name }}</option>
                                     @endforeach
                                     
                                 </select>
+                                
+                                <script>
+                                    var beforeSubmit = function () {
+                                        $('#select_index_fld').val($('#state').attr("selectedIndex"));
+                                        return true;
+                                    }
+                                </script>
 
                                 @error('state')
                                     <span class="invalid-feedback" role="alert">
@@ -183,7 +191,7 @@
                                     $countries = Country::all();
                                     ?>
                                     @foreach($countries as $country)
-                                        <option> {{ $country->name }}</option>
+                                        <option value = {{$country->id}} > {{ $country->name }}</option>
                                     @endforeach
                                     
                                 </select>

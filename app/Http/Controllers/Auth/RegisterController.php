@@ -65,7 +65,7 @@ class RegisterController extends Controller
             'city' => ['required', 'string'],
             'state' => ['required', 'string'],
             'pcode' => ['required', 'string'],
-            'country' => ['required', 'string', 'min:8'],
+            'country' => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {
@@ -83,26 +83,32 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
+        
         $user = User::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
+            'fname' => $data['first_name'],
+            'lname' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'home_phone' => $data['home_phone'],
             'cell_phone' => $data['cell_phone'],
             'address' => $data['address'],
             'city' => $data['city'],
-            'state_id' => $state->id,
+            'state_id' =>  $data['state'],
             'pcode' => $data['pcode'],
-            'country_id' => $data['country_id'],
+            'country_id' => $data['country'],
         ]);
+        echo($data['state']);
+        dd($data['country']);
 
+        if ($user == NULL)
+        {
+            session()->flash('error', "There was an error registering your account");
+        }
 
         $role = Role::select('id')->where('name', 'Student')->first();
         $user->roles()->attach($role);
 
-        session()->flash('error', "Success Message");
+        session()->flash('success', $user->fname . $user->lname . " has been registered successfully");
 
         return $user;
     }
