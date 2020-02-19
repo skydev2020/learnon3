@@ -103,6 +103,7 @@ class RegisterController extends Controller
         if ($user == NULL)
         {
             session()->flash('error', "There was an error registering your account");
+            return null;
         }
 
         $role = Role::select('id')->where('name', 'Student')->first();
