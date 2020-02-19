@@ -52,13 +52,13 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data, Request $request)
+    protected function validator(array $data)
     {
         $validator = Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:1', 'confirmed'],
             'home_phone' => ['required', 'string'],
             'cell_phone' => ['required', 'string'],
             'address' => ['required', 'string'],
@@ -69,7 +69,7 @@ class RegisterController extends Controller
         ]);
 
         if ($validator->fails()) {
-            $request->session()->flash('error', $validator->messages()->first());
+            session()->flash('error', $validator->messages()->first());
         }
 
         return $validator;
@@ -83,8 +83,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $country = Country::select('id')->where('name', $data['country'])->first();
-        $state = State::select('id')->where('name', $data['state'])->first();
 
         $user = User::create([
             'first_name' => $data['first_name'],
@@ -97,32 +95,17 @@ class RegisterController extends Controller
             'city' => $data['city'],
             'state_id' => $state->id,
             'pcode' => $data['pcode'],
-            'country_id' => $country->id,
+            'country_id' => $data['country_id'],
         ]);
 
 
         $role = Role::select('id')->where('name', 'Student')->first();
         $user->roles()->attach($role);
+
+        session()->flash('error', "Success Message");
+
         return $user;
     }
 
-    /**
-     * Handle a registration request for the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    // public function register(Request $request)
-    // {
-        // $this->validator($request->all(), $request)->validate();
 
-        // event(new Registered($user = $this->create($request->all())));
-
-        // session()->flash('success', $user->first_name . $user->last_name . ' has been registered successfully');
-        // $this->guard()->login($user);
-
-        // return $this->registered($request, $user)
-        //                  ?: redirect($this->redirectPath());
-    //     return $this->redirectPath();
-    // }
 }
