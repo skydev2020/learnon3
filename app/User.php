@@ -17,7 +17,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'fname', 'lname', 'email', 'password', 'home_phone', 'cell_phone', 'address', 'city', 'state_id', 'pcode',
+<<<<<<< HEAD
          'country_id', 'grade_id', 'parent_fname', 'parent_lname', 'street', 'school'
+=======
+         'country_id', 'grade_id', 'parent_fname', 'parent_lname', 'street', 'school', 'how_id'
+>>>>>>> register_fix
     ];
 
     /**

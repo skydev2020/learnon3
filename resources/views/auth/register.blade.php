@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                        
+
 
                         <div class="form-group row">
                             <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
@@ -138,20 +138,20 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="state" class="col-md-4 col-form-label text-md-right">{{ __('State') }}</label>
+                            <label for="state_id" class="col-md-4 col-form-label text-md-right">{{ __('Province / State') }}</label>
 
                             <div class="col-md-6">
-                                <select name="state" id="state">
+                                <select name="state_id" id="state_id">
                                     <?php use App\State;
                                     $states = State::all();
                                     ?>
                                     @foreach($states as $state)
-                                        <option> {{ $state->name }}</option>
+                                        <option value = {{$state->id}}> {{ $state->name }}</option>
                                     @endforeach
-                                    
+
                                 </select>
 
-                                @error('state')
+                                @error('state_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -175,20 +175,20 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
+                            <label for="country_id" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
 
                             <div class="col-md-6">
-                                <select name="country" id="country">
+                                <select name="country_id" id="country_id">
                                     <?php use App\Country;
                                     $countries = Country::all();
                                     ?>
                                     @foreach($countries as $country)
-                                        <option> {{ $country->name }}</option>
+                                        <option value = {{$country->id}} > {{ $country->name }}</option>
                                     @endforeach
-                                    
+
                                 </select>
 
-                                @error('country')
+                                @error('country_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

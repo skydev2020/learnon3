@@ -53,9 +53,10 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data, Request $request)
+    protected function validator(array $data)
     {
         $validator = Validator::make($data, [
+<<<<<<< HEAD
             'fname'         => ['required', 'string', 'max:255'],
             'lname'         => ['required', 'string', 'max:255'],
             'email'         => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -67,10 +68,23 @@ class RegisterController extends Controller
             'state'         => ['required', 'string'],
             'pcode'         => ['required', 'string'],
             'country'       => ['required', 'string'],
+=======
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:1', 'confirmed'],
+            'home_phone' => ['required', 'string'],
+            'cell_phone' => ['required', 'string'],
+            'address' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'state_id' => ['required', 'integer'],
+            'pcode' => ['required', 'string'],
+            'country_id' => ['required', 'integer'],
+>>>>>>> register_fix
         ]);
 
         if ($validator->fails()) {
-            $request->session()->flash('error', $validator->messages()->first());
+            session()->flash('error', $validator->messages()->first());
         }
 
         return $validator;
@@ -84,6 +98,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+<<<<<<< HEAD
         $country = Country::select('id')->where('name', $data['country'])->first();
         $state = State::select('id')->where('name', $data['state'])->first();
         $grade = Grade::select('id')->where('name', $data['grade'])->first();
@@ -105,30 +120,43 @@ class RegisterController extends Controller
             'parent_lname'  => $data['parent_lname'],
             'street'        => $data['street'],
             'school'        => $data['school'],
-        ]);
+=======
 
+        $user = User::create([
+            'fname' => $data['first_name'],
+            'lname' => $data['last_name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'home_phone' => $data['home_phone'],
+            'cell_phone' => $data['cell_phone'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'state_id' =>  $data['state_id'],
+            'pcode' => $data['pcode'],
+            'country_id' => $data['country_id'],
+>>>>>>> register_fix
+        ]);
+        // echo($data['state_id']);
+        // dd($data['country_id']);
+
+        if ($user == NULL)
+        {
+            session()->flash('error', "There was an error registering your account");
+            return null;
+        }
 
         $role = Role::select('id')->where('name', 'Student')->first();
         $user->roles()->attach($role);
+
+        session()->flash('success', $user->fname . $user->lname . " has been registered successfully");
+
         return $user;
     }
 
-    /**
-     * Handle a registration request for the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function register(Request $request)
-    {
-        $this->validator($request->all(), $request)->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
+<<<<<<< HEAD
         $request->session()->flash('success', $user->fname . $user->lname . ' has been registered successfully');
         $this->guard()->login($user);
+=======
+>>>>>>> register_fix
 
-        return $this->registered($request, $user)
-                         ?: redirect($this->redirectPath());
-    }
 }
