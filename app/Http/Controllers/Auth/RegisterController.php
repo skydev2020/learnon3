@@ -63,9 +63,9 @@ class RegisterController extends Controller
             'cell_phone' => ['required', 'string'],
             'address' => ['required', 'string'],
             'city' => ['required', 'string'],
-            'state' => ['required', 'string'],
+            'state_id' => ['required', 'string'],
             'pcode' => ['required', 'string'],
-            'country' => ['required', 'string'],
+            'country_id' => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {
@@ -83,7 +83,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        
+
         $user = User::create([
             'fname' => $data['first_name'],
             'lname' => $data['last_name'],
@@ -93,12 +93,12 @@ class RegisterController extends Controller
             'cell_phone' => $data['cell_phone'],
             'address' => $data['address'],
             'city' => $data['city'],
-            'state_id' =>  $data['state'],
+            'state_id' =>  $data['country_id'],
             'pcode' => $data['pcode'],
-            'country_id' => $data['country'],
+            'country_id' => $data['country_id'],
         ]);
-        echo($data['state']);
-        dd($data['country']);
+        echo($data['state_id']);
+        dd($data['country_id']);
 
         if ($user == NULL)
         {

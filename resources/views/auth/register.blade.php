@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                        
+
 
                         <div class="form-group row">
                             <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
@@ -142,16 +142,16 @@
 
                             <div class="col-md-6">
                                 <input type="hidden" name="selected_index" value="" id="select_index_fld" />
-                                <select name="state" id="state">
+                                <select name="state_id" id="state">
                                     <?php use App\State;
                                     $states = State::all();
                                     ?>
                                     @foreach($states as $state)
                                         <option value = {{$state->id}}> {{ $state->name }}</option>
                                     @endforeach
-                                    
+
                                 </select>
-                                
+
                                 <script>
                                     var beforeSubmit = function () {
                                         $('#select_index_fld').val($('#state').attr("selectedIndex"));
@@ -186,14 +186,14 @@
                             <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
 
                             <div class="col-md-6">
-                                <select name="country" id="country">
+                                <select name="country_id" id="country">
                                     <?php use App\Country;
                                     $countries = Country::all();
                                     ?>
                                     @foreach($countries as $country)
                                         <option value = {{$country->id}} > {{ $country->name }}</option>
                                     @endforeach
-                                    
+
                                 </select>
 
                                 @error('country')
