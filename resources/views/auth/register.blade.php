@@ -138,11 +138,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="state" class="col-md-4 col-form-label text-md-right">{{ __('State') }}</label>
+                            <label for="state_id" class="col-md-4 col-form-label text-md-right">{{ __('Province / State') }}</label>
 
                             <div class="col-md-6">
-                                <input type="hidden" name="selected_index" value="" id="select_index_fld" />
-                                <select name="state_id" id="state">
+                                <select name="state_id" id="state_id">
                                     <?php use App\State;
                                     $states = State::all();
                                     ?>
@@ -152,14 +151,7 @@
 
                                 </select>
 
-                                <script>
-                                    var beforeSubmit = function () {
-                                        $('#select_index_fld').val($('#state').attr("selectedIndex"));
-                                        return true;
-                                    }
-                                </script>
-
-                                @error('state')
+                                @error('state_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -183,10 +175,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="country" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
+                            <label for="country_id" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
 
                             <div class="col-md-6">
-                                <select name="country_id" id="country">
+                                <select name="country_id" id="country_id">
                                     <?php use App\Country;
                                     $countries = Country::all();
                                     ?>
@@ -196,7 +188,7 @@
 
                                 </select>
 
-                                @error('country')
+                                @error('country_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
