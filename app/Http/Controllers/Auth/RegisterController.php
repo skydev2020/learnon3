@@ -112,16 +112,17 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function register(Request $request)
-    {
-        $this->validator($request->all(), $request)->validate();
+    // public function register(Request $request)
+    // {
+        // $this->validator($request->all(), $request)->validate();
 
-        event(new Registered($user = $this->create($request->all())));
+        // event(new Registered($user = $this->create($request->all())));
 
-        $request->session()->flash('success', $user->first_name . $user->last_name . ' has been registered successfully');
-        $this->guard()->login($user);
+        // session()->flash('success', $user->first_name . $user->last_name . ' has been registered successfully');
+        // $this->guard()->login($user);
 
-        return $this->registered($request, $user)
-                         ?: redirect($this->redirectPath());
-    }
+        // return $this->registered($request, $user)
+        //                  ?: redirect($this->redirectPath());
+    //     return $this->redirectPath();
+    // }
 }
