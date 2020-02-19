@@ -8,6 +8,7 @@ use App\User;
 use App\Role;
 use App\Country;
 use App\State;
+use App\Grade;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -55,17 +56,17 @@ class RegisterController extends Controller
     protected function validator(array $data, Request $request)
     {
         $validator = Validator::make($data, [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'home_phone' => ['required', 'string'],
-            'cell_phone' => ['required', 'string'],
-            'address' => ['required', 'string'],
-            'city' => ['required', 'string'],
-            'state' => ['required', 'string'],
-            'pcode' => ['required', 'string'],
-            'country' => ['required', 'string', 'min:8'],
+            'fname'         => ['required', 'string', 'max:255'],
+            'lname'         => ['required', 'string', 'max:255'],
+            'email'         => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'      => ['required', 'string', 'min:8', 'confirmed'],
+            'home_phone'    => ['required', 'string'],
+            'cell_phone'    => ['required', 'string'],
+            'address'       => ['required', 'string'],
+            'city'          => ['required', 'string'],
+            'state'         => ['required', 'string'],
+            'pcode'         => ['required', 'string'],
+            'country'       => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {
@@ -85,19 +86,25 @@ class RegisterController extends Controller
     {
         $country = Country::select('id')->where('name', $data['country'])->first();
         $state = State::select('id')->where('name', $data['state'])->first();
+        $grade = Grade::select('id')->where('name', $data['grade'])->first();
 
         $user = User::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'home_phone' => $data['home_phone'],
-            'cell_phone' => $data['cell_phone'],
-            'address' => $data['address'],
-            'city' => $data['city'],
-            'state_id' => $state->id,
-            'pcode' => $data['pcode'],
-            'country_id' => $country->id,
+            'fname'         => $data['fname'],
+            'lname'         => $data['lname'],
+            'email'         => $data['email'],
+            'password'      => Hash::make($data['password']),
+            'home_phone'    => $data['home_phone'],
+            'cell_phone'    => $data['cell_phone'],
+            'address'       => $data['address'],
+            'city'          => $data['city'],
+            'state_id'      => $state->id,
+            'pcode'         => $data['pcode'],
+            'country_id'    => $country->id,
+            'grade_id'      => $grade->id,
+            'parent_fname'  => $data['parent_fname'],
+            'parent_lname'  => $data['parent_lname'],
+            'street'        => $data['street'],
+            'school'        => $data['school'],
         ]);
 
 
@@ -118,7 +125,7 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        $request->session()->flash('success', $user->first_name . $user->last_name . ' has been registered successfully');
+        $request->session()->flash('success', $user->fname . $user->lname . ' has been registered successfully');
         $this->guard()->login($user);
 
         return $this->registered($request, $user)

@@ -16,8 +16,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'home_phone', 'cell_phone', 'address', 'city', 'state_id', 'pcode',
-         'country_id'
+        'fname', 'lname', 'email', 'password', 'home_phone', 'cell_phone', 'address', 'city', 'state_id', 'pcode',
+         'country_id', 'grade_id', 'parent_fname', 'parent_lname', 'street', 'school'
     ];
 
     /**
@@ -66,5 +66,9 @@ class User extends Authenticatable
 
     public function state(){
         return $this->belongsTo('App\State');
+    }
+
+    public function grade(){
+        return $this->belongsTo('App\Grade');
     }
 }
