@@ -24,3 +24,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
     Route::resource('/students', 'StudentsController', ['except' => ['show', 'create', 'store']]);
 });
+
+Route::get('/register_tutor', 'auth\RegisterTutorController@index')->name('register_tutor');
+
+Route::post('register_tutor', 'auth\RegisterTutorController@register');

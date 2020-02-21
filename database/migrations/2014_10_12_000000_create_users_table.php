@@ -37,6 +37,7 @@ class CreateUsersTable extends Migration
             $table->string('parent_lname');
             $table->string('street');
             $table->string('school');
+            $table->bigInteger('how_id')->references('id')->on('hows')->onDelete('cascade');
             $table->timestamps();
         });
     }

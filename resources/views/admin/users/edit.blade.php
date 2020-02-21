@@ -25,13 +25,28 @@
                         </div>
                         
                         <div class="form-group row">
-                            <label for="name" class="col-md-2 col-form-label text-md-right">Name</label>
+                            <label for="fname" class="col-md-2 col-form-label text-md-right">First Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                 name="name" value="{{ $user->first_name }}" required autofocus>
+                                <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror"
+                                 name="fname" value="{{ $user->fname }}" required autofocus>
 
                                 @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="fname" class="col-md-2 col-form-label text-md-right">Last Name</label>
+
+                            <div class="col-md-6">
+                                <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"
+                                 name="lname" value="{{ $user->lname }}" required autofocus>
+
+                                @error('lname')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -67,12 +67,12 @@ class RegisterController extends Controller
             'state_id'      => ['required', 'integer'],
             'pcode'         => ['required', 'string'],
             'country_id'    => ['required', 'integer'],
-            'grade_id'      => ['required', 'integer'],
-            'parent_fname'  => ['required', 'string'],
-            'parent_lname'  => ['required', 'string'],
-            'street'        => ['required', 'string'],
-            'school'        => ['required', 'string'],
-            'how_id'        => ['required', 'integer']
+            // 'grade_id'      => ['required', 'integer'],
+            // 'parent_fname'  => ['required', 'string'],
+            // 'parent_lname'  => ['required', 'string'],
+            // 'street'        => ['required', 'string'],
+            // 'school'        => ['required', 'string'],
+            // 'how_id'        => ['required', 'integer']
         ]);
 
         if ($validator->fails()) {
@@ -100,15 +100,26 @@ class RegisterController extends Controller
             'cell_phone'            => $data['cell_phone'],
             'address'               => $data['address'],
             'city'                  => $data['city'],
-            'state_id'              => $data['state_id'],
+            'state_id'              =>  $data['state_id'],
             'pcode'                 => $data['pcode'],
             'country_id'            => $data['country_id'],
-            'grade_id'              => $data['grade_id'],
-            'parent_fname'          => $data['parent_fname'],
-            'parent_lname'          => $data['parent_lname'],
-            'street'                => $data['street'],
-            'school'                => $data['school'],
-            'how_id'                => $data['how_id'],
+            //'grade_id'              => $data['grade_id'],
+            // 'parent_fname'          => $data['parent_fname'],
+            // 'parent_lname'          => $data['parent_lname'],
+            // 'street'                => $data['street'],
+            // 'school'                => $data['school'],
+            // 'how_id'                => $data['how_id'],
+            'other_notes'           => $data['other_notes'],
+            'post_secondary_edu'    => $data['post_secondary_edu'],
+            'area_of_concentration' => $data['area_of_concentration'],
+            'tutoring_courses'      => $data['tutoring_courses'],
+            'work_experience'       => $data['work_experience'],
+            'tutoring_areas'        => $data['tutoring_areas'],
+            'gender'                => $data['sex_val'],
+            'certified_teacher'     => $data['ct_radio'],
+            'criminal_record'       => $data['cr_radio'],
+            'criminal_check'        => $data['cc_radio'],
+            
         ]);
 
         // echo($data['state_id']);

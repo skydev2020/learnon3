@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 
-class RegisterController extends Controller
+class RegisterTutorController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -56,23 +56,27 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         $validator = Validator::make($data, [
-            'fname'    => ['required', 'string', 'max:255'],
-            'lname'     => ['required', 'string', 'max:255'],
-            'email'         => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'      => ['required', 'string', 'min:1', 'confirmed'],
-            'home_phone'    => ['required', 'string'],
-            'cell_phone'    => ['required', 'string'],
-            'address'       => ['required', 'string'],
-            'city'          => ['required', 'string'],
-            'state_id'      => ['required', 'integer'],
-            'pcode'         => ['required', 'string'],
-            'country_id'    => ['required', 'integer'],
-            'grade_id'      => ['required', 'integer'],
-            'parent_fname'  => ['required', 'string'],
-            'parent_lname'  => ['required', 'string'],
-            'street'        => ['required', 'string'],
-            'school'        => ['required', 'string'],
-            'how_id'        => ['required', 'integer']
+            'fname'                 => ['required', 'string', 'max:255'],
+            'lname'                 => ['required', 'string', 'max:255'],
+            'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'              => ['required', 'string', 'min:1', 'confirmed'],
+            'home_phone'            => ['required', 'string'],
+            'cell_phone'            => ['required', 'string'],
+            'address'               => ['required', 'string'],
+            'city'                  => ['required', 'string'],
+            'state_id'              => ['required', 'integer'],
+            'pcode'                 => ['required', 'string'],
+            'country_id'            => ['required', 'integer'],
+            'other_notes'           => ['required', 'string'],
+            'post_secondary_edu'    => ['required', 'string'],
+            'area_of_concentration' => ['required', 'string'],
+            'tutoring_courses'      => ['required', 'string'],
+            'work_experience'       => ['required', 'string'],
+            'tutoring_areas'        => ['required', 'string'],
+            'sex_val'               => ['required', 'string'],
+            'certified'             => ['required', 'string'],
+            'cr_radio'              => ['required', 'string'],
+            'cc_radio'              => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {
@@ -90,7 +94,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $user = User::create([
             'fname'                 => $data['fname'],
             'lname'                 => $data['lname'],
@@ -103,16 +106,17 @@ class RegisterController extends Controller
             'state_id'              => $data['state_id'],
             'pcode'                 => $data['pcode'],
             'country_id'            => $data['country_id'],
-            'grade_id'              => $data['grade_id'],
-            'parent_fname'          => $data['parent_fname'],
-            'parent_lname'          => $data['parent_lname'],
-            'street'                => $data['street'],
-            'school'                => $data['school'],
-            'how_id'                => $data['how_id'],
+            'other_notes'           => $data['other_notes'],
+            'post_secondary_edu'    => $data['post_secondary_edu'],
+            'area_of_concentration' => $data['area_of_concentration'],
+            'tutoring_courses'      => $data['tutoring_courses'],
+            'work_experience'       => $data['work_experience'],
+            'tutoring_areas'        => $data['tutoring_areas'],
+            'gender'                => $data['sex_val'],
+            'certified_teacher'     => $data['certified'],
+            'criminal_record'       => $data['cr_radio'],
+            'criminal_check'        => $data['cc_radio'],
         ]);
-
-        // echo($data['state_id']);
-        // dd($data['country_id']);
 
         if ($user == NULL)
         {
@@ -120,7 +124,7 @@ class RegisterController extends Controller
             return null;
         }
 
-        $role = Role::select('id')->where('name', 'Student')->first();
+        $role = Role::select('id')->where('name', 'Tutor')->first();
         $user->roles()->attach($role);
 
         session()->flash('success', $user->fname . $user->lname . " has been registered successfully");
@@ -128,5 +132,7 @@ class RegisterController extends Controller
         return $user;
     }
 
-
+    public function index(){
+        return view('auth/register_tutor');
+    }
 }

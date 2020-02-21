@@ -17,11 +17,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'fname', 'lname', 'email', 'password', 'home_phone', 'cell_phone', 'address', 'city', 'state_id', 'pcode',
-<<<<<<< HEAD
-         'country_id', 'grade_id', 'parent_fname', 'parent_lname', 'street', 'school'
-=======
-         'country_id', 'grade_id', 'parent_fname', 'parent_lname', 'street', 'school', 'how_id'
->>>>>>> register_fix
+         'country_id', 'grade_id', 'parent_fname', 'parent_lname', 'street', 'school', 'how_id', 'other_notes',
+         'post_secondary_edu', 'area_of_concentration', 'tutoring_courses', 'work_experience', 'tutoring_areas',
+         'gender', 'certified_teacher', 'criminal_record', 'criminal_check'
     ];
 
     /**
@@ -74,5 +72,9 @@ class User extends Authenticatable
 
     public function grade(){
         return $this->belongsTo('App\Grade');
+    }
+
+    public function how(){
+        return $this->belongsTo('App\How');
     }
 }
