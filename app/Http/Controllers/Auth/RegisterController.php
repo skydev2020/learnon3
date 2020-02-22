@@ -63,9 +63,9 @@ class RegisterController extends Controller
             'cell_phone' => ['required', 'string'],
             'address' => ['required', 'string'],
             'city' => ['required', 'string'],
-            'state_id' => ['required', 'string'],
+            'state_id' => ['required', 'integer'],
             'pcode' => ['required', 'string'],
-            'country_id' => ['required', 'string'],
+            'country_id' => ['required', 'integer'],
         ]);
 
         if ($validator->fails()) {
@@ -93,16 +93,17 @@ class RegisterController extends Controller
             'cell_phone' => $data['cell_phone'],
             'address' => $data['address'],
             'city' => $data['city'],
-            'state_id' =>  $data['country_id'],
+            'state_id' =>  $data['state_id'],
             'pcode' => $data['pcode'],
             'country_id' => $data['country_id'],
         ]);
-        echo($data['state_id']);
-        dd($data['country_id']);
+        // echo($data['state_id']);
+        // dd($data['country_id']);
 
         if ($user == NULL)
         {
             session()->flash('error', "There was an error registering your account");
+            return null;
         }
 
         $role = Role::select('id')->where('name', 'Student')->first();
