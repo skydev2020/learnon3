@@ -17,7 +17,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'fname', 'lname', 'email', 'password', 'home_phone', 'cell_phone', 'address', 'city', 'state_id', 'pcode',
-         'country_id', 'grade_id', 'parent_fname', 'parent_lname', 'street', 'school', 'how_id', 'other_notes',
+         'country_id', 'grade_id', 'subjects', 'parent_fname', 'parent_lname', 'street', 'school', 'how_id', 'other_notes',
          'post_secondary_edu', 'area_of_concentration', 'tutoring_courses', 'work_experience', 'tutoring_areas',
          'gender', 'certified_teacher', 'criminal_record', 'criminal_check'
     ];

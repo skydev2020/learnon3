@@ -21,8 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
-    Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
-    Route::resource('/students', 'StudentsController', ['except' => ['show', 'create', 'store']]);
+    Route::resource('/users', 'UsersController');
+    Route::resource('/students', 'StudentsController');
 });
 
 Route::get('/register_tutor', 'auth\RegisterTutorController@index')->name('register_tutor');

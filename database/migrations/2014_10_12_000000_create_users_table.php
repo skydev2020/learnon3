@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('pcode');
             $table->bigInteger('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->bigInteger('grade_id')->references('id')->on('grades')->onDelete('cascade');
+            $table->string('subjects');
             $table->string('parent_fname');
             $table->string('parent_lname');
             $table->string('street');

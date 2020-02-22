@@ -219,6 +219,16 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="subjects" style = "text-align:center;">{{ __('Courses') }}
+                            <br>
+                            Seperate Multiple courses by a comma (,)
+                            </label>
+                            <br>
+                            <textarea class="form-control inputstl"  name = "subjects" id = "subjects" placeholder="Enter the courses that you require" >
+                            </textarea>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="parent_fname" class="col-md-4 col-form-label text-md-right">{{ __("Parent's First Name") }}</label>
 
                             <div class="col-md-6">
