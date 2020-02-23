@@ -293,11 +293,11 @@
 
                             <div class="col-md-6">
                                 <select name="how_id" id="how_id">
-                                    <?php use App\How;
-                                    $hows = How::all();
+                                    <?php use App\Referrer;
+                                    $referrers = Referrer::all();
                                     ?>
-                                    @foreach($hows as $how)
-                                        <option value = {{$how->id}} > {{ $how->name }}</option>
+                                    @foreach($referrers as $referrer)
+                                        <option value = {{$referrer->id}} > {{ $referrer->name }}</option>
                                     @endforeach
 
                                 </select>
@@ -312,7 +312,7 @@
 
                         <div class="form-group row">
                             <label for="term_val" class="col-md-4 col-form-label text-md-right">{{ __('Terms & Conditions') }}</label>
-                            
+
                                 <textarea class="form-control inputstl"  name = "term_val" id="term_val" rows="10"  readonly="">
 1. You certify that you are at least 18 years old and that you are the legal guardian of the child/children being registered.
 2. If you are not over 18, you MUST have parental permission to sign up for LearnOn! Tutoring.
@@ -335,14 +335,14 @@
 19. YOU the client AGREE that you will NOT make direct payment to any tutor and "skip" over LearnOn! Tutoring.
 20. If you the client breaks the agreement and makes a direct deal with a tutor assigned to you by LearnOn! Tutoring you are financially liable to LearnOn! Tutoring for all the sessions obtained privately from the tutor. You the client are financially responsible for all legal, collection and court costs that LearnOn! Tutoring incurs in order to enforce this agreement, that includes all lost revenues from paying the tutor directly, soliciting the tutors services privately and skipping over LearnOn! Tutoring.
                                 </textarea>
-                        </div>  
+                        </div>
 
                         <div class="form-group row">
                             <div class="form-group col-md-8 text-md-right" >
                                 <input type="checkbox" name="terms_val" id ="terms_val" required>I have read and agree to the <b>Terms & Conditions</b>
                                 <b><span id="tcmessage" class="confirmMessage"></span><b>
                                 <br>
-                            </div> 
+                            </div>
                         </div>
 
                         <div class="form-group row mb-0">
