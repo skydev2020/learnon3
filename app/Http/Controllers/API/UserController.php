@@ -26,14 +26,11 @@ class UserController extends Controller
         $email = $input['email'];
 
         $user = User::where('email', $email)->first();
-        $success = [];
+        $exist = "no";
 
-        if ($user == null) {
-            $success['exist'] = "no";
-        }
-        else {
-            $success['exist'] = "yes";
-            $success['token'] =  $user->createToken('Learn On')->accessToken;
+        if ($user) {
+            $exist = "yes";
+            // $success['token'] =  $user->createToken('Learn On')->accessToken;
             // API token will not be generated here
         }
 
@@ -41,6 +38,6 @@ class UserController extends Controller
         // $success['token'] =  $user->createToken('MyApp')->accessToken;
         // $success['name'] =  $user->name;
         // return response()->json(['success' => $success], $this->successStatus);
-        return response()->json(['success' => $success], 200);
+        return response()->json(['exist' => $exist], 200);
     }
 }
