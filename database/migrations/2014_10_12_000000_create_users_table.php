@@ -29,16 +29,16 @@ class CreateUsersTable extends Migration
             $table->string('cell_phone');
             $table->string('address');
             $table->string('city');
-            $table->bigInteger('state_id')->references('id')->on('states')->onDelete('cascade');
+            $table->bigInteger('state_id')->references('id')->on('states')->onDelete('set null');
             $table->string('pcode');
-            $table->bigInteger('country_id')->references('id')->on('countries')->onDelete('cascade');
-            $table->bigInteger('grade_id')->references('id')->on('grades')->onDelete('cascade');
+            $table->bigInteger('country_id')->references('id')->on('countries')->onDelete('set null');
+            $table->bigInteger('grade_id')->references('id')->on('grades')->onDelete('set null');
             $table->string('subjects');
             $table->string('parent_fname');
             $table->string('parent_lname');
             $table->string('street');
             $table->string('school');
-            $table->bigInteger('how_id')->references('id')->on('hows')->onDelete('cascade');
+            $table->bigInteger('referrer_id')->references('id')->on('referrers')->onDelete('set null');
             $table->timestamps();
         });
     }

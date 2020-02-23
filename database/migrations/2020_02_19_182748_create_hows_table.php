@@ -13,7 +13,7 @@ class CreateHowsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hows', function (Blueprint $table) {
+        Schema::create('referrers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('type');
@@ -28,6 +28,6 @@ class CreateHowsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hows');
+        Schema::dropIfExists('referrers');
     }
 }

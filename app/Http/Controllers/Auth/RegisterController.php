@@ -73,7 +73,7 @@ class RegisterController extends Controller
             'parent_lname'  => ['required', 'string'],
             'street'        => ['required', 'string'],
             'school'        => ['required', 'string'],
-            'how_id'        => ['required', 'integer']
+            'referrer_id'        => ['required', 'integer']
         ]);
 
         if ($validator->fails()) {
@@ -110,7 +110,7 @@ class RegisterController extends Controller
             'parent_lname'          => $data['parent_lname'],
             'street'                => $data['street'],
             'school'                => $data['school'],
-            'how_id'                => $data['how_id'],
+            'referrer_id'           => $data['referrer_id'],
         ]);
 
         // echo($data['state_id']);
