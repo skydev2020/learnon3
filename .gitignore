@@ -4,6 +4,7 @@
 /public/css/app.css
 /public/js/app.js
 /storage/*.key
+/storage/logs/
 /vendor
 .env
 .env.backup
@@ -12,3 +13,4 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.rnd

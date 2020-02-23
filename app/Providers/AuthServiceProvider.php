@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -104,5 +105,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('manage-discount-package', function($user) {
             return $user->hasRole('student');
         });
+
+        Passport::routes();
+        Passport::loadKeysFrom(getcwd().'\..\storage\secret-keys\oauth');
     }
 }
