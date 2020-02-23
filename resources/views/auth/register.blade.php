@@ -367,4 +367,6 @@
 
 @endsection
 <!-- Scripts -->
+@section("jssection")
 <script src="{{ asset('js/register/register.js')}}"></script>
+@stop

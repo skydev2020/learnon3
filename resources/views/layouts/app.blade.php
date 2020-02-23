@@ -234,5 +234,6 @@
             @yield('content')
         </main>
     </div>
+    @yield('jssection')
 </body>
 </html>
