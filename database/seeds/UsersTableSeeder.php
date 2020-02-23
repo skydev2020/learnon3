@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
 
         $admin = User::create([
             'email' => 'captain@learnon.ca',
-            'first_name' => 'Learnon! Admin',
+            'fname' => 'Learnon! Admin',
             'password' => Hash::make('masterkey4'),
             'status' => 1,
             'approved' => 1
@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
 
         $tutor = User::create([
             'email' => 'tutor@learnon.ca',
-            'first_name' => 'Learnon! Tutor',
+            'fname' => 'Learnon! Tutor',
             'password' => Hash::make('masterkey4'),
             'status' => 1,
             'approved' => 1
@@ -40,7 +40,7 @@ class UsersTableSeeder extends Seeder
 
         $student = User::create([
             'email' => 'student@learnon.ca',
-            'first_name' => 'Learnon! Student',
+            'fname' => 'Learnon! Student',
             'password' => Hash::make('masterkey4'),
             'status' => 1,
             'approved' => 1

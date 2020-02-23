@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
+use App\Grade;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Config;
 use Config;
@@ -27,7 +28,8 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->where('email','like', '%learnon%')->get();
+        //$students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->where('email','like', '%learnon%')->get();
+        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
         return view('admin.students.index')->with('students', $students);
     }
 
@@ -38,7 +40,7 @@ class StudentsController extends Controller
      */
     public function create()
     {
-        //
+        
 
     }
 
@@ -59,9 +61,23 @@ class StudentsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show()
     {
-        //
+        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()
+        ->where('fname', '>=', $_GET['s_name'])
+        ->where('city','>=', $_GET['s_city'])
+        ->where('created_at', '>=', $_GET['s_date'])
+        ->where('subjects', '>=', $_GET['s_sub'])
+        ->get();
+
+        if (count($students) != 0)
+            return view('admin.students.index')->with('students', $students);
+
+        else {
+            session()->flash('error', "No search results!");
+            $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
+            return view('admin.students.index')->with('students', $students);
+        }
     }
 
     /**
@@ -70,9 +86,11 @@ class StudentsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $student)
     {
-        //
+        return view('admin.students.contract')->with([
+            'student' => $student
+        ]);
     }
 
     /**

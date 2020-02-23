@@ -15,8 +15,8 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('fname');
+            $table->string('lname');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -32,6 +32,13 @@ class CreateUsersTable extends Migration
             $table->bigInteger('state_id')->references('id')->on('states')->onDelete('cascade');
             $table->string('pcode');
             $table->bigInteger('country_id')->references('id')->on('countries')->onDelete('cascade');
+            $table->bigInteger('grade_id')->references('id')->on('grades')->onDelete('cascade');
+            $table->string('subjects');
+            $table->string('parent_fname');
+            $table->string('parent_lname');
+            $table->string('street');
+            $table->string('school');
+            $table->bigInteger('how_id')->references('id')->on('hows')->onDelete('cascade');
             $table->timestamps();
         });
     }
