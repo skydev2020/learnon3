@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
     Route::resource('/users', 'UsersController');
     Route::resource('/students', 'StudentsController');
+    Route::resource('/assignments', 'AssignmentsController');
 });
 
 Route::get('/register_tutor', 'auth\RegisterTutorController@index')->name('register_tutor');
