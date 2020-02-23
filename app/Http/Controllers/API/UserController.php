@@ -33,7 +33,7 @@ class UserController extends Controller
         }
         else {
             $success['exist'] = "yes";
-            // $success['token'] =  $user->createToken('Learn On')->accessToken;
+            $success['token'] =  $user->createToken('Learn On')->accessToken;
             // API token will not be generated here
         }
 

@@ -215,4 +215,6 @@
         </div>
     </div>
 </div>
+<!-- Scripts -->
+<script src="{{ asset('js/register/register.js')}}"></script>
 @endsection
