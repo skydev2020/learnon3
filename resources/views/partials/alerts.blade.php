@@ -1,3 +1,8 @@
+@guest
+<div class="container">
+@else
+<div class="container-fluid">
+@endguest
 @if(session('success'))
     <div class="alert alert-success" role="alert">
         {{ session('success') }}
@@ -15,3 +20,4 @@
         {{ session('error') }}
     </div>
 @endif
+</div>
