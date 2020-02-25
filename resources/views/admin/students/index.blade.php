@@ -61,15 +61,22 @@
                             </div>
                         </div>
                     </form>
-                    <br>
 
-                    <table class="table">
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+
+                    <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Roles</th>
+                            <th scope="col">City</th>
+                            <th scope="col">Subjects</th>
+                            <th scope="col">Date Registered</th>
                             <th scope="col">Actions</th>
                         </tr>
                         </thead>
@@ -79,7 +86,9 @@
                                 <th scope="row">{{$student->id}}</th>
                                 <td scope="col">{{$student->fname . ' ' . $student->lname}}</td>
                                 <td scope="col">{{$student->email}}</td>
-                                <td scope="col">{{implode(', ', $student->roles()->get()->pluck('name')->toArray())}}</td>
+                                <td scope="col">{{$student->city}}</td>
+                                <td scope="col">{{$student->subjects}}</td>
+                                <td scope="col">{{$student->created_at}}</td>
                                 <td scope="col">
                                     @can('edit-users')
                                         <a href="{{route('admin.users.edit', $student->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
@@ -99,7 +108,6 @@
                         @endforeach
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
