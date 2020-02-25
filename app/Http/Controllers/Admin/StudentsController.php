@@ -34,21 +34,32 @@ class StudentsController extends Controller
         $s_sub = isset($_GET['s_sub']) ? trim($_GET['s_sub']) : "";
         $s_status_id = isset($_GET['s_status_id']) ? trim($_GET['s_status_id']) : "";
 
+        $q = "1=1 ";
 
-        // if($s_name) {
-        //     $students = $students->where('fname', 'like', "abc");
-        // }
+        if ($s_name) {
+            $q.= " and city like '%".$s_city."%'";
+        }
+
+        if ($s_date) {
+            $q.= " and created_at like '%".$s_date."%'";
+        }
+
+        if ($s_sub) {
+            $q.= " and subjects like '%".$s_sub."%'";
+        }
+
+        if ($s_status_id) {
+            $q.= " and student_status_id like '%".$s_status_id."%'";
+        }
+
+        if ($s_name) {
+            $q.= " and (fname like '%".$s_name."%' or lname like '%" .$s_name . "%') ";
+        }
+
+
         $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()
-        ->where('city','like', '%'. $s_city .'%')
-        ->where('created_at', 'like', '%'. $s_date .'%')
-        // ->where('subjects', 'like', '%'. $s_sub .'%')
-        // ->where('student_status_id', 'like', '%'. $s_status_id .'%')
-        // ->where('fname', 'like', '%'. $s_name .'%')
-        // ->orWhere('lname', 'like', '%'. $s_name .'%')
-        ->get();
+        ->whereRaw($q)->get();
 
-        //$students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->where('email','like', '%learnon%')->get();
-        // $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
         $student_statuses = StudentStatus::all();
         $data = [
             'students' => $students,
