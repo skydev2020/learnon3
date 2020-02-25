@@ -107,6 +107,6 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Passport::routes();
-        Passport::loadKeysFrom(getcwd().'\..\storage\secret-keys\oauth');
+        Passport::loadKeysFrom(base_path().'\storage\secret-keys\oauth');
     }
 }
