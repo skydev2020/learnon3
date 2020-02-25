@@ -124,9 +124,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="city" class="col-form-label">{{ __('City') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6  d-flex align-items-center">
                                 <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus>
 
                                 @error('city')
@@ -138,9 +140,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="state_id" class="col-md-4 col-form-label text-md-right">{{ __('Province / State') }}</label>
-
-                            <div class="col-md-6">
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="state_id" class="col-form-label">{{ __('Province / State') }}</label>
+                            </div>
+                            <div class="col-8 d-flex align-items-center">
                                 <select name="state_id" id="state_id">
                                     <?php use App\State;
                                     $states = State::all();
@@ -160,9 +163,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="pcode" class="col-md-4 col-form-label text-md-right">{{ __('Pcode') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="pcode" class="col-form-label">{{ __('Pcode') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-8 d-flex align-items-center">
                                 <input id="pcode" type="text" class="form-control @error('pcode') is-invalid @enderror"
                                  name="pcode" value="{{ old('pcode') }}" required autocomplete="pcode" autofocus>
 
@@ -175,9 +180,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="country_id" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
-
-                            <div class="col-md-6">
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="country_id" class="col-form-label">{{ __('Country') }}</label>
+                            </div>
+                            <div class="col-8 d-flex align-items-center">
                                 <select name="country_id" id="country_id">
                                     <?php use App\Country;
                                     $countries = Country::all();
@@ -197,9 +203,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="grade_id" class="col-md-4 col-form-label text-md-right">{{ __('Current Grade / Year') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="grade_id" class="col-form-label">{{ __('Current Grade / Year') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-8 d-flex align-items-center">
                                 <select name="grade_id" id="grade_id">
                                     <?php use App\Grade;
                                     $grades = Grade::all();
@@ -219,13 +227,16 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="subjects" style = "text-align:center;">{{ __('Courses') }}
-                            <br>
-                            Seperate Multiple courses by a comma (,)
-                            </label>
-                            <br>
-                            <textarea class="form-control inputstl"  name = "subjects" id = "subjects" placeholder="Enter the courses that you require" >
-                            </textarea>
+                            <div class="col-4">
+                                <label for="subjects" style = "text-align:center;">{{ __('Courses') }}
+                                <br>
+                                Seperate Multiple courses by a comma (,)
+                                </label>
+                            </div>
+                            <div class="col-8">
+                                <textarea class="form-control inputstl"  name = "subjects" id = "subjects" placeholder="Enter the courses that you require" >
+                                </textarea>
+                            </div>
                         </div>
 
                         <div class="form-group row">
