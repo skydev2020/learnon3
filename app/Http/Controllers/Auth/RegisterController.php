@@ -73,7 +73,7 @@ class RegisterController extends Controller
             'parent_lname'  => ['required', 'string'],
             'street'        => ['required', 'string'],
             'school'        => ['required', 'string'],
-            'referrer_id'        => ['required', 'integer']
+            'referrer_id'   => ['required', 'integer']
         ]);
 
         if ($validator->fails()) {
