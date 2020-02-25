@@ -14,7 +14,7 @@
                         <div class="form-group row">
                             <label for="s_name" class="col-md-4 col-form-label text-md-right">{{ __('Student Name') }}</label>
                             <div class="col-md-6">
-                                <input id="s_name" type="text" class="form-control" name="s_name" value="{{ old('s_name') }}"
+                                <input id="s_name" type="text" class="form-control" name="s_name" value="{{ $data['old']['s_name'] }}"
                                 autocomplete="s_name" autofocus>
                             </div>
                         </div>
@@ -22,7 +22,7 @@
                         <div class="form-group row">
                             <label for="s_city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
                             <div class="col-md-6">
-                                <input id="s_city" type="text" class="form-control" name="s_city" value="{{ old('s_city') }}"
+                                <input id="s_city" type="text" class="form-control" name="s_city" value="{{ $data['old']['s_city'] }}"
                                 autocomplete="s_city" autofocus>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                         <div class="form-group row">
                             <label for="s_sub" class="col-md-4 col-form-label text-md-right">{{ __('Subjects') }}</label>
                             <div class="col-md-6">
-                                <input id="s_sub" type="text" class="form-control" name="s_sub" value="{{ old('s_sub') }}"
+                                <input id="s_sub" type="text" class="form-control" name="s_sub" value="{{ $data['old']['s_sub'] }}"
                                 autocomplete="s_sub" autofocus>
                             </div>
                         </div>
@@ -38,9 +38,13 @@
                         <div class="form-group row">
                             <label for="s_status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
                             <div class="col-md-6">
-                                <select style="display: inline-block;" id="s_status" class = "form-control">
+                                <select style="display: inline-block;" id="s_status_id" name="s_status_id" class = "form-control">
                                     <option></option>
-                                    <option>Need Tutoring</option>
+                                    @foreach ($data['student_statuses'] as $key => $value)
+                                    <option value="{{ $value->id }}" {{ ( $value->id == $data['old']['s_status_id']) ? 'selected' : '' }}>
+                                        {{ $value->title }}
+                                    </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -48,7 +52,7 @@
                         <div class="form-group row">
                             <label for="s_date" class="col-md-4 col-form-label text-md-right">{{ __('Date Registered') }}</label>
                             <div class="col-md-6">
-                                <input id="s_date" type="date" class="form-control" name="s_date" value="{{ old('s_date') }}"
+                                <input id="s_date" type="date" class="form-control" name="s_date" value="{{ $data['old']['s_date'] }}"
                                 autocomplete="s_date" autofocus>
                             </div>
                         </div>

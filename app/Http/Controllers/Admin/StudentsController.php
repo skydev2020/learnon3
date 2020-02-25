@@ -8,7 +8,6 @@ use App\Role;
 use App\StudentStatus;
 use App\Grade;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Config;
 use Config;
 /**
  * StudentsController is working with Students
@@ -29,13 +28,44 @@ class StudentsController extends Controller
      */
     public function index()
     {
+        $s_name = isset($_GET['s_name']) ? trim($_GET['s_name']) : "";
+        $s_city =  isset($_GET['s_city']) ? trim($_GET['s_city']) : "";
+        $s_date = isset($_GET['s_date']) ? trim($_GET['s_date']) : "";
+        $s_sub = isset($_GET['s_sub']) ? trim($_GET['s_sub']) : "";
+        $s_status_id = isset($_GET['s_status_id']) ? trim($_GET['s_status_id']) : "";
+
+
+        // if($s_name) {
+        //     $students = $students->where('fname', 'like', "abc");
+        // }
+        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()
+        ->where('city','like', '%'. $s_city .'%')
+        ->where('created_at', 'like', '%'. $s_date .'%')
+        // ->where('subjects', 'like', '%'. $s_sub .'%')
+        // ->where('student_status_id', 'like', '%'. $s_status_id .'%')
+        // ->where('fname', 'like', '%'. $s_name .'%')
+        // ->orWhere('lname', 'like', '%'. $s_name .'%')
+        ->get();
+
         //$students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->where('email','like', '%learnon%')->get();
-        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
+        // $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
         $student_statuses = StudentStatus::all();
         $data = [
             'students' => $students,
-            'student_statuses' => $student_statuses
+            'student_statuses' => $student_statuses,
+            'old' => [
+                's_name' => $s_name,
+                's_city' => $s_city,
+                's_date' => $s_date,
+                's_sub' => $s_sub,
+                's_status_id' => $s_status_id,
+                ]
         ];
+
+
+        if (count($students) == 0) {
+            session()->flash('error', "No search results!");
+        }
 
         return view('admin.students.index')->with('data', $data);
     }
@@ -68,23 +98,9 @@ class StudentsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(User $student)
     {
-        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()
-        ->where('fname', '>=', $_GET['s_name'])
-        ->where('city','>=', $_GET['s_city'])
-        ->where('created_at', '>=', $_GET['s_date'])
-        ->where('subjects', '>=', $_GET['s_sub'])
-        ->get();
 
-        if (count($students) != 0)
-            return view('admin.students.index')->with('students', $students);
-
-        else {
-            session()->flash('error', "No search results!");
-            $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
-            return view('admin.students.index')->with('students', $students);
-        }
     }
 
     /**
