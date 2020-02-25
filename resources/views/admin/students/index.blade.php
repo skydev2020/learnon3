@@ -8,7 +8,7 @@
                 <div class="card-header">Students</div>
 
                 <div class="card-body">
-                    <form method="GET" action="{{ route('admin.students.show', $students[0]) }}">
+                    <form method="GET" action="{{ route('admin.students.index') }}">
                         @csrf
                         {{method_field('GET')}}
                         <div class="form-group row">
@@ -81,7 +81,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($students as $student)
+                        @foreach ($data['students'] as $student)
                             <tr>
                                 <th scope="row">{{$student->id}}</th>
                                 <td scope="col">{{$student->fname . ' ' . $student->lname}}</td>

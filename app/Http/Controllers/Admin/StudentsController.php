@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
+use App\StudentStatus;
 use App\Grade;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Config;
@@ -30,7 +31,13 @@ class StudentsController extends Controller
     {
         //$students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->where('email','like', '%learnon%')->get();
         $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
-        return view('admin.students.index')->with('students', $students);
+        $student_statuses = StudentStatus::all();
+        $data = [
+            'students' => $students,
+            'student_statuses' => $student_statuses
+        ];
+
+        return view('admin.students.index')->with('data', $data);
     }
 
     /**

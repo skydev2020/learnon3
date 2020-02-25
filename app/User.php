@@ -18,8 +18,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'fname', 'lname', 'email', 'password', 'home_phone', 'cell_phone', 'address', 'city', 'state_id', 'pcode',
-         'country_id', 'grade_id', 'subjects', 'parent_fname', 'parent_lname', 'street', 'school', 'referrer_id', 'other_notes',
-         'post_secondary_edu', 'area_of_concentration', 'tutoring_courses', 'work_experience', 'tutoring_areas',
+         'country_id', 'grade_id', 'subjects', 'parent_fname', 'parent_lname', 'street', 'school', 'referrer_id', 'student_status_id',
+         'other_notes', 'post_secondary_edu', 'area_of_concentration', 'tutoring_courses', 'work_experience', 'tutoring_areas',
          'gender', 'certified_teacher', 'criminal_record', 'criminal_check'
     ];
 
@@ -65,6 +65,10 @@ class User extends Authenticatable
 
     public function country(){
         return $this->belongsTo('App\Country');
+    }
+
+    public function studentStatus(){
+        return $this->belongsTo('App\StudentStatus');
     }
 
     public function state(){
