@@ -111,6 +111,15 @@ class StudentsController extends Controller
      */
     public function show(User $student)
     {
+<<<<<<< HEAD
+=======
+        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()
+        ->where('fname', 'like', $_GET['s_name'])
+        ->where('city','like', $_GET['s_city'])
+        ->where('created_at', 'like', $_GET['s_date'])
+        ->where('subjects', 'like', $_GET['s_sub'])
+        ->get();
+>>>>>>> students
 
     }
 

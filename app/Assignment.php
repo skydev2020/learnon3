@@ -14,12 +14,10 @@ class Assignment extends Model
 
     
     public function student() {
-        $assignments = belongsTo(App\Assignment);
-        return $assignments->second();
+        return $this->belongsTo('App\User', 'student_id')->first();
     }
 
     public function tutor() {
-        $assignments = belongsTo(App\Assignment);
-        return $assignments->first();
+        return $this->belongsTo('App\User', 'tutor_id')->first();
     }
 }

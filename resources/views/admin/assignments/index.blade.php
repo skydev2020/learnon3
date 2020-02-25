@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-12">
             <div class="card">
-                <div class="card-header">Students</div>
-
+                <div class="card-header">{{ __('Assigned Students') }}</div>
                 <div class="card-body">
-                    <form method="GET" action="{{ route('admin.assignments.show', $assignments) }}">
+                    <form method="GET" action="{{ route('admin.assignments.index') }}">
                         @csrf
                         {{method_field('GET')}}
                         <div class="form-group row">
@@ -61,8 +60,13 @@
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <table class="table">
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th scope="col">ID</th>
@@ -77,10 +81,10 @@
                         @foreach ($assignments as $assignment)
                             <tr>
                                 <th scope="row">{{$assignment->id}}</th>
-                                <td scope="col">{{$assignment->student()->fname . ' ' . $student->student()->lname}}</td>
-                                <td scope="col">{{$assignment->tutor()->fname . ' ' . $student->tutor()->lname}}</td>
-                                <td scope="col">{{$assignment->subject}}</td>
-                                <td scope="col">{{$assignment->assigned_at}}</td>
+                                <td scope="col">{{$assignment->student()['fname'] . ' ' . $assignment->student()['lname']}}</td>
+                                <td scope="col">{{$assignment->tutor()['fname'] . ' ' . $assignment->tutor()['lname']}}</td>
+                                <td scope="col">{{$assignment->subjects}}</td>
+                                <td scope="col">{{$assignment->created_at}}</td>
                                 <td scope="col">
                                     @can('edit-users')
                                         <a href="{{route('admin.assignments.edit', $assignment->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
