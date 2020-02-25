@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-12">
             <div class="card">
-                <div class="card-header">{{ __('Students') }}</div>
+                <div class="card-header">{{ __('Assigned Students') }}</div>
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.assignments.index') }}">
                         @csrf
@@ -60,8 +60,13 @@
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <table class="table">
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th scope="col">ID</th>
