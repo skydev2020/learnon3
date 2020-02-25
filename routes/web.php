@@ -24,6 +24,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/users', 'UsersController');
     Route::resource('/students', 'StudentsController');
     Route::resource('/assignments', 'AssignmentsController');
+    Route::resource('/packages', 'PackagesController');
 });
 
 Route::get('/register_tutor', 'auth\RegisterTutorController@index')->name('register_tutor');

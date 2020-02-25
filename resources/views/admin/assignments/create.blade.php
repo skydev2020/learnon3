@@ -40,10 +40,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group ">
                                         <b>Tutor Pay Rate($) per hour</b>
-                                        <?php
-                                        use App\Rate;
-                                        $rates = Rate::all(); ?>
-                                        <input type="text"    name="tpay_value" id="tpay_value" value={{$rates->first()['basic_tutor']}}>
+                                        <input type="text"    name="tpay_value" id="tpay_value" value="20">
                                     </div>
                                 </div>
 
@@ -134,7 +131,7 @@
                                 <b> Student Invoice Rate($) per hour </b>
                             </div>
                             <div class = "col-md-4" style = "text-align:center;">
-                                <input  type = "text" name = "spay_value" id = "spay_value" value={{$rates->first()['basic_student']}}>
+                                <input  type = "text" name = "spay_value" id = "spay_value" vlue = "42">
                             </div>
                         </div>
                         <div style = "display:flex;">
