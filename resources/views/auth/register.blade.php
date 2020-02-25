@@ -289,10 +289,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="how_id" class="col-md-4 col-form-label text-md-right">{{ __('How you heard about us') }}</label>
+                            <label for="referrer_id" class="col-md-4 col-form-label text-md-right">{{ __('How you heard about us') }}</label>
 
                             <div class="col-md-6">
-                                <select name="how_id" id="how_id">
+                                <select name="referrer_id" id="referrer_id">
                                     <?php use App\Referrer;
                                     $referrers = Referrer::all();
                                     ?>
@@ -302,7 +302,7 @@
 
                                 </select>
 
-                                @error('how_id')
+                                @error('referrer_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
