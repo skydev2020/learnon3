@@ -5,10 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Students</div>
-
+                <div class="card-header">{{ __('Students') }}</div>
                 <div class="card-body">
-                    <form method="GET" action="{{ route('admin.assignments.show', $assignments) }}">
+                    <form method="GET" action="{{ route('admin.assignments.index') }}">
                         @csrf
                         {{method_field('GET')}}
                         <div class="form-group row">
@@ -77,10 +76,10 @@
                         @foreach ($assignments as $assignment)
                             <tr>
                                 <th scope="row">{{$assignment->id}}</th>
-                                <td scope="col">{{$assignment->student()->fname . ' ' . $student->student()->lname}}</td>
-                                <td scope="col">{{$assignment->tutor()->fname . ' ' . $student->tutor()->lname}}</td>
-                                <td scope="col">{{$assignment->subject}}</td>
-                                <td scope="col">{{$assignment->assigned_at}}</td>
+                                <td scope="col">{{$assignment->student()['fname'] . ' ' . $assignment->student()['lname']}}</td>
+                                <td scope="col">{{$assignment->tutor()['fname'] . ' ' . $assignment->tutor()['lname']}}</td>
+                                <td scope="col">{{$assignment->subjects}}</td>
+                                <td scope="col">{{$assignment->created_at}}</td>
                                 <td scope="col">
                                     @can('edit-users')
                                         <a href="{{route('admin.assignments.edit', $assignment->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>

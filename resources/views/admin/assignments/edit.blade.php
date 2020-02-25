@@ -5,11 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header" style = "text-align:center;">{{ __('Create An Assignment') }}</div>
+                <div class="card-header" style = "text-align:center;">{{ __('Edit An Assignment') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.assignments.store') }}">
-                        @csrf
-                        {{method_field('POST')}}
+                    <form action="{{route('admin.assignments.update', $assignment)}}" method="POST">
 
                         <div class="form-group row">
                             <label for="tutor_val" class="col-md-4 col-form-label text-md-right">{{ __('Select Tutor') }}</label>
@@ -17,7 +15,9 @@
                             <div class="col-md-5">
                                 <select id = "tutor_val" name = "tutor_val">
                                     @foreach ($tutors as $tutor)
-                                        <option value = {{$tutor->id}}> {{$tutor->fname . ' ' . $tutor->lname}}  </option>
+                                        <option value = {{$tutor->id}} <?=$tutor->id == $assignment->tutor_id ? ' selected="selected"' : '';?> >
+                                         {{$tutor->fname . ' ' . $tutor->lname}}  </option>
+
                                     @endforeach
                                 </select>
                             </div>
@@ -29,11 +29,15 @@
                             <div class="col-md-5">
                                 <select id = "student_val" name = "student_val">
                                     @foreach ($students as $student)
-                                        <option value = {{$student->id}}> {{$student->fname .  ' ' . $student->lname}}  </option>
+                                    <option value = {{$student->id}} <?=$student->id == $assignment->student_id ? ' selected="selected"' : '';?> >
+                                         {{$student->fname . ' ' . $student->lname}}  </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
+
+                        @csrf
+                        {{method_field('PUT')}}
 
                         <div class="row">
                             <div class="col-md-10" style = "display:flex;">
@@ -134,13 +138,14 @@
                                 <b> Student Invoice Rate($) per hour </b>
                             </div>
                             <div class = "col-md-4" style = "text-align:center;">
-                                <input  type = "text" name = "spay_value" id = "spay_value" value={{$rates->first()['basic_student']}}>
+                                
+                                <input  type = "text" name = "spay_value" id = "spay_value" value = {{$rates->first()['basic_student']}}>
                             </div>
                         </div>
                         <div style = "display:flex;">
                             <div class = "form-group row col-md-4">
                                 <b>    Subject(s) Assigned     </b>
-                                <textarea name = "subject_value" id="subject_value"></textarea>
+                                <textarea name = "subject_value" id="subject_value"> {{ $assignment->subjects }} </textarea>
                             </div>
 
                             <div class = "form-group">
@@ -152,14 +157,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('SAVE') }}
-                                </button>
-                            </div>
-                        </div>
-
+                        <button type="submit" class="btn btn-primary">
+                            Save
+                        </button>
                     </form>
                 </div>
 

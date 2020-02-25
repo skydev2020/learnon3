@@ -64,10 +64,10 @@ class StudentsController extends Controller
     public function show()
     {
         $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()
-        ->where('fname', '>=', $_GET['s_name'])
-        ->where('city','>=', $_GET['s_city'])
-        ->where('created_at', '>=', $_GET['s_date'])
-        ->where('subjects', '>=', $_GET['s_sub'])
+        ->where('fname', 'like', $_GET['s_name'])
+        ->where('city','like', $_GET['s_city'])
+        ->where('created_at', 'like', $_GET['s_date'])
+        ->where('subjects', 'like', $_GET['s_sub'])
         ->get();
 
         if (count($students) != 0)
