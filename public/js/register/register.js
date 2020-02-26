@@ -30,7 +30,6 @@ function checkMailStatus(){
 function submitOnValid(){
     //document.getElementById("dup_email_prob").style.display = "block";
 
-    console.log(errors);
     if(errors.duplicateEmail == false){
     //   document.getElementById("dup_email_prob").style.display = "none";
       return true;

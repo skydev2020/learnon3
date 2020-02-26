@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ __('Register Tutors') }}</div>
 
@@ -13,7 +13,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="fname" class="col-form-label">{{ __('First Name') }}</label>
+                                <label for="fname" class="col-form-label font-weight-bold">{{ __('First Name') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -30,7 +30,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="lname" class="col-form-label">{{ __('Last Name') }}</label>
+                                <label for="lname" class="col-form-label font-weight-bold">{{ __('Last Name') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -47,7 +47,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="email" class="col-form-label">{{ __('E-Mail Address') }}</label>
+                                <label for="email" class="col-form-label font-weight-bold">{{ __('E-Mail Address') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -63,7 +63,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="password" class="col-form-label">{{ __('Password') }}</label>
+                                <label for="password" class="col-form-label font-weight-bold">{{ __('Password') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -79,7 +79,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="password-confirm" class="col-form-label">{{ __('Confirm Password') }}</label>
+                                <label for="password-confirm" class="col-form-label font-weight-bold">{{ __('Confirm Password') }}</label>
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -88,7 +88,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="home_phone" class="col-form-label">{{ __('Home phone') }}</label>
+                                <label for="home_phone" class="col-form-label font-weight-bold">{{ __('Home phone') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -105,7 +105,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="cell_phone" class="col-form-label">{{ __('Cell phone') }}</label>
+                                <label for="cell_phone" class="col-form-label font-weight-bold">{{ __('Cell phone') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -122,7 +122,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="address" class="col-form-label">{{ __('Address') }}</label>
+                                <label for="address" class="col-form-label font-weight-bold">{{ __('Address') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -139,7 +139,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="city" class="col-form-label">{{ __('City') }}</label>
+                                <label for="city" class="col-form-label font-weight-bold">{{ __('City') }}</label>
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus>
@@ -154,7 +154,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="state_id" class="col-form-label">{{ __('Province / State') }}</label>
+                                <label for="state_id" class="col-form-label font-weight-bold">{{ __('Province / State') }}</label>
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <select name="state_id" id="state_id">
@@ -177,7 +177,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="pcode" class="col-form-label">{{ __('Pcode') }}</label>
+                                <label for="pcode" class="col-form-label font-weight-bold">{{ __('Pcode') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -193,9 +193,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="country_id" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="country_id" class="col-form-label font-weight-bold">{{ __('Country') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <select name="country_id" id="country_id">
                                     <?php use App\Country;
                                     $countries = Country::all();
@@ -217,7 +219,7 @@
                         <h4 style="text-align: center">{{ __('Other Details') }}</h4>
 
                         <div class="form-group row col-md-12">
-                            <label for = "other_notes">{{ __('Other Notes') }}</label>
+                            <label for = "other_notes" class="font-weight-bold">{{ __('Other Notes') }}</label>
                             <textarea class="form-control inputstl" id = "other_notes" name = "other_notes"  value="{{ old('other_notes') }}"
                             required autocomplete="other_notes" autofocus>
                             </textarea>
@@ -225,14 +227,14 @@
 
 
                         <div class="form-group row col-md-12">
-                            <label for = "post_secondary_edu">{{ __('Post Secondary Education attending/attended') }}</label>
+                            <label for = "post_secondary_edu" class="font-weight-bold">{{ __('Post Secondary Education attending/attended') }}</label>
                             <textarea class="form-control inputstl" id = "post_secondary_edu" name = "post_secondary_edu"  value="{{ old('post_secondary_edu') }}"
                             required autocomplete="post_secondary_edu" autofocus>
                             </textarea>
                         </div>
 
                         <div class="form-group row col-md-12">
-                            <label for = "area_of_concentration">
+                            <label for = "area_of_concentration" class="font-weight-bold">
                             {{ __('Subjects studied/major area of concentration (please indicate grades and grade point averages)') }}
                             </label>
                             <textarea class="form-control inputstl" id = "area_of_concentration" name = "area_of_concentration"  value="{{ old('area_of_concentration') }}"
@@ -241,7 +243,7 @@
                         </div>
 
                         <div class="form-group row col-md-12">
-                            <label for = "tutoring_courses">
+                            <label for = "tutoring_courses" class="font-weight-bold">
                             {{ __('Courses you can tutor for each grade level (list each course, please be as detailed as possible)') }}
                             </label>
                             <textarea class="form-control inputstl" id = "tutoring_courses" name = "tutoring_courses"
@@ -251,7 +253,7 @@
                         </div>
 
                         <div class="form-group row col-md-12">
-                            <label for = "work_experience">{{ __('Please provide past job/work experience(N/A for none)') }}</label>
+                            <label for = "work_experience" class="font-weight-bold">{{ __('Please provide past job/work experience(N/A for none)') }}</label>
                             <textarea class="form-control inputstl" id = "work_experience" name = "work_experience"
                               value="{{ old('work_experience') }}"
                             required autocomplete="work_experience" autofocus>
@@ -259,7 +261,7 @@
                         </div>
 
                         <div class="form-group row col-md-12">
-                            <label for = "tutoring_areas">{{ __('City/suburbs/area you can tutor') }}</label>
+                            <label for = "tutoring_areas" class="font-weight-bold">{{ __('City/suburbs/area you can tutor') }}</label>
                             <textarea class="form-control inputstl" id = "tutoring_areas" name = "tutoring_areas"
                               value="{{ old('tutoring_areas') }}"
                             required autocomplete="tutoring_areas" autofocus>
@@ -267,8 +269,9 @@
                         </div>
 
                         <div class="form-group col-md-4 row">
-                            <label for = "sex_val">Please indicate Male/Female</label>
+                            <label for = "sex_val" class="font-weight-bold">Please indicate Male/Female</label>
                             <select name="sex_val" style="display: block;" class="form-control" required>
+                                <option value="">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
@@ -276,33 +279,32 @@
 
 
                         <div class="form-group col-md-12 row">
-                            <label>Are you a certified teacher?&nbsp; &nbsp;</label>
-                            <label class="radio-inline">
-                                <input type="radio" name="certified" value="Yes">Yes
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="certified" value="No">No
+                            <label class="font-weight-bold">Are you a certified teacher?&nbsp; &nbsp;</label>
+                            <label class="radio-inline d-flex align-items-center">
+                                <input type="radio" name="certified" value="Yes">&nbsp;Yes
+                            </label>&nbsp;&nbsp;
+                            <label class="radio-inline d-flex align-items-center">
+                                <input type="radio" name="certified" value="No">&nbsp;No
                             </label>
                         </div>
 
                         <div class="form-group col-md-12 row">
-                            <label>Have you ever had a criminal conviction (disregarding minor traffic violations)?&nbsp; &nbsp; </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="cr_radio" value="Yes">Yes
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="cr_radio" value="No">No
+                            <label class="font-weight-bold">Have you ever had a criminal conviction (disregarding minor traffic violations)?&nbsp; &nbsp; </label>
+                            <label class="radio-inline d-flex align-items-center">
+                                <input type="radio" name="cr_radio" value="Yes">&nbsp;Yes
+                            </label>&nbsp;&nbsp;
+                            <label class="radio-inline d-flex align-items-center">
+                                <input type="radio" name="cr_radio" value="No">&nbsp;No
                             </label>
                         </div>
 
-
                         <div class="form-group col-md-12 row">
-                            <label>Would you be willing to provide a background criminal check? &nbsp; &nbsp;</label>
-                            <label class="radio-inline">
-                                <input type="radio" name="cc_radio" value="Yes">Yes
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="cc_radio" value="No">No
+                            <label class="font-weight-bold" >Would you be willing to provide a background criminal check? &nbsp; &nbsp;</label>
+                            <label class="radio-inline d-flex align-items-center">
+                                <input type="radio" name="cc_radio" value="Yes">&nbsp;Yes
+                            </label>&nbsp;&nbsp;
+                            <label class="radio-inline d-flex align-items-center">
+                                <input type="radio" name="cc_radio" value="No">&nbsp;No
                             </label>
                         </div>
 
@@ -391,29 +393,6 @@
                             </div>
                         </div>
 
-                        <script type="text/javascript">
-                            function checkName()
-                            {
-                                if(document.getElementById("terms_val").checked == false) return;
-
-                                var n1 = document.getElementById("name1").value;
-                                var n2 = document.getElementById("name2").value;
-                                var n3 = document.getElementById("name3").value;
-
-                                var fname = document.getElementById("fname").value;
-                                var lname = document.getElementById("lname").value;
-
-                                var full_name = fname + ' '+ lname;
-                                if(full_name!=n1  || full_name!=n2 || full_name!=n3){
-                                alert('Names do not match !!');
-                                document.getElementById("register").disabled = true;
-                                document.getElementById("terms_val").checked = false;
-                                }else{
-                                    document.getElementById("register").disabled = false;
-                                }
-                            }
-                        </script>
-
                         <div class="form-group row">
                             <div class="form-group col-md-8 text-md-right" >
                                 <input type="checkbox" name="terms_val" id ="terms_val" required onclick="checkName()"> I have read and agree to the <b>Terms & Conditions</b>
@@ -442,3 +421,7 @@
     </div>
 </div>
 @endsection
+<!-- Scripts -->
+@section("jssection")
+<script src="{{ asset('js/register/register_tutor.js')}}"></script>
+@stop
