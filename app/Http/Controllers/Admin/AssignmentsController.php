@@ -66,8 +66,13 @@ class AssignmentsController extends Controller
             return view('admin.assignments.index')->with('assignments', $assignments);
         }
 
-        $request->session()->flash('error', "No search results!");
         $assignments = Assignment::all();
+
+        session()->flash('error', null);
+        if (count($assignments) == 0) {
+            session()->flash('error', "No search results!");
+        }
+
         return view('admin.assignments.index')->with('assignments', $assignments);
     }
 

@@ -73,7 +73,7 @@ class StudentsController extends Controller
                 ]
         ];
 
-
+        session()->flash('error', null);
         if (count($students) == 0) {
             session()->flash('error', "No search results!");
         }
