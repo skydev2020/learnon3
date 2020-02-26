@@ -20,4 +20,12 @@ class Assignment extends Model
     public function tutor() {
         return $this->belongsTo('App\User', 'tutor_id')->first();
     }
+
+    public function students() {
+        return $this->belongsTo('App\User', 'student_id');
+    }
+
+    public function tutors() {
+        return $this->belongsTo('App\User', 'tutor_id');
+    }
 }

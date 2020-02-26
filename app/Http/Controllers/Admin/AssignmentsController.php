@@ -9,6 +9,7 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Config;
 
 class AssignmentsController extends Controller
 {
@@ -17,37 +18,56 @@ class AssignmentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $data = $this->validate($request, [
+            's_name' => 'nullable|string',
+            't_name' => 'nullable|string',
+            'a_id'   => 'nullable|numeric',
+            'a_date' => 'nullable|date',
+        ]);
+
+        // $s_name = isset($_GET['s_name']) ? trim($_GET['s_name']) : "";
+        // $t_name =  isset($_GET['t_name']) ? trim($_GET['t_name']) : "";
+        // $a_id = isset($_GET['a_id']) ? trim($_GET['a_id']) : "";
+        // $a_date = isset($_GET['a_date']) ? trim($_GET['a_date']) : "";
+
+        $q = "1=1 ";
+        if (isset($data['a_id'])) {
+            $q.= " and id like '%".$a_id."%'";
+        }
+
+        if (isset($data['a_date'])) {
+            $q.= " and created_at like '%".$a_date."%'";
+        }
+
+        $assignments = Assignment::query()->whereRaw($q);
+
+        if (isset($data['s_name']))
+        {
+            $assignments = Assignment::whereHas('students', function($student) use ($data) {
+                return $student->where('fname', 'like', "%" . $data['s_name'] . "%")
+                ->orwhere('lname', 'like', "%" . $data['s_name'] . "%");
+            });
+        }
+        
+        if (isset($data['t_name']))
+        {
+            $assignments = Assignment::whereHas('tutors', function($tutor) use ($data) {
+                return $tutor->where('fname', 'like', "%" . $data['t_name'] . "%")
+                ->orwhere('lname', 'like', "%" . $data['t_name'] . "%");
+            });
+        }
+
+        $assignments = $assignments->get();
+
+        if( count($assignments) != 0 )
+        {
+            return view('admin.assignments.index')->with('assignments', $assignments);
+        }
+
+        $request->session()->flash('error', "No search results!");
         $assignments = Assignment::all();
-
-        foreach ($assignments as $key => $assignment){
-            if (!isset($_GET['s_name'])) break;
-            $s_fullname = $assignment->student()['fname'] . ' ' . $assignment->student()['lname'];
-            $t_fullname = $assignment->tutor()['fname'] . ' ' . $assignment->tutor()['lname'];
-            if ($_GET['s_name'] != "" && strpos($s_fullname, $_GET['s_name']) === false) unset($assignments[$key]);
-            else if ($_GET['t_name'] != "" && strpos($t_fullname, $_GET['t_name']) === false) unset($assignments[$key]);
-
-            else if ($_GET['a_id'] != "" && $assignment->id != $_GET['a_id'])
-            {
-                unset($assignments[$key]);
-            }
-
-            else if($_GET['a_date'] != "" && strpos($assignment->created_at, $_GET['a_date']) === false)
-            {
-                unset($assignments[$key]);
-            }
-        }
-
-        if (count($assignments) != 0)
-            return view('admin.assignments.index')->with('assignments', $assignments);
-
-        else {
-            session()->flash('error', "No search results!");
-            $assignments = Assignment::all();
-            return view('admin.assignments.index')->with('assignments', $assignments);
-        }
-
         return view('admin.assignments.index')->with('assignments', $assignments);
     }
 
@@ -75,7 +95,7 @@ class AssignmentsController extends Controller
         $validator = Validator::make($request->all(), [
             'tutor_val'             => ['required', 'integer'],
             'student_val'           => ['required', 'integer'],
-            'subject_value'           => ['required', 'string'],
+            'subject_value'         => ['required', 'string'],
         ]);
 
         if ($validator->fails())

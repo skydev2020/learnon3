@@ -36,7 +36,7 @@ class StudentsController extends Controller
 
         $q = "1=1 ";
 
-        if ($s_name) {
+        if ($s_city) {
             $q.= " and city like '%".$s_city."%'";
         }
 
