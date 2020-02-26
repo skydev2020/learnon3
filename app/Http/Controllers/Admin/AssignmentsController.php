@@ -50,7 +50,7 @@ class AssignmentsController extends Controller
                 ->orwhere('lname', 'like', "%" . $data['s_name'] . "%");
             });
         }
-        
+
         if (isset($data['t_name']))
         {
             $assignments = Assignment::whereHas('tutors', function($tutor) use ($data) {
@@ -78,7 +78,7 @@ class AssignmentsController extends Controller
      */
     public function create()
     {
-        
+
         $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()->get();
         $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
         return view('admin.assignments.create')->with('tutors', $tutors)->with('students', $students);
@@ -103,7 +103,7 @@ class AssignmentsController extends Controller
             $request->session()->flash('error', "There was an error creating the assignment");
             $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()->get();
             $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
-            return redirect(route('admin.users.assignments.create')->with('tutors', $tutors)->with('students', $students));
+            return redirect(route('admin.assignments.create'));
         }
 
         $data = $request->all();
@@ -123,13 +123,13 @@ class AssignmentsController extends Controller
             $request->session()->flash('error', "There was an error creating the assignment");
             $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()->get();
             $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
-            return redirect(route('admin.users.assignments.create')->with('tutors', $tutors)->with('students', $students));
+            return redirect(route('admin.users.assignments.create'));
         }
 
         $request->session()->flash('success', "The assignment has been created successfully");
         $assignments = Assignment::all();
         return view('admin.assignments.index')->with('assignments', $assignments);
-        
+
     }
 
     /**
@@ -153,7 +153,7 @@ class AssignmentsController extends Controller
         if (Gate::denies('edit-users')) {
             return redirect(route('admin.users.index'));
         }
-        
+
         $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()->get();
         $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
         return view('admin.assignments.edit')->with([
