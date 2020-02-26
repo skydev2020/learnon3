@@ -48,8 +48,8 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{route('admin.students.index')}}">Student List</a>
                                     <a class="dropdown-item" href="{{route('admin.assignments.index')}}">Student Assignment</a>
-                                    <a class="dropdown-item" href="{{route('admin.packages.index')}}">Student Packages</a>
-                                    <a class="dropdown-item" href="#">Packages</a>
+                                    <a class="dropdown-item" href="{{route('admin.student_packages.index')}}">Student Packages</a>
+                                    <a class="dropdown-item" href="{{route('admin.packages.index')}}">Packages</a>
                                 </div>
                             </li>
                             @endcan
