@@ -11,11 +11,12 @@
                     <form method="POST" action="{{ route('register') }}" onsubmit="return submitOnValid()">
                         @csrf
 
-
                         <div class="form-group row">
-                            <label for="fname" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="fname" class="col-form-label">{{ __('First Name') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-6 d-flex align-items-center">
                                 <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror"
                                  name="fname" value="{{ old('fname') }}" required autocomplete="fname" autofocus>
 
@@ -28,9 +29,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="lname" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
-
-                            <div class="col-md-6">
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="lname" class="col-form-label">{{ __('Last Name') }}</label>
+                            </div>
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"
                                  name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
 
@@ -43,9 +45,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="email" class="col-form-label">{{ __('E-Mail Address') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" onblur="checkMailStatus()">
                                 <span style="color: red; display: none;" id="dup_email_prob"><b>Email already Exists !</b></span>
                                 @error('email')
@@ -57,9 +61,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="password" class="col-form-label">{{ __('Password') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
@@ -71,17 +77,20 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="password-confirm" class="col-form-label">{{ __('Confirm Password') }}</label>
+                            </div>
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="home_phone" class="col-md-4 col-form-label text-md-right">{{ __('Home phone') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="home_phone" class="col-form-label">{{ __('Home phone') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="home_phone" type="text" class="form-control @error('home_phone') is-invalid @enderror"
                                  name="home_phone" value="{{ old('home_phone') }}" required autocomplete="home_phone" autofocus>
 
@@ -94,9 +103,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="cell_phone" class="col-md-4 col-form-label text-md-right">{{ __('Cell phone') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="cell_phone" class="col-form-label">{{ __('Cell phone') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="cell_phone" type="text" class="form-control @error('cell_phone') is-invalid @enderror"
                                  name="cell_phone" value="{{ old('cell_phone') }}" required autocomplete="cell_phone" autofocus>
 
@@ -109,9 +120,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="address" class="col-form-label">{{ __('Address') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="address" type="text" class="form-control @error('address') is-invalid @enderror"
                                  name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
 
@@ -128,7 +141,7 @@
                                 <label for="city" class="col-form-label">{{ __('City') }}</label>
                             </div>
 
-                            <div class="col-6  d-flex align-items-center">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus>
 
                                 @error('city')
@@ -227,22 +240,24 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-4">
+                            <div class="col-4 d-flex justify-content-end">
                                 <label for="subjects" style = "text-align:center;">{{ __('Courses') }}
                                 <br>
                                 Seperate Multiple courses by a comma (,)
                                 </label>
                             </div>
-                            <div class="col-8">
+                            <div class="col-8 d-flex align-items-center">
                                 <textarea class="form-control inputstl"  name = "subjects" id = "subjects" placeholder="Enter the courses that you require" >
                                 </textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="parent_fname" class="col-md-4 col-form-label text-md-right">{{ __("Parent's First Name") }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="parent_fname" class="col-form-label">{{ __("Parent's First Name") }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-8 d-flex align-items-center">
                                 <input id="parent_fname" type="text" class="form-control @error('parent_fname') is-invalid @enderror"
                                  name="parent_fname" value="{{ old('parent_fname') }}" required autocomplete="parent_fname" autofocus>
 
@@ -255,9 +270,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="parent_lname" class="col-md-4 col-form-label text-md-right">{{ __("Parent's Last Name") }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="parent_lname" class="col-form-label">{{ __("Parent's Last Name") }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-8 d-flex align-items-center">
                                 <input id="parent_lname" type="text" class="form-control @error('parent_lname') is-invalid @enderror"
                                  name="parent_lname" value="{{ old('parent_lname') }}" required autocomplete="parent_lname" autofocus>
 
@@ -270,9 +287,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="street" class="col-md-4 col-form-label text-md-right">{{ __('Major Street Intersection') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="street" class="col-form-label">{{ __('Major Street Intersection') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-8 d-flex align-items-center">
                                 <input id="street" type="text" class="form-control @error('street') is-invalid @enderror"
                                  name="street" value="{{ old('street') }}" required autocomplete="street" autofocus>
 
@@ -285,9 +304,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="school" class="col-md-4 col-form-label text-md-right">{{ __('School Name') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="school" class="col-form-label">{{ __('School Name') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-8 d-flex align-items-center">
                                 <input id="school" type="text" class="form-control @error('school') is-invalid @enderror"
                                  name="school" value="{{ old('school') }}" required autocomplete="school" autofocus>
 
@@ -300,9 +321,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="referrer_id" class="col-md-4 col-form-label text-md-right">{{ __('How you heard about us') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="referrer_id" class="col-form-label">{{ __('How you heard about us') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-8 d-flex align-items-center">
                                 <select name="referrer_id" id="referrer_id">
                                     <?php use App\Referrer;
                                     $referrers = Referrer::all();
@@ -322,8 +345,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="term_val" class="col-md-4 col-form-label text-md-right">{{ __('Terms & Conditions') }}</label>
-
+                            <div class="col-4 d-flex justify-content-end align-items-center">
+                                <label for="term_val" class="col-form-label">{{ __('Terms & Conditions') }}</label>
+                            </div>
+                            <div class="col-8 d-flex align-items-center">
                                 <textarea class="form-control inputstl"  name = "term_val" id="term_val" rows="10"  readonly="">
 1. You certify that you are at least 18 years old and that you are the legal guardian of the child/children being registered.
 2. If you are not over 18, you MUST have parental permission to sign up for LearnOn! Tutoring.
@@ -346,10 +371,11 @@
 19. YOU the client AGREE that you will NOT make direct payment to any tutor and "skip" over LearnOn! Tutoring.
 20. If you the client breaks the agreement and makes a direct deal with a tutor assigned to you by LearnOn! Tutoring you are financially liable to LearnOn! Tutoring for all the sessions obtained privately from the tutor. You the client are financially responsible for all legal, collection and court costs that LearnOn! Tutoring incurs in order to enforce this agreement, that includes all lost revenues from paying the tutor directly, soliciting the tutors services privately and skipping over LearnOn! Tutoring.
                                 </textarea>
+                            </div>
                         </div>
 
                         <div class="form-group row">
-                            <div class="form-group col-md-8 text-md-right" >
+                            <div class="form-group col-12 text-center" >
                                 <input type="checkbox" name="terms_val" id ="terms_val" required>I have read and agree to the <b>Terms & Conditions</b>
                                 <b><span id="tcmessage" class="confirmMessage"></span><b>
                                 <br>
