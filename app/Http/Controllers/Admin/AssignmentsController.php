@@ -34,11 +34,11 @@ class AssignmentsController extends Controller
 
         $q = "1=1 ";
         if (isset($data['a_id'])) {
-            $q.= " and id like '%".$a_id."%'";
+            $q.= " and id like '%".$data['a_id']."%'";
         }
 
         if (isset($data['a_date'])) {
-            $q.= " and created_at like '%".$a_date."%'";
+            $q.= " and created_at like '%".$data['a_date']."%'";
         }
 
         $assignments = Assignment::query()->whereRaw($q);
@@ -66,7 +66,7 @@ class AssignmentsController extends Controller
             return view('admin.assignments.index')->with('assignments', $assignments);
         }
 
-        $assignments = Assignment::all();
+        //$assignments = Assignment::all();
 
         session()->flash('error', null);
         if (count($assignments) == 0) {
