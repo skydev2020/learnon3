@@ -13,7 +13,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="fname" class="col-form-label">{{ __('First Name') }}</label>
+                                <label for="fname" class="col-form-label font-weight-bold">{{ __('First Name') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -30,7 +30,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="lname" class="col-form-label">{{ __('Last Name') }}</label>
+                                <label for="lname" class="col-form-label font-weight-bold">{{ __('Last Name') }}</label>
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"
@@ -46,7 +46,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="email" class="col-form-label">{{ __('E-Mail Address') }}</label>
+                                <label for="email" class="col-form-label font-weight-bold">{{ __('E-Mail Address') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -62,7 +62,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="password" class="col-form-label">{{ __('Password') }}</label>
+                                <label for="password" class="col-form-label font-weight-bold">{{ __('Password') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -78,7 +78,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="password-confirm" class="col-form-label">{{ __('Confirm Password') }}</label>
+                                <label for="password-confirm" class="col-form-label font-weight-bold">{{ __('Confirm Password') }}</label>
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -87,7 +87,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="home_phone" class="col-form-label">{{ __('Home phone') }}</label>
+                                <label for="home_phone" class="col-form-label font-weight-bold">{{ __('Home phone') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -104,7 +104,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="cell_phone" class="col-form-label">{{ __('Cell phone') }}</label>
+                                <label for="cell_phone" class="col-form-label font-weight-bold">{{ __('Cell phone') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -121,7 +121,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="address" class="col-form-label">{{ __('Address') }}</label>
+                                <label for="address" class="col-form-label font-weight-bold">{{ __('Address') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -138,7 +138,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="city" class="col-form-label">{{ __('City') }}</label>
+                                <label for="city" class="col-form-label font-weight-bold">{{ __('City') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -154,7 +154,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="state_id" class="col-form-label">{{ __('Province / State') }}</label>
+                                <label for="state_id" class="col-form-label font-weight-bold">{{ __('Province / State') }}</label>
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <select name="state_id" id="state_id">
@@ -173,7 +173,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="pcode" class="col-form-label">{{ __('Pcode') }}</label>
+                                <label for="pcode" class="col-form-label font-weight-bold">{{ __('Pcode') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -190,7 +190,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="country_id" class="col-form-label">{{ __('Country') }}</label>
+                                <label for="country_id" class="col-form-label font-weight-bold">{{ __('Country') }}</label>
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <select name="country_id" id="country_id">
@@ -209,7 +209,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="grade_id" class="col-form-label">{{ __('Current Grade / Year') }}</label>
+                                <label for="grade_id" class="col-form-label font-weight-bold">{{ __('Current Grade / Year') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -229,7 +229,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="subjects" style = "text-align:center;">{{ __('Courses') }}
+                                <label for="subjects" class="font-weight-bold text-center" >{{ __('Courses') }}
                                 <br>
                                 Seperate Multiple courses by a comma (,)
                                 </label>
@@ -242,7 +242,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="parent_fname" class="col-form-label">{{ __("Parent's First Name") }}</label>
+                                <label for="parent_fname" class="col-form-label font-weight-bold">{{ __("Parent's First Name") }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -259,7 +259,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="parent_lname" class="col-form-label">{{ __("Parent's Last Name") }}</label>
+                                <label for="parent_lname" class="col-form-label font-weight-bold">{{ __("Parent's Last Name") }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -276,7 +276,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="street" class="col-form-label">{{ __('Major Street Intersection') }}</label>
+                                <label for="street" class="col-form-label font-weight-bold">{{ __('Major Street Intersection') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -293,7 +293,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="school" class="col-form-label">{{ __('School Name') }}</label>
+                                <label for="school" class="col-form-label font-weight-bold">{{ __('School Name') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -310,7 +310,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="referrer_id" class="col-form-label">{{ __('How you heard about us') }}</label>
+                                <label for="referrer_id" class="col-form-label font-weight-bold">{{ __('How you heard about us') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -330,7 +330,7 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end align-items-center">
-                                <label for="term_val" class="col-form-label">{{ __('Terms & Conditions') }}</label>
+                                <label for="term_val" class="col-form-label font-weight-bold">{{ __('Terms & Conditions') }}</label>
                             </div>
                             <div class="col-8 d-flex align-items-center">
                                 <textarea class="form-control inputstl"  name = "term_val" id="term_val" rows="10"  readonly="">

@@ -1,4 +1,34 @@
-var errors = {"duplicateEmail": false};
+var errors = {
+    "duplicateEmail": false,
+    "nameMatch": false
+};
+function checkMailStatus(){
+    //document.getElementById("dup_email_prob").style.display = "block";
+
+  var email=$("#email").val().trim();// value in field email
+  if (email.length ==0 ) {
+      return;
+  }
+  $.ajax({
+      type:'post',
+          url:'/api/checkEmail',
+          data:{email: email},
+          success:function(msg){
+
+            var obj = eval(msg);
+            if (obj.exist =="no"){
+                errors.duplicateEmail = false;
+                document.getElementById("dup_email_prob").style.display = "none";
+            }else{
+                errors.duplicateEmail = true;
+                document.getElementById("dup_email_prob").style.display = "block";
+            }
+
+            console.log(msg);
+        }
+   });
+}
+
 function checkName() {
     if(document.getElementById("terms_val").checked == false) return;
 
@@ -11,23 +41,22 @@ function checkName() {
 
     var full_name = fname + ' '+ lname;
     if(full_name!=n1  || full_name!=n2 || full_name!=n3){
-    alert('Names do not match !!');
-    document.getElementById("register").disabled = true;
-    document.getElementById("terms_val").checked = false;
-    }else{
+
+        document.getElementById("register").disabled = true;
+        document.getElementById("terms_val").checked = false;
+        document.getElementById("name_match").style.display = "block";
+    }
+    else {
         document.getElementById("register").disabled = false;
+        errors.nameMatch = true;
+        document.getElementById("name_match").style.display = "none";
     }
 }
 
 
 function submitOnValid(){
-    //document.getElementById("dup_email_prob").style.display = "block";
-
-    if(errors.duplicateEmail == false){
-    //   document.getElementById("dup_email_prob").style.display = "none";
+    if (errors.duplicateEmail == false && errors.nameMatch == false) {
       return true;
-    }else{
-    //   document.getElementById("dup_email_prob").style.display = "block";
-      return false;
     }
+    return false;
 }

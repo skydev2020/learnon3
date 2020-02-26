@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register Tutors') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register_tutor') }}">
+                    <form method="POST" action="{{ route('register_tutor') }}" onsubmit="return submitOnValid()">
                         @csrf
 
                         <div class="form-group row">
@@ -51,13 +51,14 @@
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" onblur="checkMailStatus()">
+                                <span style="color: red; display: none;" id="dup_email_prob"><b>Email already Exists !</b></span>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+
                             </div>
                         </div>
 
@@ -218,7 +219,7 @@
 
                         <h4 style="text-align: center">{{ __('Other Details') }}</h4>
 
-                        <div class="form-group row col-md-12">
+                        <div class="form-group row col-12">
                             <label for = "other_notes" class="font-weight-bold">{{ __('Other Notes') }}</label>
                             <textarea class="form-control inputstl" id = "other_notes" name = "other_notes"  value="{{ old('other_notes') }}"
                             required autocomplete="other_notes" autofocus>
@@ -226,14 +227,14 @@
                         </div>
 
 
-                        <div class="form-group row col-md-12">
+                        <div class="form-group row col-12">
                             <label for = "post_secondary_edu" class="font-weight-bold">{{ __('Post Secondary Education attending/attended') }}</label>
                             <textarea class="form-control inputstl" id = "post_secondary_edu" name = "post_secondary_edu"  value="{{ old('post_secondary_edu') }}"
                             required autocomplete="post_secondary_edu" autofocus>
                             </textarea>
                         </div>
 
-                        <div class="form-group row col-md-12">
+                        <div class="form-group row col-12">
                             <label for = "area_of_concentration" class="font-weight-bold">
                             {{ __('Subjects studied/major area of concentration (please indicate grades and grade point averages)') }}
                             </label>
@@ -242,7 +243,7 @@
                             </textarea>
                         </div>
 
-                        <div class="form-group row col-md-12">
+                        <div class="form-group row col-12">
                             <label for = "tutoring_courses" class="font-weight-bold">
                             {{ __('Courses you can tutor for each grade level (list each course, please be as detailed as possible)') }}
                             </label>
@@ -252,7 +253,7 @@
                             </textarea>
                         </div>
 
-                        <div class="form-group row col-md-12">
+                        <div class="form-group row col-12">
                             <label for = "work_experience" class="font-weight-bold">{{ __('Please provide past job/work experience(N/A for none)') }}</label>
                             <textarea class="form-control inputstl" id = "work_experience" name = "work_experience"
                               value="{{ old('work_experience') }}"
@@ -260,7 +261,7 @@
                             </textarea>
                         </div>
 
-                        <div class="form-group row col-md-12">
+                        <div class="form-group row col-12">
                             <label for = "tutoring_areas" class="font-weight-bold">{{ __('City/suburbs/area you can tutor') }}</label>
                             <textarea class="form-control inputstl" id = "tutoring_areas" name = "tutoring_areas"
                               value="{{ old('tutoring_areas') }}"
@@ -277,8 +278,7 @@
                             </select>
                         </div>
 
-
-                        <div class="form-group col-md-12 row">
+                        <div class="form-group col-12 row">
                             <label class="font-weight-bold">Are you a certified teacher?&nbsp; &nbsp;</label>
                             <label class="radio-inline d-flex align-items-center">
                                 <input type="radio" name="certified" value="Yes">&nbsp;Yes
@@ -288,7 +288,7 @@
                             </label>
                         </div>
 
-                        <div class="form-group col-md-12 row">
+                        <div class="form-group col-12 row">
                             <label class="font-weight-bold">Have you ever had a criminal conviction (disregarding minor traffic violations)?&nbsp; &nbsp; </label>
                             <label class="radio-inline d-flex align-items-center">
                                 <input type="radio" name="cr_radio" value="Yes">&nbsp;Yes
@@ -298,7 +298,7 @@
                             </label>
                         </div>
 
-                        <div class="form-group col-md-12 row">
+                        <div class="form-group col-12 row">
                             <label class="font-weight-bold" >Would you be willing to provide a background criminal check? &nbsp; &nbsp;</label>
                             <label class="radio-inline d-flex align-items-center">
                                 <input type="radio" name="cc_radio" value="Yes">&nbsp;Yes
@@ -312,7 +312,7 @@
                             <h1 style="text-align: center">Independent Contractor - Tutor Agreement</h1>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-12">
                                 <b>By becoming a LearnOn! tutor I, </b><input type="text" name="name1" id="name1" > (fill in first last name and have it be the exact same as you filled in the boxes of the first page) <b>agree to the following Terms & Conditions.</b>
                                 <br>
                                 <br>
@@ -388,22 +388,23 @@
 
 
                         <div class="row" id="btn_dsp" style="text-align: center;" >
-                            <div class="form-group col-md-12" >
+                            <div class="form-group col-12" >
                             <span style="color: red;display: none;" id="dup_email_prob"><b>Email already Exists !</b></span>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <div class="form-group col-md-8 text-md-right" >
+                            <div class="form-group col-8 text-right" >
                                 <input type="checkbox" name="terms_val" id ="terms_val" required onclick="checkName()"> I have read and agree to the <b>Terms & Conditions</b>
                                 <b><span id="tcmessage" class="confirmMessage"></span><b>
                                 <br>
+                                <span style="color: red; display: none;" id="name_match"><b>All the Names are not maching correctly.</b></span>
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary" id = "register">
+                            <div class="col-6 offset-4">
+                                <button type="submit" class="btn btn-primary" id = "register" disabled>
                                     {{ __('Register') }}
                                 </button>
 
