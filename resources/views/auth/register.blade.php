@@ -16,7 +16,7 @@
                                 <label for="fname" class="col-form-label">{{ __('First Name') }}</label>
                             </div>
 
-                            <div class="col-md-6 d-flex align-items-center">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror"
                                  name="fname" value="{{ old('fname') }}" required autocomplete="fname" autofocus>
 
@@ -156,7 +156,7 @@
                             <div class="col-4 d-flex justify-content-end">
                                 <label for="state_id" class="col-form-label">{{ __('Province / State') }}</label>
                             </div>
-                            <div class="col-8 d-flex align-items-center">
+                            <div class="col-6 d-flex align-items-center">
                                 <select name="state_id" id="state_id">
                                     @foreach($states as $state)
                                     <option value = {{$state->id}}> {{ $state->name }}</option>
@@ -176,7 +176,7 @@
                                 <label for="pcode" class="col-form-label">{{ __('Pcode') }}</label>
                             </div>
 
-                            <div class="col-8 d-flex align-items-center">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="pcode" type="text" class="form-control @error('pcode') is-invalid @enderror"
                                  name="pcode" value="{{ old('pcode') }}" required autocomplete="pcode" autofocus>
 
@@ -192,7 +192,7 @@
                             <div class="col-4 d-flex justify-content-end">
                                 <label for="country_id" class="col-form-label">{{ __('Country') }}</label>
                             </div>
-                            <div class="col-8 d-flex align-items-center">
+                            <div class="col-6 d-flex align-items-center">
                                 <select name="country_id" id="country_id">
                                     @foreach($countries as $country)
                                     <option value = {{$country->id}} > {{ $country->name }}</option>
@@ -212,7 +212,7 @@
                                 <label for="grade_id" class="col-form-label">{{ __('Current Grade / Year') }}</label>
                             </div>
 
-                            <div class="col-8 d-flex align-items-center">
+                            <div class="col-6 d-flex align-items-center">
                                 <select name="grade_id" id="grade_id">
                                     @foreach($grades as $grade)
                                     <option value = {{$grade->id}} > {{ $grade->name }}</option>
@@ -245,7 +245,7 @@
                                 <label for="parent_fname" class="col-form-label">{{ __("Parent's First Name") }}</label>
                             </div>
 
-                            <div class="col-8 d-flex align-items-center">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="parent_fname" type="text" class="form-control @error('parent_fname') is-invalid @enderror"
                                  name="parent_fname" value="{{ old('parent_fname') }}" required autocomplete="parent_fname" autofocus>
 
@@ -262,7 +262,7 @@
                                 <label for="parent_lname" class="col-form-label">{{ __("Parent's Last Name") }}</label>
                             </div>
 
-                            <div class="col-8 d-flex align-items-center">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="parent_lname" type="text" class="form-control @error('parent_lname') is-invalid @enderror"
                                  name="parent_lname" value="{{ old('parent_lname') }}" required autocomplete="parent_lname" autofocus>
 
@@ -279,7 +279,7 @@
                                 <label for="street" class="col-form-label">{{ __('Major Street Intersection') }}</label>
                             </div>
 
-                            <div class="col-8 d-flex align-items-center">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="street" type="text" class="form-control @error('street') is-invalid @enderror"
                                  name="street" value="{{ old('street') }}" required autocomplete="street" autofocus>
 
@@ -296,7 +296,7 @@
                                 <label for="school" class="col-form-label">{{ __('School Name') }}</label>
                             </div>
 
-                            <div class="col-8 d-flex align-items-center">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="school" type="text" class="form-control @error('school') is-invalid @enderror"
                                  name="school" value="{{ old('school') }}" required autocomplete="school" autofocus>
 
@@ -313,7 +313,7 @@
                                 <label for="referrer_id" class="col-form-label">{{ __('How you heard about us') }}</label>
                             </div>
 
-                            <div class="col-8 d-flex align-items-center">
+                            <div class="col-6 d-flex align-items-center">
                                 <select name="referrer_id" id="referrer_id">
                                 @foreach($referrers as $referrer)
                                 <option value = {{$referrer->id}} > {{ $referrer->name }}</option>

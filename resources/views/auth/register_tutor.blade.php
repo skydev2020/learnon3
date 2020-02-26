@@ -12,9 +12,11 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="fname" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="fname" class="col-form-label">{{ __('First Name') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror"
                                  name="fname" value="{{ old('fname') }}" required autocomplete="fname" autofocus>
 
@@ -27,9 +29,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="lname" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="lname" class="col-form-label">{{ __('Last Name') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"
                                  name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
 
@@ -42,9 +46,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="email" class="col-form-label">{{ __('E-Mail Address') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
@@ -56,9 +62,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="password" class="col-form-label">{{ __('Password') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
@@ -70,17 +78,20 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="password-confirm" class="col-form-label">{{ __('Confirm Password') }}</label>
+                            </div>
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="home_phone" class="col-md-4 col-form-label text-md-right">{{ __('Home phone') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="home_phone" class="col-form-label">{{ __('Home phone') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="home_phone" type="text" class="form-control @error('home_phone') is-invalid @enderror"
                                  name="home_phone" value="{{ old('home_phone') }}" required autocomplete="home_phone" autofocus>
 
@@ -93,9 +104,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="cell_phone" class="col-md-4 col-form-label text-md-right">{{ __('Cell phone') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="cell_phone" class="col-form-label">{{ __('Cell phone') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="cell_phone" type="text" class="form-control @error('cell_phone') is-invalid @enderror"
                                  name="cell_phone" value="{{ old('cell_phone') }}" required autocomplete="cell_phone" autofocus>
 
@@ -108,9 +121,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="address" class="col-form-label">{{ __('Address') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="address" type="text" class="form-control @error('address') is-invalid @enderror"
                                  name="address" value="{{ old('address') }}" required autocomplete="address" autofocus>
 
@@ -123,9 +138,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
-
-                            <div class="col-md-6">
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="city" class="col-form-label">{{ __('City') }}</label>
+                            </div>
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required autocomplete="city" autofocus>
 
                                 @error('city')
@@ -137,9 +153,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="state_id" class="col-md-4 col-form-label text-md-right">{{ __('Province / State') }}</label>
-
-                            <div class="col-md-6">
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="state_id" class="col-form-label">{{ __('Province / State') }}</label>
+                            </div>
+                            <div class="col-6 d-flex align-items-center">
                                 <select name="state_id" id="state_id">
                                     <?php use App\State;
                                     $states = State::all();
@@ -159,9 +176,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="pcode" class="col-md-4 col-form-label text-md-right">{{ __('Pcode') }}</label>
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="pcode" class="col-form-label">{{ __('Pcode') }}</label>
+                            </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6 d-flex align-items-center">
                                 <input id="pcode" type="text" class="form-control @error('pcode') is-invalid @enderror"
                                  name="pcode" value="{{ old('pcode') }}" required autocomplete="pcode" autofocus>
 
@@ -219,8 +238,8 @@
                             <textarea class="form-control inputstl" id = "area_of_concentration" name = "area_of_concentration"  value="{{ old('area_of_concentration') }}"
                             required autocomplete="area_of_concentration" autofocus>
                             </textarea>
-                        </div>  
-                            
+                        </div>
+
                         <div class="form-group row col-md-12">
                             <label for = "tutoring_courses">
                             {{ __('Courses you can tutor for each grade level (list each course, please be as detailed as possible)') }}
@@ -292,7 +311,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <b>By becoming a LearnOn! tutor I, </b><input type="text" name="name1" id="name1" > (fill in first last name and have it be the exact same as you filled in the boxes of the first page) <b>agree to the following Terms & Conditions.</b> 
+                                <b>By becoming a LearnOn! tutor I, </b><input type="text" name="name1" id="name1" > (fill in first last name and have it be the exact same as you filled in the boxes of the first page) <b>agree to the following Terms & Conditions.</b>
                                 <br>
                                 <br>
                                 <b>1. The terms and/or conditions in this agreement can not and will not be interpreted for any reason as the establishment of an employer/employee relationship. I understand that as an independent contractor, I will not be an employee of LearnOn! Tutoring and will not be entitled to participate in or to receive any benefits or rights from LearnOn! Tutoring’s employment benefits or welfare plans including but not limited to any pension plans, health plans, disability insurance, and workers compensation insurance. </b>
@@ -362,15 +381,15 @@
                                 <br>
                                 <br>
                                 <b>I    </b></b><input type="text" name="name3" id="name3" required >(fill in first last name and have it be the exact same as you filled in the boxes of the first page)<b>have carefully read, and fully understand all of the above Terms and Conditions.</b>
-                            </div>          
+                            </div>
                         </div>
 
-                            
+
                         <div class="row" id="btn_dsp" style="text-align: center;" >
                             <div class="form-group col-md-12" >
                             <span style="color: red;display: none;" id="dup_email_prob"><b>Email already Exists !</b></span>
-                            </div> 
-                        </div>  
+                            </div>
+                        </div>
 
                         <script type="text/javascript">
                             function checkName()
@@ -392,15 +411,15 @@
                                 }else{
                                     document.getElementById("register").disabled = false;
                                 }
-                            } 
-                        </script> 
+                            }
+                        </script>
 
                         <div class="form-group row">
                             <div class="form-group col-md-8 text-md-right" >
                                 <input type="checkbox" name="terms_val" id ="terms_val" required onclick="checkName()"> I have read and agree to the <b>Terms & Conditions</b>
                                 <b><span id="tcmessage" class="confirmMessage"></span><b>
                                 <br>
-                            </div> 
+                            </div>
                         </div>
 
                         <div class="form-group row mb-0">

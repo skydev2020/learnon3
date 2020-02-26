@@ -18,7 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/register_tutor', 'auth\RegisterTutorController@index')->name('register_tutor');
+Route::post('register_tutor', 'auth\RegisterTutorController@register');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
     Route::resource('/users', 'UsersController');
@@ -27,6 +28,3 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/packages', 'PackagesController');
 });
 
-Route::get('/register_tutor', 'auth\RegisterTutorController@index')->name('register_tutor');
-
-Route::post('register_tutor', 'auth\RegisterTutorController@register');
