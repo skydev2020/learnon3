@@ -158,13 +158,9 @@
                             </div>
                             <div class="col-8 d-flex align-items-center">
                                 <select name="state_id" id="state_id">
-                                    <?php use App\State;
-                                    $states = State::all();
-                                    ?>
                                     @foreach($states as $state)
-                                        <option value = {{$state->id}}> {{ $state->name }}</option>
+                                    <option value = {{$state->id}}> {{ $state->name }}</option>
                                     @endforeach
-
                                 </select>
 
                                 @error('state_id')
@@ -198,13 +194,9 @@
                             </div>
                             <div class="col-8 d-flex align-items-center">
                                 <select name="country_id" id="country_id">
-                                    <?php use App\Country;
-                                    $countries = Country::all();
-                                    ?>
                                     @foreach($countries as $country)
-                                        <option value = {{$country->id}} > {{ $country->name }}</option>
+                                    <option value = {{$country->id}} > {{ $country->name }}</option>
                                     @endforeach
-
                                 </select>
 
                                 @error('country_id')
@@ -222,13 +214,9 @@
 
                             <div class="col-8 d-flex align-items-center">
                                 <select name="grade_id" id="grade_id">
-                                    <?php use App\Grade;
-                                    $grades = Grade::all();
-                                    ?>
                                     @foreach($grades as $grade)
-                                        <option value = {{$grade->id}} > {{ $grade->name }}</option>
+                                    <option value = {{$grade->id}} > {{ $grade->name }}</option>
                                     @endforeach
-
                                 </select>
 
                                 @error('grade_id')
@@ -327,13 +315,9 @@
 
                             <div class="col-8 d-flex align-items-center">
                                 <select name="referrer_id" id="referrer_id">
-                                    <?php use App\Referrer;
-                                    $referrers = Referrer::all();
-                                    ?>
-                                    @foreach($referrers as $referrer)
-                                        <option value = {{$referrer->id}} > {{ $referrer->name }}</option>
-                                    @endforeach
-
+                                @foreach($referrers as $referrer)
+                                <option value = {{$referrer->id}} > {{ $referrer->name }}</option>
+                                @endforeach
                                 </select>
 
                                 @error('referrer_id')

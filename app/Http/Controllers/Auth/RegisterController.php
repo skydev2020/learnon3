@@ -9,6 +9,7 @@ use App\Role;
 use App\Country;
 use App\State;
 use App\Grade;
+use App\Referrer;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -113,8 +114,6 @@ class RegisterController extends Controller
             'referrer_id'           => $data['referrer_id'],
         ]);
 
-        // echo($data['state_id']);
-        // dd($data['country_id']);
 
         if ($user == NULL)
         {
@@ -129,6 +128,22 @@ class RegisterController extends Controller
 
         return $user;
     }
+
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $grades = Grade::all();
+        $countries = Country::all();
+        $states = State::all();
+        $referrers = Referrer::all();
+        return view('auth.register', compact('grades', 'countries', 'states', 'referrers'));
+    }
+
 
 
 }
