@@ -27,5 +27,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/assignments', 'AssignmentsController');
     Route::resource('/packages', 'PackagesController');
     Route::resource('/student_packages', 'Student_PackagesController');
+    Route::resource('/tutors', 'TutorsController');
 });
 

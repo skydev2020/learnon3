@@ -59,7 +59,7 @@
                                     Tutors
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Tutors List</a>
+                                    <a class="dropdown-item" href="{{route('admin.tutors.index')}}">Tutors List</a>
                                     <a class="dropdown-item" href="#">Sessions</a>
                                     <a class="dropdown-item" href="#">Tutor Assignment</a>
                                     <a class="dropdown-item" href="#">Homework Assignments</a>

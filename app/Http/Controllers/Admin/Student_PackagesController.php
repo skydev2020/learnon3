@@ -16,10 +16,7 @@ class Student_PackagesController extends Controller
      */
     public function index()
     {
-        $orders = Order::whereHas('packages', function($package){
-            return $package->where('name', 'like', "%" . "%");
-        })->get();
-
+        $orders = Order::has('packages')->get(); 
         return view('admin.student_packages.index')->with('orders', $orders);
     }
 
