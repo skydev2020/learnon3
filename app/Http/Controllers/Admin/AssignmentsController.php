@@ -157,6 +157,7 @@ class AssignmentsController extends Controller
      */
     public function edit(Assignment $assignment)
     {
+        //dd($assignment->id);
         if (Gate::denies('edit-users')) {
             return redirect(route('admin.users.index'));
         }
