@@ -80,9 +80,9 @@
                         <tbody>
                         @foreach ($assignments as $assignment)
                             <tr>
-                                <th scope="row">{{$assignment->id}}</th>
-                                <td scope="col">{{$assignment->student()['fname'] . ' ' . $assignment->student()['lname']}}</td>
-                                <td scope="col">{{$assignment->tutor()['fname'] . ' ' . $assignment->tutor()['lname']}}</td>
+                                <th scope="row"> {{$assignment->id}}</th>
+                                <td scope="col">{{$assignment->student() != null ? $assignment->student()['fname'] . ' ' . $assignment->student()['lname'] : "" }}</td>
+                                <td scope="col">{{$assignment->tutor() != null ? $assignment->tutor()['fname'] . ' ' . $assignment->tutor()['lname'] : ""}}</td>
                                 <td scope="col">{{$assignment->subjects}}</td>
                                 <td scope="col">{{$assignment->created_at}}</td>
                                 <td scope="col">

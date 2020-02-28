@@ -46,20 +46,20 @@
                                     Students
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item {{Request::segment(2)=="students" ? 'active' : '' }} " href="{{route('admin.students.index')}}">Student List</a>
-                                    <a class="dropdown-item" href="{{route('admin.assignments.index')}}">Student Assignment</a>
-                                    <a class="dropdown-item" href="{{route('admin.student_packages.index')}}">Student Packages</a>
-                                    <a class="dropdown-item" href="{{route('admin.packages.index')}}">Packages</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="students" ? 'active' : '' }}" href="{{route('admin.students.index')}}">Student List</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="assignments" ? 'active' : '' }}" href="{{route('admin.assignments.index')}}">Student Assignment</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="student_packages" ? 'active' : '' }}" href="{{route('admin.student_packages.index')}}">Student Packages</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="packages" ? 'active' : '' }}" href="{{route('admin.packages.index')}}">Packages</a>
                                 </div>
                             </li>
                             @endcan
                             @can('manage-tutors')
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown  {{in_array(Request::segment(2), ["tutors", "sessions"]) ? 'active' : '' }}">
                                 <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Tutors
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('admin.tutors.index')}}">Tutors List</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="tutors" ? 'active' : '' }}" href="{{route('admin.tutors.index')}}">Tutors List</a>
                                     <a class="dropdown-item" href="#">Sessions</a>
                                     <a class="dropdown-item" href="{{route('admin.tutorassignments.index')}}">Tutor Assignment</a>
                                     <a class="dropdown-item" href="#">Homework Assignments</a>
