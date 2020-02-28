@@ -62,7 +62,7 @@
                                     <a class="dropdown-item" href="{{route('admin.tutors.index')}}">Tutors List</a>
                                     <a class="dropdown-item" href="#">Sessions</a>
                                     <a class="dropdown-item" href="{{route('admin.tutorassignments.index')}}">Tutor Assignment</a>
-                                    <a class="dropdown-item" href="#">Homework Assignments</a>
+                                    <a class="dropdown-item" href="{{route('admin.essayassignments.index')}}">Homework Assignments</a>
                                     <a class="dropdown-item" href="#">Rejected Tutors</a>
                                 </div>
                             </li>
