@@ -34,19 +34,19 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Home</a>
+                            <li class="nav-item {{Request::is('home') ? 'active' : '' }}">
+                                <a class="nav-link" href="/home">Home</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">My Profile</a>
                             </li>
                             @can('manage-students')
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown {{in_array(Request::segment(2), ["students", "assignments", "student_packages", "packages"]) ? 'active' : '' }}">
                                 <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Students
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route('admin.students.index')}}">Student List</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="students" ? 'active' : '' }} " href="{{route('admin.students.index')}}">Student List</a>
                                     <a class="dropdown-item" href="{{route('admin.assignments.index')}}">Student Assignment</a>
                                     <a class="dropdown-item" href="{{route('admin.student_packages.index')}}">Student Packages</a>
                                     <a class="dropdown-item" href="{{route('admin.packages.index')}}">Packages</a>
