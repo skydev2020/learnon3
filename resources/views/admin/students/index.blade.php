@@ -94,16 +94,16 @@
                                 <td scope="col">{{$student->subjects}}</td>
                                 <td scope="col">{{date('d/m/Y', strtotime($student->created_at))}}</td>
                                 <td scope="col">
-                                    @can('edit-users')
+                                    @can('manage-students')
                                         [<a href="{{route('admin.students.show', $student->id)}}">View</a>]
                                     @endcan
-                                    @can('edit-users')
+                                    @can('manage-students')
                                         [<a href="{{route('admin.students.edit', $student->id)}}">Edit</a>]
                                     @endcan
-                                    @can('edit-users')
+                                    @can('manage-students')
                                         [<a href="{{route('admin.students.invoices', $student->id)}}">Invoices</a>]
                                     @endcan
-                                    @can('edit-users')
+                                    @can('manage-students')
                                         [<a href="{{route('admin.students.contract', $student)}}" target="_blank">Contract</a>]
                                     @endcan
                                 </td>
