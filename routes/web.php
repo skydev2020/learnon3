@@ -29,5 +29,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/student_packages', 'Student_PackagesController');
     Route::resource('/tutors', 'TutorsController');
     Route::resource('/tutorassignments', 'TutorAssignmentsController');
+
+    //Custom Route
+    Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
+    Route::get('/students/contract/{student}', 'StudentsController@showContract')->name('students.contract');
 });
 
