@@ -111,7 +111,7 @@ class StudentsController extends Controller
      */
     public function show(User $student)
     {
-
+        dd('abc');
     }
 
     /**
@@ -148,5 +148,27 @@ class StudentsController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+     /**
+     * Manage Invoices
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function manageInvoices(User $student)
+    {
+        dd('abcdd');
+    }
+
+     /**
+     * Show Contract
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function showContract(User $student)
+    {
+        dd('abcdd32234');
     }
 }

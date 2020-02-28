@@ -92,20 +92,19 @@
                                 <td scope="col">{{$student->email}}</td>
                                 <td scope="col">{{$student->city}}</td>
                                 <td scope="col">{{$student->subjects}}</td>
-                                <td scope="col">{{$student->created_at}}</td>
+                                <td scope="col">{{date('d/m/Y', strtotime($student->created_at))}}</td>
                                 <td scope="col">
-                                    @can('edit-users')
-                                        <a href="{{route('admin.users.edit', $student->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
+                                    @can('manage-students')
+                                        [<a href="{{route('admin.students.show', $student->id)}}">View</a>]
                                     @endcan
-                                    @can('delete-users')
-                                    <form action="{{ route('admin.users.destroy', $student) }}" method="POST" class="float-left">
-                                        @csrf
-                                        {{method_field('DELETE')}}
-                                        <button type="submit" class="btn btn-warning">Delete</button>
-                                    </form>
+                                    @can('manage-students')
+                                        [<a href="{{route('admin.students.edit', $student->id)}}">Edit</a>]
                                     @endcan
-                                    @can('edit-users')
-                                        <a href="{{route('admin.students.edit', $student)}}" target="_blank"><button type="button" class="btn btn-primary float-left">Contract</button></a>
+                                    @can('manage-students')
+                                        [<a href="{{route('admin.students.invoices', $student->id)}}">Invoices</a>]
+                                    @endcan
+                                    @can('manage-students')
+                                        [<a href="{{route('admin.students.contract', $student)}}" target="_blank">Contract</a>]
                                     @endcan
                                 </td>
                             </tr>

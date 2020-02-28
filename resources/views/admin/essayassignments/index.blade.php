@@ -46,8 +46,12 @@
                         <div class="form-group row">
                             <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Current Status') }}</label>
                             <div class="col-md-6">
-                                <input id="status" type="text" class="form-control" name="status"
-                                 value="{{ $data['old']['status'] }}" autocomplete="status" autofocus>
+                                <select class = "form-control" name = "status" id = "status">
+                                    @foreach ($data['statuses'] as $essaystatus)
+                                        <option value = {{$essaystatus->id}} <?= $essaystatus->id == $data['old']['status'] ? "selected" : ""?>>
+                                         {{ $essaystatus->name }} </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -107,7 +111,7 @@
 
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
-                            <a href = "{{ route('admin.tutorassignments.create') }}"> <button class="btn btn-primary">
+                            <a href = "{{ route('admin.essayassignments.create') }}"> <button class="btn btn-primary">
                                 {{ __('ADD NEW ASSIGNMENT') }}
                             </button>
                             </a>
@@ -152,7 +156,7 @@
                                     @endcan
 
                                     @can('delete-users')
-                                    <form action="{{ route('admin.tutorassignments.destroy', $essay_assignment) }}" method="POST" class="float-left">
+                                    <form action="{{ route('admin.essayassignments.destroy', $essay_assignment) }}" method="POST" class="float-left">
                                         @csrf
                                         {{method_field('DELETE')}}
                                         <button type="submit" class="btn btn-warning">Delete</button>
