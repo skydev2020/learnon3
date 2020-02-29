@@ -124,7 +124,7 @@
                 <div class="card-header"></div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
-                        <thead>g
+                        <thead>
                         <tr>
                             <th scope="col">Assignment #</th>
                             <th scope="col">Student Name</th>
@@ -152,14 +152,15 @@
                                 <td scope="col">{{$essay_assignment->date_completed}}</td>
                                 <td scope="col">
                                     @can('edit-users')
-                                        <a href="{{route('admin.tutorassignments.edit', $essay_assignment->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
+                                        <a href="{{route('admin.essayassignments.edit', $essay_assignment->id)}}">Edit</a>
                                     @endcan
 
                                     @can('delete-users')
-                                    <form action="{{ route('admin.essayassignments.destroy', $essay_assignment) }}" method="POST" class="float-left">
+                                    <form action="{{ route('admin.essayassignments.destroy', $essay_assignment) }}" method="post">
                                         @csrf
                                         {{method_field('DELETE')}}
-                                        <button type="submit" class="btn btn-warning">Delete</button>
+                                        <a href="javascript:;" onclick="parentNode.submit();">Delete</a>
+      
                                     </form>
                                     @endcan
                                 </td>

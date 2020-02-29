@@ -284,8 +284,6 @@ class EssayAssignmentsController extends Controller
         ];
 
         $essayassignment->delete();
-        return view('admin.essayassignments.index')->with('data', $data);
-
-        return redirect()->route('admin.tutorassignments.index')->with('data', $data);
+        return redirect()->route('admin.essayassignments.index')->with('data', $data);
     }
 }
