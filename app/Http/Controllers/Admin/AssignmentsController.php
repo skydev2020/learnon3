@@ -73,7 +73,7 @@ class AssignmentsController extends Controller
             session()->flash('error', "No search results!");
         }
 
-        $assignments = Assignment::where('id', 'not in', Assignment::where('name', 'like', "%" . $name . "%"))->get();
+        //$assignments = Assignment::where('id', 'not in', Assignment::where('name', 'like', "%" . $name . "%"))->get();
 
         return view('admin.assignments.index')->with('assignments', $assignments);
     }

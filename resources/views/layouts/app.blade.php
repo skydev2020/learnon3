@@ -60,7 +60,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item {{Request::segment(2)=="tutors" ? 'active' : '' }}" href="{{route('admin.tutors.index')}}">Tutors List</a>
-                                    <a class="dropdown-item {{Request::segment(2)=="sessions" ? 'active' : '' }}" href="#">Sessions</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="sessions" ? 'active' : '' }}" href="{{route('admin.sessions.index')}}">Sessions</a>
                                     <a class="dropdown-item {{Request::segment(2)=="tutorassignments" ? 'active' : '' }}" href="{{route('admin.tutorassignments.index')}}">Tutor Assignment</a>
                                     <a class="dropdown-item {{Request::segment(2)=="essayassignments" ? 'active' : '' }}" href="{{route('admin.essayassignments.index')}}">Homework Assignments</a>
                                     <a class="dropdown-item {{Request::segment(2)=="assignments" ? 'active' : '' }}" href="#">Rejected Tutors</a>
