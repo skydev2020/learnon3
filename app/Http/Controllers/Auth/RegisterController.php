@@ -137,7 +137,9 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        $grades = Grade::all();
+        $grades = Grade::with('subjects')->get();
+        // dd($grades->toJson());
+
         $countries = Country::all();
         $states = State::all();
         $referrers = Referrer::all();

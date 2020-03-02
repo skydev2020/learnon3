@@ -227,6 +227,19 @@
                             </div>
                         </div>
 
+
+                        <div class="form-group row">
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="grade_id" class="col-form-label font-weight-bold">{{ __('Subjects') }}:</label>
+                            </div>
+
+                            <div class="col-6 d-flex align-items-center">
+                                <div class="scrollbox">
+
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
                                 <label for="subjects" class="font-weight-bold text-center" >{{ __('Courses') }}
