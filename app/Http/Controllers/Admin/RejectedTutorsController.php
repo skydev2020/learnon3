@@ -99,9 +99,7 @@ class RejectedTutorsController extends Controller
         }
 
         $roles = Role::all();
-        return view('admin.rejectedtutors.edit')->with([
-            'tutor' => $rejectedtutor
-        ]);
+        return view('admin.rejectedtutors.edit')->with('tutor', $rejectedtutor);
     }
 
     /**
@@ -111,10 +109,10 @@ class RejectedTutorsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $tutor)
+    public function update(Request $request, User $rejectedtutor)
     {
         $validator = Validator::make($request->all(), [
-            'email'             => ['required', 'email'],
+            'email'             => ['required', 'email','unique:users'],
             'fname'             => ['required', 'string'],
             'lname'             => ['required', 'string'],
             'home_phone'        => ['required', 'string'],
@@ -138,34 +136,42 @@ class RejectedTutorsController extends Controller
 
         if ($validator->fails())
         {
+            
             $request->session()->flash('error', $validator->messages()->first());
-            return redirect()->route('admin.essayassignments.edit', $essayassignment);
+            return redirect()->route('admin.rejectedtutors.edit', $rejectedtutor);
         }
 
         $data = $request->all();
-        $tutor->email = $data['email'];
-        $tutor->fname = $data['fname'];
-        $tutor->lname = $data['lname'];
-        $tutor->home_phone = $data['home_phone'];
-        $tutor->cell_phone = $data['cell_phone'];
-        $tutor->password = $data['password'];
-        $tutor->address = $data['address'];
-        $tutor->city = $data['city'];
-        $tutor->state_id = $data['state_id'];
-        $tutor->pcode = $data['pcode'];
-        $tutor->country_id = $data['country_id'];
-        $tutor->other_notes = $data['other_notes'];
-        $tutor->post_secondary_edu = $data['post_secondary_edu'];
-        $tutor->area_of_concentration = $data['area_of_concentration'];
-        $tutor->tutoring_courses = $data['tutoring_courses'];
-        $tutor->work_experience = $data['work_experience'];
-        $tutor->tutoring_areas = $data['tutoring_areas'];
-        $tutor->gender = $data['sex_val'];
-        $tutor->certified_teacher = $data['certified'];
-        $tutor->criminal_record = $data['cr_radio'];
-        $tutor->criminal_check = $data['cc_radio'];
-        $tutor->approved = $data['approved'];
+        $rejectedtutor->email = $data['email'];
+        $rejectedtutor->fname = $data['fname'];
+        $rejectedtutor->lname = $data['lname'];
+        $rejectedtutor->home_phone = $data['home_phone'];
+        $rejectedtutor->cell_phone = $data['cell_phone'];
+        $rejectedtutor->password = $data['password'];
+        $rejectedtutor->address = $data['address'];
+        $rejectedtutor->city = $data['city'];
+        $rejectedtutor->state_id = $data['state_id'];
+        $rejectedtutor->pcode = $data['pcode'];
+        $rejectedtutor->country_id = $data['country_id'];
+        $rejectedtutor->other_notes = $data['other_notes'];
+        $rejectedtutor->post_secondary_edu = $data['post_secondary_edu'];
+        $rejectedtutor->area_of_concentration = $data['area_of_concentration'];
+        $rejectedtutor->tutoring_courses = $data['tutoring_courses'];
+        $rejectedtutor->work_experience = $data['work_experience'];
+        $rejectedtutor->tutoring_areas = $data['tutoring_areas'];
+        $rejectedtutor->gender = $data['sex_val'];
+        $rejectedtutor->certified_teacher = $data['certified'];
+        $rejectedtutor->criminal_record = $data['cr_radio'];
+        $rejectedtutor->criminal_check = $data['cc_radio'];
+        $rejectedtutor->approved = $data['approved'];
 
+        if($rejectedtutor->save()){
+            $request->session()->flash('success', 'The tutor has been updated successfully');
+            return redirect()->route('admin.rejectedtutors.index');
+        }
+        
+        $request->session()->flash('error', 'There was an error updating the tutor');
+        return redirect()->route('admin.rejectedtutors.edit', $rejectedtutor);
     }
 
     /**
@@ -174,8 +180,14 @@ class RejectedTutorsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $rejectedtutor)
     {
-        //
+        if (Gate::denies('manage-tutors')) {
+            
+            return redirect(route('admin.rejectedtutors.index'));
+        }
+
+        $rejectedtutor->delete();
+        return redirect(route('admin.rejectedtutors.index'));    
     }
 }
