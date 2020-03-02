@@ -63,7 +63,7 @@
                                     <a class="dropdown-item {{Request::segment(2)=="sessions" ? 'active' : '' }}" href="{{route('admin.sessions.index')}}">Sessions</a>
                                     <a class="dropdown-item {{Request::segment(2)=="tutorassignments" ? 'active' : '' }}" href="{{route('admin.tutorassignments.index')}}">Tutor Assignment</a>
                                     <a class="dropdown-item {{Request::segment(2)=="essayassignments" ? 'active' : '' }}" href="{{route('admin.essayassignments.index')}}">Homework Assignments</a>
-                                    <a class="dropdown-item {{Request::segment(2)=="assignments" ? 'active' : '' }}" href="#">Rejected Tutors</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="rejectedtutors" ? 'active' : '' }}" href="{{route('admin.rejectedtutors.index')}}">Rejected Tutors</a>
                                 </div>
                             </li>
                             @endcan

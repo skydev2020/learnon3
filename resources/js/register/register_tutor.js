@@ -55,7 +55,7 @@ function checkName() {
 
 
 function submitOnValid(){
-    if (errors.duplicateEmail == false && errors.nameMatch == false) {
+    if (errors.duplicateEmail == false && errors.nameMatch == true) {
       return true;
     }
     return false;

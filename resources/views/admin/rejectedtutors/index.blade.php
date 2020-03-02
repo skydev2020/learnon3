@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Tutors</div>
+                <div class="card-header">Rejected Tutors</div>
 
                 <div class="card-body">
-                    <form method="GET" action="{{ route('admin.tutors.index') }}">
+                    <form method="GET" action="{{ route('admin.rejectedtutors.index') }}">
                         @csrf
                         {{method_field('GET')}}
                         <div class="form-group row">
@@ -26,31 +26,9 @@
                                 autocomplete="email" autofocus>
                             </div>
                         </div>
-
+                        
                         <div class="form-group row">
-                            <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
-                            <div class="col-md-6">
-                                <select style="display: inline-block;" id="status" name="status" class = "form-control">
-                                    <option></option>
-                                    <option>Enabled</option>
-                                    <option>Disabled</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="approved" class="col-md-4 col-form-label text-md-right">{{ __('Approved') }}</label>
-                            <div class="col-md-6">
-                                <select style="display: inline-block;" id="approved" name="approved" class = "form-control">
-                                    <option></option>
-                                    <option>Yes</option>
-                                    <option>No</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="t_date" class="col-md-4 col-form-label text-md-right">{{ __('Date Registered') }}</label>
+                            <label for="t_date" class="col-md-4 col-form-label text-md-right">{{ __('Date Added') }}</label>
                             <div class="col-md-6">
                                 <input id="t_date" type="date" class="form-control" name="t_date" value="{{ $data['old']['t_date'] }}"
                                 autocomplete="t_date" autofocus>
@@ -75,11 +53,8 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th scope="col">ID</th>
                             <th scope="col">Tutor Name</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Approved</th>
                             <th scope="col">Date Added</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -87,31 +62,21 @@
                         <tbody>
                         @foreach ($data['tutors'] as $tutor)
                             <tr>
-                                <th scope="row">{{$tutor->id}}</th>
                                 <td scope="col">{{$tutor->fname . ' ' . $tutor->lname}}</td>
                                 <td scope="col">{{$tutor->email}}</td>
-                                <td scope="col" value = {{$tutor->status}}> <?=$tutor->status == 1? 'Enabled' : 'Disabled';?> </td>
-                                <td scope="col"> <?=$tutor->approved == 1? 'Yes' : 'NO'; ?> </td>
-                                <td scope="col">{{$tutor->created_at}}</td>
+                                <td scope="col">{{date('d/m/Y', strtotime($tutor->created_at)) }}</td>
                                 <td scope="col">
                                     @can('edit-users')
-                                        <a href="{{route('admin.tutors.edit', $tutor->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
+                                        [<a href="{{route('admin.rejectedtutors.edit', $tutor->id)}}">Edit</a>]
                                     @endcan
                                     @can('manage-tutors')
-                                        <a href="{{route('admin.tutors.show', $tutor)}}" target="_blank"><button type="button" class="btn btn-primary float-left">Contract</button></a>
+                                        [<a href="{{route('admin.rejectedtutors.show', $tutor)}}">Contract</a>]
                                     @endcan
                                     @can('manage-tutors')
-                                    <form action="{{ route('admin.tutors.destroy', $tutor) }}" method="POST" class="float-left">
-                                        @csrf
+                                    <form action="{{ route('admin.rejectedtutors.destroy', $tutor) }}" method="POST" class="float-left">
+                                    @csrf
                                         {{method_field('DELETE')}}
-                                        <button type="submit" class="btn btn-warning">View Work</button>
-                                    </form>
-                                    @endcan
-                                    @can('manage-tutors')
-                                    <form action="{{ route('admin.tutors.destroy', $tutor) }}" method="POST" class="float-left">
-                                        @csrf
-                                        {{method_field('DELETE')}}
-                                        <button type="submit" class="btn btn-warning">View Paycheques</button>
+                                        [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
                                     </form>
                                     @endcan
                                 </td>
