@@ -229,27 +229,14 @@
 
 
                         <div class="form-group row">
-                            <div class="col-4 d-flex justify-content-end">
-                                <label for="grade_id" class="col-form-label font-weight-bold">{{ __('Subjects') }}:</label>
+                            <div class="col-4 d-flex justify-content-end align-items-center">
+                                <label class="col-form-label font-weight-bold">{{ __('Subjects') }}:</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
                                 <div class="scrollbox">
 
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-4 d-flex justify-content-end">
-                                <label for="subjects" class="font-weight-bold text-center" >{{ __('Courses') }}
-                                <br>
-                                Seperate Multiple courses by a comma (,)
-                                </label>
-                            </div>
-                            <div class="col-8 d-flex align-items-center">
-                                <textarea class="form-control inputstl"  name = "subjects" id = "subjects" placeholder="Enter the courses that you require" >
-                                </textarea>
                             </div>
                         </div>
 
