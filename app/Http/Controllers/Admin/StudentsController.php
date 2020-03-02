@@ -9,6 +9,7 @@ use App\StudentStatus;
 use App\Grade;
 use Illuminate\Http\Request;
 use Config;
+use App\Subject;
 /**
  * StudentsController is working with Students
  * Student is a User whose Role is Student
@@ -44,6 +45,8 @@ class StudentsController extends Controller
             $q.= " and created_at like '%".$s_date."%'";
         }
 
+        $q.= " and grade_id >= '1'";
+
         if ($s_sub) {
             $q.= " and subjects like '%".$s_sub."%'";
         }
@@ -61,9 +64,11 @@ class StudentsController extends Controller
         ->whereRaw($q)->get();
 
         $student_statuses = StudentStatus::all();
+        $subjects = Subject::all();
         $data = [
-            'students' => $students,
-            'student_statuses' => $student_statuses,
+            'students'          => $students,
+            'student_statuses'  => $student_statuses,
+            'subjects'          => $subjects,
             'old' => [
                 's_name' => $s_name,
                 's_city' => $s_city,

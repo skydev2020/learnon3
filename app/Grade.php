@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grade extends Model
 {
-    //
+    public function subjects() {
+        return $this->belongsToMany('App\Subject');
+    }
 }

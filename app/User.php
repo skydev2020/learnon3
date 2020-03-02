@@ -75,8 +75,8 @@ class User extends Authenticatable
         return $this->belongsTo('App\State');
     }
 
-    public function grade(){
-        return $this->belongsTo('App\Grade');
+    public function grades(){
+        return $this->belongsTo('App\Grade', 'grade_id');
     }
 
     public function referrer(){
