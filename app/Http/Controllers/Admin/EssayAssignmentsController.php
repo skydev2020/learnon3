@@ -238,9 +238,18 @@ class EssayAssignmentsController extends Controller
      * @param  \App\EssayAssignment  $essay_Assignment
      * @return \Illuminate\Http\Response
      */
-    public function edit(EssayAssignment $essay_Assignment)
+    public function edit(EssayAssignment $essayassignment)
     {
-        //
+        $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()->get();
+        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
+        $essay_statuses = EssayStatus::all();
+        $data = [
+            'tutors'            => $tutors,
+            'students'          => $students,
+            'statuses'          => $essay_statuses,
+            'essayassignment'   => $essayassignment
+        ];
+        return view('admin.essayassignments.edit')->with('data', $data);
     }
 
     /**
@@ -252,7 +261,48 @@ class EssayAssignmentsController extends Controller
      */
     public function update(Request $request, EssayAssignment $essayassignment)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'assignment_num'    => ['required', 'integer'],
+            'tutor_id'          => ['required', 'int'],
+            'student_id'        => ['required', 'int'],
+            'topic'             => ['required', 'string'],
+            'description'       => ['required', 'string'],
+            'file_format'       => ['required', 'string'],
+            'paid_to_tutor'     => ['required', 'string'],
+            'price_owed'        => ['required', 'string'],
+            'date_assigned'     => ['required', 'date'],
+            'date_completed'    => ['required', 'date'],
+            'date_due'          => ['required', 'date'],
+            'status_id'         => ['required', 'integer'],
+        ]);
+
+        if ($validator->fails())
+        {
+            $request->session()->flash('error', $validator->messages()->first());
+            return redirect()->route('admin.essayassignments.edit', $essayassignment);
+        }
+
+        $data = $request->all();
+        $essayassignment->assignment_num = $data['assignment_num'];
+        $essayassignment->tutor_id = $data['tutor_id'];
+        $essayassignment->student_id = $data['student_id'];
+        $essayassignment->topic = $data['topic'];
+        $essayassignment->description = $data['description'];
+        $essayassignment->format = $data['file_format'];
+        $essayassignment->paid = $data['paid_to_tutor'];
+        $essayassignment->owed = $data['price_owed'];
+        $essayassignment->date_assigned = $data['date_assigned'];
+        $essayassignment->date_completed = $data['date_completed'];
+        $essayassignment->date_due = $data['date_due'];
+        $essayassignment->status_id = $data['status_id'];
+
+        if($essayassignment->save()){
+            $request->session()->flash('success', 'The Homework Assignmnet has been updated successfully');
+            return redirect()->route('admin.essayassignments.index');
+        }
+        
+        $request->session()->flash('error', 'There was an error updating the homework assignment');
+        return redirect()->route('admin.essayassignments.edit');
     }
 
     /**
