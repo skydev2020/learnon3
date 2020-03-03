@@ -76,7 +76,8 @@
                                     <a class="dropdown-item" href="#">Billing Process</a>
                                     <a class="dropdown-item {{Request::segment(2)=="invoices" ? 'active' : '' }}"
                                     href="{{route('admin.invoices.index')}}">Student Invoices</a>
-                                    <a class="dropdown-item" href="#">Tutors Paycheques</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="paycheques" ? 'active' : '' }}"
+                                     href="{{route('admin.paycheques.index')}}">Tutors Paycheques</a>
                                     <a class="dropdown-item" href="#">Payment Received</a>
                                     <a class="dropdown-item" href="#">Monthly Expenses</a>
                                     <a class="dropdown-item" href="#">Other Income</a>

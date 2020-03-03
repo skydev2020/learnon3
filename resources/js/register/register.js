@@ -61,7 +61,6 @@ function getSubjects(gradeId) {
                     className = 'even';
                 }
             }
-
         }
     }
 }
