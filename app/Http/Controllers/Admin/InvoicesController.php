@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Invoice;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class InvoicesController extends Controller
 {
@@ -150,6 +151,11 @@ class InvoicesController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
-        //
+        if (Gate::denies('manage-payments')) {
+            return redirect()->route('admin.invoices.index');
+        }
+
+        $invoice->delete();
+        return redirect()->route('admin.invoices.index');
     }
 }
