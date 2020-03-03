@@ -74,7 +74,8 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">Billing Process</a>
-                                    <a class="dropdown-item" href="#">Student Invoices</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="studentinvoices" ? 'active' : '' }}"
+                                    href="{{route('admin.studentinvoices.index')}}">Student Invoices</a>
                                     <a class="dropdown-item" href="#">Tutors Paycheques</a>
                                     <a class="dropdown-item" href="#">Payment Received</a>
                                     <a class="dropdown-item" href="#">Monthly Expenses</a>
