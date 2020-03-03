@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.13.1/standard-all/ckeditor.js"></script>
 </head>
 <body>
     <div id="app">

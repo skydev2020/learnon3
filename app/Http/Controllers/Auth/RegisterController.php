@@ -69,7 +69,6 @@ class RegisterController extends Controller
             'pcode'         => ['required', 'string'],
             'country_id'    => ['required', 'integer'],
             'grade_id'      => ['required', 'integer'],
-            'subjects'      => ['required', 'string'],
             'parent_fname'  => ['required', 'string'],
             'parent_lname'  => ['required', 'string'],
             'street'        => ['required', 'string'],

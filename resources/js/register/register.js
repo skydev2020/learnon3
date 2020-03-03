@@ -66,10 +66,10 @@ function getSubjects(gradeId) {
     }
 }
 
-setTimeout(function() {
+window.addEventListener(function() {
     // select initial subjects: after loading pages
    if (grades.length>0) {
        getSubjects(grades[0].id);
    }
 
-}, 0);
+});

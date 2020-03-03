@@ -131,12 +131,14 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-4 d-flex justify-content-end">
-                                <label for="invoice_mail" class="col-form-label font-weight-bold">{{ __('Invoice Mail:') }}</label>
+                        <div class="col-4 d-flex justify-content-end">
+                                <label for="invoice_mail" class="col-form-label font-weight-bold">
+                                {{ __('Invoice Mail:') }}</label>
                             </div>
-
-                            <div class="col-6">
-                                <?php echo html_entity_decode($invoice->invoice_format); ?>
+                            <div class="col-8 d-flex align-items-center">
+                            <textarea id="invoice_mail" class="form-control inputstl"
+                                 name="invoice_mail" required autocomplete="invoice_mail" autofocus>
+                                 <?php echo html_entity_decode($invoice->invoice_format); ?></textarea>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">
@@ -148,4 +150,16 @@
         </div>
     </div>
 </div>
+
 @endsection
+<!-- Scripts -->
+@section("jssection")
+<script type="text/javascript">
+    window.addEventListener('load', function() {
+        CKEDITOR.replace('invoice_mail', {
+            uiColor: '#CCEAEE'
+        });
+    });
+</script>
+
+@stop
