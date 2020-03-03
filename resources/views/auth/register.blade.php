@@ -233,8 +233,8 @@
                                 <label class="col-form-label font-weight-bold">{{ __('Subjects') }}:</label>
                             </div>
 
-                            <div class="col-6 d-flex align-items-center flex-column">
-                                <div class="scrollbox" id="subjects_box">
+                            <div class="col-6 d-flex flex-column">
+                                <div class="scrollbox pl-1 pt-1" id="subjects_box">
 
                                 </div>
                                 <div>

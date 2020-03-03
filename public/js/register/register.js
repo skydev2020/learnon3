@@ -65,10 +65,11 @@ function getSubjects(gradeId) {
         }
     }
 }
+
 setTimeout(function() {
-    // select initial subjects
+    // select initial subjects: after loading pages
    if (grades.length>0) {
        getSubjects(grades[0].id);
    }
 
-}, 0)
+}, 0);
