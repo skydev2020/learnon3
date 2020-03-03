@@ -213,7 +213,7 @@
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
-                                <select name="grade_id" id="grade_id">
+                                <select name="grade_id" id="grade_id" onchange="getSubjects(this.value);">
                                     @foreach($grades as $grade)
                                     <option value = {{$grade->id}} > {{ $grade->name }}</option>
                                     @endforeach
@@ -389,5 +389,10 @@
 @endsection
 <!-- Scripts -->
 @section("jssection")
+<script>
+    var grades_json = '<?php echo json_encode($grades_array, JSON_HEX_APOS) ?>';
+    var grades = eval(grades_json);
+
+</script>
 <script src="{{ asset('js/register/register.js')}}"></script>
 @stop

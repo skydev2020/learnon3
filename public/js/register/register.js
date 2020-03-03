@@ -38,3 +38,15 @@ function submitOnValid(){
       return false;
     }
 }
+
+
+//update subjects field according to grade_id
+function getSubjects(gradeId) {
+
+    for (let grade of grades) {
+        if (grade['id'] == gradeId) {
+            console.log("Grade: ", grade);
+            return;
+        }
+    }
+}
