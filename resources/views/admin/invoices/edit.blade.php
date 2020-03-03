@@ -7,16 +7,16 @@
             <div class="card">
                 <div class="card-header">Student Invoices</div>
                 <div class="card-body">
-                    <form action="{{route('admin.invoices.update', $invoice, 0)}}" method="POST">
+                    <form action="{{route('admin.invoices.update', $invoice)}}" method="POST">
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
                                 <label for="s_name" class="col-form-label font-weight-bold">Student Name:</label>
                             </div>
 
                             <div class="col-md-6">
-                                <a href = " {{route ( 'admin.users.edit', $invoice->student_id ) }} ">
-                                {{$invoice->students()->first()['fname'].' '.$invoice->students()->first()['lname']}}
-                                </a>{{' ( '. $invoice->studnet_id . ' )'}}
+                                <a href = " {{route ( 'admin.users.edit', $invoice->user_id ) }} ">
+                                {{$invoice->users()->first()['fname'].' '.$invoice->users()->first()['lname']}}
+                                </a>{{' ( '. $invoice->user_id . ' )'}}
                             </div>
                         </div>
                         

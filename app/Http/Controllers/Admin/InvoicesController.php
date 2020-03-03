@@ -106,44 +106,40 @@ class InvoicesController extends Controller
      * @param  \App\Invoice  $Invoice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Invoice $invoice, Int $flag)
+    public function update(Request $request, Invoice $invoice)
     {
-        if ($flag == 0) {
-            $validator = Validator::make($request->all(), [
-                'invoice_date'      => ['required', 'date'],
-                'num_of_sessions'   => ['required', 'int'],
-                'total_hours'       => ['required', 'string'],
-                'total_amount'      => ['required', 'string'],
-                'paid_amount'       => ['required', 'string'],
-                'invoice_notes'     => ['required', 'string'],
-                'status'            => ['required', 'string'],
-            ]);
+        $validator = Validator::make($request->all(), [
+            'invoice_date'      => ['required', 'date'],
+            'num_of_sessions'   => ['required', 'int'],
+            'total_hours'       => ['required', 'string'],
+            'total_amount'      => ['required', 'string'],
+            'paid_amount'       => ['required', 'string'],
+            'invoice_notes'     => ['required', 'string'],
+            'status'            => ['required', 'string'],
+        ]);
 
-            if ($validator->fails())
-            {
-                $request->session()->flash('error', $validator->messages()->first());
-                return redirect()->route('admin.invoices.edit', $invoice);
-            }
-
-            $data = $request->all();
-            $invoice->invoice_date = $data['invoice_date'];
-            $invoice->num_of_sessions = $data['num_of_sessions'];
-            $invoice->total_hours = $data['total_hours'];
-            $invoice->total_amount = $data['total_amount'];
-            $invoice->paid_amount = $data['paid_amount'];
-            $invoice->invoice_notes = $data['invoice_notes'];
-            $invoice->status = $data['status'];
-
-            if($invoice->save()){
-                $request->session()->flash('success', 'You have modified invoices!');
-                return redirect()->route('admin.invoices.index');
-            }
-            
-            $request->session()->flash('error', 'There was an error modifying invoices');
+        if ($validator->fails())
+        {
+            $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.invoices.edit', $invoice);
-        } else if ($flag == 1) {
-
         }
+
+        $data = $request->all();
+        $invoice->invoice_date = $data['invoice_date'];
+        $invoice->num_of_sessions = $data['num_of_sessions'];
+        $invoice->total_hours = $data['total_hours'];
+        $invoice->total_amount = $data['total_amount'];
+        $invoice->paid_amount = $data['paid_amount'];
+        $invoice->invoice_notes = $data['invoice_notes'];
+        $invoice->status = $data['status'];
+
+        if($invoice->save()){
+            $request->session()->flash('success', 'You have modified invoices!');
+            return redirect()->route('admin.invoices.index');
+        }
+        
+        $request->session()->flash('error', 'There was an error modifying invoices');
+        return redirect()->route('admin.invoices.edit', $invoice);
     }
 
     /**

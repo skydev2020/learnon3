@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invoice extends Model
 {
-    public function students() {
+    public function users() {
         return $this->belongsTo('App\User', 'user_id');
     }
 }

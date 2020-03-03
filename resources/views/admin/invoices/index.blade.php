@@ -85,8 +85,8 @@
                         @foreach ($data['invoices'] as $invoice)
                             <tr>
                                 <td scope="col">{{$invoice->prefix . '-' . $invoice->num}}</td>
-                                <td scope="col">{{$invoice->students()->first()['fname'] . ' ' . 
-                                $invoice->students()->first()['lname'].' ('.$invoice->student_id.')'}}</td>
+                                <td scope="col">{{$invoice->users()->first()['fname'] . ' ' . 
+                                $invoice->users()->first()['lname'].' ('.$invoice->user_id.')'}}</td>
                                 <td scope="col">{{$invoice->total_amount}}</td>
                                 <td scope="col">{{$invoice->total_hours}}</td>
                                 <td scope="col">{{date('d/m/Y', strtotime($invoice->date_added)) }}</td>
@@ -96,7 +96,7 @@
                                         [<a href="{{route('admin.invoices.edit', $invoice)}}">Edit</a>]
                                     @endcan
                                     @can('manage-tutors')
-                                        [<a href="{{route('admin.invoices.show', $invoice)}}">View</a>]
+                                        [<a href="{{route('admin.invoices.edit', $invoice)}}">View</a>]
                                     @endcan
                                     @can('manage-tutors')
                                     <form action="{{ route('admin.invoices.destroy', $invoice) }}" method="POST" class="float-left">
