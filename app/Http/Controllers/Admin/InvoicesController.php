@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\StudentInvoice;
+use App\Invoice;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
-class StudentInvoicesController extends Controller
+class InvoicesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,7 +32,7 @@ class StudentInvoicesController extends Controller
             $q.= " and status like '%".$request_data['status']."%'";
         } else $request_data['status'] = "";
 
-        $studentInvoices = StudentInvoice::whereRaw($q);
+        $studentInvoices = Invoice::whereRaw($q);
         
         if (isset($request_data['s_name'])) {
             $studentInvoices = $studentInvoices->whereHas('students', function($student) use ($request_data) {
@@ -48,7 +49,7 @@ class StudentInvoicesController extends Controller
 
        if( count($studentInvoices) == 0 ) $request->session()->flash('error', "No search results!");
         
-        return view('admin.studentinvoices.index')->with('data', $data);
+        return view('admin.invoices.index')->with('data', $data);
     }
 
     /**
@@ -75,10 +76,10 @@ class StudentInvoicesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\StudentInvoice  $studentInvoice
+     * @param  \App\Invoice  $Invoice
      * @return \Illuminate\Http\Response
      */
-    public function show(StudentInvoice $studentInvoice)
+    public function show(Invoice $Invoice)
     {
         //
     }
@@ -86,33 +87,68 @@ class StudentInvoicesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\StudentInvoice  $studentInvoice
+     * @param  \App\Invoice  $Invoice
      * @return \Illuminate\Http\Response
      */
-    public function edit(StudentInvoice $studentinvoice)
+    public function edit(Invoice $invoice)
     {
-        return view('admin.studentinvoices.edit')->with('invoice', $studentinvoice);
+        return view('admin.invoices.edit')->with('invoice', $invoice);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\StudentInvoice  $studentInvoice
+     * @param  \App\Invoice  $Invoice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StudentInvoice $studentinvoice)
+    public function update(Request $request, Invoice $invoice, Int $flag)
     {
-        //
+        if ($flag == 0) {
+            $validator = Validator::make($request->all(), [
+                'invoice_date'      => ['required', 'date'],
+                'num_of_sessions'   => ['required', 'int'],
+                'total_hours'       => ['required', 'string'],
+                'total_amount'      => ['required', 'string'],
+                'paid_amount'       => ['required', 'string'],
+                'invoice_notes'     => ['required', 'string'],
+                'status'            => ['required', 'string'],
+            ]);
+
+            if ($validator->fails())
+            {
+                $request->session()->flash('error', $validator->messages()->first());
+                return redirect()->route('admin.invoices.edit', $invoice);
+            }
+
+            $data = $request->all();
+            $invoice->invoice_date = $data['invoice_date'];
+            $invoice->num_of_sessions = $data['num_of_sessions'];
+            $invoice->total_hours = $data['total_hours'];
+            $invoice->total_amount = $data['total_amount'];
+            $invoice->paid_amount = $data['paid_amount'];
+            $invoice->invoice_notes = $data['invoice_notes'];
+            $invoice->status = $data['status'];
+
+            if($invoice->save()){
+                $request->session()->flash('success', 'You have modified invoices!');
+                return redirect()->route('admin.invoices.index');
+            }
+            
+            $request->session()->flash('error', 'There was an error modifying invoices');
+            return redirect()->route('admin.invoices.edit', $invoice);
+        } else if ($flag == 1) {
+
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\StudentInvoice  $studentInvoice
+     * @param  \App\Invoice  $studentInvoice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StudentInvoice $studentinvoice)
+    public function destroy(Invoice $invoice)
     {
         //
     }

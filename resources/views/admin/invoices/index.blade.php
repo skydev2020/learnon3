@@ -8,9 +8,17 @@
                 <div class="card-header">Student Invoices</div>
 
                 <div class="card-body">
-                    <form method="GET" action="{{ route('admin.studentinvoices.index') }}">
+                    <form method="GET" action="{{ route('admin.invoices.index') }}">
                         @csrf
                         {{method_field('GET')}}
+                        <div class="form-group row">
+                            <label for="invoice_num" class="col-md-4 col-form-label text-md-right">{{ __('Invoice #') }}</label>
+                            <div class="col-md-6">
+                                <input id="invoice_num" type="text" class="form-control" name="invoice_num" value=""
+                                autocomplete="invoice_num" autofocus>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="s_name" class="col-md-4 col-form-label text-md-right">{{ __('Student Name') }}</label>
                             <div class="col-md-6">
@@ -85,13 +93,13 @@
                                 <td scope="col">{{$invoice->status}}</td>
                                 <td scope="col">
                                     @can('edit-users')
-                                        [<a href="{{route('admin.studentinvoices.edit', $invoice)}}">Edit</a>]
+                                        [<a href="{{route('admin.invoices.edit', $invoice)}}">Edit</a>]
                                     @endcan
                                     @can('manage-tutors')
-                                        [<a href="{{route('admin.studentinvoices.show', $invoice)}}">View</a>]
+                                        [<a href="{{route('admin.invoices.show', $invoice)}}">View</a>]
                                     @endcan
                                     @can('manage-tutors')
-                                    <form action="{{ route('admin.studentinvoices.destroy', $invoice) }}" method="POST" class="float-left">
+                                    <form action="{{ route('admin.invoices.destroy', $invoice) }}" method="POST" class="float-left">
                                     @csrf
                                         {{method_field('DELETE')}}
                                         [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
