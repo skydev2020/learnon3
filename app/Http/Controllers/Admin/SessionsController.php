@@ -166,20 +166,17 @@ class SessionsController extends Controller
      * @param  \App\Session  $session
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Session $session, Integer $flag)
+    public function update(Request $request, Session $session)
     {
-        if ($flag == 0)
-        {
-            $session->assignment_id = $request->assignment_id;
-            $session->session_date = $request->session_date;
-            $session->session_duration = $request->session_duration;
-            $session->session_notes = $request->notes;
+        $session->assignment_id = $request->assignment_id;
+        $session->session_date = $request->session_date;
+        $session->session_duration = $request->session_duration;
+        $session->session_notes = $request->notes;
 
-            if ($session->save()){
-                $request->session()->flash('success', 'The session has been updated successfully');
-            } else {
-                $request->session()->flash('error', 'There was an error updating the session');
-            }
+        if ($session->save()){
+            $request->session()->flash('success', 'The session has been updated successfully');
+        } else {
+            $request->session()->flash('error', 'There was an error updating the session');
         }
         return redirect()->route('admin.sessions.index');
     }

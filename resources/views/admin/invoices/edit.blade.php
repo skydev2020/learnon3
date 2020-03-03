@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Student Invoices</div>
                 <div class="card-body">
-                    <form action="{{route('admin.studentinvoices.update', $invoice)}}" method="POST">
+                    <form action="{{route('admin.invoices.update', $invoice, 0)}}" method="POST">
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
                                 <label for="s_name" class="col-form-label font-weight-bold">Student Name:</label>
@@ -135,20 +135,17 @@
                                 <label for="invoice_mail" class="col-form-label font-weight-bold">{{ __('Invoice Mail:') }}</label>
                             </div>
 
-                            <div class="col-6 d-flex align-items-center">
-                                
-                               
+                            <div class="col-6">
+                                <?php echo html_entity_decode($invoice->invoice_format); ?>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">
                             Update
                         </button>
-                        <span>{{$invoice->invoice_format}}</span>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection
