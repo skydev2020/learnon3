@@ -53,7 +53,7 @@ function getSubjects(gradeId) {
 
             for (let subject of grade['subjects']) {
                 $("#subjects_box").append("<div class='"+className+"'><input type='checkbox' name='subjects[]' value='"
-                +subject['id']+"'>"+subject['name']+"</div>");
+                +subject['id']+"'>&nbsp;"+subject['name']+"</div>");
                 if (className=='even') {
                     className = 'odd';
                 }
