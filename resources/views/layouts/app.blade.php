@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.13.1/standard-all/ckeditor.js"></script>
 </head>
 <body>
     <div id="app">
@@ -74,7 +75,8 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">Billing Process</a>
-                                    <a class="dropdown-item" href="#">Student Invoices</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="invoices" ? 'active' : '' }}"
+                                    href="{{route('admin.invoices.index')}}">Student Invoices</a>
                                     <a class="dropdown-item" href="#">Tutors Paycheques</a>
                                     <a class="dropdown-item" href="#">Payment Received</a>
                                     <a class="dropdown-item" href="#">Monthly Expenses</a>

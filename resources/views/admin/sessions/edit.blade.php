@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header" style = "text-align:center;">{{ __('Update Session Details') }}</div>
                 <div class="card-body">
-                    <form action="{{route('admin.sessions.update', $data['session'], 0)}}" method="POST">
+                    <form action="{{route('admin.sessions.update', $data['session'])}}" method="POST">
 
                         <div class="form-group row">
                             <label for="assignment_id" class="col-md-4 col-form-label text-md-right">{{ __('Select Tutor: ') }}</label>
