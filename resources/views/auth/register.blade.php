@@ -233,9 +233,13 @@
                                 <label class="col-form-label font-weight-bold">{{ __('Subjects') }}:</label>
                             </div>
 
-                            <div class="col-6 d-flex align-items-center">
-                                <div class="scrollbox">
+                            <div class="col-6 d-flex align-items-center flex-column">
+                                <div class="scrollbox" id="subjects_box">
 
+                                </div>
+                                <div>
+                                    <a style="cursor:pointer;" onclick="$('#subjects_box :checkbox').attr('checked', 'checked');"><u>Select All</u></a> /
+                                    <a style="cursor:pointer;" onclick="$('#subjects_box :checkbox').attr('checked', false);"><u>Unselect All</u></a>
                                 </div>
                             </div>
                         </div>
@@ -395,4 +399,5 @@
 
 </script>
 <script src="{{ asset('js/register/register.js')}}"></script>
+
 @stop
