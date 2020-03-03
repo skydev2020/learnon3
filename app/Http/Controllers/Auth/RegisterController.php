@@ -137,11 +137,13 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        $grades = Grade::all();
+        $grades = Grade::with('subjects')->get();
+        $grades_array = $grades->toArray();
+
         $countries = Country::all();
         $states = State::all();
         $referrers = Referrer::all();
-        return view('auth.register', compact('grades', 'countries', 'states', 'referrers'));
+        return view('auth.register', compact('grades', 'countries', 'states', 'referrers', 'grades_array'));
     }
 
 

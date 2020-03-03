@@ -213,7 +213,7 @@
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
-                                <select name="grade_id" id="grade_id">
+                                <select name="grade_id" id="grade_id" onchange="getSubjects(this.value);">
                                     @foreach($grades as $grade)
                                     <option value = {{$grade->id}} > {{ $grade->name }}</option>
                                     @endforeach
@@ -227,16 +227,20 @@
                             </div>
                         </div>
 
+
                         <div class="form-group row">
-                            <div class="col-4 d-flex justify-content-end">
-                                <label for="subjects" class="font-weight-bold text-center" >{{ __('Courses') }}
-                                <br>
-                                Seperate Multiple courses by a comma (,)
-                                </label>
+                            <div class="col-4 d-flex justify-content-end align-items-center">
+                                <label class="col-form-label font-weight-bold">{{ __('Subjects') }}:</label>
                             </div>
-                            <div class="col-8 d-flex align-items-center">
-                                <textarea class="form-control inputstl"  name = "subjects" id = "subjects" placeholder="Enter the courses that you require" >
-                                </textarea>
+
+                            <div class="col-6 d-flex flex-column">
+                                <div class="scrollbox pl-1 pt-1" id="subjects_box">
+
+                                </div>
+                                <div>
+                                    <a style="cursor:pointer;" onclick="$('#subjects_box :checkbox').attr('checked', 'checked');"><u>Select All</u></a> /
+                                    <a style="cursor:pointer;" onclick="$('#subjects_box :checkbox').attr('checked', false);"><u>Unselect All</u></a>
+                                </div>
                             </div>
                         </div>
 
@@ -389,5 +393,11 @@
 @endsection
 <!-- Scripts -->
 @section("jssection")
+<script>
+    var grades_json = '<?php echo json_encode($grades_array, JSON_HEX_APOS) ?>';
+    var grades = eval(grades_json);
+
+</script>
 <script src="{{ asset('js/register/register.js')}}"></script>
+
 @stop
