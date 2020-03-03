@@ -14,8 +14,8 @@
                         <div class="form-group row">
                             <label for="invoice_num" class="col-md-4 col-form-label text-md-right">{{ __('Invoice #') }}</label>
                             <div class="col-md-6">
-                                <input id="invoice_num" type="text" class="form-control" name="invoice_num" value=""
-                                autocomplete="invoice_num" autofocus>
+                                <input id="invoice_num" type="text" class="form-control" name="invoice_num" 
+                                value="{{$data['old']['invoice_num']}}" autocomplete="invoice_num" autofocus>
                             </div>
                         </div>
 
@@ -82,7 +82,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($data['studentInvoices'] as $invoice)
+                        @foreach ($data['invoices'] as $invoice)
                             <tr>
                                 <td scope="col">{{$invoice->prefix . '-' . $invoice->num}}</td>
                                 <td scope="col">{{$invoice->students()->first()['fname'] . ' ' . 

@@ -17,12 +17,16 @@ class InvoicesController extends Controller
     public function index(Request $request)
     {
         $request_data = $this->validate($request, [
+            'invoice_num'       => 'nullable|string',
             's_name'            => 'nullable|string',
             'date_added'        => 'nullable|date',
             'status'            => 'nullable|string'
         ]);
 
         $q = "1=1 ";
+        if (isset($request_data['invoice_num'])) {
+            $q .= " and num like '%" . $request_data['invoice_num'] . "%'";
+        } else $request_data['invoice_num'] = "";
 
         if (isset($request_data['date_added'])) {
             $q.= " and date_added like '%".$request_data['date_added']."%'";
@@ -32,22 +36,22 @@ class InvoicesController extends Controller
             $q.= " and status like '%".$request_data['status']."%'";
         } else $request_data['status'] = "";
 
-        $studentInvoices = Invoice::whereRaw($q);
+        $invoices = Invoice::whereRaw($q);
         
         if (isset($request_data['s_name'])) {
-            $studentInvoices = $studentInvoices->whereHas('students', function($student) use ($request_data) {
+            $invoices = $invoices->whereHas('students', function($student) use ($request_data) {
             return $student->where('fname', 'like', "%" . $request_data['s_name'] . "%")
                 ->orwhere('lname', 'like', "%" . $request_data['s_name'] . "%");
             });
         } else $request_data['s_name'] = "";
-        $studentInvoices = $studentInvoices->get();
+        $invoices = $invoices->get();
 
         $data = [
-            'studentInvoices'   => $studentInvoices,
-            'old'               => $request_data,
+            'invoices'   => $invoices,
+            'old'        => $request_data,
         ];
 
-       if( count($studentInvoices) == 0 ) $request->session()->flash('error', "No search results!");
+       if( count($invoices) == 0 ) $request->session()->flash('error', "No search results!");
         
         return view('admin.invoices.index')->with('data', $data);
     }
