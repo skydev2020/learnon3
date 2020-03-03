@@ -18,7 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'fname', 'lname', 'email', 'password', 'home_phone', 'cell_phone', 'address', 'city', 'state_id', 'pcode',
-         'country_id', 'grade_id', 'subjects', 'parent_fname', 'parent_lname', 'street', 'school', 'referrer_id', 'student_status_id',
+         'country_id', 'grade_id', 'subjects_studied', 'parent_fname', 'parent_lname', 'street', 'school', 'referrer_id', 'student_status_id',
          'other_notes', 'post_secondary_edu', 'area_of_concentration', 'tutoring_courses', 'work_experience', 'tutoring_areas',
          'gender', 'certified_teacher', 'criminal_record', 'criminal_check'
     ];
@@ -81,5 +81,10 @@ class User extends Authenticatable
 
     public function referrer(){
         return $this->belongsTo('App\Referrer');
+    }
+
+    //returning all subjects for a User
+    public function subjects() {
+        return $this->belongsTo('App\Subject');
     }
 }
