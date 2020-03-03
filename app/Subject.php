@@ -10,4 +10,10 @@ class Subject extends Model
     public function grades() {
         return $this->belongsTo('App\Grade');
     }
+
+    //returning all users for a Subject
+    public function users() {
+        return $this->belongsTo('App\User');
+    }
+
 }
