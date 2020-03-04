@@ -38,5 +38,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     //Custom Route
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
     Route::get('/students/contract/{student}', 'StudentsController@showContract')->name('students.contract');
+    Route::put('paycheques/markaspaid/{paycheque}', 'PaychequesController@markaspaid')->name('paycheques.markaspaid');
+    Route::put('paycheques/lock/{paycheque}', 'PaychequesController@lock')->name('paycheques.lock');
+    Route::put('paycheques/unlock/{paycheque}', 'PaychequesController@unlock')->name('paycheques.unlock');
 });
 

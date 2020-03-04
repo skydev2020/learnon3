@@ -21,34 +21,23 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="num_of_sessions" class="col-md-4 col-form-label text-md-right">{{ __('Total Sessions') }}</label>
+                            <label for="date_added" class="col-md-4 col-form-label text-md-right">{{ __('Date Added:') }}</label>
                             <div class="col-md-6">
-                                <input id="num_of_sessions" type="text" class="form-control" name="num_of_sessions" value="{{ $data['old']['num_of_sessions'] }}"
-                                autocomplete="num_of_sessions" autofocus>
+                                <input id="date_added" type="date" class="form-control" name="date_added"
+                                value="{{ $data['old']['date_added'] }}" autocomplete="date_added" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="total_hours" class="col-md-4 col-form-label text-md-right">{{ __('Total Hours') }}</label>
+                            <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status:') }}</label>
                             <div class="col-md-6">
-                                <input id="total_hours" type="text" class="form-control" name="total_hours" value="{{ $data['old']['total_hours'] }}"
-                                autocomplete="total_hours" autofocus>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="total_hours" class="col-md-4 col-form-label text-md-right">{{ __('Total Hours') }}</label>
-                            <div class="col-md-6">
-                                <input id="total_hours" type="text" class="form-control" name="total_hours" value="{{ $data['old']['total_hours'] }}"
-                                autocomplete="total_hours" autofocus>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type = "submit" class="btn btn-primary" >
-                                    {{ __('Search') }}
-                                </button>
+                                <select name = "status" id = "status" class = "form-control">
+                                    <option></option>
+                                    <option <?= $data['old']['status'] == "Paid" ? "selected" : "" ?> >
+                                    {{__('Paid')}}</option>
+                                    <option <?= $data['old']['status'] == "Hold For Approval" ? "selected" : "" ?> >
+                                    {{__('Hold For Approval')}}</option>
+                                </select>
                             </div>
                         </div>
                     </form>
@@ -62,37 +51,60 @@
                     <table class="table table-bordered table-striped" id = "mytable">
                         <thead>
                         <tr>
-                            <th scope="col">Invoice #</th>
-                            <th scope="col">Student Name</th>
-                            <th scope="col">Total Amount</th>
+                            <th scope="col">Tutor Name</th>
+                            <th scope="col">Total Sessions</th>
                             <th scope="col">Total Hours</th>
+                            <th scope="col">Raise Amount</th>
+                            <th scope="col">Total Amount</th>
                             <th scope="col">Date Added</th>
                             <th scope="col">Status</th>
                             <th scope="col">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($data['invoices'] as $invoice)
+                        @foreach ($data['paycheques'] as $paycheque)
                             <tr>
-                                <td scope="col">{{$invoice->prefix . '-' . $invoice->num}}</td>
-                                <td scope="col">{{$invoice->users()->first()['fname'] . ' ' . 
-                                $invoice->users()->first()['lname'].' ('.$invoice->user_id.')'}}</td>
-                                <td scope="col">{{$invoice->total_amount}}</td>
-                                <td scope="col">{{$invoice->total_hours}}</td>
-                                <td scope="col">{{date('d/m/Y', strtotime($invoice->date_added)) }}</td>
-                                <td scope="col">{{$invoice->status}}</td>
+                                <td scope="col">{{$paycheque->users()->first()['fname'] . ' ' . 
+                                $paycheque->users()->first()['lname'].' ('.$paycheque->user_id.')'}}</td>
+                                <td scope="col">{{$paycheque->num_of_sessions}}</td>
+                                <td scope="col">{{$paycheque->total_hours}}</td>
+                                <td scope="col">{{$paycheque->raise_amount}}</td>
+                                <td scope="col">{{$paycheque->total_amount}}</td>
+                                <td scope="col">{{date('d/m/Y', strtotime($paycheque->created_at)) }}</td>
+                                <td scope="col">{{$paycheque->status}}</td>
                                 <td scope="col">
-                                    @can('edit-users')
-                                        [<a href="{{route('admin.invoices.edit', $invoice)}}">Edit</a>]
+                                    @can('manage-payments')
+                                        [<a href="{{route('admin.paycheques.edit', $paycheque)}}">Edit/View</a>]
                                     @endcan
-                                    @can('manage-tutors')
-                                        [<a href="{{route('admin.invoices.edit', $invoice)}}">View</a>]
-                                    @endcan
-                                    @can('manage-tutors')
-                                    <form action="{{ route('admin.invoices.destroy', $invoice) }}" method="POST" class="float-left">
+                                    @can('manage-payments')
+                                    <form action="{{ route('admin.paycheques.destroy', $paycheque) }}" method="POST" class="float-left">
                                     @csrf
                                         {{method_field('DELETE')}}
                                         [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
+                                    </form>
+                                    @endcan
+                                    @can('manage-payments')
+                                    <form action="{{ route('admin.paycheques.markaspaid', $paycheque) }}"
+                                    method = "POST" class="float-left">
+                                    @csrf
+                                        {{method_field('PUT')}}
+                                        [<a href="javascript:;" onclick = "parentNode.submit();">Mark As Paid</a>]
+                                    </form>
+                                    @endcan
+                                    @can('manage-payments')
+                                    <form action="{{ route('admin.paycheques.lock', $paycheque) }}"
+                                    method = "POST" class="float-left">
+                                    @csrf
+                                        {{method_field('PUT')}}
+                                        [<a href="javascript:;" onclick = "parentNode.submit();">Lock Paycheque</a>]
+                                    </form>
+                                    @endcan
+                                    @can('manage-payments')
+                                    <form action="{{ route('admin.paycheques.unlock', $paycheque) }}"
+                                    method = "POST" class="float-left">
+                                    @csrf
+                                        {{method_field('PUT')}}
+                                        [<a href="javascript:;" onclick = "parentNode.submit();">Unlock Paycheque</a>]
                                     </form>
                                     @endcan
                                 </td>
