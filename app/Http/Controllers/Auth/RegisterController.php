@@ -69,6 +69,7 @@ class RegisterController extends Controller
             'pcode'         => ['required', 'string'],
             'country_id'    => ['required', 'integer'],
             'grade_id'      => ['required', 'integer'],
+            'subjects'      => ['required'],
             'parent_fname'  => ['required', 'string'],
             'parent_lname'  => ['required', 'string'],
             'street'        => ['required', 'string'],
@@ -91,7 +92,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $user = User::create([
             'fname'                 => $data['fname'],
             'lname'                 => $data['lname'],
@@ -105,7 +105,6 @@ class RegisterController extends Controller
             'pcode'                 => $data['pcode'],
             'country_id'            => $data['country_id'],
             'grade_id'              => $data['grade_id'],
-            'subjects'              => $data['subjects'],
             'parent_fname'          => $data['parent_fname'],
             'parent_lname'          => $data['parent_lname'],
             'street'                => $data['street'],
@@ -122,6 +121,11 @@ class RegisterController extends Controller
 
         $role = Role::select('id')->where('name', 'Student')->first();
         $user->roles()->attach($role);
+
+        foreach ($data['subjects'] as $subject)
+        {
+            $user->subjects()->attach($subject);
+        }
 
         session()->flash('success', $user->fname . $user->lname . " has been registered successfully");
 
