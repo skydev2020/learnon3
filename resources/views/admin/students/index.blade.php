@@ -91,7 +91,11 @@
                                 <td scope="col">{{$student->fname . ' ' . $student->lname}}</td>
                                 <td scope="col">{{$student->email}}</td>
                                 <td scope="col">{{$student->city}}</td>
-                                <td scope="col">{{$student->subjects}}</td>
+                                <td scope="col">
+                                    @foreach($student->subjects()->get() as $subject)
+                                        {{$subject['name'] . ' '}}
+                                    @endforeach
+                                </td>
                                 <td scope="col">{{date('d/m/Y', strtotime($student->created_at))}}</td>
                                 <td scope="col">
                                     @can('manage-students')

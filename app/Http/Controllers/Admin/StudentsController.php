@@ -47,10 +47,6 @@ class StudentsController extends Controller
 
         $q.= " and grade_id >= '1'";
 
-        if ($s_sub) {
-            $q.= " and subjects like '%".$s_sub."%'";
-        }
-
         if ($s_status_id) {
             $q.= " and student_status_id like '%".$s_status_id."%'";
         }
@@ -61,7 +57,15 @@ class StudentsController extends Controller
 
 
         $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()
-        ->whereRaw($q)->get();
+        ->whereRaw($q);
+
+        if ($s_sub) {
+            $students = $students->whereHas('subjects', function($subject) use ($s_sub) {
+                return $subject->where('name', 'like', "%" . $s_sub . "%");
+            });
+        }
+
+        $students = $students->get();
 
         $student_statuses = StudentStatus::all();
         $subjects = Subject::all();
