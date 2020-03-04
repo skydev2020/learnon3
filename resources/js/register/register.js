@@ -52,7 +52,7 @@ function getSubjects(gradeId) {
             let className="even";
 
             for (let subject of grade['subjects']) {
-                $("#subjects_box").append("<div class='"+className+"'><input type='checkbox' name='subjects[]' value='"
+                $("#subjects_box").append("<div class='"+className+"'><input type='checkbox' name='subjects' value='"
                 +subject['id']+"'>&nbsp;"+subject['name']+"</div>");
                 if (className=='even') {
                     className = 'odd';
@@ -65,10 +65,10 @@ function getSubjects(gradeId) {
     }
 }
 
-setTimeout(function() {
+window.addEventListener(function() {
     // select initial subjects: after loading pages
    if (grades.length>0) {
        getSubjects(grades[0].id);
    }
 
-}, 0);
+});

@@ -13,7 +13,7 @@ class Subject extends Model
 
     //returning all users for a Subject
     public function users() {
-        return $this->belongsTo('App\User');
+        return $this->belongsToMany('App\User', 'user_subject');
     }
 
 }
