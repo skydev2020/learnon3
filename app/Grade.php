@@ -8,6 +8,6 @@ class Grade extends Model
 {
     //returning all subjects for a Grade
     public function subjects() {
-        return $this->belongsToMany('App\Subject');
+        return $this->belongsToMany('App\Subject', );
     }
 }

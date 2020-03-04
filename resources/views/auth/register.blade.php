@@ -234,7 +234,7 @@
                             </div>
 
                             <div class="col-6 d-flex flex-column">
-                                <div class="scrollbox pl-1 pt-1" id="subjects_box">
+                                <div class="scrollbox pl-1 pt-1" id="subjects_box" name = "subjects_box">
 
                                 </div>
                                 <div>

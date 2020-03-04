@@ -85,6 +85,6 @@ class User extends Authenticatable
 
     //returning all subjects for a User
     public function subjects() {
-        return $this->belongsTo('App\Subject');
+        return $this->belongsToMany('App\Subject');
     }
 }
