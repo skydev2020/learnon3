@@ -131,8 +131,7 @@
 
                             <div class="col-6 d-flex align-items-center">
                                 <textarea id="paycheque_notes" class="form-control inputstl"
-                                 name="paycheque_notes" required autocomplete="paycheque_notes" autofocus>
-                                 {{$paycheque->paycheque_notes}}</textarea>
+                                 name="paycheque_notes" required autocomplete="paycheque_notes" autofocus>{{$paycheque->paycheque_notes}}</textarea>
                             </div>
                         </div>
 
