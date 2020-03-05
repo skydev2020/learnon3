@@ -21,7 +21,8 @@ class ExpensesController extends Controller
             'e_name'        => 'nullable|string',
             'amount'        => 'nullable|string',
             'expense_date'  => 'nullable|date',
-            
+            'start_date'    => 'nullable|date',
+            'end_date'      => 'nullable|date',
         ]);
 
         $q = "1=1 ";
@@ -37,15 +38,34 @@ class ExpensesController extends Controller
             $q.= " and date like '%".$request_data['expense_date']."%'";
         } else $request_data['expense_date'] = "";
 
-        $expenses = Expense::whereRaw($q)->get();
+        $expenses_search = Expense::whereRaw($q)->get();
         
+        $expenses_searchdate = Expense::all();
+        
+        if (isset($request_data['start_date']) && isset($request_data['end_date']))
+        {
+            $expenses_searchdate = Expense::whereBetween('date', [
+                $request_data['start_date'], $request_data['end_date']
+            ])->get();
+        } else{
+            $request_data['start_date'] = isset($request_data['start_date']) ? $request_data['start_date'] : "";
+            $request_data['end_date'] = isset($request_data['end_date']) ? $request_data['end_date'] : "";
+        }
+        
+        
+
+        if ($request->input('action') == 'search') {
+            $expenses = $expenses_search;
+            
+        } else {
+            $expenses = $expenses_searchdate;
+        }
+
         $data = [
             'expenses'  => $expenses,
             'old'       => $request_data,
         ];
-
-       if( count($expenses) == 0 ) $request->session()->flash('error', "No search results!");
-        
+        if( count($expenses) == 0 ) $request->session()->flash('error', "No search results!");
         return view('admin.expenses.index')->with('data', $data);
     }
 
@@ -89,7 +109,7 @@ class ExpensesController extends Controller
      */
     public function edit(Expense $expense)
     {
-        //
+        return view('admin.expenses.edit')->with('expense', $expense);
     }
 
     /**
@@ -101,7 +121,32 @@ class ExpensesController extends Controller
      */
     public function update(Request $request, Expense $expense)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'e_name'    => ['required', 'string'],
+            'expense_date'      => ['required', 'date'],
+            'amount'    => ['required', 'string'],
+            'notes'     => ['nullable', 'string'],
+        ]);
+
+        if ($validator->fails())
+        {
+            $request->session()->flash('error', $validator->messages()->first());
+            return redirect()->route('admin.expenses.edit', $expense);
+        }
+        
+        $data = $request->all();
+        $expense->name = $data['e_name'];
+        $expense->date = $data['expense_date'];
+        $expense->amount = $data['amount'];
+        if (isset($data['notes'])) $expense->detail = $data['notes'];
+
+        if(!$expense->save()) {
+            $request->session()->flash('error', 'There is an error updating the Expense details');
+            return redirect()->route('admin.expenses.edit', $expense);
+        }
+
+        $request->session()->flash('success', 'Expense details have been successfully updated');
+        return redirect()->route('admin.expenses.index');
     }
 
     /**
