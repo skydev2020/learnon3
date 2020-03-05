@@ -26,7 +26,7 @@ class RejectedTutorsController extends Controller
 
         $q = "1=1 ";
 
-        $q.= " and (status is NULL or 0) ";
+        $q.= " and (status_id is NULL or 0) ";
 
         if (isset($request_data['t_name'])) {
             $q.= " and (fname like '%".$request_data['t_name']."%' or lname like '%" .$request_data['t_name'] . "%') ";
