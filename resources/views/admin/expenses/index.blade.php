@@ -49,10 +49,11 @@
                         </div>
 
                         <div class="form-group col-2 d-flex float-left justify-content-end">
-                            <a href = "{{ route('admin.expenses.create') }}"> <button class="btn btn-primary">
+                            <a href = "{{ route('admin.expenses.create') }}">
+                                <button type = "button" class="btn btn-primary">
                                     {{ __('ADD') }}
                                 </button>
-                                </a>
+                            </a>
                         </div>
 
                         <div class="form-group col-2 d-flex float-left justify-content-end">
