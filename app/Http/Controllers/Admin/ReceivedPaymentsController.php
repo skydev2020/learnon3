@@ -8,6 +8,7 @@ use App\OrderStatus;
 use App\OrderTotal;
 use App\OrderHistory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Gate;
 
 class ReceivedPaymentsController extends Controller
@@ -129,9 +130,46 @@ class ReceivedPaymentsController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Order $receivedpayment)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'left_hours'        => ['required', 'string'],
+            'status_id'         => ['required', 'int'],
+        ]);
+
+        if ($validator->fails())
+        {
+            $request->session()->flash('error', $validator->messages()->first());
+            return redirect()->route('admin.receivedpayments.edit', $receivedpayment);
+        }
+        $data = $request->all();
+
+        if ($request->input('action') == 'update')
+        {
+            $receivedpayment->left_hours = $data['left_hours'];
+            if ($receivedpayment->save()) {
+                $request->session()->flash('success', 'You have modified orders!');
+            }
+    
+            $orderhistory = OrderHistory::create([
+                'order_id'          => $receivedpayment->id,
+                'order_status_id'   => $data['status_id'],
+                'notify'            => '0',
+                'comment'           => "Remaining Hours Update From ". $receivedpayment->left_hours . ' To ' . $data['left_hours']
+            ]);
+            return redirect()->route('admin.receivedpayments.edit', $receivedpayment);
+        }
+        else {
+            
+            $orderhistory = OrderHistory::create([
+                'order_id'          => $receivedpayment->id,
+                'status_id'          => $data['status_id'],
+                'notify'            => '0',
+                'comment'           => $data['comment']
+            ]);
+            $request->session()->flash('success', 'You have modified order histories!');
+            return redirect()->route('admin.receivedpayments.edit', $receivedpayment);
+        }    
     }
 
     /**

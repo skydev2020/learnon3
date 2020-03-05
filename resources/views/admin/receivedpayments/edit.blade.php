@@ -51,8 +51,7 @@
                                 </div>
                             </div>
 
-                            @csrf
-                            {{method_field('PUT')}}
+                            
                             
                             <div class="form-group row">
                                 <div class="col-3 d-flex justify-content-end">
@@ -150,9 +149,6 @@
                                     {{$data['order']->left_hours}}
                                 </div>
                             </div>
-
-                            @csrf
-                            {{method_field('PUT')}}
                             
                             <div class="form-group row">
                                 <div class="col-3 d-flex justify-content-end">
@@ -160,7 +156,7 @@
                                 </div>
 
                                 <div class="col-6 d-flex align-items-center">
-                                    {{$data['order_subtotal']->text}}
+                                    <?= $data['order_total'] != null ? $data['order_total']->text : "" ?>                                    
                                 </div>
                             </div>
 
@@ -170,7 +166,7 @@
                                 </div>
 
                                 <div class="col-6 d-flex align-items-center">
-                                    {{$data['order_subtotal']->text}}
+                                    <?= $data['order_subtotal'] != null ? $data['order_subtotal']->text : "" ?>
                                 </div>
                             </div>
 
@@ -180,7 +176,7 @@
                                 </div>
 
                                 <div class="col-6 d-flex align-items-center">
-                                   {{ $data['order_card']->text }}
+                                    <?= $data['order_card'] != null ? $data['order_card']->text : "" ?>
                                 </div>
                             </div>
 
@@ -190,7 +186,7 @@
                                 </div>
 
                                 <div class="col-6  d-flex align-items-center">
-                                    {{ $data['order_total']->text }}
+                                    <?= $data['order_total'] != null ? $data['order_total']->text : "" ?> 
                                 </div>
                             </div>
                         </div>
@@ -222,13 +218,16 @@
                                         </div>
 
                                         <div class="col-6 d-flex align-items-center">
-                                            {{ date($history->comment) }}
+                                            {{ $history->comment }}
                                         </div>
                                     </div>
                                     <br>
                                 </div>
                             @endforeach
                             <form action="{{route('admin.receivedpayments.update', $data['order'])}}" method="POST">
+
+                                @csrf
+                                {{method_field('PUT')}}
                                 <div class = "form-group row">
                                     <div class="col-3 align-items-center">
                                         <label class="col-form-label font-weight-bold d-flex justify-content-end">Left Hours:</label>
@@ -236,11 +235,13 @@
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
-                                        <input id = "left_hour" name = "left_hour" type = "text" 
-                                         class="form-control" value = {{$data['order']->left_hours}}>
+                                        <input id = "left_hours" name = "left_hours" type = "text" 
+                                        class="form-control" value = {{$data['order']->left_hours}}>
                                         </input>
                                     </div>
                                 </div>
+                                <button type="submit" class="btn btn-primary" name = "action" value = "update">Update</button>
+                                
 
                                 <div class = "form-group row">
                                     <div class="col-3 align-items-center d-flex justify-content-end">
@@ -259,6 +260,9 @@
                                     </div>
                                 </div>
 
+                                @csrf
+                                {{method_field('PUT')}}
+
                                 <div class = "form-group row">
                                     <div class="col-3 align-items-center d-flex justify-content-end">
                                         <label class="col-form-label font-weight-boldd">Comment:</label>
@@ -269,8 +273,7 @@
                                         </input>
                                     </div>
                                 </div>
-
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="submit" class="btn btn-primary" name = "action" value = "add history">Add Order History</button>
                             </form>
                         </div>
                     </div>
