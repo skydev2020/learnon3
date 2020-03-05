@@ -79,8 +79,10 @@
                                     href="{{route('admin.invoices.index')}}">Student Invoices</a>
                                     <a class="dropdown-item {{Request::segment(2)=="paycheques" ? 'active' : '' }}"
                                      href="{{route('admin.paycheques.index')}}">Tutors Paycheques</a>
-                                    <a class="dropdown-item" href="#">Payment Received</a>
-                                    <a class="dropdown-item" href="#">Monthly Expenses</a>
+                                    <a class="dropdown-item {{Request::segment(2) == "receivedpayments" ? 'active' : ''}}"
+                                     href="{{route('admin.receivedpayments.index')}}">Payment Received</a>
+                                    <a class="dropdown-item {{Request::segment(2) == "expenses" ? 'active' : ''}}"
+                                     href="{{route('admin.expenses.index')}}">Monthly Expenses</a>
                                     <a class="dropdown-item" href="#">Other Income</a>
                                     <a class="dropdown-item" href="#">CSV Upload</a>
                                     <a class="dropdown-item" href="#">Base Invoice Rates</a>
