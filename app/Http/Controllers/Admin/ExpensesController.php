@@ -97,7 +97,7 @@ class ExpensesController extends Controller
         if ($validator->fails())
         {
             $request->session()->flash('error', $validator->messages()->first());
-            return redirect()->route('admin.expenses.edit', $expense);
+            return redirect()->route('admin.expenses.create');
         }
 
         $data = $request->all();
@@ -110,7 +110,7 @@ class ExpensesController extends Controller
 
         if($expense == NULL) {
             $request->session()->flash('error', 'There is an error creating the Expense details');
-            return redirect()->route('admin.expenses.create', $expense);
+            return redirect()->route('admin.expenses.create');
         }
 
         $request->session()->flash('success', 'Expense details have been successfully created');
