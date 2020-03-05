@@ -76,7 +76,7 @@ class ExpensesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.expenses.create');
     }
 
     /**
@@ -87,7 +87,34 @@ class ExpensesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'e_name'        => ['required', 'string'],
+            'expense_date'  => ['required', 'date'],
+            'amount'        => ['required', 'string'],
+            'notes'         => ['nullable', 'string'],
+        ]);
+
+        if ($validator->fails())
+        {
+            $request->session()->flash('error', $validator->messages()->first());
+            return redirect()->route('admin.expenses.edit', $expense);
+        }
+
+        $data = $request->all();
+        $expense = Expense::create([
+            'name'              => $data['e_name'],
+            'date'              => $data['expense_date'],
+            'amount'            => $data['amount'],
+            'detail'            => $data['notes'],
+        ]);
+
+        if($expense == NULL) {
+            $request->session()->flash('error', 'There is an error creating the Expense details');
+            return redirect()->route('admin.expenses.create', $expense);
+        }
+
+        $request->session()->flash('success', 'Expense details have been successfully created');
+        return redirect()->route('admin.expenses.index');
     }
 
     /**
@@ -122,10 +149,10 @@ class ExpensesController extends Controller
     public function update(Request $request, Expense $expense)
     {
         $validator = Validator::make($request->all(), [
-            'e_name'    => ['required', 'string'],
-            'expense_date'      => ['required', 'date'],
-            'amount'    => ['required', 'string'],
-            'notes'     => ['nullable', 'string'],
+            'e_name'        => ['required', 'string'],
+            'expense_date'  => ['required', 'date'],
+            'amount'        => ['required', 'string'],
+            'notes'         => ['nullable', 'string'],
         ]);
 
         if ($validator->fails())
@@ -157,6 +184,11 @@ class ExpensesController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        //
+        if (Gate::denies('manage-payments')) {
+            return redirect()->route('admin.expenses.index');
+        }
+
+        $expense->delete();
+        return redirect()->route('admin.expenses.index');
     }
 }
