@@ -231,7 +231,7 @@
                                 <div class = "form-group row">
                                     <div class="col-3 align-items-center">
                                         <label class="col-form-label font-weight-bold d-flex justify-content-end">Left Hours:</label>
-                                        <span class="help d-flex justify-content-end">(e.g 12:30, 12.30, 1:45, 1.45)</span>
+                                        <span class="d-flex justify-content-end">(e.g 12:30, 12.30, 1:45, 1.45)</span>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
