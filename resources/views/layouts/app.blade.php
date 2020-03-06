@@ -122,7 +122,8 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">Information</a>
-                                    <a class="dropdown-item" href="#">Coupons</a>
+                                    <a class="dropdown-item {{Request::segment(2) == "coupons" ? 'active' : ''}}"
+                                     href="{{route('admin.coupons.index')}}">Coupons</a>
                                     <a class="dropdown-item" href="#">Email Templates</a>
                                     <a class="dropdown-item" href="#">Mail Log</a>
                                     <a class="dropdown-item" href="#">Activity Log</a>
