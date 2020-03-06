@@ -126,7 +126,8 @@
                                      href="{{route('admin.coupons.index')}}">Coupons</a>
                                     <a class="dropdown-item {{Request::segment(2) == "broadcasts" ? 'active' : ''}}"
                                      href="{{route('admin.broadcasts.index')}}">Email Templates</a>
-                                    <a class="dropdown-item" href="#">Mail Log</a>
+                                    <a class="dropdown-item {{Request::segment(2) == "maillogs" ? 'active' : ''}}"
+                                     href="{{route('admin.maillogs.index')}}">Mail Log</a>
                                     <a class="dropdown-item" href="#">Activity Log</a>
                                     <a class="dropdown-item" href="#">Send Email</a>
                                     <a class="dropdown-item" href="#">Send Notification</a>
