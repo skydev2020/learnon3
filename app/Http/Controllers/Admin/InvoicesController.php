@@ -7,6 +7,7 @@ use App\Invoice;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use DateTime;
 
 class InvoicesController extends Controller
 {
@@ -156,6 +157,68 @@ class InvoicesController extends Controller
         }
 
         $invoice->delete();
+        return redirect()->route('admin.invoices.index');
+    }
+
+    public function lock(Request $request, Invoice $invoice)
+    {
+        if (Gate::denies('manage-payments'))
+        {
+            return redirect()->route('admin.invoices.index');
+        }
+
+        $invoice->is_locked = 1;
+        if (!$invoice->save())
+        {
+            $request->session()->flash('error', 'There is an error locking the Invoice!');
+            return redirect()->route('admin.invoices.index');
+        }
+        session()->flash('success', 'You have Locked the Invoice!');
+        return redirect()->route('admin.invoices.index');
+    }
+
+    public function unlock(Request $request, Invoice $invoice)
+    {
+        if (Gate::denies('manage-payments'))
+        {
+            return redirect()->route('admin.invoices.index');
+        }
+
+        $invoice->is_locked = 0;
+        if (!$invoice->save())
+        {
+            $request->session()->flash('error', 'There is an error Unlocking the Invoice!');
+            return redirect()->route('admin.invoices.index');
+        }
+        session()->flash('success', 'You have Unlocked the Invoice!');
+        return redirect()->route('admin.invoices.index');
+    }
+
+    public function applyLateFee(Request $request, Invoice $invoice){
+        if (gate::denies('manage-payments'))
+        {
+            return redirect()->route('admin.invoices.index');
+        }
+
+        $date_added = $invoice->invoice_date;
+        $current_date = date('Y-m-d');
+
+        $date_added_obj	= new DateTime($date_added);
+		$current_date_obj = new DateTime($current_date);
+				
+        $months = $current_date_obj->diff($date_added_obj)->m;
+        $late_fee = ($months - 1) * 20;
+        $total_amount = $invoice->total_amount - $invoice->late_fee + $late_fee;
+        $invoice->late_fee = $late_fee;
+        $invoice->total_amount = $total_amount;
+        $invoice->status = "Reminder Sent";
+
+        if (!$invoice->save())
+        {
+            $request->session()->flash('error', 'There is an error applying Late Fee for this invoice!');
+            return redirect()->route('admin.invoices.index');
+        }
+        session()->flash('success', 'Late Fee Applied Successfuly for this invoice!');
         return redirect()->route('admin.invoices.index');
     }
 }
