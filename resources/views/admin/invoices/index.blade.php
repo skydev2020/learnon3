@@ -92,17 +92,42 @@
                                 <td scope="col">{{date('d/m/Y', strtotime($invoice->date_added)) }}</td>
                                 <td scope="col">{{$invoice->status}}</td>
                                 <td scope="col">
-                                    @can('edit-users')
-                                        [<a href="{{route('admin.invoices.edit', $invoice)}}">Edit</a>]
+                                    @can('manage-payments')
+                                        [<a href="{{route('admin.invoices.edit', $invoice)}}">View / Edit</a>]
                                     @endcan
-                                    @can('manage-tutors')
-                                        [<a href="{{route('admin.invoices.edit', $invoice)}}">View</a>]
-                                    @endcan
-                                    @can('manage-tutors')
+                                    @can('manage-payments')
                                     <form action="{{ route('admin.invoices.destroy', $invoice) }}" method="POST" class="float-left">
                                     @csrf
                                         {{method_field('DELETE')}}
                                         [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
+                                    </form>
+                                    @endcan
+
+                                    @can('manage-payments')
+                                    <form action="{{ route('admin.invoices.lock', $invoice) }}" method="POST" class="float-left">
+                                    @csrf
+                                        {{method_field('PUT')}}
+                                        [<a href="javascript:;" onclick="parentNode.submit();">Lock Invoice</a>]
+                                    </form>
+                                    @endcan
+
+                                    @can('manage-payments')
+                                    <form action="{{ route('admin.invoices.unlock', $invoice) }}" method="POST" class="float-left">
+                                    @csrf
+                                        {{method_field('PUT')}}
+                                        [<a href="javascript:;" onclick="parentNode.submit();">Unlock Invoice</a>]
+                                    </form>
+                                    @endcan
+
+                                    @if($invoice->is_locked ==1)
+                                        [<a href = "">Locked</a>]
+                                    @endif
+
+                                    @can('manage-payments')
+                                    <form action="{{ route('admin.invoices.applyLateFee', $invoice) }}" method="POST" class="float-left">
+                                    @csrf
+                                        {{method_field('PUT')}}
+                                        [<a href="javascript:;" onclick="parentNode.submit();">Apply Late Fees</a>]
                                     </form>
                                     @endcan
                                 </td>
