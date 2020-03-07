@@ -40,6 +40,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/coupons', 'CouponsController');
     Route::resource('/broadcasts', 'BroadcastsController');
     Route::resource('/maillogs', 'MailLogsController');
+    Route::resource('/activitylogs', 'ActivityLogsController');
 
     //Custom Route
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
