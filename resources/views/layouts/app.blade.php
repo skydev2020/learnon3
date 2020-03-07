@@ -39,7 +39,7 @@
                                 <a class="nav-link" href="/home">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">My Profile</a>
+                                <a class="nav-link" href="{{route('admin.myprofile.index')}}">My Profile</a>
                             </li>
                             @can('manage-students')
                             <li class="nav-item dropdown {{in_array(Request::segment(2), ["students", "assignments", "student_packages", "packages"]) ? 'active' : '' }}">
