@@ -41,6 +41,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/broadcasts', 'BroadcastsController');
     Route::resource('/maillogs', 'MailLogsController');
     Route::resource('/activitylogs', 'ActivityLogsController');
+    Route::resource('/myprofile', 'MyProfileController');
 
     //Custom Route
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
