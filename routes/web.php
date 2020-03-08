@@ -37,12 +37,16 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/receivedpayments', 'ReceivedPaymentsController');
     Route::resource('/expenses', 'ExpensesController');
     Route::resource('/otherincomes', 'OtherIncomesController');
+
+    //CMS menu
+    Route::resource('/informations', 'InformationsController');
     Route::resource('/coupons', 'CouponsController');
     Route::resource('/broadcasts', 'BroadcastsController');
     Route::resource('/maillogs', 'MailLogsController');
     Route::resource('/activitylogs', 'ActivityLogsController');
-    Route::resource('/myprofile', 'MyProfileController');
 
+    //My Profile Menu
+    Route::resource('/myprofile', 'MyProfileController');
     //Custom Route
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
     Route::get('/students/contract/{student}', 'StudentsController@showContract')->name('students.contract');

@@ -121,7 +121,8 @@
                                     CMS
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Information</a>
+                                    <a class="dropdown-item {{Request::segment(2) == "informations" ? 'active' : ''}}"
+                                     href="{{route('admin.informations.index')}}">Information</a>
                                     <a class="dropdown-item {{Request::segment(2) == "coupons" ? 'active' : ''}}"
                                      href="{{route('admin.coupons.index')}}">Coupons</a>
                                     <a class="dropdown-item {{Request::segment(2) == "broadcasts" ? 'active' : ''}}"
