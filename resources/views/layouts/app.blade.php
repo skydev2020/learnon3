@@ -147,7 +147,8 @@
                                     Reports
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Report Cards</a>
+                                    <a class="dropdown-item {{Request::segment(2) == 'progressreports' ? 'active' : ''}}"
+                                     href="{{route('admin.progressreports.index')}}">Report Cards</a>
                                     <a class="dropdown-item" href="#">View Monthly Data</a>
                                     <a class="dropdown-item" href="#">Email Templates</a>
                                     <a class="dropdown-item" href="#">Tutor Report</a>

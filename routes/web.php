@@ -47,6 +47,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
 
     //My Profile Menu
     Route::resource('/myprofile', 'MyProfileController');
+
+    //Reports Menu
+    Route::resource('/progressreports', 'ProgressReportsController');
+
     //Custom Route
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
     Route::get('/students/contract/{student}', 'StudentsController@showContract')->name('students.contract');
