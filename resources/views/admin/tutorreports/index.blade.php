@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Information</div>
+                <div class="card-header">View Monthly Statistics</div>
                 <div class="card-body">
                     <div class="col-11 offset-11">
                         <button type = "button" class="btn btn-primary"  onclick = 
