@@ -152,7 +152,8 @@
                                     <a class="dropdown-item" href="#">View Monthly Data</a>
                                     <a class="dropdown-item {{Request::segment(2) == 'tutorreports' ? 'active' : ''}}"
                                      href="{{route('admin.tutorreports.index')}}">Tutor Report</a>
-                                    <a class="dropdown-item" href="#">Student Report</a>
+                                    <a class="dropdown-item {{Request::segment(2) == 'studentreports' ? 'active' : ''}}"
+                                     href="{{route('admin.studentreports.index')}}">Student Report</a>
                                 </div>
                             </li>
                             @endcan

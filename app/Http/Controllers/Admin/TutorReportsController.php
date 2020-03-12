@@ -18,14 +18,13 @@ class TutorReportsController extends Controller
      */
     public function index()
     {
-        $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()->get();
+        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
         $tutor_reports = Array();
-        foreach($tutors as $tutor)
+        foreach($students as $student)
         {
             //Get Total Students Tutored Count per tutor
-            $sessions = Session::whereHas('assignments', function($assignment) use ($tutor){
-                return $assignment->where('tutor_id', $tutor->id);
-            })->get();
+            $invoices = Invoice::where('user_id', $student->id);
+            $total_amount = array_sum($invoices->get('total_hours')->pluck('total_hours')->toArray());
             $students_tutored = (float)count($sessions);
 
             //Get Total Hours Tutored per tutor
