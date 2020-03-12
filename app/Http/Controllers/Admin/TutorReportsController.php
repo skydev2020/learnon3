@@ -31,20 +31,27 @@ class TutorReportsController extends Controller
             //Get Total Hours Tutored per tutor
             $sessions = Session::whereHas('assignments', function($assignment) use ($tutor){
                 return $assignment->where('tutor_id', $tutor->id);
-            })->get('session_duration');
+            })->get('session_duration')->pluck('session_duration')->toArray();
             $hours_tutored = (float)array_sum($sessions);
 
             //Get Average Hours Per Student with each tutor
-            $avg_hours = (float)($hours_tutored / $students_tutored);
+            if ($students_tutored != 0) {
+                $avg_hours = (float)($hours_tutored / $students_tutored);
+            } else $avg_hours = "NAN";
 
             //Get Total Hours Tutored per tutor
             $session_dates = Session::whereHas('assignments', function($assignment) use ($tutor){
                 return $assignment->where('tutor_id', $tutor->id);
-            })->get('session_date');
-            $avg_duration = get_durations($session_dates) / $students_tutored;
-
-
+            })->get('session_date')->pluck('session_date')->toArray();
+            if ($students_tutored != 0){
+                $avg_duration = $this->get_durations($session_dates) / $students_tutored;
+            } else $avg_duration = "NAN";
+            $tutor_reports[] = array("Id"=>$tutor['id'], "Tutor Name" => $tutor['name'], 'Email'=>$tutor['email'],
+            'Students Tutored'=>$students_tutored, 'Hours Tutored'=>$hours_tutored, 'Avg Hours Per Student'
+            =>$avg_hours, 'Average Duration Per Student'=>$avg_duration);
         }
+
+        return view('admin.tutorreports.index')->with('reports', $tutor_reports);
     }
 
     /**
@@ -115,13 +122,17 @@ class TutorReportsController extends Controller
 
     public function get_durations(Array $dates)
     {
-        $min_date = $dates->first();
-        $max_date = $dates->first();
+        $min_date = $dates[0];
+        $max_date = $dates[0];
         foreach($dates as $date) {
             if ($date > $max_date) $max_date = $date;
             if ($date < $min_date) $min_date = $date;
         }
 
-        return (float)date_diff($min_date, $max_date);
+        // $date_min = date_create($min_date);
+        // $date_max = date_create($max_date);
+        // //return (float)date_diff($date_min, $date_max);
+        // return $date_max - $date_min;
+        return (float)(strtotime($max_date) - strtotime($min_date)) / 86400;
     }
 }
