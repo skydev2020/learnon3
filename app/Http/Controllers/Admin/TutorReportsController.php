@@ -46,9 +46,10 @@ class TutorReportsController extends Controller
             if ($students_tutored != 0){
                 $avg_duration = $this->get_durations($session_dates) / $students_tutored;
             } else $avg_duration = "NAN";
-            $tutor_reports[] = array("Id"=>$tutor['id'], "Tutor Name" => $tutor['name'], 'Email'=>$tutor['email'],
-            'Students Tutored'=>$students_tutored, 'Hours Tutored'=>$hours_tutored, 'Avg Hours Per Student'
-            =>$avg_hours, 'Average Duration Per Student'=>$avg_duration);
+            $tutor_reports[] = array("Id"=>$tutor['id'], "Tutor Name" => $tutor['fname'] . ' ' . $tutor['lname']
+            , 'Email'=>$tutor['email'], 'Students Tutored'=>$students_tutored, 
+            'Hours Tutored'=>$hours_tutored, 'Avg Hours Per Student' =>$avg_hours
+            , 'Average Duration Per Student'=>$avg_duration);
         }
 
         return view('admin.tutorreports.index')->with('reports', $tutor_reports);
