@@ -149,7 +149,8 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item {{Request::segment(2) == 'progressreports' ? 'active' : ''}}"
                                      href="{{route('admin.progressreports.index')}}">Report Cards</a>
-                                    <a class="dropdown-item" href="#">View Monthly Data</a>
+                                     <a class="dropdown-item {{Request::segment(2) == 'monthlydata' ? 'active' : ''}}"
+                                     href="{{route('admin.monthlydata.index')}}">View Monthly Data</a>
                                     <a class="dropdown-item {{Request::segment(2) == 'tutorreports' ? 'active' : ''}}"
                                      href="{{route('admin.tutorreports.index')}}">Tutor Report</a>
                                     <a class="dropdown-item {{Request::segment(2) == 'studentreports' ? 'active' : ''}}"

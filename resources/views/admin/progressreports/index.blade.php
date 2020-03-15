@@ -74,7 +74,6 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-header">Activity Log</div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
