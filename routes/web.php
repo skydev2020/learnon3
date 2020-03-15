@@ -47,6 +47,18 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
 
     //My Profile Menu
     Route::resource('/myprofile', 'MyProfileController');
+
+    //Reports Menu
+    Route::resource('/progressreports', 'ProgressReportsController');
+    Route::resource('/tutorreports', 'TutorReportsController');
+    Route::resource('/studentreports', 'StudentReportsController');
+    Route::resource('/monthlydata', 'MonthlyDataController');
+    //Monthly Data Submenu
+    Route::resource('/monthlydatas/studenthours', 'MonthlyDatas\StudentHoursController');
+    Route::resource('/monthlydatas/tutorhours', 'MonthlyDatas\TutorHoursController');
+    Route::resource('/monthlydatas/monthlystatistics', 'MonthlyDatas\MonthlyStatisticsController');
+    Route::resource('/monthlydatas/yearlystatistics', 'MonthlyDatas\YearlyStatisticsController');
+
     //Custom Route
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
     Route::get('/students/contract/{student}', 'StudentsController@showContract')->name('students.contract');
