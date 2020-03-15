@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="col-8 offset-1">
-                        <a href = ""> <font size = '+2'> View Yearly Statistics </a>
+                        <a href = "{{ route('admin.yearlystatistics.index') }}"> <font size = '+2'> View Yearly Statistics </a>
                     </div>
 
                     <div class="col-8 offset-1">

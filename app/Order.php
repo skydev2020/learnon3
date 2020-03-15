@@ -28,4 +28,8 @@ class Order extends Model
     public function statuses() {
         return $this->belongsTo('App\OrderStatus', 'status_id');
     }
+
+    public function updatedMonth() {
+        return date('m', strtotime($this->updated_at));
+    }
 }

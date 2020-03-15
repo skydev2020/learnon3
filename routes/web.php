@@ -57,6 +57,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/monthlydatas/studenthours', 'MonthlyDatas\StudentHoursController');
     Route::resource('/monthlydatas/tutorhours', 'MonthlyDatas\TutorHoursController');
     Route::resource('/monthlydatas/monthlystatistics', 'MonthlyDatas\MonthlyStatisticsController');
+    Route::resource('/monthlydatas/yearlystatistics', 'MonthlyDatas\YearlyStatisticsController');
 
     //Custom Route
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
