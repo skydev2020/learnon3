@@ -176,9 +176,10 @@
                                      href="{{route('admin.countries.index')}}">Countries</a>
                                     <a class="dropdown-item {{Request::segment(2) == 'states' ? 'active' : ''}}"
                                      href="{{route('admin.states.index')}}">Province / State</a>
-                                     <a class="dropdown-item {{Request::segment(2) == 'subjects' ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'subjects' ? 'active' : ''}}"
                                      href="{{route('admin.subjects.index')}}">Subjects</a>
-                                    <a class="dropdown-item" href="#">Grades</a>
+                                    <a class="dropdown-item {{Request::segment(2) == 'grades' ? 'active' : ''}}"
+                                     href="{{route('admin.grades.index')}}">Grades</a>
                                     <a class="dropdown-item" href="#">Error Logs</a>
                                     <a class="dropdown-item" href="#">Backup / Restore</a>
                                 </div>
