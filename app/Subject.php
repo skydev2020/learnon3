@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
+    protected $fillable = [
+        'name'
+    ];
+
     //returning all grades for a Subject
     public function grades() {
         return $this->belongsTo('App\Grade');

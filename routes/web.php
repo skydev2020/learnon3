@@ -63,6 +63,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     //Settings Menu
     Route::resource('/countries', 'CountryController');
     Route::resource('/states', 'StatesController');
+    Route::resource('/subjects', 'SubjectsController');
 
     //Custom Route
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
