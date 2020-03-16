@@ -180,7 +180,8 @@
                                      href="{{route('admin.subjects.index')}}">Subjects</a>
                                     <a class="dropdown-item {{Request::segment(2) == 'grades' ? 'active' : ''}}"
                                      href="{{route('admin.grades.index')}}">Grades</a>
-                                    <a class="dropdown-item" href="#">Error Logs</a>
+                                     <a class="dropdown-item {{Request::segment(2) == 'errorlogs' ? 'active' : ''}}"
+                                     href="{{route('admin.errorlogs.index')}}">Error Logs</a>
                                     <a class="dropdown-item" href="#">Backup / Restore</a>
                                 </div>
                             </li>
