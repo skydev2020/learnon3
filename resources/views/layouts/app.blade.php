@@ -170,8 +170,10 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="#">Settings</a>
-                                    <a class="dropdown-item" href="#">Users</a>
-                                    <a class="dropdown-item" href="#">Countries</a>
+                                     <a class="dropdown-item {{Request::segment(2) == 'users' ? 'active' : ''}}"
+                                     href="{{route('admin.users.index')}}">Users</a>
+                                    <a class="dropdown-item {{Request::segment(2) == 'countries' ? 'active' : ''}}"
+                                     href="{{route('admin.countries.index')}}">Countries</a>
                                     <a class="dropdown-item" href="#">Province / State</a>
                                     <a class="dropdown-item" href="#">Subjects</a>
                                     <a class="dropdown-item" href="#">Grades</a>

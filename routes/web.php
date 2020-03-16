@@ -38,6 +38,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/expenses', 'ExpensesController');
     Route::resource('/otherincomes', 'OtherIncomesController');
 
+
     //CMS menu
     Route::resource('/informations', 'InformationsController');
     Route::resource('/coupons', 'CouponsController');
@@ -58,6 +59,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/monthlydatas/tutorhours', 'MonthlyDatas\TutorHoursController');
     Route::resource('/monthlydatas/monthlystatistics', 'MonthlyDatas\MonthlyStatisticsController');
     Route::resource('/monthlydatas/yearlystatistics', 'MonthlyDatas\YearlyStatisticsController');
+
+    //Settings Menu
+    Route::resource('/countries', 'CountryController');
 
     //Custom Route
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
