@@ -174,7 +174,8 @@
                                      href="{{route('admin.users.index')}}">Users</a>
                                     <a class="dropdown-item {{Request::segment(2) == 'countries' ? 'active' : ''}}"
                                      href="{{route('admin.countries.index')}}">Countries</a>
-                                    <a class="dropdown-item" href="#">Province / State</a>
+                                    <a class="dropdown-item {{Request::segment(2) == 'states' ? 'active' : ''}}"
+                                     href="{{route('admin.states.index')}}">Province / State</a>
                                     <a class="dropdown-item" href="#">Subjects</a>
                                     <a class="dropdown-item" href="#">Grades</a>
                                     <a class="dropdown-item" href="#">Error Logs</a>
