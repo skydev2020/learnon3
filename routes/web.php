@@ -38,6 +38,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/expenses', 'ExpensesController');
     Route::resource('/otherincomes', 'OtherIncomesController');
 
+
     //CMS menu
     Route::resource('/informations', 'InformationsController');
     Route::resource('/coupons', 'CouponsController');
@@ -59,6 +60,14 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/monthlydatas/monthlystatistics', 'MonthlyDatas\MonthlyStatisticsController');
     Route::resource('/monthlydatas/yearlystatistics', 'MonthlyDatas\YearlyStatisticsController');
 
+    //Settings Menu
+    Route::resource('/settings', 'SettingsController');
+    Route::resource('/countries', 'CountryController');
+    Route::resource('/states', 'StatesController');
+    Route::resource('/subjects', 'SubjectsController');
+    Route::resource('/grades', 'GradesController');
+    Route::resource('/errorlogs', 'ErrorLogsController');
+
     //Custom Route
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
     Route::get('/students/contract/{student}', 'StudentsController@showContract')->name('students.contract');
@@ -68,5 +77,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::put('invoices/lock/{invoice}', 'InvoicesController@lock')->name('invoices.lock');
     Route::put('invoices/unlock/{invoice}', 'InvoicesController@unlock')->name('invoices.unlock');
     Route::put('invoices/applyLateFee/{invoice}', 'InvoicesController@applyLateFee')->name('invoices.applyLateFee');
+    Route::get('errorlogs/clear', 'ErrorLogsController@clear')->name('errorlogs.clear');
 });
 

@@ -53,7 +53,7 @@ class InformationsController extends Controller
         if ($validator->fails())
         {
             $request->session()->flash('error', $validator->messages()->first());
-            return redirect()->route('admin.informations.edit', $information);
+            return redirect()->route('admin.informations.create');
         }
         
         $data = $request->all();

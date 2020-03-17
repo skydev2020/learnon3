@@ -169,13 +169,20 @@
                                     System
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Settings</a>
-                                    <a class="dropdown-item" href="#">Users</a>
-                                    <a class="dropdown-item" href="#">Countries</a>
-                                    <a class="dropdown-item" href="#">Province / State</a>
-                                    <a class="dropdown-item" href="#">Subjects</a>
-                                    <a class="dropdown-item" href="#">Grades</a>
-                                    <a class="dropdown-item" href="#">Error Logs</a>
+                                    <a class="dropdown-item {{Request::segment(2) == 'settings' ? 'active' : ''}}"
+                                     href="{{route('admin.settings.index')}}">Settings</a>
+                                     <a class="dropdown-item {{Request::segment(2) == 'users' ? 'active' : ''}}"
+                                     href="{{route('admin.users.index')}}">Users</a>
+                                    <a class="dropdown-item {{Request::segment(2) == 'countries' ? 'active' : ''}}"
+                                     href="{{route('admin.countries.index')}}">Countries</a>
+                                    <a class="dropdown-item {{Request::segment(2) == 'states' ? 'active' : ''}}"
+                                     href="{{route('admin.states.index')}}">Province / State</a>
+                                    <a class="dropdown-item {{Request::segment(2) == 'subjects' ? 'active' : ''}}"
+                                     href="{{route('admin.subjects.index')}}">Subjects</a>
+                                    <a class="dropdown-item {{Request::segment(2) == 'grades' ? 'active' : ''}}"
+                                     href="{{route('admin.grades.index')}}">Grades</a>
+                                     <a class="dropdown-item {{Request::segment(2) == 'errorlogs' ? 'active' : ''}}"
+                                     href="{{route('admin.errorlogs.index')}}">Error Logs</a>
                                     <a class="dropdown-item" href="#">Backup / Restore</a>
                                 </div>
                             </li>
