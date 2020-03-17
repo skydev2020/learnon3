@@ -11,6 +11,8 @@ use App\OrderStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Gate;
 
 class SettingsController extends Controller
 {
@@ -81,14 +83,12 @@ class SettingsController extends Controller
             'config_error_display'                => Setting::where('key', 'config_error_display')->first()['value'],
             'config_error_log'         => Setting::where('key', 'config_error_log')->first()['value'],
             'config_error_filename'         => Setting::where('key', 'config_error_filename')->first()['value'],
-            
             'countries'                 => Country::all(),
             'languages'                 => Language::all(),
             'currencies'                => Currency::all(),
             'statuses'                  => OrderStatus::all(),
             'filepaths'                 => $filepaths
         ];
-
         return view('admin.settings.index') -> with('data', $data);
     }
 
@@ -110,7 +110,78 @@ class SettingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Gate::denies('manage-system')) {
+            return redirect()->route('admin.settings.index');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'config_name'               => ['required', 'string'],
+            'config_url'                => ['required', 'string'],
+            'config_owner'              => ['required', 'string'],
+            'config_address'            => ['required', 'string'],
+            'config_email'              => ['required', 'string'],
+            'config_email2'             => ['required', 'string'],
+            'config_email3'             => ['required', 'string'],
+            'config_masterpassword'     => ['required', 'string'],
+            'config_telephone'          => ['required', 'string'],
+            'config_fax'                => ['nullable', 'string'],
+            'config_minimum_bill'       => ['required', 'string'],
+            'config_title'              => ['required', 'string'],
+            'config_meta_description'   => ['required', 'string'],
+            'config_description_1'      => ['required', 'string'],
+            'wage_usa'                  => ['required', 'string'],
+            'wage_canada'               => ['required', 'string'],
+            'wage_alberta'              => ['required', 'string'],
+            'invoice_usa'               => ['required', 'string'],
+            'invoice_canada'            => ['required', 'string'],
+            'invoice_alberta'           => ['required', 'string'],
+            'config_country_id'         => ['required', 'string'],
+            'config_admin_language'     => ['required', 'string'],
+            'config_currency'           => ['required', 'string'],
+            'config_currency_auto'      => ['required', 'string'],
+            'config_admin_limit'        => ['required', 'string'],
+            'config_invoice_prefix'     => ['required', 'string'],
+            'config_invoice_no'         => ['required', 'string'],
+            'config_order_status_id'    => ['required', 'string'],
+            'config_customer_approval'  => ['required', 'string'],
+            'config_mail_protocol'      => ['required', 'string'],
+            'config_mail_parameter'     => ['required', 'string'],
+            'config_smtp_host'          => ['required', 'string'],
+            'config_smtp_username'      => ['required', 'string'],
+            'config_smtp_password'      => ['required', 'string'],
+            'config_smtp_port'          => ['required', 'string'],
+            'config_smtp_timeout'       => ['required', 'string'],
+            'config_alert_mail'         => ['required', 'string'],
+            'config_account_mail'       => ['required', 'string'],
+            'config_alert_emails'       => ['required', 'string'],
+            
+            'config_ssl'                => ['required', 'string'],
+            'config_maintenance'        => ['required', 'string'],
+            'config_encryption'         => ['required', 'string'],
+            'config_seo_url'            => ['required', 'string'],
+            'config_compression'        => ['required', 'string'],
+            'config_error_display'      => ['required', 'string'],
+            'config_error_log'          => ['required', 'string'],
+            'config_error_filename'     => ['required', 'string'],
+        ]);
+
+        $data = $request->all();
+        foreach ($data as $key => $value)
+        {
+            $setting = Setting::where('key', $key)->first();
+            if ($setting != NULL && $value != NULL)
+            {
+                $setting->value = $value;
+                if (!$setting -> save())
+                {
+                    session()->flash('error', 'There is an error saving your settings!');
+                    return redirect()->route('admin.settings.index');
+                }
+            }
+        }
+
+        session() -> flash('success', 'You have successfully save your settings!');
+        return redirect()->route('admin.settings.index');
     }
 
     /**
