@@ -61,6 +61,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/monthlydatas/yearlystatistics', 'MonthlyDatas\YearlyStatisticsController');
 
     //Settings Menu
+    Route::resource('/settings', 'SettingsController');
     Route::resource('/countries', 'CountryController');
     Route::resource('/states', 'StatesController');
     Route::resource('/subjects', 'SubjectsController');

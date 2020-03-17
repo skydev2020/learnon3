@@ -169,7 +169,8 @@
                                     System
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Settings</a>
+                                    <a class="dropdown-item {{Request::segment(2) == 'settings' ? 'active' : ''}}"
+                                     href="{{route('admin.settings.index')}}">Settings</a>
                                      <a class="dropdown-item {{Request::segment(2) == 'users' ? 'active' : ''}}"
                                      href="{{route('admin.users.index')}}">Users</a>
                                     <a class="dropdown-item {{Request::segment(2) == 'countries' ? 'active' : ''}}"
