@@ -32,6 +32,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/essayassignments', 'EssayAssignmentsController');
     Route::resource('/sessions', 'SessionsController');
     Route::resource('/rejectedtutors', 'RejectedTutorsController');
+
+    //Payments Menu
+    Route::resource('/defaultwages', 'DefaultWagesController');
     Route::resource('/invoices', 'InvoicesController');
     Route::resource('/paycheques', 'PaychequesController');
     Route::resource('/receivedpayments', 'ReceivedPaymentsController');
@@ -82,5 +85,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::get('errorlogs/clear', 'ErrorLogsController@clear')->name('errorlogs.clear');
     Route::get('emailsend/send', 'EmailSendController@send')->name('emailsend.send');
     Route::get('notification/send', 'NotificationController@send')->name('notification.send');
+    Route::get('defaultwages/export', 'DefaultWagesController@export')->name('defaultwages.export');
 });
 
