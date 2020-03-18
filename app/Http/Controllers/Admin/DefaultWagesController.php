@@ -7,6 +7,11 @@ use App\Assignment;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Gate;
+use App\Exports\ExportBaseRates;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 class DefaultWagesController extends Controller
 {
@@ -50,7 +55,7 @@ class DefaultWagesController extends Controller
      */
     public function show(DefaultWage $defaultWage)
     {
-        //
+        return Excel::download(new ExportBaseRates, 'baserates.csv');
     }
 
     /**
@@ -71,9 +76,45 @@ class DefaultWagesController extends Controller
      * @param  \App\DefaultWage  $defaultWage
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DefaultWage $defaultWage)
+    public function update(Request $request, DefaultWage $defaultwage)
     {
-        //
+        if (Gate::denies('manage-payments'))
+        {
+            return redirect()->route('admin.defaultwages.index');
+        }
+
+        $validator = Validator::make($request->all(), [
+            'wage_usa'          => ['required', 'string'],
+            'wage_canada'       => ['required', 'string'],
+            'wage_alberta'      => ['required', 'string'],
+            'invoice_usa'       => ['nullable', 'string'],
+            'invoice_canada'    => ['nullable', 'string'],
+            'invoice_alberta'   => ['nullable', 'string'],
+        ]);
+
+        if ($validator->fails())
+        {
+            $request->session()->flash('error', $validator->messages()->first());
+            return redirect()->route('admin.defaultwages.index');
+        }
+
+        $data = $request->all();
+        foreach($data as $key => $value)
+        {
+            if (isset($defaultwage[$key]))
+            {
+                $defaultwage[$key] = $value;
+            }
+        }
+
+        if (!$defaultwage -> save())
+        {
+            $request->session()->flash('error', "There is an error modifying Base Invoice Rates!");
+            return redirect()->route('admin.defaultwages.index');
+        }
+
+        $request->session()->flash('success', "You have successfully modified Base Invoice Rates!");
+        return view('admin.defaultwages.index') -> with('defaultwage', $defaultwage);
     }
 
     /**
@@ -89,12 +130,5 @@ class DefaultWagesController extends Controller
 
     public function export(Request $request)
     {
-        $results = $this->getTutorBaseRates();
-    }
-
-    public function getTutorBaseRates()
-    {
-        $assignments = Assignment::has('tutors') -> has('students') -> get();
-        return $assignments;
     }
 }
