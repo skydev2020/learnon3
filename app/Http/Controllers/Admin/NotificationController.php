@@ -43,6 +43,12 @@ class NotificationController extends Controller
             'message'   => ['required', 'string'],
         ]);
 
+        if ($validator->fails())
+        {
+            $request->session()->flash('error', $validator->messages()->first());
+            return redirect()->route('admin.notification.index');
+        }
+
         // dd (Setting::where('key', 'config_email')->first()['value']);
         $data = $request -> all();
         $users = User::all();
