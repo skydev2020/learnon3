@@ -131,9 +131,10 @@
                                      href="{{route('admin.maillogs.index')}}">Mail Log</a>
                                     <a class="dropdown-item {{Request::segment(2) == "activitylogs" ? 'active' : ''}}"
                                      href="{{route('admin.activitylogs.index')}}">Activity Log</a>
-                                     <a class="dropdown-item {{Request::segment(2) == "emailsend" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == "emailsend" ? 'active' : ''}}"
                                      href="{{route('admin.emailsend.index')}}">Send Email</a>
-                                    <a class="dropdown-item" href="#">Send Notification</a>
+                                    <a class="dropdown-item {{Request::segment(2) == "notification" ? 'active' : ''}}"
+                                     href="{{route('admin.notification.index')}}">Send Notification</a>
                                 </div>
                             </li>
                             @endcan
