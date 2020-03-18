@@ -83,10 +83,11 @@
                                      href="{{route('admin.receivedpayments.index')}}">Payment Received</a>
                                     <a class="dropdown-item {{Request::segment(2) == "expenses" ? 'active' : ''}}"
                                      href="{{route('admin.expenses.index')}}">Monthly Expenses</a>
-                                     <a class="dropdown-item {{Request::segment(2) == "otherincomes" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == "otherincomes" ? 'active' : ''}}"
                                      href="{{route('admin.otherincomes.create')}}">Other Income</a>
                                     <a class="dropdown-item" href="#">CSV Upload</a>
-                                    <a class="dropdown-item" href="#">Base Invoice Rates</a>
+                                    <a class="dropdown-item {{Request::segment(2) == "defaultwages" ? 'active' : ''}}"
+                                     href="{{route('admin.defaultwages.index')}}">Base Invoice Rates</a>
                                 </div>
                             </li>
                             @endcan
