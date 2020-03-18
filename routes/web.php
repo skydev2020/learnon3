@@ -45,6 +45,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/broadcasts', 'BroadcastsController');
     Route::resource('/maillogs', 'MailLogsController');
     Route::resource('/activitylogs', 'ActivityLogsController');
+    Route::resource('/emailsend', 'EmailSendController');
 
     //My Profile Menu
     Route::resource('/myprofile', 'MyProfileController');
@@ -78,5 +79,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::put('invoices/unlock/{invoice}', 'InvoicesController@unlock')->name('invoices.unlock');
     Route::put('invoices/applyLateFee/{invoice}', 'InvoicesController@applyLateFee')->name('invoices.applyLateFee');
     Route::get('errorlogs/clear', 'ErrorLogsController@clear')->name('errorlogs.clear');
+    Route::get('emailsend/send', 'EmailSendController@send')->name('emailsend.send');
 });
 
