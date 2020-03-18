@@ -85,7 +85,8 @@
                                      href="{{route('admin.expenses.index')}}">Monthly Expenses</a>
                                     <a class="dropdown-item {{Request::segment(2) == "otherincomes" ? 'active' : ''}}"
                                      href="{{route('admin.otherincomes.create')}}">Other Income</a>
-                                    <a class="dropdown-item" href="#">CSV Upload</a>
+                                    <a class="dropdown-item {{Request::segment(2) == "csvupload" ? 'active' : ''}}"
+                                     href="{{route('admin.csvupload.index')}}">CSV Upload</a>
                                     <a class="dropdown-item {{Request::segment(2) == "defaultwages" ? 'active' : ''}}"
                                      href="{{route('admin.defaultwages.index')}}">Base Invoice Rates</a>
                                 </div>

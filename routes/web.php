@@ -34,13 +34,14 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/rejectedtutors', 'RejectedTutorsController');
 
     //Payments Menu
-    Route::resource('/defaultwages', 'DefaultWagesController');
+    
     Route::resource('/invoices', 'InvoicesController');
     Route::resource('/paycheques', 'PaychequesController');
     Route::resource('/receivedpayments', 'ReceivedPaymentsController');
     Route::resource('/expenses', 'ExpensesController');
     Route::resource('/otherincomes', 'OtherIncomesController');
-
+    Route::resource('/csvupload', 'CSVUploadController');
+    Route::resource('/defaultwages', 'DefaultWagesController');
 
     //CMS menu
     Route::resource('/informations', 'InformationsController');
