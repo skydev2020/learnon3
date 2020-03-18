@@ -46,6 +46,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/maillogs', 'MailLogsController');
     Route::resource('/activitylogs', 'ActivityLogsController');
     Route::resource('/emailsend', 'EmailSendController');
+    Route::resource('/notification', 'NotificationController');
 
     //My Profile Menu
     Route::resource('/myprofile', 'MyProfileController');
@@ -69,7 +70,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/grades', 'GradesController');
     Route::resource('/errorlogs', 'ErrorLogsController');
 
-    //Custom Route
+    //Custom Route 
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
     Route::get('/students/contract/{student}', 'StudentsController@showContract')->name('students.contract');
     Route::put('paycheques/markaspaid/{paycheque}', 'PaychequesController@markaspaid')->name('paycheques.markaspaid');
@@ -80,5 +81,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::put('invoices/applyLateFee/{invoice}', 'InvoicesController@applyLateFee')->name('invoices.applyLateFee');
     Route::get('errorlogs/clear', 'ErrorLogsController@clear')->name('errorlogs.clear');
     Route::get('emailsend/send', 'EmailSendController@send')->name('emailsend.send');
+    Route::get('notification/send', 'NotificationController@send')->name('notification.send');
 });
 
