@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Upload CSV - Income and Expense</div>
                 <div class="card-body">
-                <form method="POST" action="{{ route('admin.csvupload.store') }}">
+                <form method="post" action="{{ route('admin.csvupload.store') }}" enctype = "multipart/form-data">
                         @csrf
                         {{method_field('POST')}}
 
@@ -30,7 +30,7 @@
 
                             <div class = "col-3 d-flex align-items-center">
                                 <input type = "file" id = "income_file" name = "income_file"
-                                    class = "form-control">
+                                    class = "form-control-file">
                             </div>
                         </div>
 
@@ -41,7 +41,7 @@
 
                             <div class = "col-3 d-flex align-items-center">
                                 <input type = "file" id = "expense_file" name = "expense_file"
-                                    class = "form-control">
+                                    class = "form-control-file">
                             </div>
                         </div>
                     </form>
