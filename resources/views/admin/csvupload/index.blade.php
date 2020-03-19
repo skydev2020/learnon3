@@ -17,7 +17,7 @@
                             </div>
 
                             <div class = "col-1 d-flex">
-                                <a href = "{{ route('admin.defaultwages.index') }}">
+                                <a href = "{{ route('admin.expenses.index') }}">
                                     <button type="button" class="btn btn-primary">Cancel</button>
                                 </a>
                             </div>

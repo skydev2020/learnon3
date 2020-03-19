@@ -4,7 +4,6 @@ namespace App\Imports;
 
 use App\MonthlyIncome;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Illuminate\Support\Facades\Date;
 use DateTime;
 
 class ImportMonthlyIncome implements ToModel

@@ -14,7 +14,7 @@ class ImportProfit implements ToModel
     */
     public function model(array $row)
     {
-        if (count($row) < 40)
+        if (count($row) < 40 || DateTime::createFromFormat('Y-m-d', $row[0]) == false)
         {
             return NULL;
         }
