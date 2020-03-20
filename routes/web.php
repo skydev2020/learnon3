@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\Admin\ProcessController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -34,7 +36,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/rejectedtutors', 'RejectedTutorsController');
 
     //Payments Menu
-    
+    Route::resource('/process', 'ProcessController');
     Route::resource('/invoices', 'InvoicesController');
     Route::resource('/paycheques', 'PaychequesController');
     Route::resource('/receivedpayments', 'ReceivedPaymentsController');
