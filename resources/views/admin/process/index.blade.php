@@ -12,132 +12,112 @@
                         @csrf
                         {{method_field('GET')}}
 
+                        {{-- {{dd($data)}} --}}
+                        <div class="form-group row mb-0">
+                            <div class="col-1 offset-10">
+                                <button type = "submit" class="btn btn-primary" >
+                                    {{ $data['button_save'] }}
+                                </button>
+                            </div>
+                            <div class="col-1">
+                                
+                                    <button type = "button" class="btn btn-primary" >Cancel</button>
+                                
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
                                 <label for="payment_date" class="col-form-label font-weight-bold">{{ __('Billing Month:') }}</label>
                             </div>
                             <div class="col-6">
-                                <select name = "payment_date" id = "payment_date">
+                                <select name = "payment_date" id = "payment_date" class = "form-control">
                                     <option value = "0">--Please Select--</option>
                                     @foreach ($data['all_dates'] as $each_date)
-                                        <option value = "{{$each_date['value']}}" >
+                                        <option value = "{{$each_date['value']}}" 
+                                        <?= $each_date['value'] == $data['payment_date'] ? "selected" : "" ?>>
+                                        {{$each_date['text']}} </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="amount" class="col-form-label font-weight-bold">{{ __('Amount:') }}</label>
+                        <?php if (!empty($data['payment_date'])) { ?>
+                        
+                        <div id = "process_steps">
+                            <div class="form-group row">
+                                <input type = "checkbox" name = "process[]" id = "process[]" value="collect_hours"
+                                <?=(in_array('collect_hours', $data['billing_process'])) ? 'checked':'';?> <?=($data['processing']) ? 'disabled':''; ?>>
+                                Collect Hours </input>
+                                <div>
+                                <?=!empty($data['collect_hours']) ? "Done" : "" ?>
+                                </div>
+                                <div>
+                                    <?=!empty($data['collect_hours']) ? "Official Submitted Hours (" . $data['total_approved_hours']. ")" : ""?> 
+                                </div>
                             </div>
-                            <div class="col-6 d-flex">
-                                <input type = "text" name = "amount" id = "amount" class = "form-control"
-                                value="{{ $data['old']['amount'] }}" autocomplete="amount" autofocus></input>
+
+                            <div class="form-group row">
+                                <input type = "checkbox" name = "process[]" id = "process[]" value="generate_invoices"
+                                <?=(in_array('generate_invoices', $data['billing_process'])) ? 'checked':'';?> <?=($data['processing']) ? 'disabled':'' ?>>
+                                Generate Invoices </input>
+                                <div>
+                                    
+                                <?=!empty($data['generate_invoices']) ? "Done" : "" ?>
+                                </div>
+                                <div>
+                                    <?=!empty($data['generate_invoices']) ? "Invoice Generated ( " . $data['total_approved_hours'] . ")" : ""?> 
+                                    <br>
+                                    <?=!empty($data['generate_invoices']) ? "Invoice Updated ( " . $data['total_invoice_updated'] . ")" : ""?> 
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="expense_date" class="col-form-label font-weight-bold">{{ __('Expense Date:') }}</label>
+                            <div class="form-group row">
+                                <input type = "checkbox" name = "process[]" id = "process[]" value="send_invoices"
+                                <?=(in_array('send_invoices', $data['billing_process'])) ? 'checked':'';?> <?=($data['processing']) ? 'disabled':'' ?>>
+                                Lock Invoices </input>
+                                <div>
+                                <?=!empty($data['send_invoices']) ? "Done" : "" ?>
+                                </div>
+                                <div>
+                                    <?=!empty($data['send_invoices']) ? "Total Invoice Locked ( " . $data['total_invoice_lock'] . ")" : ""?> 
+                                    <br>
+                                    <?=!empty($data['send_invoices']) ? "Total Invoice Sent ( " . $data['total_invoice_sent'] . ")" : ""?> 
+                                </div>
                             </div>
-                            <div class="col-6 d-flex">
-                                <input id="expense_date" type="date" class="form-control" name="expense_date"
-                                value="{{ $data['old']['expense_date'] }}" autocomplete="expense_date" autofocus>
+
+                            <div class="form-group row">
+                                <input type = "checkbox" name = "process[]" id = "process[]" value="generate_paycheques"
+                                <?=(in_array('generate_paycheques', $data['billing_process'])) ? 'checked':'';?>
+                                 <?=($data['processing']) ? 'disabled':'' ?>>Generate Paycheques</input>
+                                <div>
+                                <?=!empty($data['generate_paycheques']) ? "Done" : "" ?>
+                                </div>
+                                <div>
+                                    <?=!empty($data['generate_paycheques']) ? "Paycheques Generated ( " . $data['total_paycheques_generated'] . ")" : ""?> 
+                                    <br>
+                                    <?=!empty($data['generate_paycheques']) ? "Paycheques Updated ( " . $data['total_paycheques_updated'] . ")" : ""?> 
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group col-3 d-flex float-left justify-content-end">
-                            <button type = "submit" class="btn btn-primary"  name="action" value="search">
-                                    {{ __('Search') }}
-                                </button>
-                        </div>
+                            <div class="form-group row">
+                                <input type = "checkbox" name = "process[]" id = "process[]" value="send_paycheques"
+                                <?=(in_array('send_paycheques', $data['billing_process'])) ? 'checked':'';?>
+                                 <?=($data['processing']) ? 'disabled':'' ?>>Lock Paycheques</input>
+                                <div>
+                                <?=!empty($data['generate_paycheques']) ? "Done" : "" ?>
+                                </div>
+                                <div>
+                                    <?=!empty($data['send_paycheques']) ? "Total Invoice Locked ( " . $data['total_paycheques_lock'] . ")" : ""?> 
+                                    <br>
+                                    <?=!empty($data['send_paycheques']) ? "Total Invoice Sent ( " . $data['total_paycheques_sent'] . ")" : ""?> 
+                                </div>
+                            </div>
 
-                        <div class="form-group col-2 d-flex float-left justify-content-end">
-                            <a href = "{{ route('admin.expenses.create') }}">
-                                <button type = "button" class="btn btn-primary">
-                                    {{ __('ADD') }}
-                                </button>
-                            </a>
+                            <?php if (!empty($finished)) { ?>
+                            <?php } ?>
                         </div>
-
-                        <div class="form-group col-2 d-flex float-left justify-content-end">
-                            <button class="btn btn-primary" id="btn_export" onclick="exportToExcel('expenses')">
-                            {{ __('Export') }}</button>
-                        </div>
+                        <?php } ?>                            
                     </form>
-                    
-                </div>
-
-                <div class="card-body">
-                    <form method="GET" action="{{ route('admin.expenses.index') }}">
-                        @csrf
-                        {{method_field('GET')}}
-
-                        <div class="form-group row float-left col-4 ">
-                            <div class="col-4 d-flex justify-content-end align-items-center">
-                                <label for="start_date" class="col-form-label font-weight-bold">{{ __('Start Date:') }}</label>
-                            </div>
-                            <div class="col-6 d-flex">
-                                <input id="start_date" type="date" class="form-control" name="start_date"
-                                value="{{ $data['old']['start_date'] }}" autocomplete="start_date" autofocus>
-                            </div>
-                        </div>
-
-                        <div class="form-group row float-left col-4">
-                            <div class="col-4 d-flex justify-content-end align-items-center">
-                                <label for="end_date" class="col-form-label font-weight-bold">{{ __('End Date:') }}</label>
-                            </div>
-                            <div class="col-6 d-flex">
-                                <input id="end_date" type="date" class="form-control" name="end_date"
-                                value="{{ $data['old']['end_date'] }}" autocomplete="end_date" autofocus>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-6 offset-md-4">
-                                <button type = "submit" class="btn btn-primary" name="action" value="date_search">
-                                    {{ __('Search') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header"></div>
-                <div class="card-body">
-
-                    <table class="table table-bordered table-striped" id = "expenses">
-                        <thead>
-                        <tr>
-                            <th scope="col">Expense Name</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Expense Date</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($data['expenses'] as $expense)
-                            <tr>
-                                <td scope="col">{{$expense->name}}</td>
-                                <td scope="col">{{$expense->amount}}</td>
-                                <td scope="col">{{date('d/m/Y', strtotime($expense->date))}}</td>
-                                <td scope="col">
-                                    @can('manage-payments')
-                                        [<a href="{{route('admin.expenses.edit', $expense)}}">Edit</a>]
-                                    @endcan
-                                    @can('manage-payments')
-                                    <form action="{{ route('admin.expenses.destroy', $expense) }}" method="POST" class="float-left">
-                                    @csrf
-                                        {{method_field('DELETE')}}
-                                        [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
-                                    </form>
-                                    @endcan
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>

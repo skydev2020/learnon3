@@ -91,4 +91,12 @@ class User extends Authenticatable
     public function assignments() {
         return $this -> hasMany('App\Assignment', 'student_id');
     }
+
+    public function tutor_assignments() {
+        return $this -> hasMany('App\Assignment', 'tutor_id');
+    }
+
+    public function tutor_essayAssignments() {
+        return $this -> hasMany('App\EssayAssignment', 'tutor_id');
+    }
 }
