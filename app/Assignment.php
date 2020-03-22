@@ -28,4 +28,8 @@ class Assignment extends Model
     public function tutors() {
         return $this->belongsTo('App\User', 'tutor_id');
     }
+
+    public function sessions() {
+        return $this -> hasMany('App\Session', 'assignment_id');
+    }
 }
