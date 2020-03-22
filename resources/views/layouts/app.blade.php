@@ -38,9 +38,11 @@
                             <li class="nav-item {{Request::is('home') ? 'active' : '' }}">
                                 <a class="nav-link" href="/home">Home</a>
                             </li>
+                            @can('manage-users')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('admin.myprofile.index')}}">My Profile</a>
                             </li>
+                            @endcan
                             @can('manage-students')
                             <li class="nav-item dropdown {{in_array(Request::segment(2), ["students", "assignments", "student_packages", "packages"]) ? 'active' : '' }}">
                                 <a class="nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -94,6 +96,9 @@
                             </li>
                             @endcan
                             @can('manage-payment-records')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('tutor.myprofile.index')}}">My Profile</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Payment Records</a>
                             </li>
