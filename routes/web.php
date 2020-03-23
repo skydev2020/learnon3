@@ -95,6 +95,9 @@ Route::namespace('Tutor')->prefix('tutor')->name('tutor.')->middleware('can:mana
     //My Profile Menu
     Route::resource('/myprofile', 'MyProfileController');
 
-    //PaymentRecords
+    //PaymentRecords Menu
     Route::resource('/paymentrecords', 'PaychequesController');
+
+    //Report Cards Menu
+    Route::resource('/reportcards', 'ReportCardsController');
 });

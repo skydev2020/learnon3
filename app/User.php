@@ -103,4 +103,12 @@ class User extends Authenticatable
     public function paycheques(){
         return $this -> hasMany('App\Paycheque', 'user_id');
     }
+
+    public function tutor_reportcards() {
+        return $this -> hasMany('App\ProgressReport', 'tutor_id');
+    }
+
+    public function fullname() {
+        return $this -> fname . ' ' . $this->lname;
+    }
 }
