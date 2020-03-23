@@ -94,4 +94,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
 Route::namespace('Tutor')->prefix('tutor')->name('tutor.')->middleware('can:manage-tutor-students')->group(function() {
     //My Profile Menu
     Route::resource('/myprofile', 'MyProfileController');
+
+    //PaymentRecords
+    Route::resource('/paymentrecords', 'PaychequesController');
 });
