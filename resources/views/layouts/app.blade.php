@@ -148,7 +148,7 @@
                             @endcan
                             @can('manage-essay')
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Essays</a>
+                                <a class="nav-link" href="{{route('tutor.essays.index')}}">Essays</a>
                             </li>
                             @endcan
                             @can('manage-reports')

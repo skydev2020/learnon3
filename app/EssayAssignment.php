@@ -22,4 +22,8 @@ class EssayAssignment extends Model
     public function statuses() {
         return $this->belongsTo('App\EssayStatus', 'status_id');
     }
+
+    public function attachments() {
+        return $this->hasMany('App\EssayAssignmentAttachment', 'essay_id');
+    }
 }
