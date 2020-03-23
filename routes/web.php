@@ -100,4 +100,7 @@ Route::namespace('Tutor')->prefix('tutor')->name('tutor.')->middleware('can:mana
 
     //Report Cards Menu
     Route::resource('/reportcards', 'ReportCardsController');
+
+    //Essays Menu
+    Route::resource('/essays', 'EssaysController');
 });
