@@ -204,7 +204,7 @@
                             @endcan
                             @can('manage-report-cards')
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Report Cards</a>
+                                <a class="nav-link" href="{{route('tutor.reportcards.index')}}">Report Cards</a>
                             </li>
                             @endcan
                             @can('manage-tutoring-resource')
