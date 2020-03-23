@@ -107,6 +107,16 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <div  class="col-3 d-flex justify-content-end align-items-center">
+                                <label class="col-form-label" >{{ __('Assignments Uploaded:') }}</label>
+                            </div>
+                            <div class="col-6 d-flex align-items-center font-weight-bold">
+                                <a href = "{{base_path('essay_attachments/' . $data['attachment'])}}">
+                                    {{$data['attachment']}} </a>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

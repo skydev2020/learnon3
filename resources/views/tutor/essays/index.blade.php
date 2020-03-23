@@ -32,11 +32,7 @@
                                     @endcan
 
                                     @can('manage-essay')
-                                    <form action="{{ route('tutor.essays.destroy', $essay) }}" method="POST" class="float-left">
-                                        @csrf
-                                        {{method_field('DELETE')}}
-                                        [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
-                                    </form>
+                                    [<a href = "{{route('tutor.essays.show', $essay)}}">Upload Assignment</a>]
                                     @endcan
                                 </td>
                             </tr>
