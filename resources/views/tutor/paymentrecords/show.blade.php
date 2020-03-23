@@ -46,7 +46,7 @@
                         @endforeach
 
                         <tr>
-                            <td class="right" colspan="3">Total Amount (Tutoring) $</td>
+                            <td class="text-md-right" colspan="3">Total Amount (Tutoring) $</td>
                             <td class="left">{{ $data['paycheque_info']['session_amount'] }}</td>
                         </tr>
                         </tbody>
@@ -79,12 +79,12 @@
                         @endforeach
 
                         <tr>
-                            <td class="right" colspan="3">Total Amount (Essays) $</td>
+                            <td class="text-md-right" colspan="3">Total Amount (Essays) $</td>
                             <td class="left">{{ $data['paycheque_info']['essay_amount'] }}</td>
                         </tr>
 
                         <tr>
-                            <td class="right" colspan="3">{{$data['text_grand_total']}}</td>
+                            <td class="text-md-right" colspan="3">{{$data['text_grand_total']}}</td>
                             <td class="left">{{ $data['paycheque_info']['total_paid'] }}</td>
                           </tr>
                         </tbody>

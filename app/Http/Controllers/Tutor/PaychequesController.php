@@ -61,7 +61,7 @@ class PaychequesController extends Controller
     {
         $log_data = unserialize($paymentrecord->log_data); 
 
-        $data['text_grand_total'] = sprintf("Month Total for %s: $", date("F Y", strtotime($paymentrecord->paymentrecord_date)));
+        $data['text_grand_total'] = sprintf("Month Total for %s: $", date("F Y", strtotime($paymentrecord->paycheque_date)));
 
         $data['paycheque_info'] = Array(
 			'session_amount' => round(($paymentrecord->total_amount - $paymentrecord->essay_amount), 2),
