@@ -78,7 +78,20 @@ class SessionsController extends Controller
      */
     public function create()
     {
-        //
+        $myuser = Auth::User();
+        $students = Array();
+        foreach($myuser->tutor_assignments()->get() as $assignments)
+        {
+            $students[] = $assignments->student();
+        }
+
+        $students = array_unique($students);
+
+        $data = [
+            'students'  => $students,
+            'durations' => Session::getAllDurations()
+        ];
+        return view('tutor.sessions.create') -> with('data', $data);
     }
 
     /**

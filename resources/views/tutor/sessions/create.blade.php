@@ -1,68 +1,72 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-8">
             <div class="card">
-                <div class="card-header" style = "text-align:center;">{{ __('Log Hours') }}</div>
+                <div class="card-header">Log Hours</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.sessions.store') }}">
+                <form method="POST" action="{{ route('tutor.sessions.store') }}">
                         @csrf
                         {{method_field('POST')}}
-
-                        <div class="form-group row">
-                            <label for="assignment_id" class="col-md-4 col-form-label text-md-right">{{ __('Select Tutor: ') }}</label>
-
-                            <div class="col-md-5">
-                                <select name = "assignment_id" id = "assignment_id" class = "form-control">
-                                <option></option>
-                                @foreach ($data['assignments'] as $assignment)
-                                    <option value = {{$assignment->id}} >
-                                         {{$assignment->tutor()['fname'] . ' ' . $assignment->tutor()['lname']
-                                          . ' ( ' . $assignment->base_wage . ' ) => '
-                                           . $assignment->student()['fname'] . $assignment->student()['lname']
-                                            . ' ( ' . $assignment->base_invoice . ')' }}  </option>
-
-                                @endforeach
-                                </select>
+                        <div class="form-group row mb-0">
+                            <div class="col-1 offset-10">
+                                <button type = "submit" class="btn btn-primary">
+                                    {{ __('Save') }}
+                                </button>
                             </div>
-                        </div>
-
-                        <<div class="form-group row">
-                            <label for="session_date" class="col-md-4 col-form-label text-md-right">{{ __('Date of Session:') }}</label>
-
-                            <div class="col-md-5">
-                                <input type = "date" id = "session_date" name = "session_date">
+                            <div class="col-1">
+                                <a href = "{{route('tutor.sessions.index')}}">
+                                    <button type = "button" class="btn btn-primary">Cancel</button>
+                                </a>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="session_duration" class="col-md-4 col-form-label text-md-right">{{ __('Duration of Session') }}</label>
-                            <div class="col-md-6">
-                                <select id = "session_duration" name = "session_duration" class = "form-control">
+                            <div class="col-3 d-flex justify-content-end align-items-center">
+                                <label for="student" class="col-form-label font-weight-bold">{{ __('Select a student:') }}</label>
+                            </div>
+                            <div class="col-6">
+                                <select id = "student" name = "student" class = "form-control">
                                     <option></option>
-                                    @foreach ($data['session_durations'] as $duration)
-                                        <option> {{$duration}} </option>
+                                    @foreach ($data['students'] as $student)
+                                    <option value = "{{$student->id}}">{{$student->fname . ' ' . $student->lname}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="notes" class="col-md-4 col-form-label text-md-right">
-                            {{ __('Notes about session or student progress:') }} </label>
-
-                            <div class="col-md-5">
-                                <input type = "text" id = "notes" name = "notes">
+                            <div class="col-3 d-flex justify-content-end align-items-center">
+                                <label for="session_date" class="col-form-label font-weight-bold">Date of Session:</label>
                             </div>
-                        </div> 
+                            <div class="col-6 d-flex">
+                                <input id="session_date" type="date" class="form-control" name="session_date"
+                                autocomplete="session_date" autofocus>
+                            </div>
+                        </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('SAVE') }}
-                                </button>
+                        <div class="form-group row">
+                            <div class="col-3 d-flex justify-content-end align-items-center">
+                                <label for="session_duration" class="col-form-label font-weight-bold">Duration of Session:</label>
+                            </div>
+                            <div class="col-6 d-flex">
+                                <select name = "session_duration" id = "session_duration" class = "form-control">
+                                    @foreach ($data['durations'] as $key => $value)
+                                    <option value = "{{$key}}"> {{$value}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3 d-flex justify-content-end align-items-center">
+                                <label for="session_notes" class="col-form-label font-weight-bold">{{ __('Notes about session or student progress:') }}</label>
+                            </div>
+                            <div class="col-6 d-flex">
+                                <textarea name = "session_notes" id = "session_notes" class = "form-control inputstl"
+                                autocomplete="session_notes" autofocus></textarea>
                             </div>
                         </div>
                     </form>

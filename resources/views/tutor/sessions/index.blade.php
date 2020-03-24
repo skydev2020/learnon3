@@ -66,14 +66,9 @@
                         <div class="form-group col-2 d-flex float-left justify-content-end">
                             <a href = "{{ route('tutor.sessions.create') }}">
                                 <button type = "button" class="btn btn-primary">
-                                    {{ __('ADD') }}
+                                    {{ __('Log Hours') }}
                                 </button>
                             </a>
-                        </div>
-
-                        <div class="form-group col-2 d-flex float-left justify-content-end">
-                            <button class="btn btn-primary" id="btn_export" onclick="exportToExcel('expenses')">
-                            {{ __('Export') }}</button>
                         </div>
                     </form>
                     

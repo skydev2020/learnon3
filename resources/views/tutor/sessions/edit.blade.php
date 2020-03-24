@@ -10,6 +10,18 @@
                 <form method="POST" action="{{ route('tutor.sessions.update', $data['session']) }}">
                         @csrf
                         {{method_field('PUT')}}
+                        <div class="form-group row mb-0">
+                            <div class="col-1 offset-10">
+                                <button type = "submit" class="btn btn-primary">
+                                    {{ __('Update') }}
+                                </button>
+                            </div>
+                            <div class="col-1">
+                                <a href = "{{route('tutor.sessions.index')}}">
+                                    <button type = "button" class="btn btn-primary">Cancel</button>
+                                </a>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
@@ -56,14 +68,6 @@
                             <div class="col-6 d-flex">
                                 <textarea name = "session_notes" id = "session_notes" class = "form-control inputstl"
                                 autocomplete="session_notes" autofocus>{{ $data['session']->session_notes }}</textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-6 offset-md-4">
-                                <button type = "submit" class="btn btn-primary">
-                                    {{ __('Update') }}
-                                </button>
                             </div>
                         </div>
                     </form>
