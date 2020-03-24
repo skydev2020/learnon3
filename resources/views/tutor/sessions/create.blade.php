@@ -53,6 +53,7 @@
                             </div>
                             <div class="col-6 d-flex">
                                 <select name = "session_duration" id = "session_duration" class = "form-control">
+                                    <option></option>
                                     @foreach ($data['durations'] as $key => $value)
                                     <option value = "{{$key}}"> {{$value}} </option>
                                     @endforeach

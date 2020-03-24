@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Monthly Expenses</div>
+                <div class="card-header">My Sessions</div>
 
                 <div class="card-body">
                     <form method="GET" action="{{ route('tutor.sessions.index') }}">
@@ -52,23 +52,21 @@
                                 <label for="session_notes" class="col-form-label font-weight-bold">Session Notes</label>
                             </div>
                             <div class="col-6 d-flex">
-                                <input id="session_notes" type="date" class="form-control" name="session_notes"
+                                <input id="session_notes" type="text" class="form-control" name="session_notes"
                                 value="{{ $data['old']['session_notes'] }}" autocomplete="session_notes" autofocus>
                             </div>
                         </div>
 
-                        <div class="form-group col-3 d-flex float-left justify-content-end">
-                            <button type = "submit" class="btn btn-primary"  name="action" value="search">
-                                    {{ __('Search') }}
-                                </button>
-                        </div>
+                        <div class = "form-group row mb-0">
+                            <div class="col-1 offset-10">
+                                <button type = "submit" class="btn btn-primary">{{ __('Search') }}</button>
+                            </div>
 
-                        <div class="form-group col-2 d-flex float-left justify-content-end">
-                            <a href = "{{ route('tutor.sessions.create') }}">
-                                <button type = "button" class="btn btn-primary">
-                                    {{ __('Log Hours') }}
-                                </button>
-                            </a>
+                            <div class="col-1">
+                                <a href = "{{ route('tutor.sessions.create') }}">
+                                    <button type = "button" class="btn btn-primary">Log Hours</button>
+                                </a>
+                            </div>
                         </div>
                     </form>
                     

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class SessionsController extends Controller
@@ -102,7 +103,41 @@ class SessionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'student'           => ['required', 'integer'],
+            'session_date'      => ['required', 'date'],
+            'session_duration'  => ['required', 'string'],
+            'session_notes'     => ['required', 'string']
+        ]);
+
+        if ($validator->fails())
+        {
+            $request->session()->flash('error', $validator->messages()->first());
+            return redirect()->route('tutor.sessions.create');
+        }
+
+        $tutor_id = Auth::user()->id;
+        $assignment_id = Assignment::where(function($assignment) use ($tutor_id, $request){
+            return $assignment->where('tutor_id', $tutor_id)
+            -> where('student_id', $request['student']);
+        })->first()['id'];
+
+        $data = $request->all();
+        $session = Session::create([
+            'assignment_id'     => $assignment_id,
+            'session_date'      => $data['session_date'],
+            'session_duration'  => $data['session_duration'],
+            'session_notes'     => $data['session_notes']
+        ]);
+
+        if ($session == NULL)
+        {
+            $request->session()->flash('error', "There is an error logging your session!");
+            return redirect()->route('tutor.sessions.create');
+        }
+
+        $request->session()->flash('success', "Your session logged successfully");
+        return redirect()->route('tutor.sessions.index');
     }
 
     /**
@@ -193,6 +228,11 @@ class SessionsController extends Controller
      */
     public function destroy(Session $session)
     {
-        //
+        if (Gate::denies('manage-sessions')){
+            return redirect() -> route('tutor.sessions.index');
+        }
+
+        $session->delete();
+        return redirect() -> route('tutor.sessions.index');
     }
 }
