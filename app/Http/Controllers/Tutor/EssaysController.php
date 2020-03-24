@@ -89,7 +89,7 @@ class EssaysController extends Controller
         if ($validator->fails())
         {
             $request->session()->flash('error', $validator->messages()->first());
-            return redirect()->route('tutor.essays.create');
+            return redirect()->route('tutor.essays.edit', $essay);
         }
 
         $data = $request->all();

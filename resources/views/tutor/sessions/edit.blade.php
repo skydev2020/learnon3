@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">Update Session Details</div>
                 <div class="card-body">
-                <form method="POST" action="{{ route('admin.sessions.update', $data['session']) }}">
+                <form method="POST" action="{{ route('tutor.sessions.update', $data['session']) }}">
                         @csrf
                         {{method_field('PUT')}}
 
@@ -42,8 +42,8 @@
                             <div class="col-6 d-flex">
                                 <select name = "session_duration" id = "session_duration" class = "form-control">
                                     @foreach ($data['durations'] as $key => $value)
-                                    <option <?= $key == $data['session']->session_duration ? "selected" : "" ?>>
-                                    {{$value}} </option>
+                                    <option <?= $key == $data['session']->session_duration ? "selected" : "" ?>
+                                    value = "{{$key}}"> {{$value}} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -55,8 +55,7 @@
                             </div>
                             <div class="col-6 d-flex">
                                 <textarea name = "session_notes" id = "session_notes" class = "form-control inputstl"
-                                autocomplete="session_notes" autofocus>{{ $data['session']->session_notes }}
-                                </textarea>
+                                autocomplete="session_notes" autofocus>{{ $data['session']->session_notes }}</textarea>
                             </div>
                         </div>
 

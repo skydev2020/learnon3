@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Tutor;
 
+use App\Assignment;
 use App\Http\Controllers\Controller;
 use App\Session;
 use Illuminate\Http\Request;
@@ -136,7 +137,39 @@ class SessionsController extends Controller
      */
     public function update(Request $request, Session $session)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'student'           => ['required', 'integer'],
+            'session_date'      => ['required', 'date'],
+            'session_duration'  => ['required', 'string'],
+            'session_notes'     => ['required', 'string']
+        ]);
+
+        if ($validator->fails())
+        {
+            $request->session()->flash('error', $validator->messages()->first());
+            return redirect()->route('tutor.sessions.edit', $session);
+        }
+
+        $tutor_id = Auth::user()->id;
+        $assignment_id = Assignment::where(function($assignment) use ($tutor_id, $request){
+            return $assignment->where('tutor_id', $tutor_id)
+            -> where('student_id', $request['student']);
+        })->first()['id'];
+
+        $data = $request->all();
+        $session->assignment_id     = $assignment_id;
+        $session->session_date      = $data['session_date'];
+        $session->session_duration  = $data['session_duration'];
+        $session->session_notes     = $data['session_notes'];
+
+        if (!$session->save())
+        {
+            $request->session()->flash('error', "There is an error logging your session!");
+            return redirect()->route('tutor.sessions.edit', $session);
+        }
+
+        $request->session()->flash('success', "Your session logged successfully");
+        return redirect()->route('tutor.sessions.index');
     }
 
     /**
