@@ -62,9 +62,7 @@ class EssaysController extends Controller
      */
     public function edit(EssayAssignment $essay)
     {
-        //dd($essay->id);
         $statuses = EssayStatus::whereIn('id', Array(1, 3, 4))->get();
-        //dd($essay->attachments()->first());
         $attachment_name = $essay->attachments()->first()['assignment_name'];
         $data = [
             'essay'         => $essay,

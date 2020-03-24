@@ -53,10 +53,10 @@ class SessionsController extends Controller
         $sessions = $sessions->whereRaw($q);
 
         if (isset($request_data['s_name'])) {
-            $sessions = Session::whereHas('assignments', function($assignment) use ($request_data){
-                return $assignment->whereHas('sessions', function($tutor) use ($request_data){
-                    return $tutor->where('fname', $request_data['s_name'])
-                    ->orwhere('lname', $request_data['s_name']);
+            $sessions = $sessions->whereHas('assignments', function($assignment) use ($request_data){
+                return $assignment->whereHas('students', function($student) use ($request_data){
+                    return $student->where('fname', 'like', "%" . $request_data['s_name'] . "%")
+                    ->orwhere('lname', 'like', "%" . $request_data['s_name'] . "%");
                 });
             });
         } else $request_data['s_name'] = "";
@@ -64,7 +64,8 @@ class SessionsController extends Controller
 
         $data = [
             'sessions'  => $sessions,
-            'old'       => $request_data
+            'old'       => $request_data,
+            'durations' => Session::getAllDurations()
         ];
         return view('tutor.sessions.index') -> with('data', $data);
     }
@@ -109,7 +110,21 @@ class SessionsController extends Controller
      */
     public function edit(Session $session)
     {
-        //
+        $myuser = Auth::User();
+        $students = Array();
+        foreach($myuser->tutor_assignments()->get() as $assignments)
+        {
+            $students[] = $assignments->student();
+        }
+
+        $students = array_unique($students);
+
+        $data = [
+            'session'   => $session,
+            'students'  => $students,
+            'durations' => Session::getAllDurations()
+        ];
+        return view('tutor.sessions.edit') -> with('data', $data);
     }
 
     /**

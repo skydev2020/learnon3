@@ -104,6 +104,9 @@ Route::namespace('Tutor')->prefix('tutor')->name('tutor.')->middleware('can:mana
     //Essays Menu
     Route::resource('/essays', 'EssaysController');
 
+    //My Sessions Menu
+    Route::resource('/sessions', 'SessionsController');
+
 
     //Custom Route
     Route::put('essays/upload/{essay}', 'EssaysController@upload')->name('essays.upload');
