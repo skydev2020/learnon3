@@ -213,7 +213,7 @@
                             </li>
                             @endcan
                                 <li class="nav-item">
-                                <a class="nav-link" href="#">Help</a>
+                                <a class="nav-link" href="{{route('admin.help.index')}}">Help</a>
                             </li>
                         @endauth
                     </ul>
