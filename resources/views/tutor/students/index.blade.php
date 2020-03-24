@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">My Sessions</div>
+                <div class="card-header">My Students</div>
 
                 <div class="card-body">
-                    <form method="GET" action="{{ route('tutor.sessions.index') }}">
+                    <form method="GET" action="{{ route('tutor.students.index') }}">
                         @csrf
                         {{method_field('GET')}}
 
@@ -24,36 +24,26 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="session_date" class="col-form-label font-weight-bold">Date of Session</label>
+                                <label for="status" class="col-form-label font-weight-bold">Date of Session</label>
                             </div>
                             <div class="col-6 d-flex">
-                                <input id="session_date" type="date" class="form-control" name="session_date"
-                                value="{{ $data['old']['session_date'] }}" autocomplete="session_date" autofocus>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="session_duration" class="col-form-label font-weight-bold">Duration of Session</label>
-                            </div>
-                            <div class="col-6 d-flex">
-                                <select id="session_duration" class="form-control" name="session_duration">
+                                <select id="status" class="form-control" name="status">
                                     <option value = ""></option>
-                                    @foreach ($data['durations'] as $key => $value)
-                                    <option <?= $key == $data['old']['session_duration'] ? "selected" : "" ?>
-                                    value = "{{$key}}" >{{ $value }}</option>
-                                    @endforeach
+                                    <option <?= $data['old']['status'] == "Active" ? "selected" : "" ?>
+                                    value = "Active" >Active</option>
+                                    <option <?= $data['old']['status'] == "Stop Tutoring" ? "selected" : "" ?>
+                                        value = "Stop Tutoring" >Stop Tutoring</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="session_notes" class="col-form-label font-weight-bold">Session Notes</label>
+                                <label for="assigned_at" class="col-form-label font-weight-bold">Date Assigned</label>
                             </div>
                             <div class="col-6 d-flex">
-                                <input id="session_notes" type="text" class="form-control" name="session_notes"
-                                value="{{ $data['old']['session_notes'] }}" autocomplete="session_notes" autofocus>
+                                <input id="assigned_at" type="date" class="form-control" name="assigned_at"
+                                value="{{ $data['old']['assigned_at'] }}" autocomplete="assigned_at" autofocus>
                             </div>
                         </div>
 
@@ -63,7 +53,7 @@
                             </div>
 
                             <div class="col-1">
-                                <a href = "{{ route('tutor.sessions.create') }}">
+                                <a href = "{{ route('tutor.students.create') }}">
                                     <button type = "button" class="btn btn-primary">Log Hours</button>
                                 </a>
                             </div>
@@ -80,29 +70,33 @@
                         <thead>
                         <tr>
                             <th scope="col">Student Name</th>
-                            <th scope="col">Date of Session</th>
-                            <th scope="col">Duration of Session</th>
-                            <th scope="col">Session Notes</th>
+                            <th scope="col">Subjects</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Date Assigned</th>
                             <th scope="col">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($data['sessions'] as $session)
+                        @foreach ($data['assignments'] as $assignment)
                             <tr>
-                                <td scope="col">{{$session->assignments()->first()->student()['fname']
-                                . ' ' . $session->assignments()->first()->student()['lname']}}</td>
-                                <td scope="col">{{date('d/m/Y', strtotime($session->session_date))}}</td>
-                                <td scope="col">{{$data['durations'][$session->session_duration]}}</td>
-                                <td scope="col">{{$session['session_notes']}}</td>
+                                <td scope="col">{{$assignment->student()['fname']
+                                . ' ' . $assignment->student()['lname']}}</td>
+                                <td scope="col">{{$data['subjects'][$assignment->id]}}</td>
+                                <td scope="col">{{$assignment->status_by_tutor}}</td>
+                                <td scope="col">{{ date('d/m/Y', strtotime($assignment->assigned_at)) }}</td>
                                 <td scope="col">
-                                    @can('manage-sessions')
-                                        [<a href="{{route('tutor.sessions.edit', $session)}}">Edit</a>]
+                                    @can('manage-tutor-students')
+                                        [<a href="{{route('tutor.sessions.create')}}">Log Hours</a>]
                                     @endcan
-                                    @can('manage-sessions')
-                                    <form action="{{ route('tutor.sessions.destroy', $session) }}" method="POST" class="float-left">
+                                    @can('manage-tutor-students')
+                                        [<a href="{{route('tutor.students.show', $assignment->student())}}">View Student Info</a>]
+                                    @endcan
+                                    @can('manage-tutor-students')
+                                    <form action="{{ route('tutor.students.change_status', $assignment) }}" method="POST" class="float-left">
                                     @csrf
-                                        {{method_field('DELETE')}}
-                                        [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
+                                        {{method_field('PUT')}}
+                                        [<a href="javascript:;" onclick="parentNode.submit();">
+                                        <?= $assignment->status_by_tutor=="Active" ? "Stop Tuoring" : "Start Tutoring" ?></a>]
                                     </form>
                                     @endcan
                                 </td>

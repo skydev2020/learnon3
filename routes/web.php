@@ -98,6 +98,9 @@ Route::namespace('Tutor')->prefix('tutor')->name('tutor.')->middleware('can:mana
     //PaymentRecords Menu
     Route::resource('/paymentrecords', 'PaychequesController');
 
+    //List your students Menu
+    Route::resource('/students', 'StudentsController');
+
     //Report Cards Menu
     Route::resource('/reportcards', 'ReportCardsController');
 
@@ -110,4 +113,5 @@ Route::namespace('Tutor')->prefix('tutor')->name('tutor.')->middleware('can:mana
 
     //Custom Route
     Route::put('essays/upload/{essay}', 'EssaysController@upload')->name('essays.upload');
+    Route::put('students/change_status/{assignment}', 'StudentsController@changeStatus') -> name('students.change_status');
 });

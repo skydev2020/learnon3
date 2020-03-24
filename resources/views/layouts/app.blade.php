@@ -105,7 +105,7 @@
                             @endcan
                             @can('manage-tutor-students')
                             <li class="nav-item">
-                                <a class="nav-link" href="#">List Students</a>
+                                <a class="nav-link" href="{{route('tutor.students.index')}}">List Students</a>
                             </li>
                             @endcan
                             @can('manage-student-tutors')
