@@ -118,3 +118,8 @@ Route::namespace('Tutor')->prefix('tutor')->name('tutor.')->middleware('can:mana
     Route::put('essays/upload/{essay}', 'EssaysController@upload')->name('essays.upload');
     Route::put('students/change_status/{assignment}', 'StudentsController@changeStatus') -> name('students.change_status');
 });
+
+Route::namespace('Student')->prefix('students')->name('student.')->middleware('can:manage-student-tutors')->group(function() {
+    //Account info Menu
+    Route::resource('/myprofile', 'MyProfileController');
+});

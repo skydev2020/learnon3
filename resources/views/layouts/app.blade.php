@@ -110,6 +110,9 @@
                             @endcan
                             @can('manage-student-tutors')
                             <li class="nav-item">
+                                <a class="nav-link" href="{{route('student.myprofile.index')}}">Account info</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="#">My Tutors</a>
                             </li>
                             @endcan
