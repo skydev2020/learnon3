@@ -48,14 +48,8 @@
                         </div>
 
                         <div class = "form-group row mb-0">
-                            <div class="col-1 offset-10">
+                            <div class="col-4 offset-5">
                                 <button type = "submit" class="btn btn-primary">{{ __('Search') }}</button>
-                            </div>
-
-                            <div class="col-1">
-                                <a href = "{{ route('tutor.students.create') }}">
-                                    <button type = "button" class="btn btn-primary">Log Hours</button>
-                                </a>
                             </div>
                         </div>
                     </form>
