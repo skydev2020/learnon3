@@ -170,7 +170,7 @@
                             @endcan
                             @can('manage-sessions')
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Sessions</a>
+                                <a class="nav-link" href="{{route('tutor.sessions.index')}}">My Sessions</a>
                             </li>
                             @endcan
                             @can('manage-system')
