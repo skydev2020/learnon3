@@ -205,6 +205,11 @@
                                 <a class="nav-link" href="{{route('student.packages.index')}}">Buy Discount Package</a>
                             </li>
                             @endcan
+                            @can('manage-student-reports')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('student.progressreports.index')}}">Report Cards</a>
+                            </li>
+                            @endcan
                             @can('manage-report-cards')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('tutor.reportcards.index')}}">Report Cards</a>
