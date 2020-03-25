@@ -6,6 +6,7 @@ use App\Assignment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class TutorsController extends Controller
 {
@@ -47,9 +48,9 @@ class TutorsController extends Controller
      * @param  \App\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function show(Assignment $assignment)
+    public function show(Assignment $tutor)
     {
-        //
+        return view('students.tutors.show') -> with('assignment', $tutor);
     }
 
     /**
@@ -70,9 +71,14 @@ class TutorsController extends Controller
      * @param  \App\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Assignment $assignment)
+    public function update(Request $request, Assignment $tutor)
     {
-        //
+        if (Gate::denies('manage-student-tutors')) return redirect()->route('student.tutors.index');
+        $tutor->status_by_student = "No More Tutoring";
+        if (!$tutor->save()) session()->flash('error', "There is an error updating Student(s) status.");
+        else session()->flash('success', "Student(s) status successfully updated.");
+
+        return redirect()->route('student.tutors.index');
     }
 
     /**

@@ -36,6 +36,13 @@
                                     @can('manage-student-tutors')
                                     [<a href="{{route('student.tutors.show', $assignment)}}">View Details</a>]
                                     @endcan
+                                    @can('manage-student-tutors')
+                                    <form action="{{ route('student.tutors.update', $assignment) }}" method="POST" class="float-left">
+                                        @csrf
+                                        {{method_field('PUT')}}
+                                        [<a href="javascript:;" onclick="parentNode.submit();">No More Tutoring</a>]
+                                    </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
