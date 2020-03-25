@@ -113,7 +113,7 @@
                                 <a class="nav-link" href="{{route('student.myprofile.index')}}">Account info</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">My Tutors</a>
+                                <a class="nav-link" href="{{route('student.tutors.index')}}">My Tutors</a>
                             </li>
                             @endcan
                             @can('manage-invoices')
