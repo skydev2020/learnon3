@@ -122,4 +122,7 @@ Route::namespace('Tutor')->prefix('tutor')->name('tutor.')->middleware('can:mana
 Route::namespace('Student')->prefix('students')->name('student.')->middleware('can:manage-student-tutors')->group(function() {
     //Account info Menu
     Route::resource('/myprofile', 'MyProfileController');
+
+    //My Tutors Menu
+    Route::resource('/tutors', 'TutorsController');
 });
