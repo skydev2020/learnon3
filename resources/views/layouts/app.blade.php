@@ -123,7 +123,7 @@
                             @endcan
                             @can('manage-add-student')
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Add Student</a>
+                                <a class="nav-link" href="{{route('student.children.index')}}">Add Student</a>
                             </li>
                             @endcan
                             @can('manage-cms')
@@ -202,7 +202,7 @@
                             @endcan
                             @can('manage-discount-package')
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Buy Discount Package</a>
+                                <a class="nav-link" href="{{route('student.packages.index')}}">Buy Discount Package</a>
                             </li>
                             @endcan
                             @can('manage-report-cards')

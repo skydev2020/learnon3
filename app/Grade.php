@@ -14,4 +14,8 @@ class Grade extends Model
     public function subjects() {
         return $this->belongsToMany('App\Subject');
     }
+
+    public function packages() {
+        return $this->belongsToMany('App\Package', 'package_grade');
+    }
 }

@@ -128,4 +128,10 @@ Route::namespace('Student')->prefix('students')->name('student.')->middleware('c
 
     //Invoices Menu
     Route::resource('/invoices', 'InvoicesController');
+
+    //Add Student Menu
+    Route::resource('/children', 'ChildrenController');
+
+    //Buy Discount Package Menu
+    Route::resource('/packages', 'PackagesController');
 });
