@@ -111,4 +111,8 @@ class User extends Authenticatable
     public function fullname() {
         return $this -> fname . ' ' . $this->lname;
     }
+
+    public function invoices() {
+        return $this -> hasMany('App\Invoice', 'user_id');
+    }
 }

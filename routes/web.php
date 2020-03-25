@@ -125,4 +125,7 @@ Route::namespace('Student')->prefix('students')->name('student.')->middleware('c
 
     //My Tutors Menu
     Route::resource('/tutors', 'TutorsController');
+
+    //Invoices Menu
+    Route::resource('/invoices', 'InvoicesController');
 });

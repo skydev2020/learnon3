@@ -118,7 +118,7 @@
                             @endcan
                             @can('manage-invoices')
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Invoices</a>
+                                <a class="nav-link" href="{{route('student.invoices.index')}}">Invoices</a>
                             </li>
                             @endcan
                             @can('manage-add-student')
