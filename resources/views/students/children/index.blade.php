@@ -38,7 +38,7 @@
                                     }
                                     $subjects = rtrim($subjects, ', ');
                                     echo $subjects;?></td>
-                                <td scope="col">{{$user->statuses()->first()['name']}}</td>
+                                <td scope="col">{{$user->studentstatus()->first()['title']}}</td>
                                 <td scope="col">{{date('d/m/y', strtotime($user->created_at))}}</td>
                                 <td scope="col">
                                     @can('manage-add-student')

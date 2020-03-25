@@ -31,7 +31,7 @@
                             <div class="col-6">
                                 <select id = "status" name = "status" class = "form-control">
                                     @foreach ($statuses as $status)
-                                        <option value = "{{$status->id}}">{{$status->name}}</option>
+                                        <option value = "{{$status->id}}">{{$status->title}}</option>
                                     @endforeach
                                 </select>
                             </div>

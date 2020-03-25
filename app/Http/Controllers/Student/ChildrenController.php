@@ -21,7 +21,7 @@ class ChildrenController extends Controller
      */
     public function index()
     {
-        $children = Auth::User()->children();
+        $children = Auth::User()->children() -> get();
         return view('students.children.index')->with('children', $children);
     }
 
@@ -78,23 +78,38 @@ class ChildrenController extends Controller
         $data = $request->all();
         $user = User::create([
             'fname'                 => $data['fname'],
-            'lname'                 => $data['fname'],
-            'email'                 => $data['fname'],
-            'status'                => $data['fname'],
-            'home_phone'            => $data['fname'],
-            'cell_phone'            => $data['fname'],
-            'address'               => $data['fname'],
-            'city'                  => $data['fname'],
-            'state_id'              => $data['fname'],
-            'pcode'                 => $data['fname'],
-            'country_id'            => $data['fname'],
-            'grade_id'              => $data['fname'],
-            'parent_fname'          $data['fname'],
-            'parent_lname'          => ['required', 'string'],
-            'other_notes'           => ['required', 'string'],
-            'school'                => ['required', 'string'],
-            'major_intersection'    => ['required', 'string']
+            'lname'                 => $data['lname'],
+            'email'                 => $data['email'],
+            'student_status_id'     => $data['status'],
+            'home_phone'            => $data['home_phone'],
+            'cell_phone'            => $data['cell_phone'],
+            'address'               => $data['address'],
+            'city'                  => $data['city'],
+            'state_id'              => $data['state_id'],
+            'pcode'                 => $data['pcode'],
+            'country_id'            => $data['country_id'],
+            'grade_id'              => $data['grade_id'],
+            'parent_fname'          => $data['parent_fname'],
+            'parent_lname'          => $data['parent_lname'],
+            'other_notes'           => $data['other_notes'],
+            'school'                => $data['school'],
+            'major_intersection'    => $data['major_intersection'],
+            'parent_id'             => Auth::user()->id,
+            'approved'              => 1,
+            'status_id'             => 1
         ]);
+        foreach ($data['subjects'] as $subject) {
+            $user -> subjects() -> attach($subject);
+        }
+
+        if ($user == NULL)
+        {
+             session() -> flash('error', "There is an error adding a children!");
+             return redirect() -> route('student.children.create');
+        }
+
+        session() -> flash('success', "You have added a Children!");
+        return redirect() -> route('student.children.index');
     }
 
     /**
