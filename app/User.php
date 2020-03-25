@@ -115,4 +115,8 @@ class User extends Authenticatable
     public function invoices() {
         return $this -> hasMany('App\Invoice', 'user_id');
     }
+
+    public function children() {
+        return $this -> hasMany('App\user', 'parent_id');
+    }
 }

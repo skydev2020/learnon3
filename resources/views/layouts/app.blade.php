@@ -123,7 +123,7 @@
                             @endcan
                             @can('manage-add-student')
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Add Student</a>
+                                <a class="nav-link" href="{{route('student.children.index')}}">Add Student</a>
                             </li>
                             @endcan
                             @can('manage-cms')
