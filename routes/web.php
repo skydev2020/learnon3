@@ -134,4 +134,7 @@ Route::namespace('Student')->prefix('students')->name('student.')->middleware('c
 
     //Buy Discount Package Menu
     Route::resource('/packages', 'PackagesController');
+
+    //Your Report Cards Menu
+    Route::resource('/progressreports', 'ProgressReportsController');
 });

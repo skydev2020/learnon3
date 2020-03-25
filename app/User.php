@@ -108,6 +108,10 @@ class User extends Authenticatable
         return $this -> hasMany('App\ProgressReport', 'tutor_id');
     }
 
+    public function student_reportcards() {
+        return $this -> hasMany('App\ProgressReport', 'student_id');
+    }
+
     public function fullname() {
         return $this -> fname . ' ' . $this->lname;
     }

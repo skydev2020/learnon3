@@ -31,17 +31,17 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <h1>*** Buying Packages Online is Currently not Working ***</h1>
-                    <h2>To Pay For a Package You Can:-</h2>
-                    <h3>1. Send an email transfer to:- info@LearnOn.ca</h3>
-                    <h3>2. Send a cheque to:- </h3>
+                    <h2>*** Buying Packages Online is Currently not Working ***</h2>
+                    <h3>To Pay For a Package You Can:-</h3>
+                    <h4>1. Send an email transfer to:- info@LearnOn.ca</h4>
+                    <h4>2. Send a cheque to:- </h4>
                     <div class = "px-5 ml-5">
-                        <h4>LearnOn! Tutorial</h4>
-                        <h4>#432 North Service Road West</h4>
-                        <h4>OakVille,ON  L6M 2Y1</h4>
-                        <h4>Canada</h4>
+                        <h5>LearnOn! Tutorial</h5>
+                        <h5>#432 North Service Road West</h5>
+                        <h5>OakVille,ON  L6M 2Y1</h5>
+                        <h5>Canada</h6>
                     </div>
-                    <h3>3. To pay with credit card:- http://www.learnon.ca/pay_invoice</h3> <h4>Enter The Student's Name In The Invoice Box</h4>
+                    <h4>3. To pay with credit card:- http://www.learnon.ca/pay_invoice</h4> <h5>Enter The Student's Name In The Invoice Box</h5>
                 </div>
             </div>
         </div>

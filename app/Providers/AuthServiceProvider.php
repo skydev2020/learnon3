@@ -85,8 +85,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('manage-report-cards', function($user) {
-            // return $user->hasRole('tutor');
-            return $user->hasAnyRoles(['tutor','student']);
+            return $user->hasRole('tutor');
         });
 
         // Student Related
@@ -103,6 +102,10 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('manage-discount-package', function($user) {
+            return $user->hasRole('student');
+        });
+
+        Gate::define('manage-student-reports', function($user) {
             return $user->hasRole('student');
         });
 
