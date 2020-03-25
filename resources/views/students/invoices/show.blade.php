@@ -8,6 +8,19 @@
                 <div class="card-header">TUTORING INVOICE</div>
                 <div class="card-body">
                     <div class="form-group row">
+                        <div class = "offset-10">
+                            <a onclick="window.print();">
+                                <button type = "button" class="btn btn-primary">Print Invoice</button>
+                            </a>
+                        </div>
+                        <div class="col-1">
+                            <a href = "{{ route('student.invoices.index') }}">
+                                <button type = "button" class="btn btn-primary">Back</button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <div class="col-3 d-flex justify-content-end align-items-center">
                             <label class="col-form-label">{{ __('INVOICE #:') }}</label>
                         </div>
@@ -84,18 +97,18 @@
                         </tbody>
                     </table>
 
-                    <div class = "form-group row offset-1 d-flex align-items-center">
-                        <h3>PAY ONLINE <a href="">HERE</a></h3>
-                        <br><br>
-                        <h2>Make Cheques Payable to:  </h2>
-		
-                        <p>{{$data['config_name']}}<br />
-                        {{$data['config_address']}}<br /><br />
-
-
-                *Please print and attach invoice to cheque.
-                        </p>
-                    </div>
+                        <div class = "offset-1">
+                            <h3>PAY ONLINE <a href="">HERE</a></h3>
+                        </div>
+                        <div class = "offset-1">
+                            <br><br>
+                            <h2>Make Cheques Payable to:  </h2>
+            
+                            <p> {{$data['config_name']}}<br />
+                                {{$data['config_address']}}<br /><br />
+                                *Please print and attach invoice to cheque.
+                            </p>
+                        </div>
                 </div>
             </div>
         </div>
