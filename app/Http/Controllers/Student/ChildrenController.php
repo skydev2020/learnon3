@@ -5,15 +5,18 @@ namespace App\Http\Controllers\Student;
 use App\Country;
 use App\Grade;
 use App\Http\Controllers\Controller;
+use App\Role;
 use App\State;
 use App\StudentStatus;
 use App\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ChildrenController extends Controller
 {
+    use RegistersUsers;
     /**
      * Display a listing of the resource.
      *
@@ -80,6 +83,7 @@ class ChildrenController extends Controller
             'fname'                 => $data['fname'],
             'lname'                 => $data['lname'],
             'email'                 => $data['email'],
+            'password'              => Auth::user()->password,
             'student_status_id'     => $data['status'],
             'home_phone'            => $data['home_phone'],
             'cell_phone'            => $data['cell_phone'],
@@ -98,6 +102,10 @@ class ChildrenController extends Controller
             'approved'              => 1,
             'status_id'             => 1
         ]);
+
+        $role = Role::select('id')->where('name', 'Student')->first();
+        $user->roles()->attach($role);
+
         foreach ($data['subjects'] as $subject) {
             $user -> subjects() -> attach($subject);
         }
@@ -118,9 +126,11 @@ class ChildrenController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $child)
     {
-        //
+        Auth::logout();
+        Auth::login($child);
+        return redirect()->route('student.children.index');
     }
 
     /**
