@@ -10,4 +10,8 @@ class Package extends Model
         'id', 'name', 'description', 'price_canada', 'price_usa', 'price_others', 'hours', 'status',
          'count'
     ];
+    
+    public function grades() {
+        return $this -> belongsToMany('App\Grade', 'package_grade');
+    }
 }
