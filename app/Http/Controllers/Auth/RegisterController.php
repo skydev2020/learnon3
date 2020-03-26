@@ -76,7 +76,6 @@ class RegisterController extends Controller
             'street'        => ['required', 'string'],
             'school'        => ['required', 'string'],
             'referrer_id'   => ['required', 'integer'],
-            'g-recaptcha-response' => new Captcha()
         ]);
 
         if ($validator->fails()) {
@@ -151,6 +150,17 @@ class RegisterController extends Controller
         return view('auth.register', compact('grades', 'countries', 'states', 'referrers', 'grades_array'));
     }
 
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        $request->validate(['g-recaptcha-response' => 'required|recaptcha']);
 
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+    }
 
 }
