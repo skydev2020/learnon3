@@ -10,6 +10,7 @@ use App\Country;
 use App\State;
 use App\Grade;
 use App\Referrer;
+use App\Rules\Captcha;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -74,7 +75,8 @@ class RegisterController extends Controller
             'parent_lname'  => ['required', 'string'],
             'street'        => ['required', 'string'],
             'school'        => ['required', 'string'],
-            'referrer_id'   => ['required', 'integer']
+            'referrer_id'   => ['required', 'integer'],
+            'g-recaptcha-response' => new Captcha()
         ]);
 
         if ($validator->fails()) {
