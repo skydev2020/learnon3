@@ -44,6 +44,13 @@
                                     @can('manage-add-student')
                                     [<a href="{{route('student.children.show', $user)}}">Switch Profile</a>]
                                     @endcan
+                                    @can('manage-add-student')
+                                    <form action="{{ route('student.children.destroy', $user) }}" method="POST" class="float-left">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                        [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

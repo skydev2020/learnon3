@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class ChildrenController extends Controller
@@ -162,8 +163,12 @@ class ChildrenController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $child)
     {
-        //
+        if (Gate::denies('manage-add-student')) return redirect() -> route('student.children.index');
+
+        $child->delete();
+        session() -> flash('success', "You have modified Children!");
+        return redirect() -> route('student.children.index');
     }
 }
