@@ -167,6 +167,8 @@ class ChildrenController extends Controller
     {
         if (Gate::denies('manage-add-student')) return redirect() -> route('student.children.index');
 
+        $child -> roles()->detach();
+        $child -> subjects() -> detach();
         $child->delete();
         session() -> flash('success', "You have modified Children!");
         return redirect() -> route('student.children.index');
