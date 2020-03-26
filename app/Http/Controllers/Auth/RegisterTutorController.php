@@ -135,4 +135,17 @@ class RegisterTutorController extends Controller
     public function index(){
         return view('auth/register_tutor');
     }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        $request->validate(['g-recaptcha-response' => 'required|recaptcha']);
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+    }
 }
