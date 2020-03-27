@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>LearnOn! Tutoring</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -80,9 +80,9 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
+                {{-- <div class="title m-b-md">
                     Laravel
-                </div>
+                </div> --}}
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
