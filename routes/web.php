@@ -137,4 +137,9 @@ Route::namespace('Student')->prefix('students')->name('student.')->middleware('c
 
     //Your Report Cards Menu
     Route::resource('/progressreports', 'ProgressReportsController');
+
+    //Custom Route
+    Route::get('tutoringstatuses/onlinetutoring/', 'TutoringStatusesController@onlinetutoring')->name('tutoringstatuses.onlinetutoring');
+    Route::get('tutoringstatuses/psersontutoring/', 'TutoringStatusesController@psersontutoring')->name('tutoringstatuses.psersontutoring');
+    Route::get('tutoringstatuses/both/', 'TutoringStatusesController@both')->name('tutoringstatuses.both');
 });
