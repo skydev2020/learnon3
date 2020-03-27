@@ -333,6 +333,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <div class="col-4 d-flex justify-content-end">
+                                <label for="service_method" class="col-form-label font-weight-bold">{{ __('Select Service Method') }}</label>
+                            </div>
+
+                            <div class="col-6 d-flex align-items-center">
+                                <select name="service_method" id="service_method">
+                                    <option value = "Online">Online Tutoring</option>
+                                    <option value = "Home">In person Tutoring</option>
+                                    <option value = "Both">Mix of Both</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end align-items-center">
                                 <label for="term_val" class="col-form-label font-weight-bold">{{ __('Terms & Conditions') }}</label>
                             </div>
