@@ -273,7 +273,7 @@ class ProcessController extends Controller
             $result['num_of_sessions'] = count($student_sessions);
             foreach($student_sessions as $each_session)
             {
-                $bill_info = $this->checkStudentMiniBill($each_student, $each_session->session_duration);
+                $bill_info = $this->checkStudentMiniBill($each_student, $each_session);
                 if ($bill_info > 0) $total_session_hours += $bill_info;
                 else $total_session_hours += $each_session->session_duration;
             }
@@ -288,7 +288,7 @@ class ProcessController extends Controller
 					
             //Get Package details of this student. Only packages with payment status as 5 are considered.
             $student_packages = $this->getStudentPackages($each_student);
-            $bill_info = $this->checkStudentMiniBill($each_student, $result['total_hours']);
+            // $bill_info = $this->checkStudentMiniBill($each_student, $result['total_hours']);
             $result['hour_charged'] = $result['total_hours'];
             $result['total_amount'] = 
             round(($result['total_hours'] * $this->getStudentRate($each_student)), 2);
@@ -359,7 +359,7 @@ class ProcessController extends Controller
                     if (isset($result['hour_charged']))
                         $invoice_data['hour_charged'] = $result['hour_charged'];
                         $invoice_data['total_hours'] = $result['total_hours'];
-                        $invoice_data['studet_sessions'] = $this->student_sessions();
+                        $invoice_data['studet_sessions'] = $student_sessions;
                         $result['invoice_format'] = $this->invoices_format($invoice_mailmsg, 
                         $check_invoice, $invoice_data);
                         $result['log_data'] = $log_data;
@@ -432,17 +432,17 @@ class ProcessController extends Controller
             </tr>';
             foreach($invoice_data['student_sessions'] as $each_session) {
                 $bill_info = $this->checkStudentMiniBill($invoice->users()->first()
-                ,$each_session['session_duration']);
+                ,$each_session);
 				if($bill_info > 0) {
 					$min_charged_hours = $bill_info;
 				}
 				else
 				{
-					$min_charged_hours = $each_session['session_duration'];
+					$min_charged_hours = $each_session->session_duration;
 				}
 				$sessions_details .= '
 				  <tr>
-				    <td align="left">'.date("d M Y", strtotime($each_session['session_date'])).'</td>
+				    <td align="left">'.date("d M Y", strtotime($each_session->session_date)).'</td>
 				    <td align="right">'.$duration_array[$min_charged_hours].'</td>
 				  </tr>';
 			}
@@ -501,17 +501,17 @@ class ProcessController extends Controller
               <td align="right"><strong>DURATION</strong></td>
             </tr>';
             foreach($invoice_data['student_sessions'] as $each_session) {
-                $bill_info = $this->checkStudentMiniBill($student,$each_session['session_duration']);
+                $bill_info = $this->checkStudentMiniBill($student,$each_session);
 				if($bill_info > 0) {
 					$min_charged_hours = $bill_info;
 				}
 				else
 				{
-					$min_charged_hours = $each_session['session_duration'];
+					$min_charged_hours = $each_session->session_duration;
 				}
 				$sessions_details .= '
 				  <tr>
-				    <td align="left">'.date("d M Y", strtotime($each_session['session_date'])).'</td>
+				    <td align="left">'.date("d M Y", strtotime($each_session->session_date)).'</td>
 				    <td align="right">'.$duration_array[$min_charged_hours].'</td>
 				  </tr>';
 			}
@@ -626,11 +626,18 @@ class ProcessController extends Controller
         return $sessions;
     }
 
-    public function checkStudentMiniBill($student, $session_duration)
+    public function checkStudentMiniBill($student, $session)
     {
-        if ($student->grade_id <= 7 && $session_duration < 1.00) return 1.00;
-        elseif ($student->grade_id > 7 && $session_duration < 1.50) return 1.00;
-
+        if ($student->grade_id <= 7)
+        {
+            if ($session->method == "Online" && $session->session_duration < 0.50) return 0.50;
+            else if ($session->session_duration < 1.00) return 1.00;
+        }
+        elseif ($student->grade_id > 7)
+        {
+            if ($session->method == "Online" && $session->session_duration < 0.75) return 0.50;
+            else if ($session->session_duration < 1.50) return 1.00;
+        }
         return 0;
     }
 
