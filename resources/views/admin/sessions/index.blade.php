@@ -87,6 +87,7 @@
                             <th scope="col">Duration of Session</th>
                             <th scope="col">Date of Submission</th>
                             <th scope="col">Date of Session</th>
+                            <th scope="col">Session Method</th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
@@ -100,6 +101,7 @@
                                 <td scope="col">{{$data['session_durations'][$session->session_duration]}}</td>
                                 <td scope="col">{{$session->date_submission}}</td>
                                 <td scope="col">{{$session->session_date}}</td>
+                                <td scope="col">{{$session->method}}</td>
                                 <td scope="col">
                                     @can('edit-users')
                                         [<a href="{{route('admin.sessions.edit', $session->id)}}">Edit</a>]
