@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">Log Hours</div>
                 <div class="card-body">
@@ -68,6 +68,18 @@
                             <div class="col-6 d-flex">
                                 <textarea name = "session_notes" id = "session_notes" class = "form-control inputstl"
                                 autocomplete="session_notes" autofocus></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3 d-flex justify-content-end align-items-center">
+                                <label for="method" class="col-form-label font-weight-bold">{{ __('Select Tutoring Method:') }}</label>
+                            </div>
+                            <div class="col-6 d-flex">
+                                <select name = "method" id = "method" class = "form-control">
+                                    <option>Home</option>
+                                    <option>Online</option>
+                                </select>
                             </div>
                         </div>
                     </form>
