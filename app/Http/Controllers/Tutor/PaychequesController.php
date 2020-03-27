@@ -110,7 +110,8 @@ class PaychequesController extends Controller
 				'session_duration' => $each_session->session_duration." hours",
 				'session_date' => date("d-M-Y", strtotime($each_session->session_date)),
                 'session_amount' => (in_array($each_session->id, $sessions_raise_keys)) ? 
-                $sessions_raise[$each_session->id] : $each_session->session_duration*$each_session->assignments()->first()['base_wage'],
+                $sessions_raise[$each_session->id] : $each_session->session_duration * 
+                ($each_session->method == "Online" ? 35 : 42),
 			);			
 		}
 		

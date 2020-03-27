@@ -107,7 +107,8 @@ class SessionsController extends Controller
             'student'           => ['required', 'integer'],
             'session_date'      => ['required', 'date'],
             'session_duration'  => ['required', 'string'],
-            'session_notes'     => ['required', 'string']
+            'session_notes'     => ['required', 'string'],
+            'method'            => ['required', 'string']
         ]);
 
         if ($validator->fails())
@@ -127,7 +128,8 @@ class SessionsController extends Controller
             'assignment_id'     => $assignment_id,
             'session_date'      => $data['session_date'],
             'session_duration'  => $data['session_duration'],
-            'session_notes'     => $data['session_notes']
+            'session_notes'     => $data['session_notes'],
+            'method'            => $data['method']
         ]);
 
         if ($session == NULL)
