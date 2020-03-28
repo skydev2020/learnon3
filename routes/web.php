@@ -142,4 +142,8 @@ Route::namespace('Student')->prefix('students')->name('student.')->middleware('c
     Route::get('tutoringstatuses/onlinetutoring/', 'TutoringStatusesController@onlinetutoring')->name('tutoringstatuses.onlinetutoring');
     Route::get('tutoringstatuses/psersontutoring/', 'TutoringStatusesController@psersontutoring')->name('tutoringstatuses.psersontutoring');
     Route::get('tutoringstatuses/both/', 'TutoringStatusesController@both')->name('tutoringstatuses.both');
+    Route::get('tutoringstatuses/stoptutoring/', 'TutoringStatusesController@stopTutoring')->name('tutoringstatuses.stoptutoring');
+    Route::get('tutoringstatuses/resumetutoring/', 'TutoringStatusesController@resumeTutoring')->name('tutoringstatuses.resumetutoring');
+    Route::get('tutoringstatuses/changetutor/', 'TutoringStatusesController@changeTutor')->name('tutoringstatuses.changetutor');
+    Route::get('tutoringstatuses/startnewtutoring/', 'TutoringStatusesController@startNewTutoring')->name('tutoringstatuses.startnewtutoring');
 });

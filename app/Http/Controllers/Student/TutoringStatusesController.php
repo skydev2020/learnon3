@@ -111,4 +111,40 @@ class TutoringStatusesController extends Controller
         else session()->flash('success', "Your Tutoring has changed to Mix of Online and In Person Tutoring!");
         return view('home');
     }
+
+    public function stopTutoring()
+    {
+        $user = Auth::user();
+        $user->student_status_id = 2;
+        if (!$user->save()) session()->flash('error', "There is an error changing your tutoring status!");
+        else session()->flash('success', "Your tutoring status has been changed to Stop Tutoring!");
+        return view('home');
+    }
+
+    public function resumeTutoring()
+    {
+        $user = Auth::user();
+        $user->student_status_id = 2;
+        if (!$user->save()) session()->flash('error', "There is an error changing your tutoring status!");
+        else session()->flash('success', "Your tutoring status has been changed to Stop Tutoring!");
+        return view('home');
+    }
+
+    public function changeTutor()
+    {
+        $user = Auth::user();
+        $user->student_status_id = 2;
+        if (!$user->save()) session()->flash('error', "There is an error changing your tutoring status!");
+        else session()->flash('success', "Your tutoring status has been changed to Stop Tutoring!");
+        return view('home');
+    }
+
+    public function startNewTutoring()
+    {
+        $user = Auth::user();
+        $user->student_status_id = 2;
+        if (!$user->save()) session()->flash('error', "There is an error changing your tutoring status!");
+        else session()->flash('success', "Your tutoring status has been changed to Stop Tutoring!");
+        return view('home');
+    }
 }

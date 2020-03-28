@@ -20,7 +20,9 @@
                 <div class = "card-body">
                     <div class = "form-group row">
                         <div class = "col-3 d-flex">
-                            <button type = "button" class = "btn btn-primary">Stop Tutoring</button>
+                            <a href = "{{route('student.tutoringstatuses.stoptutoring')}}">
+                                <button type = "button" class = "btn btn-primary">Stop Tutoring</button>
+                            </a>
                         </div>
                         <div class = "col-5 d-flex">
                             -Click here to STOP current Tutoring
@@ -29,6 +31,7 @@
 
                     <div class = "form-group row">
                         <div class = "col-3 d-flex">
+                            <a href = "{{route('student.tutoringstatuses.resumetutoring')}}">
                             <button type = "button" class = "btn btn-primary">Resume Tutoring</button>
                         </div>
                         <div class = "col-5 d-flex">

@@ -50,10 +50,10 @@
                                     Students
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="tc-white dropdown-item {{Request::segment(2)=="students" ? 'active' : '' }}" href="{{route('admin.students.index')}}">Student List</a>
-                                    <a class="tc-white dropdown-item {{Request::segment(2)=="assignments" ? 'active' : '' }}" href="{{route('admin.assignments.index')}}">Student Assignment</a>
-                                    <a class="tc-white dropdown-item {{Request::segment(2)=="student_packages" ? 'active' : '' }}" href="{{route('admin.student_packages.index')}}">Student Packages</a>
-                                    <a class="tc-white dropdown-item {{Request::segment(2)=="packages" ? 'active' : '' }}" href="{{route('admin.packages.index')}}">Packages</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="students" ? 'active' : '' }}" href="{{route('admin.students.index')}}">Student List</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="assignments" ? 'active' : '' }}" href="{{route('admin.assignments.index')}}">Student Assignment</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="student_packages" ? 'active' : '' }}" href="{{route('admin.student_packages.index')}}">Student Packages</a>
+                                    <a class="dropdown-item {{Request::segment(2)=="packages" ? 'active' : '' }}" href="{{route('admin.packages.index')}}">Packages</a>
                                 </div>
                             </li>
                             @endcan
