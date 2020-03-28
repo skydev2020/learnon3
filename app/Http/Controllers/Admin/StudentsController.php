@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Country;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
 use App\StudentStatus;
 use App\Grade;
+use App\Referrer;
+use App\State;
 use Illuminate\Http\Request;
 use Config;
 use App\Subject;
@@ -120,7 +123,12 @@ class StudentsController extends Controller
      */
     public function show(User $student)
     {
-        dd('abc');
+        $data = [
+            'student'           => $student,
+            'referrers'         => Referrer::all(),
+            'student_statuses'  => StudentStatus::all()
+        ];
+        return view('admin.students.show')->with(['data' => $data]);
     }
 
     /**
@@ -131,9 +139,15 @@ class StudentsController extends Controller
      */
     public function edit(User $student)
     {
-        return view('admin.students.contract')->with([
-            'student' => $student
-        ]);
+        $states = State::all();
+        $countries = Country::all();
+        $grades = Grade::with('subjects')->get();
+        $grades_array = $grades->toArray();
+        $referrers = Referrer::all();
+        $student_statuses = StudentStatus::all();
+        
+        return view('admin.students.edit', compact('grades', 'states', 'countries', 'grades_array', 'referrers'
+        , 'student_statuses', 'student'));
     }
 
     /**
