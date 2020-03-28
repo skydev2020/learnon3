@@ -91,7 +91,7 @@ class TutoringStatusesController extends Controller
         $user->service_method = "Online";
         if (!$user->save()) session()->flash('error', "There is an error changing Service Method!");
         else session()->flash('success', "Your Tutoring has changed to Online Video Tutoring!");
-        return view('home');
+        return redirect() -> route('home');
     }
 
     public function psersontutoring()
@@ -100,7 +100,7 @@ class TutoringStatusesController extends Controller
         $user->service_method = "Home";
         if (!$user->save()) session()->flash('error', "There is an error changing Service Method!");
         else session()->flash('success', "Your Tutoring has changed to In Person Tutoring!");
-        return view('home');
+        return redirect() -> route('home');
     }
 
     public function both()
@@ -109,7 +109,7 @@ class TutoringStatusesController extends Controller
         $user->service_method = "Both";
         if (!$user->save()) session()->flash('error', "There is an error changing Service Method!");
         else session()->flash('success', "Your Tutoring has changed to Mix of Online and In Person Tutoring!");
-        return view('home');
+        return redirect() -> route('home');
     }
 
     public function stopTutoring()
@@ -118,7 +118,7 @@ class TutoringStatusesController extends Controller
         $user->student_status_id = 2;
         if (!$user->save()) session()->flash('error', "There is an error changing your tutoring status!");
         else session()->flash('success', "Your tutoring status has been changed to Stop Tutoring!");
-        return view('home');
+        return redirect() -> route('home');
     }
 
     public function resumeTutoring()
@@ -127,7 +127,7 @@ class TutoringStatusesController extends Controller
         $user->student_status_id = 2;
         if (!$user->save()) session()->flash('error', "There is an error changing your tutoring status!");
         else session()->flash('success', "Your tutoring status has been changed to Resume Tutoring!");
-        return view('home');
+        return redirect() -> route('home');
     }
 
     public function changeTutor()
@@ -136,7 +136,7 @@ class TutoringStatusesController extends Controller
         $user->student_status_id = 2;
         if (!$user->save()) session()->flash('error', "There is an error changing your tutoring status!");
         else session()->flash('success', "Your tutoring status has been changed to Change Tutor!");
-        return view('home');
+        return redirect() -> route('home');
     }
 
     public function startNewTutoring()
@@ -145,6 +145,6 @@ class TutoringStatusesController extends Controller
         $user->student_status_id = 2;
         if (!$user->save()) session()->flash('error', "There is an error changing your tutoring status!");
         else session()->flash('success', "Your tutoring status has been changed to Start New Tutoring!");
-        return view('home');
+        return redirect() -> route('home');
     }
 }
