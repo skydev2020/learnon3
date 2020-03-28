@@ -126,7 +126,7 @@ class TutoringStatusesController extends Controller
         $user = Auth::user();
         $user->student_status_id = 2;
         if (!$user->save()) session()->flash('error', "There is an error changing your tutoring status!");
-        else session()->flash('success', "Your tutoring status has been changed to Stop Tutoring!");
+        else session()->flash('success', "Your tutoring status has been changed to Resume Tutoring!");
         return view('home');
     }
 
@@ -135,7 +135,7 @@ class TutoringStatusesController extends Controller
         $user = Auth::user();
         $user->student_status_id = 2;
         if (!$user->save()) session()->flash('error', "There is an error changing your tutoring status!");
-        else session()->flash('success', "Your tutoring status has been changed to Stop Tutoring!");
+        else session()->flash('success', "Your tutoring status has been changed to Change Tutor!");
         return view('home');
     }
 
@@ -144,7 +144,7 @@ class TutoringStatusesController extends Controller
         $user = Auth::user();
         $user->student_status_id = 2;
         if (!$user->save()) session()->flash('error', "There is an error changing your tutoring status!");
-        else session()->flash('success', "Your tutoring status has been changed to Stop Tutoring!");
+        else session()->flash('success', "Your tutoring status has been changed to Start New Tutoring!");
         return view('home');
     }
 }
