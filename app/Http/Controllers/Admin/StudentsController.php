@@ -245,7 +245,19 @@ class StudentsController extends Controller
      */
     public function manageInvoices(User $student)
     {
-        dd('abcdd');
+        $data = [
+            'invoices'   => $student->invoices()->get(),
+            'old'        => [
+                'invoice_num'       => "",
+                's_name'            => "",
+                'date_added'        => "",
+                'status'            => ""
+            ]
+        ];
+
+       if( count($student->invoices()->get()) == 0 ) session()->flash('error', "No search results!");
+        
+        return view('admin.invoices.index')->with('data', $data);
     }
 
      /**
