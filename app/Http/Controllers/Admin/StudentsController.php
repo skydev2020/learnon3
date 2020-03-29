@@ -13,6 +13,9 @@ use App\State;
 use Illuminate\Http\Request;
 use Config;
 use App\Subject;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+
 /**
  * StudentsController is working with Students
  * Student is a User whose Role is Student
@@ -157,9 +160,70 @@ class StudentsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $student)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'fname'                 => ['required', 'string', 'max:255'],
+            'lname'                 => ['required', 'string', 'max:255'],
+            'email'                 => ['required', 'email', 'max:255'],
+            'password'              => ['required', 'string', 'min:8', 'confirmed'],
+            'grade_id'              => ['required', 'integer'],
+            'subjects'              => ['required', 'Array'],
+            'home_phone'            => ['required', 'string'],
+            'cell_phone'            => ['required', 'string'],
+            'address'               => ['required', 'string'],
+            'city'                  => ['required', 'string'],
+            'state_id'              => ['required', 'integer'],
+            'pcode'                 => ['required', 'string'],
+            'country_id'            => ['required', 'integer'],
+            'parent_fname'          => ['required', 'string'],
+            'parent_lname'          => ['required', 'string'],
+            'service_method'        => ['required', 'string'],
+            'other_notes'           => ['required', 'string'],
+            'school'                => ['required', 'string'],
+            'major_intersection'    => ['required', 'string'],
+            'referrer_id'           => ['required', 'integer'],
+            'student_status_id'     => ['required', 'integer'],
+            'approved'              => ['required', 'integer'],
+            'status'                => ['required', 'integer'],
+        ]);
+
+        if ($validator->fails()) {
+            session()->flash('error', $validator -> messages() -> first());
+            return redirect()->route('student.students.index');
+        }
+        $data = $request->all();
+        $student-> email = $data['email'];
+        $student-> password = Hash::make($data['password']);
+        $student-> fname = $data['fname'];
+        $student-> lname = $data['lname'];
+        $student-> grade_id = $data['grade_id'];
+        $student-> parent_fname = $data['parent_fname'];
+        $student-> parent_lname = $data['parent_lname'];
+        $student-> home_phone = $data['home_phone'];
+        $student-> cell_phone = $data['cell_phone'];
+        $student-> address = $data['address'];
+        $student-> city = $data['city'];
+        $student-> state_id = $data['state_id'];
+        $student-> pcode = $data['pcode'];
+        $student-> country_id = $data['country_id'];
+        $student-> service_method = $data['service_method'];
+        $student-> other_notes = $data['other_notes'];
+        $student-> major_intersection = $data['major_intersection'];
+        $student-> school = $data['school'];
+        $student-> referrer_id = $data['referrer_id'];
+        $student-> student_status_id = $data['student_status_id'];
+        $student-> approved = $data['approved'];
+        $student-> status = $data['status'];
+        
+        $student-> subjects() -> sync($data['subjects']);
+        if (!$student->save())
+        {
+            session()->flash('error', "There is an error modifying student!");
+            return redirect()->route('admin.students.edit', $student);
+        }
+        session()->flash('success', "You have modified student!");
+        return redirect()->route('admin.students.index');
     }
 
     /**
