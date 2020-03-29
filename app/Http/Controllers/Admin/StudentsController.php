@@ -190,7 +190,7 @@ class StudentsController extends Controller
 
         if ($validator->fails()) {
             session()->flash('error', $validator -> messages() -> first());
-            return redirect()->route('student.students.index');
+            return redirect()->route('admin.students.edit', $student);
         }
         $data = $request->all();
         $student-> email = $data['email'];

@@ -76,10 +76,11 @@
                         <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Email</th>
+                            <th scope="col">Student Name</th>
                             <th scope="col">City</th>
                             <th scope="col">Subjects</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Tutoring Service</th>
                             <th scope="col">Date Registered</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -89,13 +90,14 @@
                             <tr>
                                 <th scope="row">{{$student->id}}</th>
                                 <td scope="col">{{$student->fname . ' ' . $student->lname}}</td>
-                                <td scope="col">{{$student->email}}</td>
                                 <td scope="col">{{$student->city}}</td>
                                 <td scope="col">
                                     @foreach($student->subjects()->get() as $subject)
                                         {{$subject['name'] . ' '}}
                                     @endforeach
                                 </td>
+                                <td scope="col">{{$student->studentStatus()->first()['title']}}</td>
+                                <td scope="col">{{$student->service_method}}</td>
                                 <td scope="col">{{date('d/m/Y', strtotime($student->created_at))}}</td>
                                 <td scope="col">
                                     @can('manage-students')
