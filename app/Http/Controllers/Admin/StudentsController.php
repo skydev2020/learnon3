@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Config;
 use App\Subject;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use PDF;
@@ -105,8 +106,15 @@ class StudentsController extends Controller
      */
     public function create()
     {
-
-
+        $states = State::all();
+        $countries = Country::all();
+        $grades = Grade::with('subjects')->get();
+        $grades_array = $grades->toArray();
+        $referrers = Referrer::all();
+        $student_statuses = StudentStatus::all();
+        
+        return view('admin.students.create', compact('grades', 'states', 'countries', 'grades_array', 'referrers'
+        , 'student_statuses'));
     }
 
     /**
@@ -117,7 +125,78 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all()['service_method']);
+        $validator = Validator::make($request->all(), [
+            'fname'                 => ['required', 'string', 'max:255'],
+            'lname'                 => ['required', 'string', 'max:255'],
+            'email'                 => ['required', 'email', 'max:255', 'unique:users'],
+            'password'              => ['required', 'string', 'min:8', 'confirmed'],
+            'grade_id'              => ['required', 'integer'],
+            'subjects'              => ['required', 'Array'],
+            'home_phone'            => ['required', 'string'],
+            'cell_phone'            => ['required', 'string'],
+            'address'               => ['required', 'string'],
+            'city'                  => ['required', 'string'],
+            'state_id'              => ['required', 'integer'],
+            'pcode'                 => ['required', 'string'],
+            'country_id'            => ['required', 'integer'],
+            'parent_fname'          => ['required', 'string'],
+            'parent_lname'          => ['required', 'string'],
+            'service_method'        => ['required', 'string'],
+            'other_notes'           => ['required', 'string'],
+            'school'                => ['required', 'string'],
+            'major_intersection'    => ['required', 'string'],
+            'referrer_id'           => ['required', 'integer'],
+            'student_status_id'     => ['required', 'integer'],
+            'approved'              => ['required', 'integer'],
+            'status'                => ['required', 'integer'],
+        ]);
+
+        if ($validator->fails()) {
+            session()->flash('error', $validator -> messages() -> first());
+            return redirect()->route('admin.students.create');
+        }
+        $data = $request->all();
+        $student = User::create([
+            'fname'                 => $data['fname'],
+            'lname'                 => $data['lname'],
+            'email'                 => $data['email'],
+            'password'              => Hash::make($data['password']),
+            'grade_id'              => $data['grade_id'],
+            'home_phone'            => $data['home_phone'],
+            'cell_phone'            => $data['cell_phone'],
+            'address'               => $data['address'],
+            'city'                  => $data['city'],
+            'state_id'              => $data['state_id'],
+            'pcode'                 => $data['fname'],
+            'country_id'            => $data['country_id'],
+            'parent_fname'          => $data['parent_fname'],
+            'parent_lname'          => $data['parent_lname'],
+            'service_method'        => $data['service_method'],
+            'other_notes'           => $data['other_notes'],
+            'school'                => $data['school'],
+            'major_intersection'    => $data['major_intersection'],
+            'referrer_id'           => $data['referrer_id'],
+            'student_status_id'     => $data['student_status_id'],
+            'approved'              => $data['approved'],
+            'status'                => $data['status'],
+        ]);
+        if ($student == NULL)
+        {
+            session()->flash('error', "There is an error modifying student!");
+            return redirect()->route('admin.students.create');
+        }
+
+        $role = Role::select('id')->where('name', 'Student')->first();
+        $student->roles()->attach($role);
+        foreach($data['subjects'] as $subject)
+        {
+            $student -> subjects() -> attach($subject);
+        }
+        $student -> save();
+        ActivityLog::log_activity(Auth::user()->id, "Student Added", "A new student added.");
+        session()->flash('success', "You have modified student!");
+        return redirect()->route('admin.students.index');
     }
 
     /**
@@ -235,9 +314,14 @@ class StudentsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $student)
     {
-        //
+        if (Gate::denies('manage-students')) return redirect()->route('admin.students.index');
+        $student->subjects()->detach();
+        $student->roles()->detach();
+        $student->delete();
+        session()->flash('success', "You have modified student!");
+        return redirect() -> route('admin.students.index');
     }
 
      /**
@@ -278,5 +362,10 @@ class StudentsController extends Controller
         
         $pdf = PDF::loadView('admin.students.contract', $data);
         return $pdf->stream('admin.students.contract');
+    }
+
+    public function export(Request $request, User $student)
+    {
+        dd($request['names']);
     }
 }
