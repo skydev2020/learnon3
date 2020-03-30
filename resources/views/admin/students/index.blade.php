@@ -107,7 +107,7 @@
                                         [<a href="{{route('admin.students.edit', $student->id)}}">Edit</a>]
                                     @endcan
                                     @can('manage-students')
-                                        [<a href="{{route('admin.students.invoices', $student->id)}}">Invoices</a>]
+                                        [<a href="{{route('admin.students.invoices', $student)}}">Invoices</a>]
                                     @endcan
                                     @can('manage-students')
                                         [<a href="{{route('admin.students.contract', $student)}}" target="_blank">Contract</a>]

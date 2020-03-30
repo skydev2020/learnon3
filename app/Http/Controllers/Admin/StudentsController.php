@@ -15,7 +15,7 @@ use Config;
 use App\Subject;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use PDF;
 /**
  * StudentsController is working with Students
  * Student is a User whose Role is Student
@@ -258,6 +258,7 @@ class StudentsController extends Controller
        if( count($student->invoices()->get()) == 0 ) session()->flash('error', "No search results!");
         
         return view('admin.invoices.index')->with('data', $data);
+        
     }
 
      /**
@@ -268,6 +269,11 @@ class StudentsController extends Controller
      */
     public function showContract(User $student)
     {
-        dd('abcdd32234');
+        $data = [
+            'student' => $student
+        ];
+        
+        $pdf = PDF::loadView('admin.students.contract', $data);
+        return $pdf->stream('admin.students.contract');
     }
 }
