@@ -69,7 +69,7 @@
                                 <td scope="col">{{$assignment->student() != null ? $assignment->student()['fname'] 
                                 . ' ' . $assignment->student()['lname'] . ' ( ' . $assignment->student()['id'] . ' )' : "" }}</td>
                                 <td scope="col">{{$assignment->tutor() != null ? $assignment->tutor()['fname'] 
-                                . ' ' . $assignment->tutor()['lname'] . ' ( ' . $assignment->student()['id'] . ' )' : ""}}</td>
+                                . ' ' . $assignment->tutor()['lname'] . ' ( ' . $assignment->tutor()['id'] . ' )' : ""}}</td>
                                 <td scope="col"><?php
                                     $subjects = "";
                                     foreach ($assignment->subjects()->get() as $subject)
@@ -81,7 +81,14 @@
                                 <td scope="col">{{date('d/m/Y', strtotime($assignment->created_at))}}</td>
                                 <td scope="col">
                                     @can('manage-students')
-                                        <a href="{{route('admin.assignments.edit', $assignment)}}">Edit</a>
+                                    <a href="{{route('admin.assignments.edit', $assignment)}}">Edit</a>
+                                    @endcan
+                                    @can('manage-students')
+                                    <form action="{{ route('admin.assignments.destroy', $assignment) }}" method="POST" class="float-left">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                        [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
+                                    </form>
                                     @endcan
                                 </td>
                             </tr>

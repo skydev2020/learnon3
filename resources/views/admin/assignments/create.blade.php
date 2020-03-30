@@ -1,162 +1,115 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-12">
             <div class="card">
-                <div class="card-header" style = "text-align:center;">{{ __('Create An Assignment') }}</div>
+                <div class="card-header">{{ __('Create an Assignment') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.assignments.store') }}">
+                    <form action="{{route('admin.assignments.store')}}" method="POST">
                         @csrf
                         {{method_field('POST')}}
+                        <div class="form-group row">
+                            <div class = "col-1 offset-10">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                            <div class="col-1">
+                                <a href = "{{route('admin.assignments.index')}}">
+                                    <button type="button" class="btn btn-primary">Cancel</button>
+                                </a>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
-                            <label for="tutor_val" class="col-md-4 col-form-label text-md-right">{{ __('Select Tutor') }}</label>
-
-                            <div class="col-md-5">
-                                <select id = "tutor_val" name = "tutor_val">
-                                    @foreach ($tutors as $tutor)
-                                        <option value = {{$tutor->id}}> {{$tutor->fname . ' ' . $tutor->lname}}  </option>
+                            <div class = "col-3 d-flex justify-content-end align-items-center">
+                                <label for = "student_val" class="col-form-label font-weight-bold">Select Student:</label>
+                            </div>
+                            <div class="col-2">
+                                <select name="student_val" id="student_val" class="form-control">
+                                    <option>-Select-</option>
+                                    @foreach ($data['students'] as $student)
+                                    <option value = "{{$student->id}}">{{ $student->fname . ' ' . $student->lname }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         
                         <div class="form-group row">
-                            <label for="student_val" class="col-md-4 col-form-label text-md-right">{{ __('Select Student') }}</label>
-
-                            <div class="col-md-5">
-                                <select id = "student_val" name = "student_val">
-                                    @foreach ($students as $student)
-                                        <option value = {{$student->id}}> {{$student->fname .  ' ' . $student->lname}}  </option>
+                            <div class = "col-3 d-flex justify-content-end align-items-center">
+                                <label for = "tutor_val" class="col-form-label font-weight-bold">Select Tutor:</label>
+                            </div>
+                            <div class="col-2">
+                                <select name="tutor_val" id="tutor_val" class="form-control">
+                                    <option>-Select-</option>
+                                    @foreach ($data['tutors'] as $tutor)
+                                    <option value = "{{$tutor->id}}">{{ $tutor->fname . ' ' . $tutor->lname }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-10" style = "display:flex;">
-                                <div class="col-md-4">
-                                    <div class="form-group ">
-                                        <b>Tutor Pay Rate($) per hour</b>
-                                        <input type="text"    name="tpay_value" id="tpay_value" value="20">
-                                    </div>
-                                </div>
+                        <div class="form-group row">
+                            <div class = "col-3 d-flex justify-content-end align-items-center">
+                                <label for = "base_invoice" class="col-form-label font-weight-bold">Student invoice rate($):</label>
+                            </div>
+                            <div class="col-3 d-flex">
+                                <input type = "text" id = "base_invoice" name = "base_invoice" class = "col-8 form-control"
+                                    autocomplete= "base_invoice" autofocus/>
+                                <label for = "base_invoice" class="col-form-label">&nbsp; per hour</label>
+                            </div>
+                        </div>
 
-                                <div class="col-md-3">
-                                    <div class="form-group ">
-                                        <b>From (Hr)</b>
-                                        <input type="text" readonly value="1" />
-                                    </div>
-                                </div>
+                        <div class="form-group row">
+                            <div class = "col-3 d-flex justify-content-end align-items-center">
+                                <label for = "base_wage" class="col-form-label font-weight-bold">Tutor pay rate($):</label>
+                            </div>
+                            <div class="col-3 d-flex">
+                                <input type = "text" id = "base_wage" name = "base_wage" class = "col-8 form-control"
+                                autocomplete= "base_wage" autofocus/>
+                                <label for = "base_wage" class="col-form-label">&nbsp; per hour</label>
+                            </div>
+                        </div>
 
-                                <div class="col-md-3">
-                                    <div class="form-group ">
-                                        <b>To (Hr)</b>
-                                        <input type="text" readonly value="5" />
+                        <div class="form-group row">
+                            <div class = "col-3 d-flex justify-content-end align-items-center">
+                                <label for = "subjects_box" class="col-form-label font-weight-bold">Subject(s) Assigned:</label>
+                            </div>
+                            <div class="col-3">
+                                <div class="scrollbox pl-1 pt-1 overflow-auto" id="subjects_box" name = "subjects_box">
+                                    @foreach ($data['subjects'] as $subject)
+                                    <div>
+                                        <input type = "checkbox" value = " {{ $subject -> id }} " name = "subjects[]"
+                                        > {{$subject->name}}
                                     </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-10" style = "display:flex;">
-                                <div class="col-md-4">
-                                    <div class="form-group ">
-                                        <input type="text" readonly  value="21" />
-                                    </div>  
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group ">
-                                        <input type="text" readonly value="6" />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group ">
-                                        <input type="text" readonly value="15" />
-                                    </div>
-                                </div>
+                        <div class="form-group row">
+                            <div class = "col-3 d-flex justify-content-end align-items-center">
+                                <label for = "active" class="col-form-label font-weight-bold">Status:</label>
                             </div>
-                        </div>   
-
-
-                        <div class="row">
-                            <div class="col-md-10" style = "display:flex;">
-                                <div class="col-md-4">
-                                    <div class="form-group ">
-                                        <input type="text" readonly  value="23" />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group ">
-                                        <input type="text" readonly value="16" />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="form-group ">
-                                        <input type="text" readonly value="21" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-10" style = "display:flex;">
-                                <div class="col-md-4">
-                                    <div class="form-group ">
-                                        <input type="text"  readonly value="25" />
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group ">
-                                        <input type="text"  value="21" />
-                                    </div>
-                                </div>
-
-                                    <div class="col-md-3">
-                                    <div class="form-group ">
-                                        <input type="text" readonly value="50" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class = "form-group row col-md-10">
-                            <div class = "col-md-6" style = "text-align:center;">
-                                <b> Student Invoice Rate($) per hour </b>
-                            </div>
-                            <div class = "col-md-4" style = "text-align:center;">
-                                <input  type = "text" name = "spay_value" id = "spay_value" vlue = "42">
-                            </div>
-                        </div>
-                        <div style = "display:flex;">
-                            <div class = "form-group row col-md-4">
-                                <b>    Subject(s) Assigned     </b>
-                                <textarea name = "subject_value" id="subject_value"></textarea>
-                            </div>
-
-                            <div class = "form-group">
-                                <b>    Status     </b>
-                                <select id = "status" name = "status" style = "display:inline;">
-                                    <option> Enabled </option>
-                                    <option> Disabled </option>
+                            <div class="col-2">
+                                <select name="active" id="active" class="form-control">
+                                    <option value = "1">Enabled</option>
+                                    <option value = "0">Disabled</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('SAVE') }}
-                                </button>
+                        <div class="form-group row">
+                            <div class = "col-3 d-flex justify-content-end align-items-center">
+                                <label class="col-form-label font-weight-bold">Status By Tutor:</label>
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <div class = "col-3 d-flex justify-content-end align-items-center">
+                                <label class="col-form-label font-weight-bold">Status By Student:</label>
+                            </div>
+                        </div>
                     </form>
                 </div>
 

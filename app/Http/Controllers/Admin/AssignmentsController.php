@@ -81,9 +81,12 @@ class AssignmentsController extends Controller
      */
     public function create()
     {
-        $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()->get();
-        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
-        return view('admin.assignments.create')->with('tutors', $tutors)->with('students', $students);
+        $data = [
+            'tutors'    => Role::find(config('global.TUTOR_ROLE_ID'))->users()->get(),
+            'students'  => Role::find(config('global.STUDENT_ROLE_ID'))->users()->get(),
+            'subjects'  => Subject::all(),
+        ];
+        return view('admin.assignments.create')->with('data', $data);
     }
 
     /**
@@ -97,14 +100,15 @@ class AssignmentsController extends Controller
         $validator = Validator::make($request->all(), [
             'tutor_val'             => ['required', 'integer'],
             'student_val'           => ['required', 'integer'],
-            'subject_value'         => ['required', 'string'],
+            'subjects'              => ['required', 'Array'],
+            'base_invoice'          => ['required', 'string'],
+            'base_wage'             => ['required', 'string'],
+            'active'                => ['required', 'integer'],
         ]);
 
         if ($validator->fails())
         {
-            $request->session()->flash('error', "There was an error creating the assignment");
-            $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()->get();
-            $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
+            $request->session()->flash('error', $validator->messages()->first());
             return redirect(route('admin.assignments.create'));
         }
 
@@ -112,25 +116,19 @@ class AssignmentsController extends Controller
         $assignment = Assignment::create([
             'tutor_id'              => $data['tutor_val'],
             'student_id'            => $data['student_val'],
-            'subjects'              => $data['subject_value'],
-            'base_wage'             => $data['tpay_value'],
-            'base_invoice'          => $data['spay_value'],
-            'status_by_tutor'       => $data['status'],
-            'status_by_student'     => $data['status'],
-            'final_status'          => $data['status'],
+            'base_wage'             => $data['base_wage'],
+            'base_invoice'          => $data['base_invoice'],
+            'active'                => $data['active'],
         ]);
 
         if ($assignment == NULL)
         {
-            $request->session()->flash('error', "There was an error creating the assignment");
-            $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()->get();
-            $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
+            session()->flash('error', "There was an error creating the assignment");
             return redirect(route('admin.users.assignments.create'));
         }
-
-        $request->session()->flash('success', "The assignment has been created successfully");
-        $assignments = Assignment::all();
-        return view('admin.assignments.index')->with('assignments', $assignments);
+        $assignment -> subjects() -> attach($data['subjects']);
+        session() -> flash('success', "The assignment has been created successfully");
+        return redirect() -> route('admin.assignments.index');
 
     }
 
@@ -214,6 +212,10 @@ class AssignmentsController extends Controller
      */
     public function destroy(Assignment $assignment)
     {
-        //
+        if (Gate::denies('manage-students')) return redirect()->route('admin.assignments.index');
+
+        $assignment->delete();
+        session() -> flash('success', "Student assignment details has been successfully deleted.");
+        return redirect()->route('admin.assignments.index');
     }
 }
