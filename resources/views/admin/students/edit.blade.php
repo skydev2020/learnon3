@@ -101,7 +101,8 @@
                                 <div class="scrollbox pl-1 pt-1 overflow-auto" id="subjects_box" name = "subjects_box">
                                     @foreach ($student->subjects()->get() as $subject)
                                     <div>
-                                        <input type = "checkbox" checked>{{$subject->name}}
+                                        <input type = "checkbox" name = "subjects[]" value = "{{$subject->id}}" 
+                                        checked>{{$subject->name}}
                                     </div>
                                     @endforeach
                                 </div>

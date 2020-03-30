@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ActivityLog;
 use App\Country;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -13,6 +14,7 @@ use App\State;
 use Illuminate\Http\Request;
 use Config;
 use App\Subject;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use PDF;
@@ -222,6 +224,7 @@ class StudentsController extends Controller
             session()->flash('error', "There is an error modifying student!");
             return redirect()->route('admin.students.edit', $student);
         }
+        ActivityLog::log_activity(Auth::user()->id, "Profile Updated", "Student profile details updated.");
         session()->flash('success', "You have modified student!");
         return redirect()->route('admin.students.index');
     }
