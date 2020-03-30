@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ActivityLog;
+use App\Country;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
 use App\StudentStatus;
 use App\Grade;
+use App\Referrer;
+use App\State;
 use Illuminate\Http\Request;
 use Config;
 use App\Subject;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use PDF;
 /**
  * StudentsController is working with Students
  * Student is a User whose Role is Student
@@ -97,8 +106,15 @@ class StudentsController extends Controller
      */
     public function create()
     {
-
-
+        $states = State::all();
+        $countries = Country::all();
+        $grades = Grade::with('subjects')->get();
+        $grades_array = $grades->toArray();
+        $referrers = Referrer::all();
+        $student_statuses = StudentStatus::all();
+        
+        return view('admin.students.create', compact('grades', 'states', 'countries', 'grades_array', 'referrers'
+        , 'student_statuses'));
     }
 
     /**
@@ -109,7 +125,78 @@ class StudentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all()['service_method']);
+        $validator = Validator::make($request->all(), [
+            'fname'                 => ['required', 'string', 'max:255'],
+            'lname'                 => ['required', 'string', 'max:255'],
+            'email'                 => ['required', 'email', 'max:255', 'unique:users'],
+            'password'              => ['required', 'string', 'min:8', 'confirmed'],
+            'grade_id'              => ['required', 'integer'],
+            'subjects'              => ['required', 'Array'],
+            'home_phone'            => ['required', 'string'],
+            'cell_phone'            => ['required', 'string'],
+            'address'               => ['required', 'string'],
+            'city'                  => ['required', 'string'],
+            'state_id'              => ['required', 'integer'],
+            'pcode'                 => ['required', 'string'],
+            'country_id'            => ['required', 'integer'],
+            'parent_fname'          => ['required', 'string'],
+            'parent_lname'          => ['required', 'string'],
+            'service_method'        => ['required', 'string'],
+            'other_notes'           => ['required', 'string'],
+            'school'                => ['required', 'string'],
+            'major_intersection'    => ['required', 'string'],
+            'referrer_id'           => ['required', 'integer'],
+            'student_status_id'     => ['required', 'integer'],
+            'approved'              => ['required', 'integer'],
+            'status'                => ['required', 'integer'],
+        ]);
+
+        if ($validator->fails()) {
+            session()->flash('error', $validator -> messages() -> first());
+            return redirect()->route('admin.students.create');
+        }
+        $data = $request->all();
+        $student = User::create([
+            'fname'                 => $data['fname'],
+            'lname'                 => $data['lname'],
+            'email'                 => $data['email'],
+            'password'              => Hash::make($data['password']),
+            'grade_id'              => $data['grade_id'],
+            'home_phone'            => $data['home_phone'],
+            'cell_phone'            => $data['cell_phone'],
+            'address'               => $data['address'],
+            'city'                  => $data['city'],
+            'state_id'              => $data['state_id'],
+            'pcode'                 => $data['fname'],
+            'country_id'            => $data['country_id'],
+            'parent_fname'          => $data['parent_fname'],
+            'parent_lname'          => $data['parent_lname'],
+            'service_method'        => $data['service_method'],
+            'other_notes'           => $data['other_notes'],
+            'school'                => $data['school'],
+            'major_intersection'    => $data['major_intersection'],
+            'referrer_id'           => $data['referrer_id'],
+            'student_status_id'     => $data['student_status_id'],
+            'approved'              => $data['approved'],
+            'status'                => $data['status'],
+        ]);
+        if ($student == NULL)
+        {
+            session()->flash('error', "There is an error modifying student!");
+            return redirect()->route('admin.students.create');
+        }
+
+        $role = Role::select('id')->where('name', 'Student')->first();
+        $student->roles()->attach($role);
+        foreach($data['subjects'] as $subject)
+        {
+            $student -> subjects() -> attach($subject);
+        }
+        $student -> save();
+        ActivityLog::log_activity(Auth::user()->id, "Student Added", "A new student added.");
+        session()->flash('success', "You have modified student!");
+        return redirect()->route('admin.students.index');
     }
 
     /**
@@ -120,7 +207,12 @@ class StudentsController extends Controller
      */
     public function show(User $student)
     {
-        dd('abc');
+        $data = [
+            'student'           => $student,
+            'referrers'         => Referrer::all(),
+            'student_statuses'  => StudentStatus::all()
+        ];
+        return view('admin.students.show')->with(['data' => $data]);
     }
 
     /**
@@ -131,9 +223,15 @@ class StudentsController extends Controller
      */
     public function edit(User $student)
     {
-        return view('admin.students.contract')->with([
-            'student' => $student
-        ]);
+        $states = State::all();
+        $countries = Country::all();
+        $grades = Grade::with('subjects')->get();
+        $grades_array = $grades->toArray();
+        $referrers = Referrer::all();
+        $student_statuses = StudentStatus::all();
+        
+        return view('admin.students.edit', compact('grades', 'states', 'countries', 'grades_array', 'referrers'
+        , 'student_statuses', 'student'));
     }
 
     /**
@@ -143,9 +241,71 @@ class StudentsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $student)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'fname'                 => ['required', 'string', 'max:255'],
+            'lname'                 => ['required', 'string', 'max:255'],
+            'email'                 => ['required', 'email', 'max:255'],
+            'password'              => ['required', 'string', 'min:8', 'confirmed'],
+            'grade_id'              => ['required', 'integer'],
+            'subjects'              => ['required', 'Array'],
+            'home_phone'            => ['required', 'string'],
+            'cell_phone'            => ['required', 'string'],
+            'address'               => ['required', 'string'],
+            'city'                  => ['required', 'string'],
+            'state_id'              => ['required', 'integer'],
+            'pcode'                 => ['required', 'string'],
+            'country_id'            => ['required', 'integer'],
+            'parent_fname'          => ['required', 'string'],
+            'parent_lname'          => ['required', 'string'],
+            'service_method'        => ['required', 'string'],
+            'other_notes'           => ['required', 'string'],
+            'school'                => ['required', 'string'],
+            'major_intersection'    => ['required', 'string'],
+            'referrer_id'           => ['required', 'integer'],
+            'student_status_id'     => ['required', 'integer'],
+            'approved'              => ['required', 'integer'],
+            'status'                => ['required', 'integer'],
+        ]);
+
+        if ($validator->fails()) {
+            session()->flash('error', $validator -> messages() -> first());
+            return redirect()->route('admin.students.edit', $student);
+        }
+        $data = $request->all();
+        $student-> email = $data['email'];
+        $student-> password = Hash::make($data['password']);
+        $student-> fname = $data['fname'];
+        $student-> lname = $data['lname'];
+        $student-> grade_id = $data['grade_id'];
+        $student-> parent_fname = $data['parent_fname'];
+        $student-> parent_lname = $data['parent_lname'];
+        $student-> home_phone = $data['home_phone'];
+        $student-> cell_phone = $data['cell_phone'];
+        $student-> address = $data['address'];
+        $student-> city = $data['city'];
+        $student-> state_id = $data['state_id'];
+        $student-> pcode = $data['pcode'];
+        $student-> country_id = $data['country_id'];
+        $student-> service_method = $data['service_method'];
+        $student-> other_notes = $data['other_notes'];
+        $student-> major_intersection = $data['major_intersection'];
+        $student-> school = $data['school'];
+        $student-> referrer_id = $data['referrer_id'];
+        $student-> student_status_id = $data['student_status_id'];
+        $student-> approved = $data['approved'];
+        $student-> status = $data['status'];
+        
+        $student-> subjects() -> sync($data['subjects']);
+        if (!$student->save())
+        {
+            session()->flash('error', "There is an error modifying student!");
+            return redirect()->route('admin.students.edit', $student);
+        }
+        ActivityLog::log_activity(Auth::user()->id, "Profile Updated", "Student profile details updated.");
+        session()->flash('success', "You have modified student!");
+        return redirect()->route('admin.students.index');
     }
 
     /**
@@ -154,9 +314,14 @@ class StudentsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $student)
     {
-        //
+        if (Gate::denies('manage-students')) return redirect()->route('admin.students.index');
+        $student->subjects()->detach();
+        $student->roles()->detach();
+        $student->delete();
+        session()->flash('success', "You have modified student!");
+        return redirect() -> route('admin.students.index');
     }
 
      /**
@@ -167,7 +332,20 @@ class StudentsController extends Controller
      */
     public function manageInvoices(User $student)
     {
-        dd('abcdd');
+        $data = [
+            'invoices'   => $student->invoices()->get(),
+            'old'        => [
+                'invoice_num'       => "",
+                's_name'            => "",
+                'date_added'        => "",
+                'status'            => ""
+            ]
+        ];
+
+       if( count($student->invoices()->get()) == 0 ) session()->flash('error', "No search results!");
+        
+        return view('admin.invoices.index')->with('data', $data);
+        
     }
 
      /**
@@ -178,6 +356,16 @@ class StudentsController extends Controller
      */
     public function showContract(User $student)
     {
-        dd('abcdd32234');
+        $data = [
+            'student' => $student
+        ];
+        
+        $pdf = PDF::loadView('admin.students.contract', $data);
+        return $pdf->stream('admin.students.contract');
+    }
+
+    public function export(Request $request, User $student)
+    {
+        dd($request['names']);
     }
 }
