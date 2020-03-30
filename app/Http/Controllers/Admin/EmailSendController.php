@@ -60,7 +60,8 @@ class EmailSendController extends Controller
             'subject'   => $data['subject'],
             'message'   => $data['message'],
         ];
-        //dd($mail_data['message']);
+        
+        dd(strip_tags($mail_data['message']));
 
 
         switch($data['receivers'])
@@ -81,23 +82,13 @@ class EmailSendController extends Controller
                     case 2: //Tutors
                         foreach ($tutors as $tutor)
                         {
-                            $mail = $this -> baseMail();
-                            $mail->setTo($tutor->email);
-                            $mail->setFrom(Setting::where('key', 'config_email2')->first()['value']);
-                            $mail->setSubject($data['subject']);					
-                            $mail->setHtml($message);
-                            $mail->send();
+                            Mail::to($tutor->email) -> send(new SendMail($mail_data));
                         }
                     break;
                     case 3: //Students
                         foreach ($students as $student)
                         {
-                            $mail = $this -> baseMail();
-                            $mail->setTo($student->email);
-                            $mail->setFrom(Setting::where('key', 'config_email')->first()['value']);
-                            $mail->setSubject($data['subject']);					
-                            $mail->setHtml($message);
-                            $mail->send();
+                            Mail::to($student->email) -> send(new SendMail($mail_data));
                         }
                     break;
                     default:
@@ -107,14 +98,10 @@ class EmailSendController extends Controller
             break;
 
             case 3: //Selected Users
-                foreach($data['users'] as $userId)
+                foreach($data['user'] as $userId)
                 {
                     $userEmail = User::where('id', $userId)->first()['email'];
-                    $mail = $this -> baseMail();
-                    $mail->setTo($userEmail);
-                    $mail->setFrom(Setting::where('key', 'config_email')->first()['value']);
-                    $mail->setSubject($data['subject']);					
-                    $mail->setHtml($message);
+                    Mail::to($userEmail) -> send(new SendMail($mail_data));
                     $mail->send();
                 }
             break;

@@ -26,7 +26,7 @@ class RejectedTutorsController extends Controller
 
         $q = "1=1 ";
 
-        $q.= " and (status_id is NULL or 0) ";
+        $q.= " and (status is NULL or 0) ";
 
         if (isset($request_data['t_name'])) {
             $q.= " and (fname like '%".$request_data['t_name']."%' or lname like '%" .$request_data['t_name'] . "%') ";
@@ -37,7 +37,7 @@ class RejectedTutorsController extends Controller
         } else $request_data['t_date'] = "";
 
         if (isset($request_data['email'])) {
-            $q.= " and email like '%".$email."%'";
+            $q.= " and email like '%".$request_data['email']."%'";
         } else $request_data['email'] = "";
 
         $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()

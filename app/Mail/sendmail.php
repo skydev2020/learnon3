@@ -33,7 +33,7 @@ class sendmail extends Mailable
                 ->with([
                     'name'              => "Learnon Tutoring!",
                     "email"             => "info@learnon.ca" ,
-                    'subject'           => $this->data['message'],
+                    'subject'           => $this->data['subject'],
                     'user_message'      => $this->data['message'],
                 ]);
     }
