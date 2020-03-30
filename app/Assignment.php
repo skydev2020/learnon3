@@ -9,7 +9,7 @@ class Assignment extends Model
     //
     protected $fillable = [
         'tutor_id', 'student_id', 'subjects', 'base_wage', 'base_invoice', 'total_hour worked', 'assigned_at', 'city',
-         'status_by_tutor', 'status_by_students', 'final_status'
+         'status_by_tutor', 'status_by_students', 'active'
     ];
 
     

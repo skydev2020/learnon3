@@ -41,9 +41,8 @@
                                 </button>
                             </div>
                             <div class="col-1 offset-5">
-                                <a href = "{{ route('admin.assignments.create') }}"> <button class="btn btn-primary">
-                                    {{ __('Add') }}
-                                </button>
+                                <a href = "{{ route('admin.assignments.create') }}"> 
+                                    <button class="btn btn-primary" type = "button">{{ __('Add') }}</button>
                                 </a>
                             </div>
                         </div>
