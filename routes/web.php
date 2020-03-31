@@ -93,6 +93,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::get('emailsend/send', 'EmailSendController@send')->name('emailsend.send');
     Route::get('notification/send', 'NotificationController@send')->name('notification.send');
     Route::get('defaultwages/export', 'DefaultWagesController@export')->name('defaultwages.export');
+    Route::post('essayassignments/upload', 'EssayAssignmentsController@upload') -> name('essayassignments.upload');
+    Route::post('essayassignments/upload_csv', 'EssayAssignmentsController@upload_csv') -> name('essayassignments.upload_csv');
 });
 
 Route::namespace('Tutor')->prefix('tutor')->name('tutor.')->middleware('can:manage-tutor-students')->group(function() {

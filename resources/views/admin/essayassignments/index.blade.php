@@ -12,40 +12,40 @@
                         {{method_field('GET')}}
 
                         <div class="form-group row">
-                            <label for="a_id" class="col-md-4 col-form-label text-md-right">{{ __('Assignment #') }}</label>
-                            <div class="col-md-6">
+                            <label for="a_id" class="col-4 col-form-label text-right">{{ __('Assignment #') }}</label>
+                            <div class="col-6">
                                 <input id="a_id" type="text" class="form-control" name="a_id"
                                  value="{{ $data['old']['a_id'] }}" autocomplete="a_id" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="s_name" class="col-md-4 col-form-label text-md-right">{{ __('Student Name') }}</label>
-                            <div class="col-md-6">
+                            <label for="s_name" class="col-4 col-form-label text-right">{{ __('Student Name') }}</label>
+                            <div class="col-6">
                                 <input id="s_name" type="text" class="form-control" name="s_name"
                                 value="{{ $data['old']['s_name'] }}" autocomplete="s_name" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="t_name" class="col-md-4 col-form-label text-md-right">{{ __('Tutor Name') }}</label>
-                            <div class="col-md-6">
+                            <label for="t_name" class="col-4 col-form-label text-right">{{ __('Tutor Name') }}</label>
+                            <div class="col-6">
                                 <input id="t_name" type="text" class="form-control" name="t_name"
                                  value="{{ $data['old']['t_name'] }}" autocomplete="t_name" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="topic" class="col-md-4 col-form-label text-md-right">{{ __('Topic') }}</label>
-                            <div class="col-md-6">
+                            <label for="topic" class="col-4 col-form-label text-right">{{ __('Topic') }}</label>
+                            <div class="col-6">
                                 <input id="topic" type="text" class="form-control" name="topic"
                                  value="{{ $data['old']['topic'] }}" autocomplete="topic" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Current Status') }}</label>
-                            <div class="col-md-6">
+                            <label for="status" class="col-4 col-form-label text-right">{{ __('Current Status') }}</label>
+                            <div class="col-6">
                                 <select class = "form-control" name = "status" id = "status">
                                     @foreach ($data['statuses'] as $essaystatus)
                                         <option value = {{$essaystatus->id}} <?= $essaystatus->id == $data['old']['status'] ? "selected" : ""?>>
@@ -56,29 +56,29 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="price_owed" class="col-md-4 col-form-label text-md-right">{{ __('Price Paid') }}</label>
-                            <div class="col-md-6">
+                            <label for="price_owed" class="col-4 col-form-label text-right">{{ __('Price Paid') }}</label>
+                            <div class="col-6">
                                 <input id="price_owed" type="text" class="form-control" name="price_owed"
                                  value="{{ $data['old']['price_owed'] }}" autocomplete="price_owed" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="paid_to_tutor" class="col-md-4 col-form-label text-md-right">{{ __('Paid to Tutor') }}</label>
-                            <div class="col-md-6">
+                            <label for="paid_to_tutor" class="col-4 col-form-label text-right">{{ __('Paid to Tutor') }}</label>
+                            <div class="col-6">
                                 <input id="paid_to_tutor" type="text" class="form-control" name="paid_to_tutor"
                                  value="{{ $data['old']['paid_to_tutor'] }}" autocomplete="status" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="a_date_from" class="col-md-4 col-form-label text-md-right">{{ __('Date Assigned') }}</label>
-                            <div class="col-md-3">
+                            <label for="a_date_from" class="col-4 col-form-label text-right">{{ __('Date Assigned') }}</label>
+                            <div class="col-3">
                                 Date From
                                 <input id="a_date_from" type="date" class="form-control" name="a_date_from"
                                  value="{{ $data['old']['a_date_from'] }}" autofocus>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-3">
                                 Date To
                                 <input id="a_date_to" type="date" class="form-control" name="a_date_to"
                                  value="{{ $data['old']['a_date_to'] }}" autofocus>
@@ -86,13 +86,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="c_date_from" class="col-md-4 col-form-label text-md-right">{{ __('Date Completed') }}</label>
-                            <div class="col-md-3">
+                            <label for="c_date_from" class="col-4 col-form-label text-right">{{ __('Date Completed') }}</label>
+                            <div class="col-3">
                                 Date From
                                 <input id="c_date_from" type="date" class="form-control" name="c_date_from"
                                  value="{{ $data['old']['c_date_from'] }}" autofocus>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-3">
                                 Date To
                                 <input id="c_date_to" type="date" class="form-control" name="c_date_to"
                                  value="{{ $data['old']['c_date_to'] }}" autofocus>
@@ -100,7 +100,7 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-6 offset-4">
                                 <button type = "submit" class="btn btn-primary" >
                                     {{ __('Search') }}
                                 </button>
@@ -110,10 +110,16 @@
                     <br>
 
                     <div class="form-group row mb-0">
-                        <div class="col-md-6 offset-md-4">
-                            <a href = "{{ route('admin.essayassignments.create') }}"> <button class="btn btn-primary">
+                        <div class="col-2 offset-4">
+                            <a href = "{{ route('admin.essayassignments.create') }}">
+                                <button class="btn btn-primary">
                                 {{ __('ADD NEW ASSIGNMENT') }}
                             </button>
+                            </a>
+                        </div>
+                        <div class = "col-1 offset-5">
+                            <a href = "{{ route('admin.essayassignments.upload') }}">
+                                <button class="btn btn-primary" type = "button">Batch Upload</button>
                             </a>
                         </div>
                     </div>

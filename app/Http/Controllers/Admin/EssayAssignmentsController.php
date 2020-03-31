@@ -1,15 +1,18 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
+use App\ActivityLog;
 use App\EssayAssignment;
 use App\Http\Controllers\Controller;
 
 use App\Role;
 use App\EssayStatus;
+use App\Imports\ImportEssay;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EssayAssignmentsController extends Controller
 {
@@ -229,7 +232,7 @@ class EssayAssignmentsController extends Controller
      */
     public function show(EssayAssignment $essay_Assignment)
     {
-        //
+        return view('admin.essayassignments.upload');
     }
 
     /**
@@ -335,5 +338,48 @@ class EssayAssignmentsController extends Controller
 
         $essayassignment->delete();
         return redirect()->route('admin.essayassignments.index')->with('data', $data);
+    }
+
+    public function upload_csv(Request $request)
+    {
+        // dd($request->file('file1')->getMimeType());
+        $validator = Validator::make([
+            'file1'     => isset($request->file1) ? $request->file('file1')->getClientOriginalExtension() : NULL,
+            'file2'     => isset($request->file2) ? $request->file('file2')->getClientOriginalExtension() : NULL,
+            'file3'     => isset($request->file3) ? $request->file('file3')->getClientOriginalExtension() : NULL,
+        ], [
+            'file1'     => ['nullable', 'in:csv'],
+            'file2'     => ['nullable', 'in:csv'],
+            'file3'     => ['nullable', 'in:csv'],
+        ]);
+
+        if ($validator->fails())
+        {
+            session() -> flash('error', $validator->messages()->first());
+            return redirect()->route('admin.essayassignments.upload');
+        }
+        if (!isset($request->file1) && !isset($request->file2) && !isset($request->file3))
+        {
+            session() -> flash('error', "Please select file");
+            return redirect()->route('admin.essayassignments.upload');
+        }
+
+        if (isset($request->file1))
+        {
+            $essay = Excel::import(new ImportEssay, $request->file('file1'));
+            ActivityLog::log_activity(Auth::User()->id, "Essay Upload CSV", "Essay uploaded");
+        }
+        if (isset($request->file2))
+        {
+            Excel::import(new ImportEssay, request()->file('file2'));
+            ActivityLog::log_activity(Auth::User()->id, "Essay Upload CSV", "Essay uploaded");
+        }
+        if (isset($request->file3))
+        {
+            Excel::import(new ImportEssay, request()->file('file3'));
+            ActivityLog::log_activity(Auth::User()->id, "Essay Upload CSV", "Essay uploaded");
+        }
+        session() -> flash('success', "CSV File Uploaded successfully");
+        return redirect() -> route('admin.essayassignments.index');
     }
 }
