@@ -81,7 +81,7 @@
                                 <td scope="col">{{date('d/m/Y', strtotime($assignment->created_at))}}</td>
                                 <td scope="col">
                                     @can('manage-students')
-                                    <a href="{{route('admin.assignments.edit', $assignment)}}">Edit</a>
+                                    [<a href="{{route('admin.assignments.edit', $assignment)}}">Edit</a>]
                                     @endcan
                                     @can('manage-students')
                                     <form action="{{ route('admin.assignments.destroy', $assignment) }}" method="POST" class="float-left">

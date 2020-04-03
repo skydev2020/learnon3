@@ -26,7 +26,7 @@
                                 <td scope="col">{{$order->package()['name']}}</td>
                                 <td scope="col">{{$order->total_hours}}</td>
                                 <td scope="col">{{$order->left_hours}}</td>
-                                <td scope="col">{{$order->date_added}}</td>
+                                <td scope="col">{{date('d/m/Y', strtotime($order->created_at))}}</td>
                                 <td scope="col">
                                     @can('edit-users')
                                         <a href="{{route('admin.packages.create')}}"><button type="button" class="btn btn-primary float-left">Send Reminder</button></a>

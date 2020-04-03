@@ -112,11 +112,14 @@
                                 <th scope="row">{{$student->id}}</th>
                                 <td scope="col">{{$student->fname . ' ' . $student->lname}}</td>
                                 <td scope="col">{{$student->city}}</td>
-                                <td scope="col">
-                                    @foreach($student->subjects()->get() as $subject)
-                                        {{$subject['name'] . ' '}}
-                                    @endforeach
-                                </td>
+                                <td scope="col"><?php
+                                    $subjects = "";
+                                    foreach ($student->subjects()->get() as $subject)
+                                    {
+                                        $subjects .= $subject->name . ', ';
+                                    }
+                                    $subjects = rtrim($subjects, ', ');
+                                    echo $subjects;?></td>
                                 <td scope="col">{{$student->studentStatus()->first()['title']}}</td>
                                 <td scope="col">{{$student->service_method}}</td>
                                 <td scope="col">{{date('d/m/Y', strtotime($student->created_at))}}</td>

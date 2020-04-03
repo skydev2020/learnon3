@@ -43,11 +43,11 @@
                             <tr>
                                 <th scope="row">{{$package->id}}</th>
                                 <td scope="col">{{$package->name}}</td>
-                                <td scope="col">{{$package->description}}</td>
+                                <td scope="col"><?php echo html_entity_decode($package->description); ?></td>
+                                <td scope="col">{{$package->hours}}</td>
                                 <td scope="col">{{$package->price_usa}}</td>
-                                <td scope="col">{{$package->price_canada}}</td>
-                                <td scope="col">{{$package->price_usa}}</td>
-                                <td scope="col">{{$package->price_others}}</td>
+                                <td scope="col">{{$package->price_can}}</td>
+                                <td scope="col">{{$package->price_alb}}</td>
                                 <td scope="col">
                                     @can('edit-users')
                                         <a href="{{route('admin.packages.create')}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>

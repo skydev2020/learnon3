@@ -89,7 +89,7 @@
                                 $invoice->users()->first()['lname'].' ('.$invoice->user_id.')'}}</td>
                                 <td scope="col">{{$invoice->total_amount}}</td>
                                 <td scope="col">{{$invoice->total_hours}}</td>
-                                <td scope="col">{{date('d/m/Y', strtotime($invoice->date_added)) }}</td>
+                                <td scope="col">{{date('d/m/Y', strtotime($invoice->created_at)) }}</td>
                                 <td scope="col">{{$invoice->status}}</td>
                                 <td scope="col">
                                     @can('manage-payments')
