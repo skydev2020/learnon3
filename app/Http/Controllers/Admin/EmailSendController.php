@@ -102,7 +102,6 @@ class EmailSendController extends Controller
                 {
                     $userEmail = User::where('id', $userId)->first()['email'];
                     Mail::to($userEmail) -> send(new SendMail($mail_data));
-                    $mail->send();
                 }
             break;
         }
