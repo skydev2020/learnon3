@@ -54,7 +54,7 @@
                                 <td scope="col">{{$maillog->mail_to}}</td>
                                 <td scope="col">{{$maillog->mail_from}}</td>
                                 <td scope="col">{{$maillog->subject}}</td>
-                                <td scope="col">{{$maillog->date_send}}</td>
+                                <td scope="col">{{date('m/d/Y', strtotime($maillog->created_at ))}}</td>
                                 <td scope="col">
                                     @can('manage-cms')
                                         [<a href="{{route('admin.maillogs.show', $maillog)}}">View</a>]

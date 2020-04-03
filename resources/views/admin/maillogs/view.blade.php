@@ -12,7 +12,7 @@
                             <label class="col-form-label font-weight-bold">{{ __('Date Send:') }}</label>
                         </div>
                         <div class="col-6 d-flex align-items-center">
-                            {{$maillog->date_send}}
+                            {{ date('m/d/Y', strtotime($maillog->created_at)) }}
                         </div>
                     </div>
 
