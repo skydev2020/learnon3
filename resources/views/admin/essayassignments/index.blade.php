@@ -44,12 +44,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="status" class="col-4 col-form-label text-right">{{ __('Current Status') }}</label>
+                            <label for="status" class="col-4 col-form-label text-right">Current Status</label>
                             <div class="col-6">
                                 <select class = "form-control" name = "status" id = "status">
+                                    <option></option>
                                     @foreach ($data['statuses'] as $essaystatus)
-                                        <option value = {{$essaystatus->id}} <?= $essaystatus->id == $data['old']['status'] ? "selected" : ""?>>
-                                         {{ $essaystatus->name }} </option>
+                                    <option value = {{$essaystatus->id}} <?= $essaystatus->id == $data['old']['status'] ? "selected" : ""?>>
+                                        {{ $essaystatus->name }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -154,19 +155,19 @@
                                 <td scope="col">{{$essay_assignment->statuses()->first()['name']}}</td>
                                 <td scope="col">{{$essay_assignment->owed}}</td>
                                 <td scope="col">{{$essay_assignment->paid}}</td>
-                                <td scope="col">{{$essay_assignment->date_assigned}}</td>
+                                <td scope="col">{{date('m/d/Y', strtotime($essay_assignment->date_assigned))}}</td>
                                 <td scope="col">{{$essay_assignment->date_completed}}</td>
                                 <td scope="col">
-                                    @can('edit-users')
-                                        <a href="{{route('admin.essayassignments.edit', $essay_assignment->id)}}">Edit</a>
+                                    @can('manage-tutors')
+                                        [<a href="{{route('admin.essayassignments.edit', $essay_assignment->id)}}">Edit</a>]
                                     @endcan
 
-                                    @can('delete-users')
-                                    <form action="{{ route('admin.essayassignments.destroy', $essay_assignment) }}" method="post">
+                                    @can('manage-tutors')
+                                    <form action="{{ route('admin.essayassignments.destroy', $essay_assignment) }}"
+                                     method="post" class = "float-left">
                                         @csrf
                                         {{method_field('DELETE')}}
-                                        <a href="javascript:;" onclick="parentNode.submit();">Delete</a>
-      
+                                        [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
                                     </form>
                                     @endcan
                                 </td>

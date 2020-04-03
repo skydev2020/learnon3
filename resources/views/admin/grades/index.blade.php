@@ -29,10 +29,14 @@
                         @foreach ($grades as $grade)
                             <tr>
                                 <td scope="col">{{$grade->name}}</td>
-                                <td scope="col">
-                                    @foreach ($grade->subjects()->get() as $subject)
-                                        {{$subject['name'] . ','}}
-                                    @endforeach
+                                <td scope="col"><?php
+                                    $subjects = "";
+                                    foreach ($grade->subjects()->get() as $subject)
+                                    {
+                                        $subjects .= ($subject['name'] . ', ');
+                                    }
+                                    $subjects = rtrim($subjects, ', ');
+                                    echo $subjects ?>
                                 </td>
                                 <td scope="col">
                                     @can('manage-cms')

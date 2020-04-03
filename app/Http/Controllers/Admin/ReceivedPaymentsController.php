@@ -41,7 +41,7 @@ class ReceivedPaymentsController extends Controller
             $q.= " and status_id like '%".$request_data['status_id']."%'";
         } else $request_data['status_id'] = "";
 
-        $orders = Order::whereRaw($q);
+        $orders = Order::has('users')->whereRaw($q);
         
         if (isset($request_data['s_name'])) {
             $orders = $orders->whereHas('users', function($user) use ($request_data) {

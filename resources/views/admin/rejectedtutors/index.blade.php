@@ -12,34 +12,38 @@
                         @csrf
                         {{method_field('GET')}}
                         <div class="form-group row">
-                            <label for="t_name" class="col-md-4 col-form-label text-md-right">{{ __('Tutor Name') }}</label>
-                            <div class="col-md-6">
+                            <label for="t_name" class="col-4 col-form-label text-right">{{ __('Tutor Name') }}</label>
+                            <div class="col-6">
                                 <input id="t_name" type="text" class="form-control" name="t_name" value="{{ $data['old']['t_name'] }}"
                                 autocomplete="t_name" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
-                            <div class="col-md-6">
+                            <label for="email" class="col-4 col-form-label text-right">{{ __('Email') }}</label>
+                            <div class="col-6">
                                 <input id="email" type="text" class="form-control" name="email" value="{{ $data['old']['email'] }}"
                                 autocomplete="email" autofocus>
                             </div>
                         </div>
                         
                         <div class="form-group row">
-                            <label for="t_date" class="col-md-4 col-form-label text-md-right">{{ __('Date Added') }}</label>
-                            <div class="col-md-6">
+                            <label for="t_date" class="col-4 col-form-label text-right">{{ __('Date Added') }}</label>
+                            <div class="col-6">
                                 <input id="t_date" type="date" class="form-control" name="t_date" value="{{ $data['old']['t_date'] }}"
                                 autocomplete="t_date" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-1 offset-4">
                                 <button type = "submit" class="btn btn-primary" >
                                     {{ __('Search') }}
                                 </button>
+                            </div>                
+                            <div class="col-1 offset-6">
+                                <button class = "btn btn-primary" onclick="exportToExcel('mytable')"
+                                >Export to Excel</button>
                             </div>
                         </div>
                     </form>
@@ -84,11 +88,6 @@
                         @endforeach
                         </tbody>
                     </table>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-2 col-lg-5 col-xs-12 col-sm-12">
-                    <button id="btn_exp" onclick="exportToExcel('mytable')">Export to Excel</button>
                 </div>
             </div>
         </div>

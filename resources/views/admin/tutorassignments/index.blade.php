@@ -74,18 +74,24 @@
                             <tr>
                                 <td scope="col">{{$assignment->tutor()['fname'] . ' ' . $assignment->tutor()['lname']}}</td>
                                 <td scope="col">{{$assignment->student()['fname'] . ' ' . $assignment->student()['lname']}}</td>
-                                <td scope="col">{{$assignment->subjects}}</td>
-                                <td scope="col">{{$assignment->created_at}}</td>
+                                <td scope="col"><?php $subjects = "";
+                                    foreach ($assignment->subjects()->get() as $subject)
+                                    {
+                                        $subjects .= $subject->name . ', ';
+                                    }
+                                    $subjects = rtrim($subjects, ', ');
+                                    echo $subjects; ?></td>
+                                <td scope="col">{{date('m/d/Y', strtotime($assignment->created_at))}}</td>
                                 <td scope="col">
-                                    @can('edit-users')
-                                        <a href="{{route('admin.tutorassignments.edit', $assignment->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
+                                    @can('manage-tutors')
+                                        [<a href="{{route('admin.tutorassignments.edit', $assignment->id)}}">Edit</a>]
                                     @endcan
 
-                                    @can('delete-users')
+                                    @can('manage-tutors')
                                     <form action="{{ route('admin.tutorassignments.destroy', $assignment) }}" method="POST" class="float-left">
                                         @csrf
                                         {{method_field('DELETE')}}
-                                        <button type="submit" class="btn btn-warning">Delete</button>
+                                        [<a href = "javascript:;" onclick="parentNode.submit();">Delete</a>]
                                     </form>
                                     @endcan
                                 </td>
