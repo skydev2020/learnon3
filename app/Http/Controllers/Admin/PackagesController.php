@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PackagesController extends Controller
 {
@@ -60,8 +61,7 @@ class PackagesController extends Controller
             'description'       => $data['description'],
             'price_canada'      => $data['price_canada'],
             'price_usa'         => $data['price_usa'],
-            'price_others'      => $data['price_others'],
-            'hours'             => $data['hours'],
+            'price_alb'         => $data['price_others'],
             'hours'             => $data['hours'],
         ]);
 
@@ -117,6 +117,10 @@ class PackagesController extends Controller
      */
     public function destroy(Package $package)
     {
-        //
+        if (Gate::denies('manage-students')) return redirect()->route('admin.packages.index');
+
+        $package->delete();
+        session()->flash('success', "The Package has been deleted successfully");
+        return redirect()->route('admin.packages.index');
     }
 }

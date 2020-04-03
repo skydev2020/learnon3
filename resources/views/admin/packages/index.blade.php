@@ -9,10 +9,13 @@
                 <div class="card-body">
                     <form action="{{ route('admin.packages.create') }}">
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-2 offset-4">
                                 <button type = "submit" class="btn btn-primary" >
                                     {{ __('ADD NEW PACKAGE') }}
                                 </button>
+                            </div>
+                            <div class="col-1 offset-5">
+                                <button class = "btn btn-primary" onclick="exportToExcel('packages')">Export to Excel</button>
                             </div>
                         </div>
                     </form>
@@ -25,7 +28,7 @@
             <div class="card">
                 <div class="card-header"></div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped" id = "mytable">
+                    <table class="table table-bordered table-striped" id = "packages">
                         <thead>
                         <tr>
                             <th scope="col">ID</th>
@@ -49,8 +52,15 @@
                                 <td scope="col">{{$package->price_can}}</td>
                                 <td scope="col">{{$package->price_alb}}</td>
                                 <td scope="col">
-                                    @can('edit-users')
-                                        <a href="{{route('admin.packages.create')}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
+                                    @can('manage-students')
+                                        [<a href="{{route('admin.packages.create')}}">Edit</a>]
+                                    @endcan
+                                    @can('manage-students')
+                                    <form action="{{ route('admin.packages.destroy', $package) }}" method="POST" class="float-left">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                        [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
+                                    </form>
                                     @endcan
                                 </td>
                             </tr>
@@ -58,12 +68,6 @@
                         </tbody>
                         </tbody>
                     </table>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-2 col-lg-2 col-xs-12 col-sm-12">
-                    <button id="btn_exp" onclick="exportToExcel('mytable')">Export to Excel</button>
                 </div>
             </div>
         </div>

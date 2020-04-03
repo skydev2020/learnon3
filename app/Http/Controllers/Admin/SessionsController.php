@@ -25,7 +25,7 @@ class SessionsController extends Controller
             'session_date'      => 'nullable|date',
         ]);
 
-        $sessions = Session::query();
+        $sessions = Session::has('assignments');
 
         if (isset($request_data['date_submission'])) {
             $sessions = $sessions->where('date_submission', $request_data['date_submission']);
