@@ -195,16 +195,18 @@
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
-                                        <input type = "radio" name = "config_minimum_bill" id = "config_minimum_bill"
-                                        class = "form-control" value = "1" <?=$data['config_minimum_bill']=="1"?"checked":""?>
-                                        > Yes </input>
-                                        <input type = "radio" name = "config_minimum_bill" id = "config_minimum_bill"
-                                        class = "form-control" value = "0" <?=$data['config_minimum_bill']=="0"?"checked":""?>
-                                        > No </input>
+                                        <label class="radio-inline d-flex align-items-center">
+                                            <input type="radio" name="config_minimum_bill" value="1" id="config_minimum_bill"
+                                            <?=$data['config_minimum_bill']=="1"?"checked":""?> >&nbsp;Yes
+                                        </label>&nbsp;&nbsp;
+                                        <label class="radio-inline d-flex align-items-center">
+                                            <input type="radio" name="config_minimum_bill" value="0" id="config_minimum_bill"
+                                            <?=$data['config_minimum_bill']=="0"?"checked":""?> >&nbsp;No
+                                        </label>&nbsp;&nbsp;
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <h4> Tutor Pay Rate </h4>
+                                    <h4>&nbsp; Tutor Pay Rate </h4>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
@@ -244,7 +246,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <h4> Student Invoice Rate </h4>
+                                    <h4>&nbsp; Student Invoice Rate </h4>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
@@ -345,12 +347,16 @@
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
-                                        <input type = "radio" name = "config_currency_auto" id = "config_currency_auto"
-                                        class = "form-control" value = "1" <?=$data['config_currency_auto']=="1"?"checked":""?>
-                                        > Yes </input>
-                                        <input type = "radio" name = "config_currency_auto" id = "config_currency_auto"
-                                        class = "form-control" value = "0" <?=$data['config_currency_auto']=="0"?"checked":""?>
-                                        > No </input>
+                                        <label class = "radio-inline">
+                                            <input type = "radio" name = "config_currency_auto" id = "config_currency_auto"
+                                                value = "1" <?=$data['config_currency_auto']=="1"?"checked":""?>
+                                        >&nbsp; Yes &nbsp;
+                                        </label>&nbsp;&nbsp;
+                                        <label class = "radio-inline">
+                                            <input type = "radio" name = "config_currency_auto" id = "config_currency_auto"
+                                                value = "0" <?=$data['config_currency_auto']!="1"?"checked":""?>
+                                        >&nbsp; No &nbsp;
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -416,29 +422,33 @@
                                         <span class="d-flex justify-content-end">Set the default order status when an order is processed.</span>
                                     </div>
 
-                                    <div class="col-6 d-flex align-items-center">
+                                    <div class="col-2 d-flex align-items-center">
                                         <select id = "config_order_status_id" name = "config_order_status_id"
                                         class = "form-control">
                                             @foreach ($data['statuses'] as $status)
                                                 <option <?= $status->id==$data['config_order_status_id']?"selected":"" ?>
                                                 value = "{{ $status->id }}"> {{ $status->name }} </option>
                                             @endforeach
-                                        </selected>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-3 d-flex">
+                                    <div class="col-3">
                                         <label class="col-form-label font-weight-bold" 
                                         for = "config_minimum_bill" >Approve New Customers:</label>
                                         <span class="d-flex justify-content-end">Don't allow new customer to login until their account has been approved.</span>
                                     </div>
                                     <div class="col-6 d-flex align-items-center">
-                                        <input type = "radio" name = "config_customer_approval" id = "config_customer_approval"
-                                        class = "form-control" value = "1" <?=$data['config_customer_approval']=="1"?"checked":""?>
-                                        > Yes </input>
-                                        <input type = "radio" name = "config_customer_approval" id = "config_customer_approval"
-                                        class = "form-control" value = "0" <?=$data['config_customer_approval']=="0"?"checked":""?>
-                                        > No </input>
+                                        <label class = "radio-inline">
+                                            <input type = "radio" name = "config_customer_approval" id = "config_customer_approval"
+                                                value = "1" <?=$data['config_customer_approval'] == "1" ? "checked":"" ?>
+                                                >&nbsp; Yes &nbsp;
+                                        </label>&nbsp; &nbsp;
+                                        <label class = "radio-inline">
+                                            <input type = "radio" name = "config_customer_approval" id = "config_customer_approval"
+                                                value = "0" <?= $data['config_customer_approval'] != "1" ? "checked" : "" ?>
+                                                >&nbsp; No &nbsp;
+                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -540,12 +550,14 @@
                                         <span class="d-flex justify-content-end">Send a email to the store owner when a new order is created.</span>
                                     </div>
                                     <div class="col-6 d-flex align-items-center">
-                                        <input type = "radio" name = "config_customer_approval" id = "config_customer_approval"
-                                        class = "form-control" value = "1" <?=$data['config_alert_mail']=="1"?"checked":""?>
-                                        > Yes </input>
-                                        <input type = "radio" name = "config_customer_approval" id = "config_customer_approval"
-                                        class = "form-control" value = "0" <?=$data['config_alert_mail']=="0"?"checked":""?>
-                                        > No </input>
+                                        <label class = "radio-inline">
+                                            <input type = "radio" name = "config_alert_mail" id = "config_alert_mail"
+                                             value = "1" <?=$data['config_alert_mail']=="1"?"checked":""?>>&nbsp; Yes &nbsp;
+                                        </label>&nbsp; &nbsp;
+                                        <label class = "radio-inline">
+                                            <input type = "radio" name = "config_alert_mail" id = "config_alert_mail"
+                                            value = "0" <?=$data['config_alert_mail']=="0"?"checked":""?>>&nbsp; No &nbsp;
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -555,12 +567,14 @@
                                         <span class="d-flex justify-content-end">Send a email to the store owner when a new account is registered.</span>
                                     </div>
                                     <div class="col-6 d-flex align-items-center">
-                                        <input type = "radio" name = "config_account_mail" id = "config_account_mail"
-                                        class = "form-control" value = "1" <?=$data['config_account_mail']=="1"?"checked":""?>
-                                        > Yes </input>
-                                        <input type = "radio" name = "config_account_mail" id = "config_account_mail"
-                                        class = "form-control" value = "0" <?=$data['config_account_mail']=="0"?"checked":""?>
-                                        > No </input>
+                                        <label class="radio-inline">
+                                            <input type = "radio" name = "config_account_mail" id = "config_account_mail"
+                                             value = "1" <?=$data['config_account_mail']=="1"?"checked":""?>>&nbsp; Yes &nbsp;
+                                        </label>&nbsp; &nbsp;
+                                        <label class="radio-inline">
+                                            <input type = "radio" name = "config_account_mail" id = "config_account_mail"
+                                             value = "0" <?=$data['config_account_mail']=="0"?"checked":""?>>&nbsp; No &nbsp;
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -585,12 +599,14 @@
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
-                                        <input type = "radio" name = "config_ssl" id = "config_ssl"
-                                        class = "form-control" value = "1" <?=$data['config_ssl']=="1"?"checked":""?>
-                                        > Yes </input>
-                                        <input type = "radio" name = "config_ssl" id = "config_ssl"
-                                        class = "form-control" value = "0" <?=$data['config_ssl']=="0"?"checked":""?>
-                                        > No </input>
+                                        <label class="radio-inline">
+                                            <input type = "radio" name = "config_ssl" id = "config_ssl"
+                                             value = "1" <?=$data['config_ssl']=="1"?"checked":""?>>&nbsp; Yes &nbsp;
+                                        </label>&nbsp; &nbsp;
+                                        <label class="radio-inline">
+                                            <input type = "radio" name = "config_ssl" id = "config_ssl"
+                                             value = "0" <?=$data['config_ssl']=="0"?"checked":""?>>&nbsp; No &nbsp;
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -601,12 +617,14 @@
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
-                                        <input type = "radio" name = "config_maintenance" id = "config_maintenance"
-                                        class = "form-control" value = "1" <?=$data['config_maintenance']=="1"?"checked":""?>
-                                        > Yes </input>
-                                        <input type = "radio" name = "config_maintenance" id = "config_maintenance"
-                                        class = "form-control" value = "0" <?=$data['config_maintenance']=="0"?"checked":""?>
-                                        > No </input>
+                                        <label class="radio-inline">
+                                            <input type = "radio" name = "config_maintenance" id = "config_maintenance"
+                                             value = "1" <?=$data['config_maintenance']=="1"?"checked":""?>>&nbsp; Yes &nbsp;
+                                        </label>&nbsp; &nbsp;
+                                        <label class="radio-inline">
+                                            <input type = "radio" name = "config_maintenance" id = "config_maintenance"
+                                             value = "0" <?=$data['config_maintenance']=="0"?"checked":""?>>&nbsp; No &nbsp;
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -631,12 +649,14 @@
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
-                                        <input type = "radio" name = "config_seo_url" id = "config_seo_url"
-                                        class = "form-control" value = "1" <?=$data['config_seo_url']=="1"?"checked":""?>
-                                        > Yes </input>
-                                        <input type = "radio" name = "config_seo_url" id = "config_seo_url"
-                                        class = "form-control" value = "0" <?=$data['config_seo_url']=="0"?"checked":""?>
-                                        > No </input>
+                                        <label class="radio-inline">
+                                            <input type = "radio" name = "config_seo_url" id = "config_seo_url"
+                                            value = "1" <?=$data['config_seo_url']=="1"?"checked":""?>>&nbsp; Yes &nbsp;
+                                        </label>&nbsp; &nbsp;
+                                        <label class="radio-inline">
+                                            <input type = "radio" name = "config_seo_url" id = "config_seo_url"
+                                             value = "0" <?=$data['config_seo_url']=="0"?"checked":""?>>&nbsp; No &nbsp;
+                                        </label>
                                     </div>
                                 </div>
 
@@ -660,12 +680,14 @@
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
-                                        <input type = "radio" name = "config_error_display" id = "config_error_display"
-                                        class = "form-control" value = "1" <?=$data['config_error_display']=="1"?"checked":""?>
-                                        > Yes </input>
-                                        <input type = "radio" name = "config_error_display" id = "config_error_display"
-                                        class = "form-control" value = "0" <?=$data['config_error_display']=="0"?"checked":""?>
-                                        > No </input>
+                                        <label class="radio-inline">
+                                            <input type = "radio" name = "config_error_display" id = "config_error_display"
+                                             value = "1" <?=$data['config_error_display']=="1"?"checked":""?>>&nbsp; Yes &nbsp;
+                                        </label>&nbsp; &nbsp;
+                                        <label class="radio-inline">
+                                            <input type = "radio" name = "config_error_display" id = "config_error_display"
+                                            value = "0" <?=$data['config_error_display']=="0"?"checked":""?>>&nbsp; No  &nbsp;
+                                        </label>
                                     </div>
                                 </div>
 
@@ -676,12 +698,14 @@
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
-                                        <input type = "radio" name = "config_error_log" id = "config_error_log"
-                                        class = "form-control" value = "1" <?=$data['config_error_log']=="1"?"checked":""?>
-                                        > Yes </input>
-                                        <input type = "radio" name = "config_error_log" id = "config_error_log"
-                                        class = "form-control" value = "0" <?=$data['config_error_log']=="0"?"checked":""?>
-                                        > No </input>
+                                        <label class="radio-inline">
+                                            <input type = "radio" name = "config_error_log" id = "config_error_log"
+                                             value = "1" <?=$data['config_error_log']=="1"?"checked":""?>>&nbsp; Yes &nbsp;
+                                        </label>&nbsp; &nbsp;
+                                        <label class="radio-inline">
+                                            <input type = "radio" name = "config_error_log" id = "config_error_log"
+                                             value = "0" <?=$data['config_error_log']=="0"?"checked":""?>>&nbsp; No &nbsp;
+                                        </label>
                                     </div>
                                 </div>
                                 
