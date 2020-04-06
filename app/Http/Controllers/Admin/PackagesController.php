@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Grade;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Package;
+use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -94,7 +96,15 @@ class PackagesController extends Controller
      */
     public function edit(Package $package)
     {
-        //
+        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
+        $grades = Grade::all();
+        $data = [
+            'students'  => $students,
+            'grades'    => $grades,
+            'package'   => $package
+        ];
+
+        return view('admin.packages.edit') -> with('data', $data);
     }
 
     /**
