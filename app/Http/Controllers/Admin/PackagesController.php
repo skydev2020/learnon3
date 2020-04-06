@@ -116,7 +116,49 @@ class PackagesController extends Controller
      */
     public function update(Request $request, Package $package)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name'              => ['required', 'string'],
+            'hours'             => ['required', 'string'],
+            'prepaid'           => ['required', 'integer'],
+            'student'           => ['nullable', 'integer'],
+            'grades'            => ['required', 'Array'],
+            'description'       => ['required', 'string'],
+            'price_canada'      => ['required', 'string'],
+            'price_usa'         => ['required', 'string'],
+            'price_others'      => ['required', 'string'],
+            'status'            => ['required', 'integer'],
+        ]);
+
+        if ($validator->fails())
+        {
+            $request->session()->flash('error', $validator->messages()->first());
+            return redirect(route('admin.packages.edit', $package));
+        }
+
+        $data = $request->all();
+        $package->name          = $data['name'];
+        $package->prepaid       = $data['prepaid'];
+        $package->student_id    = $data['student'];
+        $package->description   = $data['description'];
+        $package->price_can  = $data['price_canada'];
+        $package->price_usa     = $data['price_usa'];
+        $package->price_alb     = $data['price_others'];
+        $package->hours         = $data['hours'];        
+        $package->status        = $data['status'];
+        foreach ($data['grades'] as $grade)
+        {
+            $package->grades()->attach($grade);
+        }
+
+        if (!$package->save())
+        {
+            $request->session()->flash('error', "There was an error modifying package!");
+            return redirect(route('admin.users.assignments.create'));
+        }
+
+        $request->session()->flash('success', "You have modified information!");
+        $packages = Package::all();
+        return view('admin.packages.index')->with('packages', $packages);
     }
 
     /**

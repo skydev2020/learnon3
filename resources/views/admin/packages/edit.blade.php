@@ -7,9 +7,9 @@
             <div class="card">
                 <div class="card-header">{{ __('Packages') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.packages.store') }}">
+                    <form method="POST" action="{{ route('admin.packages.update', $data['package']) }}">
                         @csrf
-                        {{method_field('POST')}}
+                        {{method_field('PUT')}}
                         
                         <div class="form-group row mb-0">
                             <div class="col-1 offset-10">
@@ -62,10 +62,11 @@
                                 <label for="student" class="col-form-label">Assign to student:</label>
                             </div>
 
-                            <div class="col-4 d-flex align-items-center">
+                            <div class="col-3 d-flex align-items-center">
                                 <select id="student" name="student" class="form-control">
+                                    <option></option>
                                     @foreach ($data['students'] as $student)
-                                    <option <?=$student->id==$data['package']->user_id?'selected':''?>
+                                    <option <?=$student->id==$data['package']->student_id?'selected':''?>
                                     value = "{{$student->id}}">{{$student->fname . ' ' . $student->lname}}</option>
                                     @endforeach
                                 </select>
@@ -74,7 +75,7 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="grade" class="col-form-label">Grades:</label>
+                                <label for="grades" class="col-form-label">Grades:</label>
                             </div>
 
                             <div class="col-2 d-flex flex-column">
@@ -83,7 +84,8 @@
                                     <div>
                                         <input <?=in_array($grade->id, $data['package']->grades()
                                         ->get()->pluck('id')->toArray())?'checked':''?> type=
-                                        "checkbox" value = "{{$grade->id}}">&nbsp;{{$grade->name}}
+                                        "checkbox" value = "{{$grade->id}}" name = "grades[]"
+                                        >&nbsp;{{$grade->name}}
                                     </div>
                                     @endforeach
                                 </div>
