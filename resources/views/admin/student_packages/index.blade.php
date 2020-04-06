@@ -29,7 +29,7 @@
                                 <td scope="col">{{date('d/m/Y', strtotime($order->created_at))}}</td>
                                 <td scope="col">
                                     @can('edit-users')
-                                        <a href="{{route('admin.packages.create')}}"><button type="button" class="btn btn-primary float-left">Send Reminder</button></a>
+                                        [<a href="{{route('admin.student_packages.show', $order)}}">Send Reminder</a>]
                                     @endcan
                                 </td>
                             </tr>

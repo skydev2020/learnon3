@@ -7,9 +7,9 @@
             <div class="card">
                 <div class="card-header">{{ __('Packages') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.packages.store') }}">
+                    <form method="POST" action="{{ route('admin.packages.update', $data['package']) }}">
                         @csrf
-                        {{method_field('POST')}}
+                        {{method_field('PUT')}}
                         
                         <div class="form-group row mb-0">
                             <div class="col-1 offset-10">
@@ -27,7 +27,7 @@
 
                             <div class="col-4">
                                 <input  class="form-control" name="name" id = "name"
-                                 autocomplete="name" autofocus>
+                                 value="{{$data['package']->name}}" autocomplete="name" autofocus>
                             </div>
                         </div>
 
@@ -36,7 +36,7 @@
 
                             <div class="col-4">
                                 <input  class="form-control" name="hours" id = "hours"
-                                 autocomplete="hours" autofocus>
+                                 value="{{$data['package']->hours}}" autocomplete="hours" autofocus>
                             </div>
                         </div>
 
@@ -47,10 +47,12 @@
 
                             <div class="col-4 d-flex align-items-center">
                                 <label class = "radio-inline">
-                                    <input type="radio" name="prepaid" id="prepaid" value="1">&nbsp;Yes
+                                    <input type="radio" name="prepaid" id="prepaid" value="1"
+                                    <?= $data['package']->prepaid == "1" ? "checked" : "" ?>>&nbsp;Yes
                                 </label> &nbsp; &nbsp;
                                 <label class = "radio-inline">
-                                    <input type="radio" name="prepaid" id="prepaid" value="0">&nbsp;No
+                                    <input type="radio" name="prepaid" id="prepaid" value="0"
+                                    <?= $data['package']->prepaid == "0" ? "checked" : "" ?>>&nbsp;No
                                 </label>
                             </div>
                         </div>
@@ -64,7 +66,8 @@
                                 <select id="student" name="student" class="form-control">
                                     <option></option>
                                     @foreach ($data['students'] as $student)
-                                    <option value = "{{$student->id}}">{{$student->fname . ' ' . $student->lname}}</option>
+                                    <option <?=$student->id==$data['package']->student_id?'selected':''?>
+                                    value = "{{$student->id}}">{{$student->fname . ' ' . $student->lname}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -79,8 +82,10 @@
                                 <div id="subjects_box" class="scrollbox pl-1 pt-1 overflow-auto">
                                     @foreach ($data['grades'] as $grade)
                                     <div>
-                                        <input type="checkbox" value = "{{$grade->id}}" 
-                                        name = "grades[]" id="grades[]">&nbsp;{{$grade->name}}
+                                        <input <?=in_array($grade->id, $data['package']->grades()
+                                        ->get()->pluck('id')->toArray())?'checked':''?> type=
+                                        "checkbox" value = "{{$grade->id}}" name = "grades[]"
+                                        >&nbsp;{{$grade->name}}
                                     </div>
                                     @endforeach
                                 </div>
@@ -96,7 +101,7 @@
 
                             <div class = "col-6">
                                 <textarea class = "form-control inputstl" name="description" id="description" autofocus
-                                ></textarea>
+                                ><?php echo html_entity_decode($data['package']->description);?> </textarea>
                             </div>
                         </div>
 
@@ -105,7 +110,7 @@
 
                             <div class = "col-4">
                                 <input  class="form-control" name="price_usa" id = "price_usa"
-                                autocomplete="price_usa" autofocus>
+                                value="{{$data['package']->price_usa}}" autocomplete="price_usa" autofocus>
                             </div>
                         </div>
 
@@ -114,7 +119,7 @@
 
                             <div class = "col-4">
                                 <input  class="form-control" name="price_canada" id = "price_canada"
-                                autocomplete="price_canada" autofocus>
+                                value="{{$data['package']->price_can}}" autocomplete="price_canada" autofocus>
                             </div>
                         </div>
 
@@ -123,7 +128,7 @@
 
                             <div class = "col-4">
                                 <input  class="form-control" name="price_others" id="price_others"
-                                autocomplete="price_others" autofocus>
+                                value="{{$data['package']->price_alb}}" autocomplete="price_others" autofocus>
                             </div>
                         </div>
 
@@ -133,10 +138,12 @@
 
                             <div class="col-4 d-flex align-items-center">
                                 <label class = "radio-inline">
-                                    <input type="radio" name="status" id="status" value="1">&nbsp;Enable
+                                    <input type="radio" name="status" id="status" value="1"
+                                    <?= $data['package']->status>0?"checked":"" ?>>&nbsp;Enable
                                 </label> &nbsp; &nbsp;
                                 <label class = "radio-inline">
-                                    <input type="radio" name="status" id="status" value="0">&nbsp;Disable
+                                    <input type="radio" name="status" id="status" value="0"
+                                    <?= $data['package']->status<=0?"checked":"" ?>>&nbsp;Disable
                                 </label>
                             </div>
                         </div>

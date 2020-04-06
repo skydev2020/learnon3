@@ -53,7 +53,7 @@
                                 <td scope="col">{{$package->price_alb}}</td>
                                 <td scope="col">
                                     @can('manage-students')
-                                        [<a href="{{route('admin.packages.create')}}">Edit</a>]
+                                        [<a href="{{route('admin.packages.edit', $package)}}">Edit</a>]
                                     @endcan
                                     @can('manage-students')
                                     <form action="{{ route('admin.packages.destroy', $package) }}" method="POST" class="float-left">
