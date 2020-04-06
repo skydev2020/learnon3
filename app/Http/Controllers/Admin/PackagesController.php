@@ -30,7 +30,15 @@ class PackagesController extends Controller
      */
     public function create()
     {
-        return view('admin.packages.create');
+        if (Gate::denies('manage-students')) return redirect()->route('admin.packages.index');
+
+        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
+        $grades = Grade::all();
+        $data = [
+            'students'  => $students,
+            'grades'    => $grades
+        ];
+        return view('admin.packages.create') -> with('data', $data);
     }
 
     /**
@@ -140,7 +148,7 @@ class PackagesController extends Controller
         $package->prepaid       = $data['prepaid'];
         $package->student_id    = $data['student'];
         $package->description   = $data['description'];
-        $package->price_can  = $data['price_canada'];
+        $package->price_can     = $data['price_canada'];
         $package->price_usa     = $data['price_usa'];
         $package->price_alb     = $data['price_others'];
         $package->hours         = $data['hours'];        
