@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">{{ __('Create an Assignment') }}</div>
+                <div class="card-header user font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create an Assignment</div>
                 <div class="card-body">
                     <form action="{{route('admin.assignments.store')}}" method="POST">
                         @csrf

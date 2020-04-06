@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Students</div>
+                <div class="card-header user font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Students</div>
 
                 <div class="card-body">
                     <div class="form-group row">
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="col-6 d-flex flex-column">
-                            <div class="scrollbox pl-1 pt-1 font-weight-bold" id="subjects_box" name = "subjects_box">
+                            <div class="scrollbox pl-1 pt-1 font-weight-bold overflow-auto" id="subjects_box" name = "subjects_box">
                                 @foreach ($data['student']->subjects()->get() as $subject)
                                 <div>
                                     <input type = "checkbox" checked>{{$subject->name}}

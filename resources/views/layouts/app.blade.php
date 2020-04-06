@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" id = "title-bar">
             <div class="container" >
                 <a class="navbar-brand" href="{{ url('/') }}" src = "{{ asset('/images/logo3.png') }}">
-                    <img src = "{{ asset('/images/logo3.png') }}" alt = "Learnon" style = "width:120px; height:50px;">
+                    <img src = "{{ asset('/images/logo3.png') }}" alt = "Learnon" style = "width:140px; height:50px;">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -37,16 +37,16 @@
                     <ul class="navbar-nav mr-auto">
                         @auth
                             <li class="nav-item {{Request::is('home') ? 'active' : '' }}">
-                                <a class="tc-white nav-link" href="{{route('home')}}">Home</a>
+                                <a class="tc-white nav-link font-weight-bold" href="{{route('home')}}">Home</a>
                             </li>
                             @can('manage-users')
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('admin.myprofile.index')}}">My Profile</a>
+                                <a class="tc-white nav-link font-weight-bold" href="{{route('admin.myprofile.index')}}">My Profile</a>
                             </li>
                             @endcan
                             @can('manage-students')
                             <li class="nav-item dropdown {{in_array(Request::segment(2), ["students", "assignments", "student_packages", "packages"]) ? 'active' : '' }}">
-                                <a class="tc-white nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white nav-link font-weight-bold dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Students
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -58,8 +58,8 @@
                             </li>
                             @endcan
                             @can('manage-tutors')
-                            <li class="nav-item dropdown  {{in_array(Request::segment(2), ["tutors", "sessions"]) ? 'active' : '' }}">
-                                <a class="tc-white nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item dropdown {{in_array(Request::segment(2), ["tutors", "sessions"]) ? 'active' : '' }}">
+                                <a class="tc-white font-weight-bold nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Tutors
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -72,8 +72,8 @@
                             </li>
                             @endcan
                             @can('manage-payments')
-                            <li class="nav-item dropdown">
-                                <a class="tc-white nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item dropdown font-weight-bold">
+                                <a class="tc-white font-weight-bold nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Payments
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -98,38 +98,38 @@
                             @endcan
                             @can('manage-payment-records')
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('tutor.myprofile.index')}}">My Profile</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('tutor.myprofile.index')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('tutor.paymentrecords.index')}}">Payment Records</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('tutor.paymentrecords.index')}}">Payment Records</a>
                             </li>
                             @endcan
                             @can('manage-tutor-students')
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('tutor.students.index')}}">List Students</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('tutor.students.index')}}">List Students</a>
                             </li>
                             @endcan
                             @can('manage-student-tutors')
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('student.myprofile.index')}}">Account info</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('student.myprofile.index')}}">Account info</a>
                             </li>
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('student.tutors.index')}}">My Tutors</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('student.tutors.index')}}">My Tutors</a>
                             </li>
                             @endcan
                             @can('manage-invoices')
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('student.invoices.index')}}">Invoices</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('student.invoices.index')}}">Invoices</a>
                             </li>
                             @endcan
                             @can('manage-add-student')
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('student.children.index')}}">Add Student</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('student.children.index')}}">Add Student</a>
                             </li>
                             @endcan
                             @can('manage-cms')
                             <li class="nav-item dropdown">
-                                <a class="tc-white nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white font-weight-bold nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     CMS
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -152,12 +152,12 @@
                             @endcan
                             @can('manage-essay')
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('tutor.essays.index')}}">Essays</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('tutor.essays.index')}}">Essays</a>
                             </li>
                             @endcan
                             @can('manage-reports')
                             <li class="nav-item dropdown">
-                                <a class="tc-white nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white font-weight-bold nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Reports
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -174,12 +174,12 @@
                             @endcan
                             @can('manage-sessions')
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('tutor.sessions.index')}}">My Sessions</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('tutor.sessions.index')}}">My Sessions</a>
                             </li>
                             @endcan
                             @can('manage-system')
                             <li class="nav-item dropdown">
-                                <a class="tc-white nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white font-weight-bold nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     System
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -203,26 +203,26 @@
                             @endcan
                             @can('manage-discount-package')
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('student.packages.index')}}">Buy Discount Package</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('student.packages.index')}}">Buy Discount Package</a>
                             </li>
                             @endcan
                             @can('manage-student-reports')
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('student.progressreports.index')}}">Report Cards</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('student.progressreports.index')}}">Report Cards</a>
                             </li>
                             @endcan
                             @can('manage-report-cards')
                             <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('tutor.reportcards.index')}}">Report Cards</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('tutor.reportcards.index')}}">Report Cards</a>
                             </li>
                             @endcan
                             @can('manage-tutoring-resource')
                             <li class="nav-item">
-                                <a class="tc-white nav-link" target="_blank" href="http://learnon.ca/tutor-help-center/">Tutoring Resources</a>
+                                <a class="tc-white font-weight-bold nav-link" target="_blank" href="http://learnon.ca/tutor-help-center/">Tutoring Resources</a>
                             </li>
                             @endcan
                                 <li class="nav-item">
-                                <a class="tc-white nav-link" href="{{route('admin.help.index')}}">Help</a>
+                                <a class="tc-white font-weight-bold nav-link" href="{{route('admin.help.index')}}">Help</a>
                             </li>
                         @endauth
                     </ul>

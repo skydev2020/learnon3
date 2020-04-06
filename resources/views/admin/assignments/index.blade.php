@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">{{ __('Student Assignments') }}</div>
+                <div class="card-header user font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Student Assignments</div>
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.assignments.index') }}">
                         @csrf
