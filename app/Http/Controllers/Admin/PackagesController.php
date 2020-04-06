@@ -64,7 +64,7 @@ class PackagesController extends Controller
 
         if ($validator->fails())
         {
-            $request->session()->flash('error', "There was an error creating new package");
+            $request->session()->flash('error', $validator->messages()->first());
             return redirect(route('admin.users.assignments.create'));
         }
 
