@@ -50,13 +50,16 @@ class PackagesController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name'             => ['required', 'string'],
-            'description'      => ['required', 'string'],
-            'price_canada'     => ['required', 'string'],
-            'price_usa'        => ['required', 'string'],
-            'price_others'     => ['required', 'string'],
-            'hours'            => ['required', 'string'],
-            'status'           => ['required', 'string'],
+            'name'              => ['required', 'string'],
+            'hours'             => ['required', 'string'],
+            'prepaid'           => ['required', 'integer'],
+            'student'           => ['nullable', 'integer'],
+            'grades'            => ['required', 'Array'],
+            'description'       => ['required', 'string'],
+            'price_canada'      => ['required', 'string'],
+            'price_usa'         => ['required', 'string'],
+            'price_others'      => ['required', 'string'],
+            'status'            => ['required', 'integer'],
         ]);
 
         if ($validator->fails())
@@ -68,19 +71,27 @@ class PackagesController extends Controller
         $data = $request->all();
         $package = Package::create([
             'name'              => $data['name'],
+            'prepaid'           => $data['prepaid'],
+            'student_id'        => $data['student'],
             'description'       => $data['description'],
-            'price_canada'      => $data['price_canada'],
+            'price_can'         => $data['price_canada'],
             'price_usa'         => $data['price_usa'],
             'price_alb'         => $data['price_others'],
             'hours'             => $data['hours'],
+            'status'            => $data['status']
         ]);
 
         if ($package == NULL)
         {
-            $request->session()->flash('error', "There was an error creating the assignment");
-            return redirect(route('admin.users.assignments.create'));
+            $request->session()->flash('error', "There was an error creating the package");
+            return redirect(route('admin.packages.create'));
         }
 
+        foreach ($data['grades'] as $grade)
+        {
+            $package->grades()->attach($grade);
+        }
+        $package->save();
         $request->session()->flash('success', "The Package has been created successfully");
         $packages = Package::all();
         return view('admin.packages.index')->with('packages', $packages);
