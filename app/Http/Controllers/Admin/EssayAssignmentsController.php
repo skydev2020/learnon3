@@ -23,6 +23,7 @@ class EssayAssignmentsController extends Controller
      */
     public function index(Request $request)
     {
+
         $request_data = $this->validate($request, [
             'a_id'              => 'nullable|integer',
             's_name'            => 'nullable|string',
