@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Rate;
 use App\Role;
+use App\Subject;
 use Config;
 use App\User;
 
@@ -127,10 +128,12 @@ class TutorAssignmentsController extends Controller
         $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()->get();
         $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
         $rates = Rate::all();
+        $subjects = Subject::all();
         $data = [
             'assignment'    => $tutorassignment,
             'tutors'        => $tutors,
             'students'      => $students,
+            'subjects'      => $subjects,
             'rates'         => $rates,
         ];
         return view('admin.tutorassignments.edit')->with(['data' => $data]);

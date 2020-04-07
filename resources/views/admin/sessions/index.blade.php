@@ -32,8 +32,8 @@
                             <div class="col-md-6">
                                 <select id = "session_duration" name = "session_duration" class = "form-control">
                                     <option></option>
-                                    @foreach ($data['session_durations'] as $duration)
-                                        <option> {{$duration}} </option>
+                                    @foreach ($data['session_durations'] as $key => $value)
+                                    <option value = "{{$key}}"> {{$value}} </option>
                                     @endforeach
                                 </select>
                             </div>
