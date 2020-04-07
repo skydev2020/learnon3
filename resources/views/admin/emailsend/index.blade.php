@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Send Email</div>
+                <div class="card-header">
+                    <i class="fas fa-envelope-open-text" style="font-size:24px"> Send Email</i>
+                </div>
                 <div class="card-body">
                     <form action="{{route('admin.emailsend.send')}}" method="GET">
                         <div class = "form-group row">
