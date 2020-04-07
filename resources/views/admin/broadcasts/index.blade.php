@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Email Templates</div>
+                <div class="card-header">
+                    <i class="fa fa-info-circle" style="font-size:24px;"> Email Templates</i>
+                </div>
                 <div class="card-body">
                     <form action="{{ route('admin.broadcasts.create') }}">
                         <div class="form-group row mb-0">
