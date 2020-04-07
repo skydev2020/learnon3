@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">{{ __('Student Packages') }}</div>
+                <div class="card-header information font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Packages</div>
                 <div class="card-body">
                     <form action="{{ route('admin.packages.create') }}">
                         <div class="form-group row mb-0">
