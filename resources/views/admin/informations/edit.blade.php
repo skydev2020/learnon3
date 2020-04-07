@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Information</div>
+                <div class="card-header">
+                    <i class="fa fa-info-circle" style="font-size:24px;"> Information</i>
+                </div>
                 <div class="card-body">
                 <form method="POST" action="{{ route('admin.informations.update', $data['information']) }}">
                         @csrf
