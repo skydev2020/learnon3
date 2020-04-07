@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-8">
             <div class="card">
-                <div class="card-header">Base Invoice Rates</div>
+                <div class="card-header">
+                    <i class="fa fa-address-book" style="font-size:24px;"> Base Invoice Rates</i>
+                </div>
                 <div class="card-body">
                 <form method="POST" action="{{ route('admin.defaultwages.update', $defaultwage) }}">
                         @csrf
