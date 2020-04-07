@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Tutor Paycheques</div>
+                <div class="card-header">
+                    <i class = "far fa-newspaper" style="font-size:24px;"> Payments Received</i>
+                </div>
                 <div class="card-body">
                     <ul class = "nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#tab_order">Order Details</a></li>

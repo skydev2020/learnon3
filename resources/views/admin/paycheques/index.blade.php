@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Tutor Paycheques</div>
+                <div class="card-header">
+                    <i class = "fa fa-info-circle" style="font-size:24px;">Tutor Paycheques</i>
+                </div>
 
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.paycheques.index') }}">
