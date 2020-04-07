@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Monthly Expenses</div>
+                <div class="card-header">
+                    <i class="fa fa-address-book" style="font-size:24px;">Monthly Expenses</i>
+                </div>
 
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.expenses.index') }}">
