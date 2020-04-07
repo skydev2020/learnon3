@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header" style = "text-align:center;">{{ __('Update EssayAssignment') }}</div>
+                <div class="card-header information font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update EssayAssignment</div>
                 <div class="card-body">
                     <form action="{{route('admin.essayassignments.update', $data['essayassignment'])}}" method="POST">
 
