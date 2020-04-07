@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Billing Process</div>
+                <div class="card-header information font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Billing Process</div>
 
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.process.index') }}">
