@@ -60,8 +60,12 @@ class SessionsController extends Controller
         } else $request_data['session_duration'] = "";
 
         $sessions = $sessions->get();
-        $session_durations = $this->getAllDurations();
-
+        $session_durations = Array();
+        foreach(Session::all() as $session)
+        {
+            $session_durations[$session->session_duration] = Session::getDuration($session->session_duration);
+        }
+        ksort($session_durations);
         $data = [
             'sessions'          => $sessions,
             'session_durations' => $session_durations,
