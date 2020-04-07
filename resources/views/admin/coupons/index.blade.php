@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Coupon</div>
+                <div class="card-header">
+                    <i class="fa fa-info-circle" style="font-size:24px;"> Coupon</i>
+                </div>
                 <div class="card-body">
                     <form action="{{ route('admin.coupons.create') }}">
                         <div class="form-group row mb-0">
