@@ -54,14 +54,17 @@ class SessionsController extends Controller
         } else $request_data['t_name'] = "";
 
         if (isset($request_data['session_duration'])) {
-            $durations = $this->getAllDurations();
-            $session_duration = array_search($request_data['session_duration'], $durations);
-            $sessions = $sessions->where('session_duration', 'like', $session_duration);
+           $sessions = $sessions->where('session_duration', 'like', $request_data['session_duration']);
         } else $request_data['session_duration'] = "";
 
         $sessions = $sessions->get();
-        $session_durations = $this->getAllDurations();
-
+        $session_durations = Array();
+        foreach(Session::all() as $session)
+        {
+            if ($session->session_duration < 0.50) continue;
+            $session_durations[$session->session_duration] = Session::getDuration($session->session_duration);
+        }
+        ksort($session_durations);
         $data = [
             'sessions'          => $sessions,
             'session_durations' => $session_durations,

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">{{ __('Edit An Assignment') }}</div>
+                <div class="card-header user font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit An Assignment</div>
                 <div class="card-body">
                     <form action="{{route('admin.assignments.update', $data['assignment'])}}" method="POST">
                         @csrf

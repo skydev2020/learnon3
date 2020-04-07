@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Tutor Paycheques</div>
+                <div class="card-header">
+                    <i class = "far fa-newpaper" style="font-size:24px;">Tutor Paycheques</i>
+                </div>
                 <div class="card-body">
                     <form action="{{route('admin.paycheques.update', $paycheque)}}" method="POST">
                         <div class="form-group row">

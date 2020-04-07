@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">{{ __('Packages') }}</div>
+                <div class="card-header information font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Packages</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.packages.update', $data['package']) }}">
                         @csrf

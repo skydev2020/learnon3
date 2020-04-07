@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Payments Received</div>
+                <div class="card-header">
+                    <i class = "far fa-newspaper" style="font-size:24px;"> Payments Received</i>
+                </div>
 
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.receivedpayments.index') }}">

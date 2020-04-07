@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Update Tutor Details</div>
+                <div class="card-header user font-weight-bold">Update Tutor Details</div>
                 <div class="card-body">
                     <form action="{{route('admin.rejectedtutors.update', $tutor)}}" method="POST">
                         <div class="form-group row">

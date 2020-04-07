@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">{{ __('Manage Sessions') }}</div>
+                <div class="card-header user font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manage Sessions</div>
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.sessions.index') }}">
                         @csrf
@@ -32,8 +32,8 @@
                             <div class="col-md-6">
                                 <select id = "session_duration" name = "session_duration" class = "form-control">
                                     <option></option>
-                                    @foreach ($data['session_durations'] as $duration)
-                                        <option> {{$duration}} </option>
+                                    @foreach ($data['session_durations'] as $key => $value)
+                                    <option value = "{{$key}}"> {{$value}} </option>
                                     @endforeach
                                 </select>
                             </div>

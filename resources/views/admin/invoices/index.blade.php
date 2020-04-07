@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Student Invoices</div>
+                <div class="card-header font-weight-bold">
+                    <i class = "fa fa-info-circle" style="font-size:24px;">Student Invoices</i>
+                </div>
 
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.invoices.index') }}">

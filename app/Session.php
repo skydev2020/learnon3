@@ -14,6 +14,38 @@ class Session extends Model
         return $this->belongsTo('App\Assignment', 'assignment_id');
     }
 
+    public static function getDuration($session_duration)
+    {
+        $splitted = explode('.', $session_duration);
+        $hours = "";
+        switch((integer)$splitted[0])
+        {
+            case 0:
+                $hours = "";
+            break;
+            case 1:
+                $hours = (string)$splitted[0] . ' Hour';
+            break;
+            default:
+                $hours = (string)$splitted[0] . ' Hours';
+        break;
+        }
+
+        $minutes = "";
+        if (isset($splitted[1]))
+        {
+            if ((integer)$splitted[1] == 0) $minutes = "";
+            else{
+                if ($splitted[1] < 10) $splitted[1] *= 10;
+
+                if ($hours == "") $minutes = (string)($splitted[1] * 0.6) . ' Minutes';
+                else $minutes = ' + ' . (string)($splitted[1] * 0.6) . ' Minutes';
+            }
+        }
+
+        return $hours . $minutes;
+    }
+
     public static function getAllDurations(){
 		return Array(
             "0.50"=>"30 Minutes",

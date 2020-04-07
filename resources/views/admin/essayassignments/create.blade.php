@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header" style = "text-align:center;">{{ __('Homework Assignments') }}</div>
+                <div class="card-header information font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Homework Assignments</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.essayassignments.store') }}">
                         @csrf

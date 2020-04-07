@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header" style = "text-align:center;">{{ __('Update Assignment') }}</div>
+                <div class="card-header user font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update Assignment</div>
                 <div class="card-body">
                     <form action="{{route('admin.tutorassignments.update', $data['assignment'])}}" method="POST">
 
@@ -61,8 +61,15 @@
                         </div>
                         <div style = "display:flex;">
                             <div class = "form-group row col-md-4">
-                                <b>    Subject(s) Assigned     </b>
-                                <textarea name = "subject_value" id="subject_value"> {{ $data['assignment']->subjects }} </textarea>
+                                <div class="scrollbox pl-1 pt-1 overflow-auto" name="subjects_box" id="subjects_box">
+                                    @foreach ($data['subjects'] as $subject)
+                                    <div>
+                                        <input <?=in_array($subject->id, $data['assignment']->subjects()->get()->pluck('id')->toArray())?'checked':''?>
+                                        value = "{{$subject->id}}", type = "checkbox" name="subjects[]" id="subjects[]">
+                                        {{$subject->name}}
+                                    </div>
+                                    @endforeach
+                                </div>
                             </div>
                             <div style = "display:block;">
                                 <div class = "form-group">

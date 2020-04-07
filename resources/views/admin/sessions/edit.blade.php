@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-10">
             <div class="card">
-                <div class="card-header" style = "text-align:center;">{{ __('Update Session Details') }}</div>
+                <div class="card-header user font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Update Session Details</div>
                 <div class="card-body">
                     <form action="{{route('admin.sessions.update', $data['session'])}}" method="POST">
 

@@ -6,7 +6,7 @@
         <div class="col-12">
 
             <div class="card">
-                <div class="card-header">{{ __('Student Packages') }}</div>
+                <div class="card-header information font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Student Packages</div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped" id = "mytable">
                         <thead>
