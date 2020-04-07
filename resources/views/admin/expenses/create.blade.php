@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-address-book" style="font-size:24px;">Add an Expense</i>
+                    <i class="fa fa-address-book" style="font-size:24px;"> Add an Expense</i>
                 </div>
                 <div class="card-body">
                 <form method="POST" action="{{ route('admin.expenses.store') }}">

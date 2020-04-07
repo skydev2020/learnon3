@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-address-book" style="font-size:24px;">Monthly Expenses</i>
+                    <i class="fa fa-address-book" style="font-size:24px;"> Monthly Expenses</i>
                 </div>
 
                 <div class="card-body">
