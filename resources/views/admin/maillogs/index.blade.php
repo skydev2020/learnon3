@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Mail Log</div>
+                <div class="card-header">
+                    <i class="fa fa-info-circle" style="font-size:24px;"> Mail Log</i>
+                </div>
 
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.maillogs.index') }}">
