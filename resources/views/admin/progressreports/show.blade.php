@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Activity Log</div>
+                <div class="card-header">
+                    <i class="fas fa-address-book" style="font-size:24px"> View Progress Report</i>
+                </div>
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-3 d-flex justify-content-end align-items-center">
