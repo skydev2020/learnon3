@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">View Student Hours</div>
+                <div class="card-header">
+                    <i class="fas fa-address-book" style="font-size:24px"> View Student Hours </i>
+                </div>
 
                 <div class="card-body">
                     <table class="table table-bordered table-striped">

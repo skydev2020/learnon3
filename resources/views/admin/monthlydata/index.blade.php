@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">View Monthly Data</div>
+                <div class="card-header">
+                    <i class="fab fa-slideshare" style="font-size:24px"> Report Card for Students/Parents</i>
+                </div>
 
                 <div class="card-body">
                     <div class="col-8 offset-1">

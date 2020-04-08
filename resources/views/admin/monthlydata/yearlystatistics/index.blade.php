@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">View Yearly Statistics</div>
+                <div class="card-header">
+                    <i class="fas fa-user-tie" style="font-size:24px;">View Monthly Statistics</i>
+                </div>
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.yearlystatistics.index') }}">
                         @csrf
