@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-10">
             <div class="card">
-                <div class="card-header">My Account Information</div>
+                <div class="card-header">
+                    <i class="fas fa-user-tie" style="font-size:24px;"> My Account Information</i>
+                </div>
                 <div class="card-body">
                     <form action="{{route('tutor.myprofile.update', $data['myuser'])}}" method="POST">
                         <div class="form-group row">
