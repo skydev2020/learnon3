@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Packages</div>
+                <div class="card-header">
+                    <i class="fa fa-info-circle" style="font-size:24px;"> Packages</i>
+                </div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
