@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-10">
             <div class="card">
-                <div class="card-header">Add another student to account</div>
+                <div class="card-header">
+                    <i class="fas fa-user-tie" style="font-size:24px;"> Add another student to account</i>
+                </div>
                 <div class="card-body">
                     <form action="{{route('student.children.store')}}" method="POST">
                         @csrf
