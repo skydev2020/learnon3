@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Student Details</div>
+                <div class="card-header">
+                    <i class="fas fa-user-tie" style="font-size:24px;"> Student Details</i>
+                </div>
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-3 d-flex justify-content-end align-items-center">
