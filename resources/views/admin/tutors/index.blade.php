@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header user font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tutors</div>
+                <div class="card-header">
+                    <i class="fas fa-user-tie" style="font-size:24px"> Tutors</i>
+                </div>
 
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.tutors.index') }}">
