@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Country</div>
+                <div class="card-header">
+                    <i class="fa fa-globe" style="font-size:24px"> Country</i>
+                </div>
                 <div class="card-body">
                     <form action="{{ route('admin.countries.create') }}">
                         <div class="form-group row mb-0">
