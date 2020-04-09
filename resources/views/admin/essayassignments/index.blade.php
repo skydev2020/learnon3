@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header information font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Homework Assignments</div>
+                <div class="card-header">
+                    <i class="fa fa-info-circle" style="font-size:24px"> Homework Assignments</i>
+                </div>
                 <div class="card-body">
                     <form method="GET" action="{{ route('admin.essayassignments.index') }}">
                         @csrf
