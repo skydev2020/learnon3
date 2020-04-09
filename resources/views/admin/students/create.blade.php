@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Students</div>
+                <div class="card-header">
+                    <i class="fas fa-user-tie" style="font-size:24px"> Students</i>
+                </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.students.store') }}" onsubmit="return submitOnValid()">

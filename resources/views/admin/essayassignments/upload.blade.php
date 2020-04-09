@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-8">
             <div class="card">
-                <div class="card-header information font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Homework Assignments</div>
+                <div class="card-header">
+                    <i class="fa fa-info-circle" style="font-size:24px"> Homework Assignments</i>
+                </div>
                 <div class="card-body">
                 <form method="post" action="{{ route('admin.essayassignments.upload_csv') }}" enctype = "multipart/form-data">
                         @csrf

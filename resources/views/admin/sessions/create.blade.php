@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header user font-weight-bold" >$nbsp;$nbsp;$nbsp;$nbsp;$nbsp;$nbsp;Log Hours</div>
+                <div class="card-header">
+                    <i class="fas fa-user-tie" style="font-size:24px"> Log Hours</i>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.sessions.store') }}">
                         @csrf
@@ -29,7 +31,7 @@
                             </div>
                         </div>
 
-                        <<div class="form-group row">
+                        <div class="form-group row">
                             <label for="session_date" class="col-md-4 col-form-label text-md-right">{{ __('Date of Session:') }}</label>
 
                             <div class="col-md-5">

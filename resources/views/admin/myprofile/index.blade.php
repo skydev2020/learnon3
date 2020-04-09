@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-8">
             <div class="card">
-                <div class="card-header user font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My Profile</div>
+                <div class="card-header">
+                    <i class="fas fa-user-tie" style="font-size:24px"> My Profile</i>
+                </div>
                 <div class="card-body">
                     <form action="{{route('admin.myprofile.update', $myuser)}}" method="POST">
                         
