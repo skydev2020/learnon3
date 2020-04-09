@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Error Log</div>
+                <div class="card-header">
+                    <i class="fa fa-file-text" style="font-size:24px"> Error Log</i>
+                </div>
                 <div class="card-body">
                     <form action="{{ route('admin.errorlogs.clear') }}">
                         <div class="form-group row mb-0">
