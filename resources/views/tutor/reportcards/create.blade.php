@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Tutor Progress Report</div>
+                <div class="card-header">
+                    <i class="fas fa-user-tie" style="font-size:24px;"> Tutor Progress Report</i>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('tutor.reportcards.store') }}">
                         @csrf
