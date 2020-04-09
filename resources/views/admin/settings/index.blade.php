@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Settings</div>
+                <div class="card-header">
+                    <i class="fa fa-cogs" aria-hidden="true" style = "font-size:24px"> Settings</i>
+                </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.settings.store') }}">
                         @csrf

@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Province/State</div>
+                <div class="card-header">
+                    <i class="fa fa-globe" style="font-size:24px"> Province / State</i>
+                </div>
                 <div class="card-body">
                 <form method="POST" action="{{ route('admin.states.update', $state) }}">
                         @csrf
