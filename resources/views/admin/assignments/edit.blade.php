@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header user font-weight-bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Edit An Assignment</div>
+                <div class="card-header">
+                    <i class="fas fa-user-tie" style="font-size:24px"> Edit an Assignment</i>
+                </div>
                 <div class="card-body">
                     <form action="{{route('admin.assignments.update', $data['assignment'])}}" method="POST">
                         @csrf
