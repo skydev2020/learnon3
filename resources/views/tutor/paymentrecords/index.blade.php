@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Payment Records</div>
+                <div class="card-header">
+                    <i class="fa fa-info-circle" style="font-size:24px;"> Payment Records</i>
+                </div>
 
                 <div class="card-body">
                     @foreach ($data as $key => $value)
