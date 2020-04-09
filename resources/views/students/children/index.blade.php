@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Add another student to account</div>
+                <div class="card-header">
+                    <i class="fa fa-address-book" style="font-size:24px;"> Add another student to account</i>
+                </div>
                 <div class="card-body">
                     <div class = "form-group row">
                         <div class = "col-1 offset-11">

@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">My Tutors</div>
+                <div class="card-header">
+                    <i class="fas fa-user-tie" style="font-size:24px;"> My Tutors</i>
+                </div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>

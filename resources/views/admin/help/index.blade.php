@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">Help</div>
+                <div class="card-header">
+                    <i class="fa fa-info-circle" style="font-size:24px"> Help</i>
+                </div>
                 <div class="card-body">
                     Administrator Help Section
                 </div>
