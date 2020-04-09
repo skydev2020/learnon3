@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Update Session Details</div>
+                <div class="card-header">
+                    <i class="fas fa-user-tie" style="font-size:24px;"> Update Session Details</i>
+                </div>
                 <div class="card-body">
                 <form method="POST" action="{{ route('tutor.sessions.update', $data['session']) }}">
                         @csrf
