@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Country;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
+use App\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class TutorsController extends Controller
 {
@@ -124,11 +128,12 @@ class TutorsController extends Controller
             return redirect(route('admin.tutors.index'));
         }
 
-        $roles = Role::all();
-        return view('admin.tutors.edit')->with([
-            'tutor' => $tutor,
-            'roles' => $roles
-        ]);
+        $data = [
+            'tutor'     => $tutor,
+            'states'    => State::all(),
+            'countries' => Country::all()
+        ];
+        return view('admin.tutors.edit')->with('data', $data);
     }
 
     /**
@@ -140,20 +145,75 @@ class TutorsController extends Controller
      */
     public function update(Request $request, User $tutor)
     {
-        $tutor->roles()->sync($request->roles);
+        if (Gate::denies('edit-users')) {
+            return redirect(route('admin.tutors.index'));
+        }
 
-        $tutor->fname = $request->fname;
-        $tutor->lname = $request->lname;
-        $tutor->email = $request->email;
-        if ($request->approved) $tutor->approved = $request->approved;
-        if ($request->status) $tutor->status = $request->status;
+        $validator = Validator::make($request->all(), [
+            'fname'                 => ['required', 'string', 'max:255'],
+            'lname'                 => ['required', 'string', 'max:255'],
+            'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'              => ['required', 'string', 'min:1', 'confirmed'],
+            'home_phone'            => ['required', 'string'],
+            'cell_phone'            => ['required', 'string'],
+            'address'               => ['required', 'string'],
+            'city'                  => ['required', 'string'],
+            'state_id'              => ['required', 'integer'],
+            'pcode'                 => ['required', 'string'],
+            'country_id'            => ['required', 'integer'],
+            'other_notes'           => ['required', 'string'],
+            'post_secondary_edu'    => ['required', 'string'],
+            'subjects_studied'      => ['required', 'string'],
+            'tutoring_courses'      => ['required', 'string'],
+            'work_experience'       => ['required', 'string'],
+            'tutoring_areas'        => ['required', 'string'],
+            'references'            => ['required', 'string'],
+            'gender'                => ['required', 'string'],
+            'certified_teacher'     => ['required', 'string'],
+            'criminal_record'       => ['required', 'string'],
+            'criminal_check'        => ['required', 'string'],
+            'approved'              => ['required', 'integer'],
+            'status'                => ['required', 'integer'],
+        ]);
+        if ($validator->fails())
+        {
+            session()->flash('error', $validator->messages()->first());
+            return redirect()->route('admin.tutors.edit', $tutor);
+        }
+        $data = $request->all();
+
+        $tutor->fname = $data['fname'];
+        $tutor->lname = $data['lname'];
+        $tutor->email = $data['email'];
+        $tutor->password = Hash::make($data['password']);
+        $tutor->home_phone = $data['home_phone'];
+        $tutor->cell_phone = $data['cell_phone'];
+        $tutor->address = $data['address'];
+        $tutor->city = $data['city'];
+        $tutor->state_id = $data['state_id'];
+        $tutor->pcode = $data['pcode'];
+        $tutor->country_id = $data['country_id'];
+        $tutor->other_notes = $data['other_notes'];
+        $tutor->post_secondary_edu = $data['post_secondary_edu'];
+        $tutor->subjects_studied = $data['subjects_studied'];
+        $tutor->tutoring_courses = $data['tutoring_courses'];
+        $tutor->work_experience = $data['work_experience'];
+        $tutor->tutoring_areas = $data['tutoring_areas'];
+        $tutor->references = $data['references'];
+        $tutor->gender = $data['gender'];
+        $tutor->certified_teacher = $data['certified_teacher'];
+        $tutor->criminal_record = $data['criminal_record'];
+        $tutor->criminal_check = $data['criminal_check'];
+        $tutor->approved = $data['approved'];
+        $tutor->status = $data['status'];
+
         if ($tutor->save()){
             $request->session()->flash('success', $tutor->fname . ' ' . $tutor->lname .' has been updated');
         } else {
             $request->session()->flash('error', 'There was an error updating the tutor');
+            return redirect()->route('admin.tutors.edit', $tutor);
         }
-        
-        //dd($user->fname);
+
         return redirect()->route('admin.tutors.index');
     }
 
