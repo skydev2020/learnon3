@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
 use App\State;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
@@ -188,9 +189,9 @@ class TutorsController extends Controller
      */
     public function show(User $tutor)
     {
-        return view('admin.tutors.contract')->with([
-            'tutor' => $tutor
-        ]);
+        $data = ['tutor' => $tutor];
+        $pdf = PDF::loadView('admin.tutors.contract', $data);
+        return $pdf->stream('admin.tutors.contract');
     }
 
     /**

@@ -1,7 +1,7 @@
 <h1>LearnOn Client Agreement</h1>    
 <table>
   <tr>
-    <td> User Name:</td>
+    <td> E-Mail:</td>
     <td>&nbsp;</td>
     <td> {{$student -> email }}</td>
   </tr>
@@ -9,6 +9,16 @@
       <td></td>
       <td></td>
       <td></td>
+  </tr>
+  <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+    <td height="40px">IP Address</td>
+    <td></td>
+    <td> {{ $student -> ip}}</td>
   </tr>
   <tr>
       <td></td>
@@ -46,7 +56,7 @@
       <td></td>
   </tr>
   <tr>
-    <td height="40px">Telephone:</td>
+    <td height="40px">Home Phone:</td>
     <td></td>
     <td> {{$student->home_phone }}</td>
   </tr>
@@ -96,7 +106,7 @@
       <td></td>
   </tr>
   <tr>
-    <td height="40px"> Postcode:</td>
+    <td height="40px"> Postal/Zip Code:</td>
     <td></td>
     <td> {{$student->pcode }}</td>
   </tr>
@@ -114,10 +124,5 @@
       <td></td>
       <td></td>
       <td></td>
-  </tr>
-  <tr>
-    <td height="40px">E-Mail:</td>
-    <td>&nbsp;</td>
-    <td> {{$student->email }}</td>
   </tr>
   </table>
