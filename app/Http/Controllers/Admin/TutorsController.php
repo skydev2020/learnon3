@@ -89,7 +89,13 @@ class TutorsController extends Controller
      */
     public function create()
     {
-        return view('admin.tutors.create');
+        if (Gate::denies('manage-tutors')) return redirect()->route('admin.tutor.index');
+        
+        $data = [
+            'states'    => State::all(),
+            'countries' => Country::all()
+        ];
+        return view('admin.tutors.create')->with('data', $data);
     }
 
     /**
@@ -100,7 +106,78 @@ class TutorsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Gate::denies('manage-tutors')) {
+            return redirect(route('admin.tutors.create'));
+        }
+
+        $validator = Validator::make($request->all(), [
+            'fname'                 => ['required', 'string', 'max:255'],
+            'lname'                 => ['required', 'string', 'max:255'],
+            'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'              => ['required', 'string', 'min:1', 'confirmed'],
+            'home_phone'            => ['required', 'string'],
+            'cell_phone'            => ['required', 'string'],
+            'address'               => ['required', 'string'],
+            'city'                  => ['required', 'string'],
+            'state_id'              => ['required', 'integer'],
+            'pcode'                 => ['required', 'string'],
+            'country_id'            => ['required', 'integer'],
+            'other_notes'           => ['required', 'string'],
+            'post_secondary_edu'    => ['required', 'string'],
+            'subjects_studied'      => ['required', 'string'],
+            'tutoring_courses'      => ['required', 'string'],
+            'work_experience'       => ['required', 'string'],
+            'tutoring_areas'        => ['required', 'string'],
+            'references'            => ['required', 'string'],
+            'gender'                => ['required', 'string'],
+            'certified_teacher'     => ['required', 'string'],
+            'criminal_record'       => ['required', 'string'],
+            'criminal_check'        => ['required', 'string'],
+            'approved'              => ['required', 'integer'],
+            'status'                => ['required', 'integer'],
+        ]);
+        if ($validator->fails())
+        {
+            session()->flash('error', $validator->messages()->first());
+            return redirect()->route('admin.tutors.create');
+        }
+        $data = $request->all();
+
+        $tutor = User::create([
+            'fname'                 => $data['fname'],
+            'lname'                 => $data['lname'],
+            'email'                 => $data['email'],
+            'password'              => Hash::make($data['password']),
+            'home_phone'            => $data['home_phone'],
+            'cell_phone'            => $data['cell_phone'],
+            'address'               => $data['address'],
+            'city'                  => $data['city'],
+            'state_id'              => $data['state_id'],
+            'pcode'                 => $data['pcode'],
+            'country_id'            => $data['country_id'],
+            'other_notes'           => $data['other_notes'],
+            'post_secondary_edu'    => $data['post_secondary_edu'],
+            'subjects_studied'      => $data['subjects_studied'],
+            'tutoring_courses'      => $data['tutoring_courses'],
+            'work_experience'       => $data['work_experience'],
+            'tutoring_areas'        => $data['tutoring_areas'],
+            'references'            => $data['references'],
+            'gender'                => $data['gender'],
+            'certified_teacher'     => $data['certified_teacher'],
+            'criminal_record'       => $data['criminal_record'],
+            'criminal_check'        => $data['criminal_check'],
+            'approved'              => $data['approved'],
+            'status'                => $data['status'],
+        ]);
+
+        if ($tutor != NULL){
+            $request->session()->flash('success', $tutor->fname . ' ' . $tutor->lname .' has been updated');
+        } else {
+            $request->session()->flash('error', 'There was an error updating the tutor');
+            return redirect()->route('admin.tutors.create');
+        }
+
+        return redirect()->route('admin.tutors.index');
     }
 
     /**
@@ -124,7 +201,7 @@ class TutorsController extends Controller
      */
     public function edit(User $tutor)
     {
-        if (Gate::denies('edit-users')) {
+        if (Gate::denies('manage-tutors')) {
             return redirect(route('admin.tutors.index'));
         }
 
@@ -145,8 +222,8 @@ class TutorsController extends Controller
      */
     public function update(Request $request, User $tutor)
     {
-        if (Gate::denies('edit-users')) {
-            return redirect(route('admin.tutors.index'));
+        if (Gate::denies('manage-tutors')) {
+            return redirect(route('admin.tutors.edit', $tutor));
         }
 
         $validator = Validator::make($request->all(), [
