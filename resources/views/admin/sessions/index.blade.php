@@ -119,6 +119,14 @@
       
                                     </form>
                                     @endcan
+
+                                    @if ($session->p_locked)
+                                        [<a href="#">P Locked</a>]
+                                    @endif
+
+                                    @if ($session->i_locked)
+                                        [<a href="#">I Locked</a>]
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
