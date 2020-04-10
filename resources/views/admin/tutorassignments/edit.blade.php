@@ -1,68 +1,84 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-user-tie" style="font-size:24px"> Update Assignment</i>
                 </div>
                 <div class="card-body">
                     <form action="{{route('admin.tutorassignments.update', $data['assignment'])}}" method="POST">
+                        @csrf
+                        {{method_field('PUT')}}
 
                         <div class="form-group row">
-                            <label for="tutor_val" class="col-md-4 col-form-label text-md-right">{{ __('Select Tutor: ') }}</label>
+                            <div class="col-1 offset-10">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                            <div class="col-1">
+                                <a href="{{route('admin.tutorassignments.index')}}">
+                                    <button type="button" class="btn btn-primary">Cancel</button>
+                                </a>
+                            </div>
+                        </div>
 
-                            <div class="col-md-5">
-                                <select id = "tutor_val" name = "tutor_val">
+                        <div class="form-group row">
+                            <div class="col-4 d-flex justify-content-end font-weight-bold">
+                                <label for="tutor_val" class="col-form-label text-right">Select Tutor:</label>
+                            </div>
+
+                            <div class="col-2">
+                                <select id = "tutor_val" name = "tutor_val" class="form-control">
                                     @foreach ($data['tutors'] as $tutor)
-                                        <option value = {{$tutor->id}} <?=$tutor->id == $data['assignment']->tutor_id ? ' selected="selected"' : '';?> >
-                                         {{$tutor->fname . ' ' . $tutor->lname}}  </option>
-
+                                        <option value = {{$tutor->id}} <?=$tutor->id == $data['assignment']->tutor_id ? ' selected="selected"' : '';?>
+                                            > {{$tutor->fname . ' ' . $tutor->lname}}  </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         
                         <div class="form-group row">
-                            <label for="student_val" class="col-md-4 col-form-label text-md-right">{{ __('Select Student:') }}</label>
+                            <div class="col-4 d-flex justify-content-end font-weight-bold">
+                                <label for="student_val" class="col-form-label text-right">Select Student:</label>
+                            </div>
 
-                            <div class="col-md-5">
-                                <select id = "student_val" name = "student_val">
+                            <div class="col-2">
+                                <select id = "student_val" name = "student_val" class="form-control">
                                     @foreach ($data['students'] as $student)
-                                    <option value = {{$student->id}} <?=$student->id == $data['assignment']->student_id ? ' selected="selected"' : '';?> >
-                                         {{$student->fname . ' ' . $student->lname}}  </option>
+                                    <option value = {{$student->id}} <?=$student->id == $data['assignment']->student_id ? ' selected="selected"' : '';?>
+                                       >{{$student->fname . ' ' . $student->lname}}  </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
-                        @csrf
-                        {{method_field('PUT')}}
-
-                        <div class="row">
-                            <div class="col-md-10" style = "display:flex;">
-                                <div class="col-md-6 text-md-right" >
-                                    <b>Tutor Pay Rate($):</b>
-                                </div>
-                                <div>
-                                    <input type="text" name="tpay_value" id="tpay_value" value={{$data['rates']->first()['basic_tutor']}}>
-                                </div>
+                        <div class="form-group row">
+                            <div class="col-4 d-flex justify-content-end font-weight-bold" >
+                                <label for="tpay_value" class="col-form-label text-right">Tutor Pay Rate($):</label>
+                            </div>
+                            <div class="col-2">
+                                <input type="text" name="tpay_value" id="tpay_value" class="form-control"
+                                 value={{$data['rates']->first()['basic_tutor']}}>
                             </div>
                         </div>
 
-                        <div class = "form-group row col-md-10">
-                            <div class = "col-md-6 text-md-right">
-                                <b> Student Invoice Rate($) per hour:</b>
+                        <div class = "form-group row">
+                            <div class = "col-4 d-flex justify-content-end font-weight-bold">
+                                <label for="spay_value" class="col-form-label">Student Invoice Rate($) per hour:</label>
                             </div>
-                            <div class = "col-md-4">
-                                
-                                <input  type = "text" name = "spay_value" id = "spay_value" value = {{$data['rates']->first()['basic_student']}}>
+                            <div class = "col-2">
+                                <input  type = "text" name = "spay_value" id = "spay_value"
+                                class="form-control" value = {{$data['rates']->first()['basic_student']}}>
                             </div>
                         </div>
-                        <div style = "display:flex;">
-                            <div class = "form-group row col-md-4">
+                        
+                        <div class = "form-group row">
+                            <div class = "col-4 d-flex align-items-center justify-content-end font-weight-bold">
+                                <label for="subjects_box" class="col-form-label">Subjects:</label>
+                            </div>
+                            <div class="col-3">
                                 <div class="scrollbox pl-1 pt-1 overflow-auto" name="subjects_box" id="subjects_box">
                                     @foreach ($data['subjects'] as $subject)
                                     <div>
@@ -72,31 +88,44 @@
                                     </div>
                                     @endforeach
                                 </div>
-                            </div>
-                            <div style = "display:block;">
-                                <div class = "form-group">
-                                    <b>    Status     </b>
-                                    <select id = "status" name = "status" style = "display:inline;">
-                                        <option> Enabled </option>
-                                        <option> Disabled </option>
-                                    </select>
-                                </div>
-
-                                <div class = "form-group">
-                                    <b>    Status By Tutor:     </b>
-                                    {{ $data['assignment']->status_by_tutor }}
-                                </div>
-
-                                <div class = "form-group">
-                                    <b>    Status By Student:    </b>
-                                    {{ $data['assignment']->status_by_student }}
+                                <div>
+                                    <a style="cursor:pointer;" onclick="$('#subjects_box :checkbox').attr('checked', 'checked');"><u>Select All</u></a> /
+                                    <a style="cursor:pointer;" onclick="$('#subjects_box :checkbox').attr('checked', false);"><u>Unselect All</u></a>
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">
-                            Save
-                        </button>
+                        <div class = "form-group row">
+                            <div class = "col-4 d-flex justify-content-end font-weight-bold">
+                                <label for="status" class="col-form-label">Status:</label>
+                            </div>
+                            <div class="col-2">
+                                <select id = "status" name = "status" class="form-control">
+                                    <option <?= $data['assignment']->active > 0 ? 'selected' : '' ?>
+                                        value="1"> Enabled </option>
+                                    <option <?= $data['assignment']->active <= 0 ? 'selected' : '' ?>
+                                        value="0"> Disabled </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class = "form-group row">
+                            <div class = "col-4 d-flex align-items-center justify-content-end font-weight-bold">
+                                <label for="status" class="col-form-label">Status By Tutor:</label>
+                            </div>
+                            <div class="col-2 d-flex align-items-center">
+                                {{ $data['assignment']->status_by_tutor }}
+                            </div>
+                        </div>
+
+                        <div class = "form-group row">
+                            <div class = "col-4 d-flex align-items-center justify-content-end font-weight-bold">
+                                <label for="status" class="col-form-label">Status By Student:</label>
+                            </div>
+                            <div class="col-2 d-flex align-items-center">
+                                {{ $data['assignment']->status_by_student }}
+                            </div>
+                        </div>
                     </form>
                 </div>
 

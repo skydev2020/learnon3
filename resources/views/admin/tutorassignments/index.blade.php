@@ -14,46 +14,44 @@
                         {{method_field('GET')}}
 
                         <div class="form-group row">
-                            <label for="t_name" class="col-md-4 col-form-label text-md-right">{{ __('Tutor Name') }}</label>
-                            <div class="col-md-6">
+                            <label for="t_name" class="col-4 col-form-label text-right">{{ __('Tutor Name') }}</label>
+                            <div class="col-6">
                                 <input id="t_name" type="text" class="form-control" name="t_name"
                                  value="{{ $data['old']['t_name'] }}" autocomplete="t_name" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="s_name" class="col-md-4 col-form-label text-md-right">{{ __('Student Name') }}</label>
-                            <div class="col-md-6">
+                            <label for="s_name" class="col-4 col-form-label text-right">{{ __('Student Name') }}</label>
+                            <div class="col-6">
                                 <input id="s_name" type="text" class="form-control" name="s_name"
                                  value="{{ $data['old']['s_name'] }}" autocomplete="s_name" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="a_date" class="col-md-4 col-form-label text-md-right">{{ __('Date Assigned') }}</label>
-                            <div class="col-md-6">
+                            <label for="a_date" class="col-4 col-form-label text-right">{{ __('Date Assigned') }}</label>
+                            <div class="col-6">
                                 <input id="a_date" type="date" class="form-control" name="a_date"
                                  value="{{ $data['old']['a_date'] }}" autocomplete="a_date" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type = "submit" class="btn btn-primary" >
-                                    {{ __('Search') }}
-                                </button>
+                            <div class="col-1 offset-4">
+                                <button type = "submit" class="btn btn-primary">Search</button>
+                            </div>
+                            <div class="col-1 offset-6">
+                                <a href = "{{ route('admin.tutorassignments.create') }}"> 
+                                    <button class="btn btn-primary">Add</button>
+                                </a>
                             </div>
                         </div>
                     </form>
                     <br>
 
                     <div class="form-group row mb-0">
-                        <div class="col-md-6 offset-md-4">
-                            <a href = "{{ route('admin.tutorassignments.create') }}"> <button class="btn btn-primary">
-                                {{ __('ADD NEW ASSIGNMENT') }}
-                            </button>
-                            </a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
