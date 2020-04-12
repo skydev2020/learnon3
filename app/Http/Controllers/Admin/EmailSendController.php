@@ -61,9 +61,6 @@ class EmailSendController extends Controller
             'message'   => $data['message'],
         ];
         
-        dd(strip_tags($mail_data['message']));
-
-
         switch($data['receivers'])
         {
             case 1: //All Users

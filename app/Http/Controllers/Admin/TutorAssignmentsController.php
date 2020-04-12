@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ActivityLog;
 use App\Assignment;
+use App\Broadcast;
 use App\Http\Controllers\Controller;
+use App\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Rate;
@@ -11,6 +14,9 @@ use App\Role;
 use App\Subject;
 use Config;
 use App\User;
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class TutorAssignmentsController extends Controller
@@ -149,6 +155,32 @@ class TutorAssignmentsController extends Controller
             $assignment->subjects()->attach($subject);
         }
         $assignment->save();
+        Notification::addInformation(Auth::User()->id, $data['student_val'], "Tutor assigned"
+            , "You have been assigned a tutor for tutoring.");
+
+        Notification::addInformation(Auth::User()->id, $data['tutor_val'], "Student assigned"
+            , "You have been assigned a student for tutoring.");   
+            
+        ActivityLog::log_activity(Auth::User()->id, "Tutor Assigned", "A tutor is assigned to a student.");
+
+        $tutor_mail = Broadcast::where('id', 4)->first();
+        $subject = $tutor_mail->subject;
+        $message = $tutor_mail->content;
+        
+        // Here you can define keys for replace before sending mail to Student
+        $tutor = User::where('id', $data['tutor_val'])->first();
+        $replace_info = Array(
+                        'TUTOR_NAME' => $tutor->fname .' ' . $tutor->lname, 
+                    );
+        
+        foreach($replace_info as $rep_key => $rep_text) {
+            $message = str_replace('@'.$rep_key.'@', $rep_text, $message);
+        }
+
+        Mail::to($tutor->email)->send(new SendMail([
+            'subject'   => $subject,
+            'message'   => $message
+        ]));
         session()->flash('success', "The assignment has been created successfully");
         return redirect()->route('admin.tutorassignments.index');
     }
