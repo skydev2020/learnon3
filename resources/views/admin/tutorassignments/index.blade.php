@@ -43,16 +43,11 @@
                             </div>
                             <div class="col-1 offset-6">
                                 <a href = "{{ route('admin.tutorassignments.create') }}"> 
-                                    <button class="btn btn-primary">Add</button>
+                                    <button class="btn btn-primary" type="button">Add</button>
                                 </a>
                             </div>
                         </div>
                     </form>
-                    <br>
-
-                    <div class="form-group row mb-0">
-                        
-                    </div>
                 </div>
             </div>
 
