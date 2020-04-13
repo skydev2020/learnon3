@@ -151,8 +151,10 @@
                         @foreach ($data['essay_assignments'] as $essay_assignment)
                             <tr>
                                 <td scope="col">{{'A' . $essay_assignment->assignment_num}}</td>
-                                <td scope="col">{{$essay_assignment->students()->first()['fname'] . ' ' . $essay_assignment->students()->first()['lname']}}</td>
-                                <td scope="col">{{$essay_assignment->tutors()->first()['fname'] . ' ' . $essay_assignment->tutors()->first()['lname']}}</td>
+                                <td scope="col"><?= $essay_assignment->students()->first() == NULL ? '' :
+                                $essay_assignment->students()->first()['fname'] . ' ' . $essay_assignment->students()->first()['lname']?></td>
+                                <td scope="col"><?= $essay_assignment->tutors()->first() == NULL ? '' :
+                                $essay_assignment->tutors()->first()['fname'] . ' ' . $essay_assignment->tutors()->first()['lname']?></td>
                                 <td scope="col">{{$essay_assignment->topic}}</td>
                                 <td scope="col">{{$essay_assignment->statuses()->first()['name']}}</td>
                                 <td scope="col">{{$essay_assignment->owed}}</td>
