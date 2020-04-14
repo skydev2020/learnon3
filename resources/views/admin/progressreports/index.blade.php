@@ -93,9 +93,10 @@
                             <tr>
                                 <td scope="col">{{$report->tutors()->first()['fname'] . ' ' .
                                 $report->tutors()->first()['lname']}}</td>
-                                <td scope="col">{{$report->students()->first()['fname']. ' ' . 
+                                <td scope="col">{{$report->students()->first()['fname']. ' ' .
                                 $report->students()->first()['lname']}}</td>
-                                <td scope="col">{{$report->grades()->first()['name']}}</td>
+                                <td scope="col"><?= $report->grades()->first() == NULL ? NULL :
+                                    $report->grades()->first()['name']?></td>
                                 <td scope="col">{{$report->subjects}}</td>
                                 <td scope="col">{{date('m/d/Y', strtotime($report->created_at))}}</td>
                                 <td scope="col">

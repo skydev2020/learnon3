@@ -38,17 +38,17 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                            <li class="nav-item {{Request::is('home') ? 'active' : '' }}">
-                                <a class="tc-white nav-link font-weight-bold" href="{{route('home')}}">Home</a>
+                            <li class="nav-item">
+                                <a class="tc-white nav-link {{Request::is('home') ? 'active' : '' }} font-weight-bold" href="{{route('home')}}">Home</a>
                             </li>
                             @can('manage-users')
                             <li class="nav-item">
-                                <a class="tc-white nav-link font-weight-bold" href="{{route('admin.myprofile.index')}}">My Profile</a>
+                                <a class="tc-white nav-link {{Request::segment(2) == 'myprofile' ? 'active' : '' }} font-weight-bold" href="{{route('admin.myprofile.index')}}">My Profile</a>
                             </li>
                             @endcan
                             @can('manage-students')
-                            <li class="nav-item dropdown {{in_array(Request::segment(2), ["students", "assignments", "student_packages", "packages"]) ? 'active' : '' }}">
-                                <a class="tc-white nav-link font-weight-bold dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item dropdown">
+                                <a class="tc-white nav-link {{in_array(Request::segment(2), ["students", "assignments", "student_packages", "packages"]) ? 'active' : '' }} font-weight-bold dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Students
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -60,8 +60,9 @@
                             </li>
                             @endcan
                             @can('manage-tutors')
-                            <li class="nav-item dropdown {{in_array(Request::segment(2), ["tutors", "sessions"]) ? 'active' : '' }}">
-                                <a class="tc-white font-weight-bold nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item dropdown">
+                                <a class="tc-white font-weight-bold nav-link {{in_array(Request::segment(2), ["tutors", "sessions", "tutorassignments"
+                                , "essayassignments", "rejectedtutors"]) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Tutors
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -75,7 +76,8 @@
                             @endcan
                             @can('manage-payments')
                             <li class="nav-item dropdown font-weight-bold">
-                                <a class="tc-white font-weight-bold nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white font-weight-bold nav-link nav-link {{in_array(Request::segment(2), ["process", "invoices", "paycheques"
+                                , "receivedpayments", "expenses", "otherincomes", "csvupload", "defaultwages"]) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Payments
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -131,7 +133,8 @@
                             @endcan
                             @can('manage-cms')
                             <li class="nav-item dropdown">
-                                <a class="tc-white font-weight-bold nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white font-weight-bold nav-link {{in_array(Request::segment(2), ["informations", "coupons", "broadcasts"
+                                , "maillogs", "activitylogs", "emailsend", "notification"]) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     CMS
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -159,7 +162,8 @@
                             @endcan
                             @can('manage-reports')
                             <li class="nav-item dropdown">
-                                <a class="tc-white font-weight-bold nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white font-weight-bold nav-link {{in_array(Request::segment(2), ["progressreports", "monthlydata", "tutorreports"
+                                , "studentreports"]) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Reports
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -181,7 +185,8 @@
                             @endcan
                             @can('manage-system')
                             <li class="nav-item dropdown">
-                                <a class="tc-white font-weight-bold nav-link dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white font-weight-bold  nav-link {{in_array(Request::segment(2), ["settings", "users", "countries"
+                                , "states", "subjects", "grades", "errorlogs"]) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     System
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

@@ -66,8 +66,9 @@
                         <tbody>
                         @foreach ($data['paycheques'] as $paycheque)
                             <tr>
-                                <td scope="col">{{$paycheque->users()->first()['fname'] . ' ' . 
-                                $paycheque->users()->first()['lname'].' ('.$paycheque->user_id.')'}}</td>
+                                <td scope="col"><?= $paycheque->users()->first() == NULL ? NULL :
+                                $paycheque->users()->first()['fname'] . ' ' .
+                                $paycheque->users()->first()['lname'].' ('.$paycheque->user_id.')'?></td>
                                 <td scope="col">{{$paycheque->num_of_sessions}}</td>
                                 <td scope="col">{{$paycheque->total_hours}}</td>
                                 <td scope="col">{{$paycheque->raise_amount}}</td>
@@ -156,7 +157,7 @@
         else {
         sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
         }
-        
+
         return (sa);
     }
 </script>
