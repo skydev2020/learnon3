@@ -16,7 +16,7 @@
                         <div class="form-group row">
                             <label for="invoice_num" class="col-md-4 col-form-label text-md-right">{{ __('Invoice #') }}</label>
                             <div class="col-md-6">
-                                <input id="invoice_num" type="text" class="form-control" name="invoice_num" 
+                                <input id="invoice_num" type="text" class="form-control" name="invoice_num"
                                 value="{{$data['old']['invoice_num']}}" autocomplete="invoice_num" autofocus>
                             </div>
                         </div>
@@ -87,8 +87,9 @@
                         @foreach ($data['invoices'] as $invoice)
                             <tr>
                                 <td scope="col">{{$invoice->prefix . '-' . $invoice->num}}</td>
-                                <td scope="col">{{$invoice->users()->first()['fname'] . ' ' . 
-                                $invoice->users()->first()['lname'].' ('.$invoice->user_id.')'}}</td>
+                                <td scope="col"><?= $invoice->users()->first() == NULL ? NULL :
+                                $invoice->users()->first()['fname'] . ' ' .
+                                $invoice->users()->first()['lname'].' ('.$invoice->user_id.')'?></td>
                                 <td scope="col">{{$invoice->total_amount}}</td>
                                 <td scope="col">{{$invoice->total_hours}}</td>
                                 <td scope="col">{{date('d/m/Y', strtotime($invoice->created_at)) }}</td>
@@ -179,7 +180,7 @@
         else {
         sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
         }
-        
+
         return (sa);
     }
 </script>

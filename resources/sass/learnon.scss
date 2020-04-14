@@ -31,3 +31,8 @@ div#app {
   a.tc-white:focus {
     color: $white_focus !important;
   }
+
+  .nav-link.active {
+      background-color: $red;
+      color: $white_focus !important;
+  }

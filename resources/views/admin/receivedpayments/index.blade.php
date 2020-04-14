@@ -85,11 +85,12 @@
                         @foreach ($data['orders'] as $order)
                             <tr>
                                 <td scope="col">{{$order->id}}</td>
-                                <td scope="col">{{$order->users()->first()['fname'] . ' ' . 
+                                <td scope="col">{{$order->users()->first()['fname'] . ' ' .
                                 $order->users()->first()['lname'].' ('.$order->user_id.')'}}</td>
                                 <td scope="col"><?= $order->package_id == 0 ? "Invoice" : "Package" ?></td>
                                 <td scope="col">{{$order->payment_method}}</td>
-                                <td scope="col">{{$order->statuses()->first()['name']}}</td>
+                                <td scope="col"><?= $order->statuses()->first() == NULL ? '' :
+                                    $order->statuses()->first()['name']?></td>
                                 <td scope="col">{{date('d/m/Y', strtotime($order->created_at)) }}</td>
                                 <td scope="col">{{'$' . number_format($order->total * $order->value, 2)}}</td>
                                 <td scope="col">
@@ -150,7 +151,7 @@
         else {
         sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
         }
-        
+
         return (sa);
     }
 </script>
