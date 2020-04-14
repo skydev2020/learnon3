@@ -1,4 +1,8 @@
 // Body
+body {
+    background-color: grey !important;
+}
+
 .scrollbox {
     border: 1px solid $scroll_border;
     width: $scroll_width;
