@@ -3,13 +3,24 @@
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-user-tie" style="font-size:24px"> My Profile</i>
                 </div>
                 <div class="card-body">
                     <form action="{{route('admin.myprofile.update', $myuser)}}" method="POST">
+
+                        <div class="form-group row">
+                            <div class="col-1 offset-10">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                            <div clas="col-1">
+                                <a href = "{{route('home')}}">
+                                    <button type = "button" class = "btn btn-primary">Cancel</button>
+                                </a>
+                            </div>
+                        </div>
                         
                         <div class="form-group row">
                             <label for="email" class="col-2 col-form-label text-md-right">E-mail</label>
@@ -63,7 +74,7 @@
 
                             <div class="col-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                                 name="password" value="{{ $myuser->password }}" required autofocus>
+                                 name="password" required autofocus>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -77,17 +88,6 @@
                             <label for="password-conform" class="col-2 col-form-label text-md-right">{{ __('Confirm') }}</label>
                             <div class="col-6 d-flex align-items-center">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-1 offset-9">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                            <div clas="col-1">
-                                <a href = "{{route('home')}}">
-                                    <button type = "button" class = "btn btn-primary">Cancel</button>
-                                </a>
                             </div>
                         </div>
                     </form>
