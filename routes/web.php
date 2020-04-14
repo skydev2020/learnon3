@@ -13,18 +13,18 @@
 
 use App\Http\Controllers\Admin\ProcessController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
+Route::get('/', 'WelcomeController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/register_tutor', 'auth\RegisterTutorController@index')->name('register_tutor');
 Route::post('register_tutor', 'auth\RegisterTutorController@register');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
-    Route::resource('/', 'HomeController');
     Route::resource('/users', 'UsersController');
     Route::resource('/students', 'StudentsController');
     Route::resource('/assignments', 'AssignmentsController');
@@ -80,7 +80,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     //Help Menu
     Route::resource('/help','HelpController');
 
-    //Custom Route 
+    //Custom Route
+    Route::get('/', 'HomeController@index')->name('home');
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
     Route::get('/students/contract/{student}', 'StudentsController@showContract')->name('students.contract');
     Route::get('/students/export/{student}', 'StudentsController@export')->name('students.export');
