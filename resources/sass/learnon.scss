@@ -3,14 +3,43 @@
     border: 1px solid #CCCCCC;
     width: 350px;
     height: 100px;
-    background: #FFFFFF;
+    background: $scroll_back;
     overflow-y: scroll;
 
     div.odd {
-        background: #E4EEF7;
+        background: $scroll_odd;
     }
 
     // div.even {
     //     background: #E4EEF7;
     // }
 }
+
+div#app {
+    background-color: grey !important;
+  }
+
+  nav#title-bar {
+    background-color: #3069AE !important;
+  }
+
+  a.tc-white {
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  a.tc-white:hover,
+  a.tc-white:focus {
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  div.user {
+    background-image:url('../images/user.png');
+    background-repeat:no-repeat;
+    background-position:1em;
+  }
+
+  div.information {
+    background-image:url('../images/information.png');
+    background-repeat:no-repeat;
+    background-position:1em;
+  }
