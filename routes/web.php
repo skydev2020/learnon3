@@ -24,6 +24,7 @@ Route::get('/register_tutor', 'auth\RegisterTutorController@index')->name('regis
 Route::post('register_tutor', 'auth\RegisterTutorController@register');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
+    Route::resource('/', 'HomeController');
     Route::resource('/users', 'UsersController');
     Route::resource('/students', 'StudentsController');
     Route::resource('/assignments', 'AssignmentsController');
