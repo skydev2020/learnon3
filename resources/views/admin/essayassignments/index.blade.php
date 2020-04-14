@@ -156,7 +156,8 @@
                                 <td scope="col"><?= $essay_assignment->tutors()->first() == NULL ? '' :
                                 $essay_assignment->tutors()->first()['fname'] . ' ' . $essay_assignment->tutors()->first()['lname']?></td>
                                 <td scope="col">{{$essay_assignment->topic}}</td>
-                                <td scope="col">{{$essay_assignment->statuses()->first()['name']}}</td>
+                                <td scope="col"><?= $essay_assignment->statuses()->first() == NULL ? '' :
+                                    $essay_assignment->statuses()->first()['name']?></td>
                                 <td scope="col">{{$essay_assignment->owed}}</td>
                                 <td scope="col">{{$essay_assignment->paid}}</td>
                                 <td scope="col">{{date('m/d/Y', strtotime($essay_assignment->date_assigned))}}</td>
