@@ -63,7 +63,7 @@
 
                             <div class="col-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
-                                 name="password" value="{{ $myuser->password }}" required autofocus>
+                                 name="password" required autofocus>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
