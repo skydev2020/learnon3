@@ -6,12 +6,12 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fas fa-user-tie" style="font-size:24px"> Update Assignment</i>
+                    <i class="fas fa-user-tie" style="font-size:24px"> Create an Assignment</i>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.tutorassignments.update', $data['assignment'])}}" method="POST">
+                    <form action="{{route('admin.tutorassignments.store')}}" method="POST">
                         @csrf
-                        {{method_field('PUT')}}
+                        {{method_field('POST')}}
 
                         <div class="form-group row">
                             <div class="col-1 offset-10">
@@ -31,9 +31,9 @@
 
                             <div class="col-2">
                                 <select id = "tutor_val" name = "tutor_val" class="form-control">
+                                    <option>-Select-</option>
                                     @foreach ($data['tutors'] as $tutor)
-                                        <option value = {{$tutor->id}} <?=$tutor->id == $data['assignment']->tutor_id ? ' selected="selected"' : '';?>
-                                            > {{$tutor->fname . ' ' . $tutor->lname}}  </option>
+                                    <option value = {{$tutor->id}}>{{$tutor->fname . ' ' . $tutor->lname}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -46,9 +46,9 @@
 
                             <div class="col-2">
                                 <select id = "student_val" name = "student_val" class="form-control">
+                                    <option>-Select-</option>
                                     @foreach ($data['students'] as $student)
-                                    <option value = {{$student->id}} <?=$student->id == $data['assignment']->student_id ? ' selected="selected"' : '';?>
-                                       >{{$student->fname . ' ' . $student->lname}}  </option>
+                                    <option value = {{$student->id}}>{{$student->fname . ' ' . $student->lname}}  </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -59,8 +59,7 @@
                                 <label for="tpay_value" class="col-form-label text-right">Tutor Pay Rate($):</label>
                             </div>
                             <div class="col-2">
-                                <input type="text" name="tpay_value" id="tpay_value" class="form-control"
-                                 value={{$data['rates']->first()['basic_tutor']}}>
+                                <input type="text" name="tpay_value" id="tpay_value" class="form-control">
                             </div>
                         </div>
 
@@ -69,8 +68,7 @@
                                 <label for="spay_value" class="col-form-label">Student Invoice Rate($) per hour:</label>
                             </div>
                             <div class = "col-2">
-                                <input  type = "text" name = "spay_value" id = "spay_value"
-                                class="form-control" value = {{$data['rates']->first()['basic_student']}}>
+                                <input  type = "text" name = "spay_value" id = "spay_value" class="form-control">
                             </div>
                         </div>
                         
@@ -82,8 +80,7 @@
                                 <div class="scrollbox pl-1 pt-1 overflow-auto" name="subjects_box" id="subjects_box">
                                     @foreach ($data['subjects'] as $subject)
                                     <div>
-                                        <input <?=in_array($subject->id, $data['assignment']->subjects()->get()->pluck('id')->toArray())?'checked':''?>
-                                        value = "{{$subject->id}}", type = "checkbox" name="subjects[]" id="subjects[]">
+                                        <input value = "{{$subject->id}}", type = "checkbox" name="subjects[]" id="subjects[]">
                                         {{$subject->name}}
                                     </div>
                                     @endforeach
@@ -101,30 +98,24 @@
                             </div>
                             <div class="col-2">
                                 <select id = "status" name = "status" class="form-control">
-                                    <option <?= $data['assignment']->active > 0 ? 'selected' : '' ?>
-                                        value="1"> Enabled </option>
-                                    <option <?= $data['assignment']->active <= 0 ? 'selected' : '' ?>
-                                        value="0"> Disabled </option>
+                                    <option value="1"> Enabled </option>
+                                    <option value="0"> Disabled </option>
                                 </select>
                             </div>
                         </div>
 
                         <div class = "form-group row">
                             <div class = "col-4 d-flex align-items-center justify-content-end font-weight-bold">
-                                <label for="status" class="col-form-label">Status By Tutor:</label>
+                                <label class="col-form-label">Status By Tutor:</label>
                             </div>
-                            <div class="col-2 d-flex align-items-center">
-                                {{ $data['assignment']->status_by_tutor }}
-                            </div>
+                            <div class="col-2 d-flex align-items-center"></div>
                         </div>
 
                         <div class = "form-group row">
                             <div class = "col-4 d-flex align-items-center justify-content-end font-weight-bold">
-                                <label for="status" class="col-form-label">Status By Student:</label>
+                                <label class="col-form-label">Status By Student:</label>
                             </div>
-                            <div class="col-2 d-flex align-items-center">
-                                {{ $data['assignment']->status_by_student }}
-                            </div>
+                            <div class="col-2 d-flex align-items-center"></div>
                         </div>
                     </form>
                 </div>

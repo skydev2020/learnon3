@@ -6,16 +6,16 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fas fa-user-tie" style="font-size:24px"> Update Tutor Details</i>
+                    <i class="fas fa-user-tie" style="font-size:24px"> Add Tutor</i>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.tutors.update', $data['tutor'])}}" method="POST">
+                    <form action="{{route('admin.tutors.store')}}" method="POST">
                         
                         @csrf
-                        {{method_field('PUT')}}
+                        {{method_field('POST')}}
                         <div class="form-group row mb-0">
                             <div class="col-1 offset-10">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                             <div class="col-1">
                                 <a href="{{ route('admin.tutors.index') }}">
@@ -30,7 +30,7 @@
 
                             <div class="col-4">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                 name="email" value="{{$data['tutor']->email }}" required autocomplete="email" autofocus>
+                                 name="email" required autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -47,7 +47,7 @@
 
                             <div class="col-4">
                                 <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror"
-                                 name="fname" value="{{ $data['tutor']->fname }}" required autofocus>
+                                 name="fname" required autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -64,7 +64,7 @@
 
                             <div class="col-4">
                                 <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"
-                                 name="lname" value="{{ $data['tutor']->lname }}" required autofocus>
+                                 name="lname" required autofocus>
 
                                 @error('lname')
                                     <span class="invalid-feedback" role="alert">
@@ -79,8 +79,8 @@
                                 <label for="home_phone" class="col-form-label">Home Phone:</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" value="{{$data['tutor']->home_phone}}" name="home_phone" required
-                                id="home_phone" class="form-control" autocomplete="home_phone" autofocus>
+                                <input type="text" name="home_phone" required id="home_phone" 
+                                class="form-control" autocomplete="home_phone" autofocus>
                             </div>
                         </div>
 
@@ -89,8 +89,8 @@
                                 <label for="cell_phone" class="col-form-label">Cell/Work Phone:</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" value="{{$data['tutor']->cell_phone}}" name="cell_phone" required
-                                id="cell_phone" class="form-control" autocomplete="cell_phone" autofocus>
+                                <input type="text" name="cell_phone" required id="cell_phone" 
+                                class="form-control" autocomplete="cell_phone" autofocus>
                             </div>
                         </div>
 
@@ -119,8 +119,8 @@
                                 <label for="address" class="col-form-label">Home Address:</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" value="{{$data['tutor']->address}}" name="address" required
-                                id="address" class="form-control" autocomplete="address" autofocus>
+                                <input type="text" name="address" required id="address" 
+                                class="form-control" autocomplete="address" autofocus>
                             </div>
                         </div>
 
@@ -129,8 +129,8 @@
                                 <label for="city" class="col-form-label">City:</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" value="{{$data['tutor']->city}}" name="city" required
-                                id="city" class="form-control" autocomplete="city" autofocus>
+                                <input type="text" name="city" required id="city" 
+                                class="form-control" autocomplete="city" autofocus>
                             </div>
                         </div>
 
@@ -140,9 +140,9 @@
                             </div>
                             <div class="col-2">
                                 <select name="state_id" id="state_id" class="form-control">
+                                    <option>--Select A Province / State--</option>
                                     @foreach ($data['states'] as $state)
-                                        <option <?= $state->id==$data['tutor']->state_id?'selected':''?>
-                                            value="{{$state->id}}">{{$state->name}}</option>
+                                    <option value="{{$state->id}}">{{$state->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -153,8 +153,8 @@
                                 <label for="pcode" class="col-form-label">Postal/Zip Code:</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" value="{{$data['tutor']->pcode}}" name="pcode" required
-                                id="pcode" class="form-control" autocomplete="pcode" autofocus>
+                                <input type="text" name="pcode" required id="pcode" 
+                                class="form-control" autocomplete="pcode" autofocus>
                             </div>
                         </div>
 
@@ -164,9 +164,9 @@
                             </div>
                             <div class="col-2">
                                 <select name="country_id" id="country_id" class="form-control">
+                                    <option>--Select Country--</option>
                                     @foreach ($data['countries'] as $country)
-                                        <option <?= $country->id==$data['tutor']->country_id?'selected':''?>
-                                            value="{{$country->id}}">{{$country->name}}</option>
+                                    <option value="{{$country->id}}">{{$country->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -178,7 +178,7 @@
                             </div>
                             <div class="col-4">
                                 <textarea name="other_notes" required class="form-control inputstl" rows="4"
-                                id="other_notes" autofocus>{{$data['tutor']->other_notes}}</textarea>
+                                id="other_notes" autofocus></textarea>
                             </div>
                         </div>
 
@@ -188,7 +188,7 @@
                             </div>
                             <div class="col-4">
                                 <textarea name="post_secondary_edu" required class="form-control inputstl" rows="4"
-                                id="post_secondary_edu" autofocus>{{$data['tutor']->post_secondary_edu}}</textarea>
+                                id="post_secondary_edu" autofocus></textarea>
                             </div>
                         </div>
 
@@ -199,7 +199,7 @@
                             </div>
                             <div class="col-4">
                                 <textarea name="subjects_studied" required class="form-control inputstl" rows="4"
-                                id="subjects_studied" autofocus>{{$data['tutor']->subjects_studied}}</textarea>
+                                id="subjects_studied" autofocus></textarea>
                             </div>
                         </div>
 
@@ -210,7 +210,7 @@
                             </div>
                             <div class="col-4">
                                 <textarea name="tutoring_courses" required class="form-control inputstl" rows="4"
-                                id="tutoring_courses" autofocus>{{$data['tutor']->tutoring_courses}}</textarea>
+                                id="tutoring_courses" autofocus></textarea>
                             </div>
                         </div>
 
@@ -221,7 +221,7 @@
                             </div>
                             <div class="col-4">
                                 <textarea name="work_experience" required class="form-control inputstl" rows="4"
-                                id="work_experience" autofocus>{{$data['tutor']->work_experience}}</textarea>
+                                id="work_experience" autofocus></textarea>
                             </div>
                         </div>
 
@@ -232,7 +232,7 @@
                             </div>
                             <div class="col-4">
                                 <textarea name="tutoring_areas" required class="form-control inputstl" rows="4"
-                                id="tutoring_areas" autofocus>{{$data['tutor']->tutoring_areas}}</textarea>
+                                id="tutoring_areas" autofocus></textarea>
                             </div>
                         </div>
 
@@ -243,7 +243,7 @@
                             </div>
                             <div class="col-4">
                                 <textarea name="references" required class="form-control inputstl" rows="4"
-                                id="references" autofocus>{{$data['tutor']->references}}</textarea>
+                                id="references" autofocus></textarea>
                             </div>
                         </div>
 
@@ -252,13 +252,11 @@
                                 <label for="gender" class="col-form-label">
                                 Please indicate Male or Female:</label>
                             </div>
-                            <div class="col-4">
+                            <div class="col-2">
                                 <select name="gender" required class="form-control" 
                                 id="gender" autofocus>
-                                    <option <?= $data['tutor']->gender=="Male" ? 'selected' : ''?>
-                                    >Male</option>
-                                    <option <?= $data['tutor']->gender=="Female" ? 'selected' : ''?>
-                                    >Female</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
                                 </select>
                             </div>
                         </div>
@@ -270,12 +268,10 @@
                             </div>
                             <div class="col-4 d-flex align-items-center">
                                 <label class="radio-inline">
-                                    <input type="radio" <?=$data['tutor']->certified_teacher>0?'checked':''?>
-                                    name="certified_teacher" id="certified_teacher" value="1">&nbsp;Yes
+                                    <input type="radio" name="certified_teacher" id="certified_teacher" value="1">&nbsp;Yes
                                 </label> &nbsp; &nbsp;
                                 <label class="radio-inline">
-                                    <input type="radio" <?=$data['tutor']->certified_teacher<=0?'checked':''?>
-                                    name="certified_teacher" id="certified_teacher" value="0">&nbsp;No
+                                    <input type="radio" name="certified_teacher" id="certified_teacher" value="0">&nbsp;No
                                 </label>
                             </div>
                         </div>
@@ -287,12 +283,10 @@
                             </div>
                             <div class="col-4 d-flex align-items-center">
                                 <label class="radio-inline">
-                                    <input type="radio" <?=$data['tutor']->criminal_record>0?'checked':''?>
-                                    name="criminal_record" id="criminal_record" value="1">&nbsp;Yes
+                                    <input type="radio" name="criminal_record" id="criminal_record" value="1">&nbsp;Yes
                                 </label> &nbsp; &nbsp;
                                 <label class="radio-inline">
-                                    <input type="radio" <?=$data['tutor']->criminal_record<=0?'checked':''?>
-                                    name="criminal_record" id="criminal_record" value="0">&nbsp;No
+                                    <input type="radio" name="criminal_record" id="criminal_record" value="0">&nbsp;No
                                 </label>
                             </div>
                         </div>
@@ -304,12 +298,10 @@
                             </div>
                             <div class="col-4 d-flex align-items-center">
                                 <label class="radio-inline">
-                                    <input type="radio" <?=$data['tutor']->criminal_check>0?'checked':''?>
-                                    name="criminal_check" id="criminal_check" value="1">&nbsp;Yes
+                                    <input type="radio" name="criminal_check" id="criminal_check" value="1">&nbsp;Yes
                                 </label> &nbsp; &nbsp;
                                 <label class="radio-inline">
-                                    <input type="radio" <?=$data['tutor']->criminal_check<=0?'checked':''?>
-                                    name="criminal_check" id="criminal_check" value="0">&nbsp;No
+                                    <input type="radio" name="criminal_check" id="criminal_check" value="0">&nbsp;No
                                 </label>
                             </div>
                         </div>
@@ -318,10 +310,8 @@
                             <label for="approved" class="col-3 col-form-label text-right">{{ __('Approved') }}</label>
                             <div class="col-2">
                                 <select style="display: inline-block;" id="approved" name="approved" class = "form-control">
-                                    <option <?= $data['tutor']->approved > 0 ? "selected" : "" ?> value = "1">
-                                        Enabled</option>
-                                    <option <?= $data['tutor']->approved <= 0 ? "selected" : "" ?> value = "0">
-                                        Disabled</option>
+                                    <option value = "1">Enabled</option>
+                                    <option value = "0">Disabled</option>
                                 </select>
                             </div>
                         </div>
@@ -330,10 +320,8 @@
                             <label for="status" class="col-3 col-form-label text-right">{{ __('Status') }}</label>
                             <div class="col-2">
                                 <select style="display: inline-block;" id="status" name="status" class = "form-control">
-                                    <option <?= $data['tutor']->status > 0 ? "selected" : "" ?>
-                                         value = "1">Enabled</option>
-                                    <option <?= $data['tutor']->status <= 0 ? "selected" : "" ?>
-                                         value = "0">Disabled</option>
+                                    <option value = "1">Enabled</option>
+                                    <option value = "0">Disabled</option>
                                 </select>
                             </div>
                         </div>

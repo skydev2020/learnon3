@@ -60,9 +60,7 @@ class EssayAssignmentsController extends Controller
             $q.= " and owed like " . (string)number_format($request_data['price_owed'], 2);
         } else $request_data['price_owed'] = "";
 
-        // dd($q);
-        $essay_assignments = EssayAssignment::has('tutors')->has('students');
-        $essay_assignments = $essay_assignments->whereRaw($q);
+        $essay_assignments = EssayAssignment::whereRaw($q);
 
         if (isset($request_data['s_name']))
         {

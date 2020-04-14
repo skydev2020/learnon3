@@ -14,24 +14,24 @@
                         @csrf
                         {{method_field('GET')}}
                         <div class="form-group row">
-                            <label for="t_name" class="col-md-4 col-form-label text-md-right">{{ __('Tutor Name') }}</label>
-                            <div class="col-md-6">
+                            <label for="t_name" class="col-4 col-form-label text-right">{{ __('Tutor Name') }}</label>
+                            <div class="col-6">
                                 <input id="t_name" type="text" class="form-control" name="t_name" value="{{ $data['old']['t_name'] }}"
                                 autocomplete="t_name" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
-                            <div class="col-md-6">
+                            <label for="email" class="col-4 col-form-label text-right">{{ __('Email') }}</label>
+                            <div class="col-6">
                                 <input id="email" type="text" class="form-control" name="email" value="{{ $data['old']['email'] }}"
                                 autocomplete="email" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
-                            <div class="col-md-6">
+                            <label for="status" class="col-4 col-form-label text-right">{{ __('Status') }}</label>
+                            <div class="col-6">
                                 <select style="display: inline-block;" id="status" name="status" class = "form-control">
                                     <option></option>
                                     <option>Enabled</option>
@@ -41,8 +41,8 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="approved" class="col-md-4 col-form-label text-md-right">{{ __('Approved') }}</label>
-                            <div class="col-md-6">
+                            <label for="approved" class="col-4 col-form-label text-right">{{ __('Approved') }}</label>
+                            <div class="col-6">
                                 <select style="display: inline-block;" id="approved" name="approved" class = "form-control">
                                     <option></option>
                                     <option>Yes</option>
@@ -52,18 +52,23 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="t_date" class="col-md-4 col-form-label text-md-right">{{ __('Date Registered') }}</label>
-                            <div class="col-md-6">
+                            <label for="t_date" class="col-4 col-form-label text-right">{{ __('Date Registered') }}</label>
+                            <div class="col-6">
                                 <input id="t_date" type="date" class="form-control" name="t_date" value="{{ $data['old']['t_date'] }}"
                                 autocomplete="t_date" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-1 offset-4">
                                 <button type = "submit" class="btn btn-primary" >
                                     {{ __('Search') }}
                                 </button>
+                            </div>
+                            <div class="col-1 offset-6">
+                                <a href="{{route('admin.tutors.create')}}">
+                                    <button type = "button" class="btn btn-primary">Add</button>
+                                </a>
                             </div>
                         </div>
                     </form>
@@ -97,23 +102,23 @@
                                 <td scope="col">{{$tutor->created_at}}</td>
                                 <td scope="col">
                                     @can('edit-users')
-                                        <a href="{{route('admin.tutors.edit', $tutor->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
+                                        [<a href="{{route('admin.tutors.edit', $tutor)}}">Edit</a>]
                                     @endcan
                                     @can('manage-tutors')
-                                        <a href="{{route('admin.tutors.show', $tutor)}}" target="_blank"><button type="button" class="btn btn-primary float-left">Contract</button></a>
+                                        [<a href="{{route('admin.tutors.show', $tutor)}}" target="_blank">Contract</a>]
                                     @endcan
                                     @can('manage-tutors')
                                     <form action="{{ route('admin.tutors.destroy', $tutor) }}" method="POST" class="float-left">
                                         @csrf
                                         {{method_field('DELETE')}}
-                                        <button type="submit" class="btn btn-warning">View Work</button>
+                                        [<a href="javascript:;" onclick="parentNode.submit();">View Work</button>
                                     </form>
                                     @endcan
                                     @can('manage-tutors')
                                     <form action="{{ route('admin.tutors.destroy', $tutor) }}" method="POST" class="float-left">
                                         @csrf
                                         {{method_field('DELETE')}}
-                                        <button type="submit" class="btn btn-warning">View Paycheques</button>
+                                        [<a href="javascript:;" onclick="parentNode.submit();">View Paycheques</button>
                                     </form>
                                     @endcan
                                 </td>

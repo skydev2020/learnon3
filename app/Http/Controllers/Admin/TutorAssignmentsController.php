@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ActivityLog;
 use App\Assignment;
+use App\Broadcast;
 use App\Http\Controllers\Controller;
+use App\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Rate;
@@ -11,6 +14,10 @@ use App\Role;
 use App\Subject;
 use Config;
 use App\User;
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class TutorAssignmentsController extends Controller
 {
@@ -88,7 +95,21 @@ class TutorAssignmentsController extends Controller
      */
     public function create()
     {
-        //
+        if (Gate::denies('manage-tutors')) {
+            return redirect(route('admin.tutorassignments.index'));
+        }
+
+        $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()->get();
+        $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()->get();
+        $rates = Rate::all();
+        $subjects = Subject::all();
+        $data = [
+            'tutors'        => $tutors,
+            'students'      => $students,
+            'subjects'      => $subjects,
+            'rates'         => $rates,
+        ];
+        return view('admin.tutorassignments.create')->with('data', $data);
     }
 
     /**
@@ -99,7 +120,69 @@ class TutorAssignmentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'tutor_val'     => ['required', 'integer'],
+            'student_val'   => ['required', 'integer'],
+            'tpay_value'    => ['required', 'string'],
+            'spay_value'    => ['required', 'string'],
+            'subjects'      => ['required', 'Array'],
+            'status'        => ['required', 'integer'],
+        ]);
+
+        if ($validator->fails())
+        {
+            session()->flash('error', $validator->messages()->first());
+            return redirect()->route('admin.tutorassignments.create');
+        }
+
+        $data = $request->all();
+        $assignment = Assignment::create([
+            'tutor_id'      => $data['tutor_val'],
+            'student_id'    => $data['student_val'],
+            'base_wage'     => $data['tpay_value'],
+            'base_invoice'  => $data['spay_value'],
+            'active'        => $data['status'],
+        ]);
+
+        if ($assignment == NULL)
+        {
+            session()->flash('error', "There is an error creating the assignment!");
+            return redirect()->route('admin.tutorassignments.create');
+        }
+
+        foreach($data['subjects'] as $subject)
+        {
+            $assignment->subjects()->attach($subject);
+        }
+        $assignment->save();
+        Notification::addInformation(Auth::User()->id, $data['student_val'], "Tutor assigned"
+            , "You have been assigned a tutor for tutoring.");
+
+        Notification::addInformation(Auth::User()->id, $data['tutor_val'], "Student assigned"
+            , "You have been assigned a student for tutoring.");   
+            
+        ActivityLog::log_activity(Auth::User()->id, "Tutor Assigned", "A tutor is assigned to a student.");
+
+        $tutor_mail = Broadcast::where('id', 4)->first();
+        $subject = $tutor_mail->subject;
+        $message = $tutor_mail->content;
+        
+        // Here you can define keys for replace before sending mail to Student
+        $tutor = User::where('id', $data['tutor_val'])->first();
+        $replace_info = Array(
+                        'TUTOR_NAME' => $tutor->fname .' ' . $tutor->lname, 
+                    );
+        
+        foreach($replace_info as $rep_key => $rep_text) {
+            $message = str_replace('@'.$rep_key.'@', $rep_text, $message);
+        }
+
+        Mail::to($tutor->email)->send(new SendMail([
+            'subject'   => $subject,
+            'message'   => $message
+        ]));
+        session()->flash('success', "The assignment has been created successfully");
+        return redirect()->route('admin.tutorassignments.index');
     }
 
     /**
@@ -121,7 +204,7 @@ class TutorAssignmentsController extends Controller
      */
     public function edit(Assignment $tutorassignment)
     {
-        if (Gate::denies('edit-users')) {
+        if (Gate::denies('manage-tutors')) {
             return redirect(route('admin.tutorassignments.index'));
         }
 
