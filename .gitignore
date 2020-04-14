@@ -3,6 +3,7 @@
 /public/storage
 /public/css/app.css
 /public/js/register/
+/public/js/app.js
 /storage/*.key
 /storage/logs/
 /vendor
