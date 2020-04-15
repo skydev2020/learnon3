@@ -40,3 +40,8 @@ div#app {
       background-color: $red;
       color: $white_focus !important;
   }
+
+  span.required {
+    color: $red;
+    font-weight: bold;
+  }
