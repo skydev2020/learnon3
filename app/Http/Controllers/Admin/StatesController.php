@@ -45,7 +45,7 @@ class StatesController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name'  => ['required', 'string', 'min:3', 'max:128'],
-            'code'  => ['required', 'string'],
+            'code'  => ['nullable', 'string'],
         ]);
 
         if ($validator->fails())
@@ -53,7 +53,7 @@ class StatesController extends Controller
             $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.states.create');
         }
-        
+
         $data = $request->all();
         $state = State::create([
             'name'  => $data['name'],
@@ -64,7 +64,7 @@ class StatesController extends Controller
             $request->session()->flash('error', 'There is an error creating Province/State!');
             return redirect()->route('admin.states.create');
         }
-        
+
         $request->session()->flash('success', 'You have modified Province/State!');
         return redirect()->route('admin.states.index');
     }
@@ -106,7 +106,7 @@ class StatesController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name'  => ['required', 'string', 'min:3', "max:128"],
-            'code'  => ['required', 'string'],
+            'code'  => ['nullable', 'string'],
         ]);
 
         if ($validator->fails())
@@ -114,10 +114,10 @@ class StatesController extends Controller
             $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.states.edit', $state);
         }
-        
+
         $data = $request->all();
         $state->name = $data['name'];
-        $state->code = $data['code'];       
+        $state->code = $data['code'];
 
         if(!$state->save()) {
             $request->session()->flash('error', 'There is an error modifying Province/State!');

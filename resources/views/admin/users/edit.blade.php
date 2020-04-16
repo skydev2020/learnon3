@@ -6,13 +6,15 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <i class="fas fa-user-tie" style="font-size:24px"> Edit user {{$user->name}}</i>    
+                    <i class="fas fa-user-tie" style="font-size:24px"> Edit user {{$user->name}}</i>
                 </div>
                 <div class="card-body">
                     <form action="{{route('admin.users.update', $user)}}" method="POST">
-                        
+
                         <div class="form-group row">
-                            <label for="email" class="col-md-2 col-form-label text-md-right">Email</label>
+                            <label for="email" class="col-md-2 col-form-label text-md-right">
+                                <span class="required">*</span> Email:
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -25,9 +27,11 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
-                            <label for="fname" class="col-md-2 col-form-label text-md-right">First Name</label>
+                            <label for="fname" class="col-md-2 col-form-label text-md-right">
+                                <span class="required">*</span> First Name:
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror"
@@ -42,7 +46,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="fname" class="col-md-2 col-form-label text-md-right">Last Name</label>
+                            <label for="fname" class="col-md-2 col-form-label text-md-right">
+                                <span class="required">*</span> Last Name:
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"

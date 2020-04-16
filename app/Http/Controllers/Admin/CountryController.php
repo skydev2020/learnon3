@@ -45,7 +45,7 @@ class CountryController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name'  => ['required', 'string', 'min:3', 'max:128'],
-            'code'  => ['required', 'string'],
+            'code'  => ['nullable', 'string'],
         ]);
 
         if ($validator->fails())
@@ -53,7 +53,7 @@ class CountryController extends Controller
             $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.countries.create');
         }
-        
+
         $data = $request->all();
         $country = Country::create([
             'name'  => $data['name'],
@@ -64,7 +64,7 @@ class CountryController extends Controller
             $request->session()->flash('error', 'There is an error creating countries!');
             return redirect()->route('admin.countries.create');
         }
-        
+
         $request->session()->flash('success', 'You have modified countries!');
         return redirect()->route('admin.countries.index');
     }
@@ -106,7 +106,7 @@ class CountryController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name'  => ['required', 'string', 'min:3', "max:128"],
-            'code'  => ['required', 'string'],
+            'code'  => ['nullable', 'string'],
         ]);
 
         if ($validator->fails())
@@ -114,10 +114,10 @@ class CountryController extends Controller
             $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.countries.edit', $country);
         }
-        
+
         $data = $request->all();
         $country->name = $data['name'];
-        $country->code = $data['code'];       
+        $country->code = $data['code'];
 
         if(!$country->save()) {
             $request->session()->flash('error', 'There is an error modifying countries!');

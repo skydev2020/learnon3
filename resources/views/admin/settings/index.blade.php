@@ -38,8 +38,10 @@
                             <div id = "tab_general" class = "tab-pane fade">
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "config_name">Site Name:</label>
+                                        <label class="col-form-label font-weight-bold"
+                                        for = "config_name">
+                                        <span class="required">*</span> Site Name:
+                                        </label>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
@@ -47,11 +49,13 @@
                                         class = "form-control" value = "{{$data['config_name']}}">
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group row">
                                     <div class="col-3 ">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "config_url">Site URL:</label>
+                                        <label class="col-form-label font-weight-bold"
+                                        for = "config_url">
+                                        <span class="required">*</span> Site URL:
+                                        </label>
                                         <span class="d-flex justify-content-end">Include the full URL to your store. Make sure to add '/' at the end. Example: http://www.yourdomain.com/path/</span>
                                     </div>
 
@@ -63,8 +67,10 @@
 
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "config_owner">Site Owner:</label>
+                                        <label class="col-form-label font-weight-bold"
+                                        for = "config_owner">
+                                            <span class="required">*</span> Site Owner:
+                                        </label>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
@@ -75,8 +81,10 @@
 
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "config_address">Address:</label>
+                                        <label class="col-form-label font-weight-bold"
+                                        for = "config_address">
+                                            <span class="required">*</span> Address:
+                                        </label>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
@@ -87,8 +95,10 @@
 
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "config_email">E-Mail:</label>
+                                        <label class="col-form-label font-weight-bold"
+                                        for = "config_email">
+                                            <span class="required">*</span> E-Mail:
+                                        </label>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
@@ -99,8 +109,10 @@
 
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "config_email2">From E-Mail for Tutors:</label>
+                                        <label class="col-form-label font-weight-bold"
+                                        for = "config_email2">
+                                            <span class="required">*</span> From E-Mail for Tutors:
+                                        </label>
                                         <span class="d-flex justify-content-end">This email address will be used as from email when automatic email is sent to tutor registration.</span>
                                     </div>
 
@@ -112,8 +124,10 @@
 
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "config_email3">From E-Mail for Billing:</label>
+                                        <label class="col-form-label font-weight-bold"
+                                        for = "config_email3">
+                                            <span class="required">*</span> From E-Mail for Billing:
+                                        </label>
                                         <span class="d-flex justify-content-end">This email address will be used as from email when email is sent to student for invoice.</span>
                                     </div>
 
@@ -125,8 +139,10 @@
 
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "config_telephone">Telephone:</label>
+                                        <label class="col-form-label font-weight-bold"
+                                        for = "config_telephone">
+                                            <span class="required">*</span> Telephone:
+                                        </label>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
@@ -137,7 +153,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_fax">Fax:</label>
                                     </div>
 
@@ -151,8 +167,10 @@
                             <div id = "tab_website" class = "tab-pane fade in active">
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "config_title" >Title:</label>
+                                        <label class="col-form-label font-weight-bold"
+                                        for = "config_title" >
+                                            <span class="required">*</span> Title:
+                                        </label>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
@@ -161,10 +179,10 @@
                                         autocomplete="config_title" autofocus>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_meta_description" >Meta Tag Description:</label>
                                     </div>
 
@@ -188,11 +206,11 @@
                                 </div>
                             </div>
 
-                            
+
                             <div id = "tab_default_wage" class = "tab-pane fade in active">
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_minimum_bill" >Process Minimum Bill</label>
                                     </div>
 
@@ -212,8 +230,9 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "wage_usa" >Pay rate for United States</label>
+                                        <label class="col-form-label font-weight-bold" for = "wage_usa" >
+                                            <span class="required">*</span> Pay rate for United States
+                                        </label>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
@@ -224,8 +243,9 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "wage_canada" >Pay rate for Canada</label>
+                                        <label class="col-form-label font-weight-bold" for = "wage_canada" >
+                                            <span class="required">*</span> Pay rate for Canada
+                                        </label>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
@@ -236,8 +256,9 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "wage_alberta" >Pay rate for Alberta</label>
+                                        <label class="col-form-label font-weight-bold" for = "wage_alberta">
+                                            <span class="required">*</span> Pay rate for Alberta
+                                        </label>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
@@ -252,8 +273,9 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "invoice_usa" >Invoice rate for United States</label>
+                                        <label class="col-form-label font-weight-bold" for = "invoice_usa">
+                                            <span class="required">*</span> Invoice rate for United States
+                                        </label>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
@@ -264,8 +286,9 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "invoice_canada" >Invoice rate for Canada</label>
+                                        <label class="col-form-label font-weight-bold" for="invoice_canada">
+                                            <span class="required">*</span> Invoice rate for Canada
+                                        </label>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
@@ -276,8 +299,9 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "invoice_alberta" >Invoice rate for Alberta</label>
+                                        <label class="col-form-label font-weight-bold" for = "invoice_alberta">
+                                            <span class="required">*</span> Invoice rate for Alberta
+                                        </label>
                                     </div>
 
                                     <div class="col-6 d-flex align-items-center">
@@ -291,7 +315,7 @@
                             <div id = "tab_local" class = "tab-pane fade in active">
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_country_id" >Country:</label>
                                     </div>
 
@@ -308,7 +332,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-3 d-flex">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_admin_language" >Administration Language</label>
                                     </div>
 
@@ -325,7 +349,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_currency" >Currency:</label>
                                         <span class="d-flex justify-content-end">Change the default currency. Clear your browser cache to see the change and reset your existing cookie.</span>
                                     </div>
@@ -343,7 +367,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_currency_auto" >Auto Update Currency:</label>
                                         <span class="d-flex justify-content-end">Set your store to automatically update currencies daily.</span>
                                     </div>
@@ -366,8 +390,9 @@
                             <div id = "tab_option" class = "tab-pane fade in active">
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "config_masterpassword" >Master Password</label>
+                                        <label class="col-form-label font-weight-bold" for = "config_masterpassword">
+                                            <span class="required">*</span> Master Password
+                                        </label>
                                         <span class="d-flex justify-content-end">This password will be used as master key when login to any account.</span>
                                     </div>
 
@@ -379,8 +404,9 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "config_admin_limit" >Default Items Per Page(Admin)</label>
+                                        <label class="col-form-label font-weight-bold" for = "config_admin_limit">
+                                            <span class="required">*</span> Default Items Per Page(Admin)
+                                        </label>
                                         <span class="d-flex justify-content-end">Determines how many admin items are shown per page (orders, customers, etc)</span>
                                     </div>
 
@@ -392,7 +418,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_invoice_prefix" >Invoice Prefix</label>
                                         <span class="d-flex justify-content-end">Set the invoice prefix (e.g. INV-2011-00). Invoice ID's will start at 1 for each unique prefix.</span>
                                     </div>
@@ -406,7 +432,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_invoice_no" >Invoice Number</label>
                                         <span class="d-flex justify-content-end">Set the invoice number. Invoice ID's will start from this number.</span>
                                     </div>
@@ -419,7 +445,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "invoice_canada" >Order Status</label>
                                         <span class="d-flex justify-content-end">Set the default order status when an order is processed.</span>
                                     </div>
@@ -436,7 +462,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_minimum_bill" >Approve New Customers:</label>
                                         <span class="d-flex justify-content-end">Don't allow new customer to login until their account has been approved.</span>
                                     </div>
@@ -458,7 +484,7 @@
                             <div id = "tab_mail" class = "tab-pane fade in active">
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_mail_protocol" >Mail Protocol</label>
                                         <span class="d-flex justify-content-end">Only choose 'Mail' unless your host has disabled the php mail function.</span>
                                     </div>
@@ -473,7 +499,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_mail_parameter" >Mail Parameters:</label>
                                         <span class="d-flex justify-content-end">When using 'Mail', additional mail parameters can be added here (e.g. "-femail@storeaddress.com".</span>
                                     </div>
@@ -486,7 +512,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_smtp_host" >SMTP Host:</label>
                                     </div>
 
@@ -499,7 +525,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_smtp_username" >SMTP Username:</label>
                                     </div>
 
@@ -511,7 +537,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_smtp_password" >SMTP Password:</label>
                                     </div>
 
@@ -523,7 +549,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_smtp_port" >SMTP Port:</label>
                                     </div>
 
@@ -535,7 +561,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_smtp_timeout" >SMTP Timeout:</label>
                                     </div>
 
@@ -547,7 +573,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_alert_mail" >New Order Alert Mail:</label>
                                         <span class="d-flex justify-content-end">Send a email to the store owner when a new order is created.</span>
                                     </div>
@@ -564,7 +590,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_account_mail" >New Account Alert Mail:</label>
                                         <span class="d-flex justify-content-end">Send a email to the store owner when a new account is registered.</span>
                                     </div>
@@ -581,7 +607,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_alert_emails" >Additional Alert E-Mails:</label>
                                         <span class="d-flex justify-content-end">Any additional emails you want to receive the alert email, in addition to the main store email. (comma separated)</span>
                                     </div>
@@ -595,7 +621,7 @@
                             <div id = "tab_server" class = "tab-pane fade in active">
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_ssl" >Use SSL</label>
                                         <span class="d-flex justify-content-end">To use SSL check with your host if a SSL certificate is installed and added the SSL URL to the admin config file.</span>
                                     </div>
@@ -613,7 +639,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_maintenance" >Maintenance Mode:</label>
                                         <span class="d-flex justify-content-end">Prevents customers from browsing your store. They will instead see a maintenance message. If logged in as admin, you will see the store as normal.</span>
                                     </div>
@@ -631,7 +657,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_encryption" >Encryption Key:</label>
                                         <span class="d-flex justify-content-end">Please provide a secret key that will be used to encrypt private information when processing orders.</span>
                                     </div>
@@ -645,7 +671,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_seo_url" >Use SEO URL's:</label>
                                         <span class="d-flex justify-content-end">To use SEO URL's apache module mod-rewrite must be installed and you need to rename the htaccess.txt to .htaccess.</span>
                                     </div>
@@ -664,7 +690,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_compression" >Output Compression Level:</label>
                                     </div>
 
@@ -677,7 +703,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_error_display" >Display Errors:</label>
                                     </div>
 
@@ -695,7 +721,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_error_log" >Log Errors:</label>
                                     </div>
 
@@ -710,10 +736,24 @@
                                         </label>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold" for = "config_error_filename">
+                                            <span class="required">*</span> Error Log Filename:
+                                        </label>
+                                    </div>
+
+                                    <div class="col-6 d-flex align-items-center">
+                                        <input type = "text" name = "config_error_filename" id = "config_error_filename"
+                                        class = "form-control" value = "{{$data['config_error_filename']}}"
+                                        autocomplete="config_error_filename" autofocus>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-3">
+                                        <label class="col-form-label font-weight-bold"
                                         for = "config_error_filename" >Error Log Filename:</label>
                                     </div>
 
@@ -726,20 +766,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
-                                        for = "config_error_filename" >Error Log Filename:</label>
-                                    </div>
-
-                                    <div class="col-6 d-flex align-items-center">
-                                        <input type = "text" name = "config_error_filename" id = "config_error_filename"
-                                        class = "form-control" value = "{{$data['config_error_filename']}}"
-                                        autocomplete="config_error_filename" autofocus>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-3">
-                                        <label class="col-form-label font-weight-bold" 
+                                        <label class="col-form-label font-weight-bold"
                                         for = "file_paths" >Ignore Tokens on these pages:</label>
                                         <span class="d-flex justify-content-end">This version of OpenCart has a token system for admin security. Modules that have not been updated for token support yet can be checked to ignore the token check and allow them to work as normal.</span>
                                     </div>
@@ -749,7 +776,7 @@
                                             @foreach ($data['filepaths'] as $filepath)
                                                 <div class = "even">
                                                     <input type = "checkbox" name = "filepaths[]">{{$filepath}}
-                                                    </input> 
+                                                    </input>
                                                 </div>
                                             @endforeach
                                         </div>

@@ -15,7 +15,8 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="name" class="col-form-label font-weight-bold">{{ __('Country Name:') }}</label>
+                                <label for="name" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span>{{ __(' Country Name:') }}</label>
                             </div>
                             <div class="col-6">
                                 <input id="name" type="text" class="form-control" name="name" value="{{ $country->name }}"
@@ -32,7 +33,7 @@
                                 value="{{ $country->code }}" autocomplete="keyword" autofocus></input>
                             </div>
                         </div>
-                        
+
                         <div class = "form-group row">
                             <div class = "col-3 d-flex justify-content-end align-items-center">
                                 <button type="submit" class="btn btn-primary">Save</button>
