@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body">
                     <form action="{{route('admin.tutors.store')}}" method="POST">
-                        
+
                         @csrf
                         {{method_field('POST')}}
                         <div class="form-group row mb-0">
@@ -25,7 +25,9 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="email" class="col-form-label">Email</label>
+                                <label for="email" class="col-form-label">
+                                    <span class="required">*</span> Email
+                                </label>
                             </div>
 
                             <div class="col-4">
@@ -39,10 +41,12 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="fname" class="col-form-label">First Name</label>
+                                <label for="fname" class="col-form-label">
+                                    <span class="required">*</span> First Name:
+                                </label>
                             </div>
 
                             <div class="col-4">
@@ -59,7 +63,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="fname" class="col-form-label">Last Name</label>
+                                <label for="fname" class="col-form-label">
+                                    <span class="required">*</span> Last Name:
+                                </label>
                             </div>
 
                             <div class="col-4">
@@ -76,10 +82,12 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="home_phone" class="col-form-label">Home Phone:</label>
+                                <label for="home_phone" class="col-form-label">
+                                    <span class="required">*</span> Home Phone:
+                                </label>
                             </div>
                             <div class="col-4">
-                                <input type="text" name="home_phone" required id="home_phone" 
+                                <input type="text" name="home_phone" required id="home_phone"
                                 class="form-control" autocomplete="home_phone" autofocus>
                             </div>
                         </div>
@@ -89,7 +97,7 @@
                                 <label for="cell_phone" class="col-form-label">Cell/Work Phone:</label>
                             </div>
                             <div class="col-4">
-                                <input type="text" name="cell_phone" required id="cell_phone" 
+                                <input type="text" name="cell_phone" required id="cell_phone"
                                 class="form-control" autocomplete="cell_phone" autofocus>
                             </div>
                         </div>
@@ -109,34 +117,40 @@
                                 <label for="password-confirm" class="col-form-label">Confirm:</label>
                             </div>
                             <div class="col-4">
-                                <input id="password-confirm" type="password" 
+                                <input id="password-confirm" type="password"
                                 class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="address" class="col-form-label">Home Address:</label>
+                                <label for="address" class="col-form-label">
+                                    <span class="required">*</span> Home Address:
+                                </label>
                             </div>
                             <div class="col-4">
-                                <input type="text" name="address" required id="address" 
+                                <input type="text" name="address" required id="address"
                                 class="form-control" autocomplete="address" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="city" class="col-form-label">City:</label>
+                                <label for="city" class="col-form-label">
+                                    <span class="required">*</span> City:
+                                </label>
                             </div>
                             <div class="col-4">
-                                <input type="text" name="city" required id="city" 
+                                <input type="text" name="city" required id="city"
                                 class="form-control" autocomplete="city" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="state_id" class="col-form-label">State/Province:</label>
+                                <label for="state_id" class="col-form-label">
+                                    <span class="required">*</span> State/Province:
+                                </label>
                             </div>
                             <div class="col-2">
                                 <select name="state_id" id="state_id" class="form-control">
@@ -150,17 +164,21 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="pcode" class="col-form-label">Postal/Zip Code:</label>
+                                <label for="pcode" class="col-form-label">
+                                    <span class="required">*</span> Postal/Zip Code:
+                                </label>
                             </div>
                             <div class="col-4">
-                                <input type="text" name="pcode" required id="pcode" 
+                                <input type="text" name="pcode" required id="pcode"
                                 class="form-control" autocomplete="pcode" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="country_id" class="col-form-label">Country:</label>
+                                <label for="country_id" class="col-form-label">
+                                    <span class="required">*</span> Country:
+                                </label>
                             </div>
                             <div class="col-2">
                                 <select name="country_id" id="country_id" class="form-control">
@@ -174,7 +192,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="other_notes" class="col-form-label">Other Notes:</label>
+                                <label for="other_notes" class="col-form-label">
+                                    <span class="required">*</span> Other Notes:
+                                </label>
                             </div>
                             <div class="col-4">
                                 <textarea name="other_notes" required class="form-control inputstl" rows="4"
@@ -184,7 +204,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="post_secondary_edu" class="col-form-label">Post Secondary Education attending / attended:</label>
+                                <label for="post_secondary_edu" class="col-form-label">
+                                    <span class="required">*</span> Post Secondary Education attending / attended:
+                                </label>
                             </div>
                             <div class="col-4">
                                 <textarea name="post_secondary_edu" required class="form-control inputstl" rows="4"
@@ -195,7 +217,8 @@
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
                                 <label for="subjects_studied" class="col-form-label">
-                                Subjects studied/major area of concentration (please indicate grades and grade point averages):</label>
+                                    <span class="required">*</span> Subjects studied/major area of concentration (please indicate grades and grade point averages):
+                                </label>
                             </div>
                             <div class="col-4">
                                 <textarea name="subjects_studied" required class="form-control inputstl" rows="4"
@@ -206,7 +229,8 @@
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
                                 <label for="tutoring_courses" class="col-form-label">
-                                Courses you can tutor for each grade level (list each course, please be as detailed as possible):</label>
+                                    <span class="required">*</span> Courses you can tutor for each grade level (list each course, please be as detailed as possible):
+                                </label>
                             </div>
                             <div class="col-4">
                                 <textarea name="tutoring_courses" required class="form-control inputstl" rows="4"
@@ -217,7 +241,8 @@
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
                                 <label for="work_experience" class="col-form-label">
-                                Please provide past job/work experience:</label>
+                                    <span class="required">*</span> Please provide past job/work experience:
+                                </label>
                             </div>
                             <div class="col-4">
                                 <textarea name="work_experience" required class="form-control inputstl" rows="4"
@@ -228,7 +253,8 @@
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
                                 <label for="tutoring_areas" class="col-form-label">
-                                City/suburbs/area you can tutor:</label>
+                                    <span class="required">*</span> City/suburbs/area you can tutor:
+                                </label>
                             </div>
                             <div class="col-4">
                                 <textarea name="tutoring_areas" required class="form-control inputstl" rows="4"
@@ -239,7 +265,8 @@
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
                                 <label for="references" class="col-form-label">
-                                Please provide 3 references (name, phone and email, and how they know you):</label>
+                                    <span class="required">*</span> Please provide 3 references (name, phone and email, and how they know you):
+                                </label>
                             </div>
                             <div class="col-4">
                                 <textarea name="references" required class="form-control inputstl" rows="4"
@@ -253,7 +280,7 @@
                                 Please indicate Male or Female:</label>
                             </div>
                             <div class="col-2">
-                                <select name="gender" required class="form-control" 
+                                <select name="gender" required class="form-control"
                                 id="gender" autofocus>
                                     <option>Male</option>
                                     <option>Female</option>
@@ -264,7 +291,8 @@
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
                                 <label for="certified_teacher" class="col-form-label">
-                                Are you a "certified teacher"?</label>
+                                    <span class="required">*</span> Are you a "certified teacher"?
+                                </label>
                             </div>
                             <div class="col-4 d-flex align-items-center">
                                 <label class="radio-inline">
@@ -279,7 +307,8 @@
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
                                 <label for="criminal_record" class="col-form-label">
-                                Have you ever had a criminal conviction (disregarding minor traffic violations)?</label>
+                                    <span class="required">*</span> Have you ever had a criminal conviction (disregarding minor traffic violations)?
+                                </label>
                             </div>
                             <div class="col-4 d-flex align-items-center">
                                 <label class="radio-inline">
@@ -294,7 +323,8 @@
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
                                 <label for="criminal_check" class="col-form-label">
-                                Would you be willing to provide a background criminal check?</label>
+                                    <span class="required">*</span> Would you be willing to provide a background criminal check?
+                                </label>
                             </div>
                             <div class="col-4 d-flex align-items-center">
                                 <label class="radio-inline">

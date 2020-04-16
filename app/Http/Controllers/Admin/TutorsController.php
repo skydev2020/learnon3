@@ -91,7 +91,7 @@ class TutorsController extends Controller
     public function create()
     {
         if (Gate::denies('manage-tutors')) return redirect()->route('admin.tutor.index');
-        
+
         $data = [
             'states'    => State::all(),
             'countries' => Country::all()
@@ -117,7 +117,7 @@ class TutorsController extends Controller
             'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'              => ['required', 'string', 'min:1', 'confirmed'],
             'home_phone'            => ['required', 'string'],
-            'cell_phone'            => ['required', 'string'],
+            'cell_phone'            => ['nullable', 'string'],
             'address'               => ['required', 'string'],
             'city'                  => ['required', 'string'],
             'state_id'              => ['required', 'integer'],
@@ -130,12 +130,12 @@ class TutorsController extends Controller
             'work_experience'       => ['required', 'string'],
             'tutoring_areas'        => ['required', 'string'],
             'references'            => ['required', 'string'],
-            'gender'                => ['required', 'string'],
+            'gender'                => ['nullable', 'string'],
             'certified_teacher'     => ['required', 'string'],
             'criminal_record'       => ['required', 'string'],
             'criminal_check'        => ['required', 'string'],
-            'approved'              => ['required', 'integer'],
-            'status'                => ['required', 'integer'],
+            'approved'              => ['nullable', 'integer'],
+            'status'                => ['nullable', 'integer'],
         ]);
         if ($validator->fails())
         {
@@ -233,7 +233,7 @@ class TutorsController extends Controller
             'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'              => ['required', 'string', 'min:1', 'confirmed'],
             'home_phone'            => ['required', 'string'],
-            'cell_phone'            => ['required', 'string'],
+            'cell_phone'            => ['nullable', 'string'],
             'address'               => ['required', 'string'],
             'city'                  => ['required', 'string'],
             'state_id'              => ['required', 'integer'],
@@ -246,12 +246,12 @@ class TutorsController extends Controller
             'work_experience'       => ['required', 'string'],
             'tutoring_areas'        => ['required', 'string'],
             'references'            => ['required', 'string'],
-            'gender'                => ['required', 'string'],
+            'gender'                => ['nullable', 'string'],
             'certified_teacher'     => ['required', 'string'],
             'criminal_record'       => ['required', 'string'],
             'criminal_check'        => ['required', 'string'],
-            'approved'              => ['required', 'integer'],
-            'status'                => ['required', 'integer'],
+            'approved'              => ['nullable', 'integer'],
+            'status'                => ['nullable', 'integer'],
         ]);
         if ($validator->fails())
         {

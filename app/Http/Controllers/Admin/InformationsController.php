@@ -47,7 +47,7 @@ class InformationsController extends Controller
         $validator = Validator::make($request->all(), [
             'title'        => ['required', 'string'],
             'description'  => ['required', 'string'],
-            'status'       => ['required', 'integer'],
+            'status'       => ['nullable', 'integer'],
         ]);
 
         if ($validator->fails())
@@ -55,7 +55,7 @@ class InformationsController extends Controller
             $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.informations.create');
         }
-        
+
         $data = $request->all();
         $information = Information::create([
             'title'         => $data['title'],
@@ -122,7 +122,7 @@ class InformationsController extends Controller
         $validator = Validator::make($request->all(), [
             'title'        => ['required', 'string'],
             'description'  => ['required', 'string'],
-            'status'       => ['required', 'integer'],
+            'status'       => ['nullable', 'integer'],
         ]);
 
         if ($validator->fails())
@@ -130,11 +130,11 @@ class InformationsController extends Controller
             $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.informations.edit', $information);
         }
-        
+
         $data = $request->all();
         $information->title = $data['title'];
         $information->description = $data['description'];
-        $information->status = $data['status'];
+        if (isset($data['status'])) $information->status = $data['status'];
         $urlalias = UrlAlias::whereRaw("query like 'information_id=" . $information->id . "'")->first();
         if (isset($data['keyword'])) {
             if ($urlalias != NULL) $urlalias->delete();
@@ -143,7 +143,7 @@ class InformationsController extends Controller
                 'keyword'   => $data['keyword']
             ]);
         }
-       
+
 
         if(!$information->save()) {
             $request->session()->flash('error', 'There is an error modifying information!');

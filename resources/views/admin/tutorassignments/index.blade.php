@@ -42,7 +42,7 @@
                                 <button type = "submit" class="btn btn-primary">Search</button>
                             </div>
                             <div class="col-1 offset-6">
-                                <a href = "{{ route('admin.tutorassignments.create') }}"> 
+                                <a href = "{{ route('admin.tutorassignments.create') }}">
                                     <button class="btn btn-primary" type="button">Add</button>
                                 </a>
                             </div>
@@ -67,8 +67,10 @@
                         <tbody>
                         @foreach ($data['assignments'] as $assignment)
                             <tr>
-                                <td scope="col">{{$assignment->tutor()['fname'] . ' ' . $assignment->tutor()['lname']}}</td>
-                                <td scope="col">{{$assignment->student()['fname'] . ' ' . $assignment->student()['lname']}}</td>
+                                <td scope="col"><?= $assignment->tutor() == NULL ? '' :
+                                $assignment->tutor()['fname'] . ' ' . $assignment->tutor()['lname']?></td>
+                                <td scope="col"><?= $assignment->student() == NULL ? '' :
+                                $assignment->student()['fname'] . ' ' . $assignment->student()['lname']?></td>
                                 <td scope="col"><?php $subjects = "";
                                     foreach ($assignment->subjects()->get() as $subject)
                                     {

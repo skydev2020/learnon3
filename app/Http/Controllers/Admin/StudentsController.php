@@ -112,7 +112,7 @@ class StudentsController extends Controller
         $grades_array = $grades->toArray();
         $referrers = Referrer::all();
         $student_statuses = StudentStatus::all();
-        
+
         return view('admin.students.create', compact('grades', 'states', 'countries', 'grades_array', 'referrers'
         , 'student_statuses'));
     }
@@ -134,7 +134,7 @@ class StudentsController extends Controller
             'grade_id'              => ['required', 'integer'],
             'subjects'              => ['required', 'Array'],
             'home_phone'            => ['required', 'string'],
-            'cell_phone'            => ['required', 'string'],
+            'cell_phone'            => ['nullable', 'string'],
             'address'               => ['required', 'string'],
             'city'                  => ['required', 'string'],
             'state_id'              => ['required', 'integer'],
@@ -143,13 +143,13 @@ class StudentsController extends Controller
             'parent_fname'          => ['required', 'string'],
             'parent_lname'          => ['required', 'string'],
             'service_method'        => ['required', 'string'],
-            'other_notes'           => ['required', 'string'],
+            'other_notes'           => ['nullable', 'string'],
             'school'                => ['required', 'string'],
             'major_intersection'    => ['required', 'string'],
-            'referrer_id'           => ['required', 'integer'],
-            'student_status_id'     => ['required', 'integer'],
-            'approved'              => ['required', 'integer'],
-            'status'                => ['required', 'integer'],
+            'referrer_id'           => ['nullable', 'integer'],
+            'student_status_id'     => ['nullable', 'integer'],
+            'approved'              => ['nullable', 'integer'],
+            'status'                => ['nullable', 'integer'],
         ]);
 
         if ($validator->fails()) {
@@ -229,7 +229,7 @@ class StudentsController extends Controller
         $grades_array = $grades->toArray();
         $referrers = Referrer::all();
         $student_statuses = StudentStatus::all();
-        
+
         return view('admin.students.edit', compact('grades', 'states', 'countries', 'grades_array', 'referrers'
         , 'student_statuses', 'student'));
     }
@@ -251,7 +251,7 @@ class StudentsController extends Controller
             'grade_id'              => ['required', 'integer'],
             'subjects'              => ['required', 'Array'],
             'home_phone'            => ['required', 'string'],
-            'cell_phone'            => ['required', 'string'],
+            'cell_phone'            => ['nullable', 'string'],
             'address'               => ['required', 'string'],
             'city'                  => ['required', 'string'],
             'state_id'              => ['required', 'integer'],
@@ -260,13 +260,13 @@ class StudentsController extends Controller
             'parent_fname'          => ['required', 'string'],
             'parent_lname'          => ['required', 'string'],
             'service_method'        => ['required', 'string'],
-            'other_notes'           => ['required', 'string'],
+            'other_notes'           => ['nullable', 'string'],
             'school'                => ['required', 'string'],
             'major_intersection'    => ['required', 'string'],
-            'referrer_id'           => ['required', 'integer'],
-            'student_status_id'     => ['required', 'integer'],
-            'approved'              => ['required', 'integer'],
-            'status'                => ['required', 'integer'],
+            'referrer_id'           => ['nullable', 'integer'],
+            'student_status_id'     => ['nullable', 'integer'],
+            'approved'              => ['nullable', 'integer'],
+            'status'                => ['nullable', 'integer'],
         ]);
 
         if ($validator->fails()) {
@@ -296,7 +296,7 @@ class StudentsController extends Controller
         $student-> student_status_id = $data['student_status_id'];
         $student-> approved = $data['approved'];
         $student-> status = $data['status'];
-        
+
         $student-> subjects() -> sync($data['subjects']);
         if (!$student->save())
         {
@@ -343,9 +343,9 @@ class StudentsController extends Controller
         ];
 
        if( count($student->invoices()->get()) == 0 ) session()->flash('error', "No search results!");
-        
+
         return view('admin.invoices.index')->with('data', $data);
-        
+
     }
 
      /**
@@ -359,7 +359,7 @@ class StudentsController extends Controller
         $data = [
             'student' => $student
         ];
-        
+
         $pdf = PDF::loadView('admin.students.contract', $data);
         return $pdf->stream('admin.students.contract');
     }

@@ -15,31 +15,34 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="c_name" class="col-form-label font-weight-bold">{{ __('Coupon Name:') }}</label>
+                                <label for="c_name" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span>{{ __(' Coupon Name:') }}</label>
                             </div>
                             <div class="col-6">
                                 <input id="c_name" type="text" class="form-control" name="c_name" autocomplete="c_name"
-                                 autofocus>
+                                 autofocus required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="description" class="col-form-label font-weight-bold">{{ __('Coupon Description:') }}</label>
+                                <label for="description" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span>{{ __(' Coupon Description:') }}</label>
                             </div>
                             <div class="col-6 d-flex">
                                 <textarea id="description" class="form-control" name="description" autocomplete="description"
-                                 autofocus></textarea>
+                                 autofocus required></textarea>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="code" class="col-form-label font-weight-bold">{{ __('Code:') }}</label>
+                                <label for="code" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span>{{ __(' Code:') }}</label>
                             </div>
                             <div class="col-6 d-flex">
                                 <input type = "text" name = "code" id = "code" class = "form-control"
-                                 autocomplete="code" autofocus></input>
+                                 autocomplete="code" autofocus required>
                             </div>
                         </div>
 
@@ -71,7 +74,7 @@
                             </div>
                             <div class="col-6 d-flex">
                                 <input type = "date" name = "date_start" id = "date_start" class = "form-control"
-                                value="{{ date('Y-m-d') }}" autocomplete="date_start" autofocus></input>
+                                value="{{ date('Y-m-d') }}" autocomplete="date_start" autofocus>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -80,7 +83,7 @@
                             </div>
                             <div class="col-6 d-flex">
                                 <input type = "date" name = "date_end" id = "date_end" class = "form-control"
-                                value="{{ date('Y-m-d') }}" autocomplete="date_end" autofocus></input>
+                                value="{{ date('Y-m-d') }}" autocomplete="date_end" autofocus>
                             </div>
                         </div>
 
@@ -91,7 +94,7 @@
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <input type = "text" name = "uses_total" id = "uses_total" class = "form-control"
-                                value="1" autocomplete="uses_total" autofocus></input>
+                                value="1" autocomplete="uses_total" autofocus>
                             </div>
                         </div>
 
@@ -102,7 +105,7 @@
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <input type = "text" name = "uses_customer" id = "uses_customer" class = "form-control"
-                                value="1" autocomplete="uses_customer" autofocus></input>
+                                value="1" autocomplete="uses_customer" autofocus>
                             </div>
                         </div>
 

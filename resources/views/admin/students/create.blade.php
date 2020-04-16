@@ -23,10 +23,12 @@
                                 </a>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <div class = "col-3 d-flex justify-content-end align-items-center">
-                                <label for = "fname" class="col-form-label font-weight-bold">First Name</label>
+                                <label for = "fname" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> First Name
+                                </label>
                             </div>
                             <div class="col-3">
                                 <input type = "text" id = "fname" name = "fname" class = "form-control"
@@ -36,7 +38,9 @@
 
                         <div class="form-group row">
                             <div class = "col-3 d-flex justify-content-end align-items-center">
-                                <label for = "lname" class="col-form-label font-weight-bold">Last Name</label>
+                                <label for = "lname" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Last Name
+                                </label>
                             </div>
                             <div class="col-3">
                                 <input type = "text" id = "lname" name = "lname" class = "form-control"
@@ -46,7 +50,9 @@
 
                         <div class="form-group row">
                             <div class = "col-3 d-flex justify-content-end align-items-center">
-                                <label for = "email" class="col-form-label font-weight-bold">E-Mail:</label>
+                                <label for = "email" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> E-Mail:
+                                </label>
                             </div>
                             <div class="col-3">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" onblur="checkMailStatus()">
@@ -86,7 +92,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="grade_id" class="col-form-label font-weight-bold">Current Grade / Year</label>
+                                <label for="grade_id" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Current Grade / Year
+                                </label>
                             </div>
 
                             <div class="col-2 d-flex align-items-center">
@@ -105,7 +113,7 @@
 
                             <div class="col-2 d-flex flex-column">
                                 <div class="scrollbox pl-1 pt-1 overflow-auto" id="subjects_box" name = "subjects_box">
-                                    
+
                                 </div>
                                 <div>
                                     <a style="cursor:pointer;" onclick="$('#subjects_box :checkbox').attr('checked', 'checked');"><u>Select All</u></a> /
@@ -116,7 +124,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for = "parent_fname" class="col-form-label font-weight-bold">Parent First Name:</label>
+                                <label for = "parent_fname" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Parent First Name:
+                                </label>
                             </div>
                             <div class="col-3">
                                 <input type = "text" id = "parent_fname" name = "parent_fname" class = "form-control"
@@ -126,7 +136,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for = "parent_lname" class="col-form-label font-weight-bold">Parent Last Name:</label>
+                                <label for = "parent_lname" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span>Parent Last Name:
+                                </label>
                             </div>
                             <div class="col-3">
                                 <input type = "text" id = "parent_lname" name = "parent_lname" class = "form-control"
@@ -136,7 +148,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for = "home_phone" class="col-form-label font-weight-bold">Telephone:</label>
+                                <label for = "home_phone" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Telephone:
+                                </label>
                             </div>
                             <div class="col-3">
                                 <input type = "text" id = "home_phone" name = "home_phone" class = "form-control"
@@ -156,7 +170,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for = "address" class="col-form-label font-weight-bold">Address:</label>
+                                <label for = "address" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Address:
+                                </label>
                             </div>
                             <div class="col-3 col-form-label">
                                 <input type = "text" id = "address" name = "address" class = "form-control"
@@ -166,7 +182,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for = "city" class="col-form-label font-weight-bold">City:</label>
+                                <label for = "city" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> City:
+                                </label>
                             </div>
                             <div class="col-3">
                                 <input type = "text" id = "city" name = "city" class = "form-control"
@@ -176,7 +194,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for = "state_id" class="col-form-label font-weight-bold">Region / State:</label>
+                                <label for = "state_id" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span>Region / State:
+                                </label>
                             </div>
                             <div class="col-2">
                                 <select id = "state_id" name = "state_id" class = "form-control">
@@ -189,7 +209,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for = "pcode" class="col-form-label font-weight-bold">Postcode:</label>
+                                <label for = "pcode" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Postcode:
+                                </label>
                             </div>
                             <div class="col-3">
                                 <input type = "text" id = "pcode" name = "pcode" class = "form-control"
@@ -199,7 +221,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 col-form-label d-flex justify-content-end align-items-center">
-                                <label for = "country_id" class="font-weight-bold">Country:</label>
+                                <label for = "country_id" class="font-weight-bold">
+                                    <span class="required">*</span> Country:
+                                </label>
                             </div>
                             <div class="col-2">
                                 <select id = "country_id" name = "country_id" class = "form-control">
@@ -212,7 +236,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 col-form-label d-flex justify-content-end align-items-center">
-                                <label for = "service_method" class="font-weight-bold">Service Method:</label>
+                                <label for = "service_method" class="font-weight-bold">
+                                    <span class="required">*</span> Service Method:
+                                </label>
                             </div>
                             <div class="col-2">
                                 <select id = "service_method" name = "service_method" class = "form-control">
@@ -235,7 +261,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 col-form-label d-flex justify-content-end align-items-center">
-                                <label for = "major_intersection" class="font-weight-bold">Major Street intersection:</label>
+                                <label for = "major_intersection" class="font-weight-bold">
+                                    <span class="required">*</span> Major Street intersection:
+                                </label>
                             </div>
                             <div class="col-3">
                                 <input type = "text" id = "major_intersection" name = "major_intersection" class = "form-control"
@@ -245,7 +273,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 col-form-label d-flex justify-content-end align-items-center">
-                                <label for = "school" class="font-weight-bold">School name:</label>
+                                <label for = "school" class="font-weight-bold">
+                                    <span class="required">*</span> School name:
+                                </label>
                             </div>
                             <div class="col-3">
                                 <input type = "text" id = "school" name = "school" class = "form-control"

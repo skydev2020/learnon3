@@ -72,7 +72,7 @@ class SessionsController extends Controller
         ];
 
         if( count($sessions) != 0 ) return view('admin.sessions.index')->with('data', $data);
-        
+
         request()->session()->flash('error', "No search results!");
         return view('admin.sessions.index')->with('data', $data);
     }
@@ -105,7 +105,7 @@ class SessionsController extends Controller
             'assignment_id'     => ['required', 'integer'],
             'session_date'      => ['required', 'date'],
             'session_duration'  => ['required', 'string'],
-            'notes'             => ['required', 'string']
+            'notes'             => ['nullable', 'string']
         ]);
 
         if ($validator->fails())
@@ -218,23 +218,23 @@ class SessionsController extends Controller
     public function getAllDurations(){
 		$duration_array = array(
             "0.50"=>"30 Minutes",
-            "0.75"=>"45 Minutes", 
-            "1.00"=>"1 Hour", 
-            "1.25"=>"1 Hour + 15 Minutes", 
-            "1.50"=>"1 Hour + 30 Minutes", 
-            "1.75"=>"1 Hour + 45 Minutes", 
-            "2.00"=>"2 Hours", 
-            "2.25"=>"2 Hours + 15 Minutes", 
-            "2.50"=>"2 Hours + 30 Minutes", 
-            "2.75"=>"2 Hours + 45 Minutes", 
-            "3.00"=>"3 Hours", 
-            "3.25"=>"3 Hours + 15 Minutes", 
-            "3.50"=>"3 Hours + 30 Minutes", 
-            "3.75"=>"3 Hours + 45 Minutes", 
-            "4.00"=>"4 Hours", 
-            "4.25"=>"4 Hours + 15 Minutes", 
-            "4.50"=>"4 Hours + 30 Minutes", 
-            "4.75"=>"4 Hours + 45 Minutes", 
+            "0.75"=>"45 Minutes",
+            "1.00"=>"1 Hour",
+            "1.25"=>"1 Hour + 15 Minutes",
+            "1.50"=>"1 Hour + 30 Minutes",
+            "1.75"=>"1 Hour + 45 Minutes",
+            "2.00"=>"2 Hours",
+            "2.25"=>"2 Hours + 15 Minutes",
+            "2.50"=>"2 Hours + 30 Minutes",
+            "2.75"=>"2 Hours + 45 Minutes",
+            "3.00"=>"3 Hours",
+            "3.25"=>"3 Hours + 15 Minutes",
+            "3.50"=>"3 Hours + 30 Minutes",
+            "3.75"=>"3 Hours + 45 Minutes",
+            "4.00"=>"4 Hours",
+            "4.25"=>"4 Hours + 15 Minutes",
+            "4.50"=>"4 Hours + 30 Minutes",
+            "4.75"=>"4 Hours + 45 Minutes",
             "5.00"=>"5 Hours");
 		return $duration_array;
 	}

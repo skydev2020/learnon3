@@ -14,7 +14,9 @@
                         {{method_field('POST')}}
 
                         <div class="form-group row">
-                            <label for="assignment_id" class="col-md-4 col-form-label text-md-right">{{ __('Select Tutor: ') }}</label>
+                            <label for="assignment_id" class="col-md-4 col-form-label text-md-right">
+                                <span class="required">*</span> {{ __(' Select Tutor => Student: ') }}
+                            </label>
 
                             <div class="col-md-5">
                                 <select name = "assignment_id" id = "assignment_id" class = "form-control">
@@ -32,7 +34,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="session_date" class="col-md-4 col-form-label text-md-right">{{ __('Date of Session:') }}</label>
+                            <label for="session_date" class="col-md-4 col-form-label text-md-right">
+                                <span class="required">*</span> {{ __(' Date of Session:') }}
+                            </label>
 
                             <div class="col-md-5">
                                 <input type = "date" id = "session_date" name = "session_date">
@@ -40,7 +44,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="session_duration" class="col-md-4 col-form-label text-md-right">{{ __('Duration of Session') }}</label>
+                            <label for="session_duration" class="col-md-4 col-form-label text-md-right">
+                                <span class="required">*</span> {{ __(' Duration of Session') }}
+                            </label>
                             <div class="col-md-6">
                                 <select id = "session_duration" name = "session_duration" class = "form-control">
                                     <option></option>
@@ -58,7 +64,7 @@
                             <div class="col-md-5">
                                 <input type = "text" id = "notes" name = "notes">
                             </div>
-                        </div> 
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

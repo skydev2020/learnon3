@@ -100,10 +100,10 @@ class AssignmentsController extends Controller
         $validator = Validator::make($request->all(), [
             'tutor_val'             => ['required', 'integer'],
             'student_val'           => ['required', 'integer'],
-            'subjects'              => ['required', 'Array'],
+            'subjects'              => ['nullable', 'Array'],
             'base_invoice'          => ['required', 'string'],
             'base_wage'             => ['required', 'string'],
-            'active'                => ['required', 'integer'],
+            'active'                => ['nullable', 'integer'],
         ]);
 
         if ($validator->fails())
@@ -126,7 +126,14 @@ class AssignmentsController extends Controller
             session()->flash('error', "There was an error creating the assignment");
             return redirect(route('admin.users.assignments.create'));
         }
-        $assignment -> subjects() -> attach($data['subjects']);
+        if (isset($data['subjects']))
+        {
+            foreach ($data['subjects'] as $subject)
+            {
+                $assignment->attach($subject);
+            }
+            $assignment->save();
+        }
         session() -> flash('success', "The assignment has been created successfully");
         return redirect() -> route('admin.assignments.index');
 
@@ -179,8 +186,8 @@ class AssignmentsController extends Controller
             'student_val'       => ['required', 'integer'],
             'base_invoice'      => ['required', 'string'],
             'base_wage'         => ['required', 'string'],
-            'subjects'          => ['required', 'Array'],
-            'active'            => ['required', 'integer']
+            'subjects'          => ['nullable', 'Array'],
+            'active'            => ['nullable', 'integer']
         ]);
         if ($validator->fails())
         {

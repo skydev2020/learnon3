@@ -15,7 +15,8 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="title" class="col-form-label font-weight-bold">{{ __('Information Title:') }}</label>
+                                <label for="title" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span>{{ __(' Information Title:') }}</label>
                             </div>
                             <div class="col-6">
                                 <input id="title" type="text" class="form-control" name="title" value="{{ $data['information']->title }}"
@@ -25,7 +26,8 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="description" class="col-form-label font-weight-bold">{{ __('Description:') }}</label>
+                                <label for="description" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span>{{ __(' Description:') }}</label>
                             </div>
                             <div class="col-8 d-flex align-items-center">
                                 <textarea id = "description" name = "description" class="form-control inputstl"

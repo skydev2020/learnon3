@@ -12,7 +12,7 @@
                     <form method="POST" action="{{ route('admin.packages.update', $data['package']) }}">
                         @csrf
                         {{method_field('PUT')}}
-                        
+
                         <div class="form-group row mb-0">
                             <div class="col-1 offset-10">
                                 <button type="submit" class="btn btn-primary">Save</button>
@@ -25,7 +25,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-3 col-form-label text-right">Package Name:</label>
+                            <label for="name" class="col-3 col-form-label text-right">
+                                <span class="required">*</span> Package Name:
+                            </label>
 
                             <div class="col-4">
                                 <input  class="form-control" name="name" id = "name"
@@ -44,7 +46,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="prepaid" class="col-form-label">Pre-paid:</label>
+                                <label for="prepaid" class="col-form-label">
+                                    <span class="required">*</span> Pre-paid:
+                                </label>
                             </div>
 
                             <div class="col-4 d-flex align-items-center">
@@ -97,9 +101,11 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row" class = "col-10">
-                            <label for="description" class="col-3 col-form-label text-right">{{ __('description') }}</label>
+                            <label for="description" class="col-3 col-form-label text-right">
+                                <span class="required">*</span>{{ __(' Description') }}
+                            </label>
 
                             <div class = "col-6">
                                 <textarea class = "form-control inputstl" name="description" id="description" autofocus
@@ -136,7 +142,8 @@
 
                         <div class="form-group row">
                             <label for = "status" class = "col-3 col-form-label text-right">
-                                    {{ __(' Status') }} </label>
+                                <span class="required">*</span>{{ __(' Status') }}
+                            </label>
 
                             <div class="col-4 d-flex align-items-center">
                                 <label class = "radio-inline">

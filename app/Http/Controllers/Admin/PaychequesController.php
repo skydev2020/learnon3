@@ -38,7 +38,7 @@ class PaychequesController extends Controller
         } else $request_data['status'] = "";
 
         $paycheques = Paycheque::whereRaw($q);
-        
+
         if (isset($request_data['t_name'])) {
             $paycheques = $paycheques->whereHas('users', function($user) use ($request_data) {
             return $user->where('fname', 'like', "%" . $request_data['t_name'] . "%")
@@ -53,7 +53,7 @@ class PaychequesController extends Controller
         ];
 
        if( count($paycheques) == 0 ) $request->session()->flash('error', "No search results!");
-        
+
         return view('admin.paycheques.index')->with('data', $data);
     }
 
@@ -110,16 +110,16 @@ class PaychequesController extends Controller
     public function update(Request $request, Paycheque $paycheque)
     {
         $validator = Validator::make($request->all(), [
-            'paycheque_num'     => ['required', 'string'],
-            'num_of_sessions'   => ['required', 'integer'],
-            'total_hours'       => ['required', 'string'],
-            'num_of_essays'     => ['required', 'integer'],
-            'essay_amount'      => ['required', 'string'],
-            'raise_amount'      => ['required', 'string'],
+            'paycheque_num'     => ['nullable', 'string'],
+            'num_of_sessions'   => ['nullable', 'integer'],
+            'total_hours'       => ['nullable', 'string'],
+            'num_of_essays'     => ['nullable', 'integer'],
+            'essay_amount'      => ['nullable', 'string'],
+            'raise_amount'      => ['nullable', 'string'],
             'total_amount'      => ['required', 'string'],
-            'paid_amount'       => ['required', 'string'],
-            'paycheque_notes'   => ['required', 'string'],
-            'status'            => ['required', 'string']
+            'paid_amount'       => ['nullable', 'string'],
+            'paycheque_notes'   => ['nullable', 'string'],
+            'status'            => ['nullable', 'string']
         ]);
 
         if ($validator->fails())
@@ -129,16 +129,16 @@ class PaychequesController extends Controller
         }
 
         $data = $request->all();
-        $paycheque->paycheque_num = $data['paycheque_num'];
-        $paycheque->num_of_sessions = $data['num_of_sessions'];
-        $paycheque->total_hours = $data['total_hours'];
-        $paycheque->num_of_essays = $data['num_of_essays'];
-        $paycheque->essay_amount = $data['essay_amount'];
-        $paycheque->raise_amount = $data['raise_amount'];
+        if (isset($paycheque->paycheque_numm)) $paycheque->paycheque_num = $data['paycheque_num'];
+        if (isset($paycheque->num_of_sessions)) $paycheque->num_of_sessions = $data['num_of_sessions'];
+        if (isset($paycheque->total_hours)) $paycheque->total_hours = $data['total_hours'];
+        if (isset($paycheque->num_of_essays)) $paycheque->num_of_essays = $data['num_of_essays'];
+        if (isset($paycheque->essay_amount)) $paycheque->essay_amount = $data['essay_amount'];
+        if (isset($paycheque->raise_amount)) $paycheque->raise_amount = $data['raise_amount'];
         $paycheque->total_amount = $data['total_amount'];
-        $paycheque->paid_amount = $data['paid_amount'];
-        $paycheque->paycheque_notes = $data['paycheque_notes'];
-        $paycheque->status = $data['status'];
+        if (isset($paycheque->paid_amount)) $paycheque->paid_amount = $data['paid_amount'];
+        if (isset($paycheque->paycheque_notes)) $paycheque->paycheque_notes = $data['paycheque_notes'];
+        if (isset($paycheque->status)) $paycheque->status = $data['status'];
 
         if (!$paycheque->save())
         {

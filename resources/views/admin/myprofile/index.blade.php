@@ -21,9 +21,11 @@
                                 </a>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
-                            <label for="email" class="col-2 col-form-label text-md-right">E-mail</label>
+                            <label for="email" class="col-2 col-form-label text-md-right">
+                                <span class="required">*</span> E-Mail:
+                            </label>
 
                             <div class="col-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
@@ -36,9 +38,11 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
-                            <label for="fname" class="col-2 col-form-label text-md-right">First Name</label>
+                            <label for="fname" class="col-2 col-form-label text-md-right">
+                                <span class="required">*</span> First Name
+                            </label>
 
                             <div class="col-6">
                                 <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror"
@@ -53,7 +57,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="fname" class="col-2 col-form-label text-md-right">Last Name</label>
+                            <label for="fname" class="col-2 col-form-label text-md-right">
+                                <span class="required">*</span> Last Name
+                            </label>
 
                             <div class="col-6">
                                 <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"

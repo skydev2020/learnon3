@@ -20,7 +20,7 @@
                                 </a>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <div class = "col-3 d-flex justify-content-end align-items-center">
                                 <label for="receivers" class="col-form-label font-weight-bold">
@@ -35,14 +35,16 @@
                                     <option value = "3">Users</option>
                                 </select>
                             </div>
-                        </div> 
+                        </div>
 
                         <div id = "receiver_box">
                         </div>
 
                         <div class="form-group row">
                             <div class = "col-3 d-flex justify-content-end align-items-center">
-                                <label for="subject" class="col-form-label font-weight-bold">Subject:</label>
+                                <label for="subject" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Subject:
+                                </label>
                             </div>
 
                             <div class = "col-6">
@@ -56,7 +58,8 @@
                         <div class="form-group row">
                             <div class = "col-3 d-flex justify-content-end align-items-center">
                                 <label for="message" class="col-form-label font-weight-bold">
-                                    Text:</label>
+                                    <span class="required">*</span> Text:
+                                </label>
                             </div>
 
                             <div class="col-6">
