@@ -15,7 +15,8 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="e_name" class="col-form-label font-weight-bold">{{ __('Expense Name:') }}</label>
+                                <label for="e_name" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> {{ __(' Expense Name:') }}</label>
                             </div>
                             <div class="col-6">
                                 <input id="e_name" type="text" class="form-control" name="e_name" value="{{ $expense->name }}"
@@ -25,7 +26,8 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="expense_date" class="col-form-label font-weight-bold">{{ __('Expense Date:') }}</label>
+                                <label for="expense_date" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> {{ __(' Expense Date:') }}</label>
                             </div>
                             <div class="col-6 d-flex">
                                 <input id="expense_date" type="date" class="form-control" name="expense_date"
@@ -35,11 +37,12 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="amount" class="col-form-label font-weight-bold">{{ __('Amount: $') }}</label>
+                                <label for="amount" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> {{ __(' Amount: $') }}</label>
                             </div>
                             <div class="col-6 d-flex">
                                 <input type = "text" name = "amount" id = "amount" class = "form-control"
-                                value="{{ $expense->amount }}" autocomplete="amount" autofocus></input>
+                                value="{{ $expense->amount }}" autocomplete="amount" autofocus>
                             </div>
                         </div>
 
@@ -48,8 +51,8 @@
                                 <label for="notes" class="col-form-label font-weight-bold">{{ __('Notes:') }}</label>
                             </div>
                             <div class="col-6 d-flex">
-                                <input type = "text" name = "notes" id = "notes" class = "form-control"
-                                value="{{ $expense->detail }}" autocomplete="notes" autofocus></input>
+                                <textarea name = "notes" id = "notes" class = "form-control inputstl"
+                                 autofocus>{{ $expense->detail }}</textarea>
                             </div>
                         </div>
 

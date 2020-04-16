@@ -27,7 +27,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="wage_usa" class="col-form-label font-weight-bold">Default Wage USA</label>
+                                <label for="wage_usa" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Default Wage USA
+                                </label>
                             </div>
                             <div class="col-6">
                                 <input id="wage_usa" type="text" class="form-control" name="wage_usa"
@@ -37,7 +39,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="wage_canada" class="col-form-label font-weight-bold">Default Wage CANADA</label>
+                                <label for="wage_canada" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Default Wage CANADA
+                                </label>
                             </div>
                             <div class="col-6">
                                 <input id="wage_canada" type="text" class="form-control" name="wage_canada"
@@ -47,7 +51,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="wage_alberta" class="col-form-label font-weight-bold">Default Wage ALBERTA</label>
+                                <label for="wage_alberta" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Default Wage ALBERTA
+                                </label>
                             </div>
                             <div class="col-6">
                                 <input id="wage_alberta" type="text" class="form-control" name="wage_alberta"
@@ -57,17 +63,21 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="invoice_usa	" class="col-form-label font-weight-bold">Default Invoice USA</label>
+                                <label for="invoice_usa	" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Default Invoice USA
+                                </label>
                             </div>
                             <div class="col-6">
                                 <input id="invoice_usa" type="text" class="form-control" name="invoice_usa"
-                                value="{{ $defaultwage->invoice_usa	}}" autocomplete="invoice_usa	" autofocus>
+                                value="{{ $defaultwage->invoice_usa	}}" autocomplete="invoice_usa" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="invoice_canada" class="col-form-label font-weight-bold">Default Invoice CANADA</label>
+                                <label for="invoice_canada" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Default Invoice CANADA
+                                </label>
                             </div>
                             <div class="col-6">
                                 <input id="invoice_canada" type="text" class="form-control" name="invoice_canada"
@@ -77,7 +87,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="invoice_alberta" class="col-form-label font-weight-bold">Default Invoice ALBERTA</label>
+                                <label for="invoice_alberta" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Default Invoice ALBERTA
+                                </label>
                             </div>
                             <div class="col-6">
                                 <input id="invoice_alberta" type="text" class="form-control" name="invoice_alberta"
@@ -87,7 +99,9 @@
 
                         <div class = "form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="income_file" class="col-form-label font-weight-bold">Upload New Rates (CSV)</label>
+                                <label for="income_file" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Upload New Rates (CSV)
+                                </label>
                             </div>
 
                             <div class = "col-3 d-flex align-items-center">
@@ -95,11 +109,12 @@
                                     class = "form-control">
                             </div>
                         </div>
-           
+
                         <div class = "form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
                                 <label class="col-form-label font-weight-bold">
-                                    Download Rates</label>
+                                    <span class="required">*</span> Download Rates
+                                </label>
                             </div>
 
                             <div class = "col-3 d-flex align-items-center">

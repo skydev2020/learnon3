@@ -39,7 +39,7 @@ class InvoicesController extends Controller
         } else $request_data['status'] = "";
 
         $invoices = Invoice::whereRaw($q);
-        
+
         if (isset($request_data['s_name'])) {
             $invoices = $invoices->whereHas('students', function($student) use ($request_data) {
             return $student->where('fname', 'like', "%" . $request_data['s_name'] . "%")
@@ -54,7 +54,7 @@ class InvoicesController extends Controller
         ];
 
        if( count($invoices) == 0 ) $request->session()->flash('error', "No search results!");
-        
+
         return view('admin.invoices.index')->with('data', $data);
     }
 
@@ -111,13 +111,13 @@ class InvoicesController extends Controller
     public function update(Request $request, Invoice $invoice)
     {
         $validator = Validator::make($request->all(), [
-            'invoice_date'      => ['required', 'date'],
+            'invoice_date'      => ['nullable', 'date'],
             'num_of_sessions'   => ['required', 'int'],
             'total_hours'       => ['required', 'string'],
             'total_amount'      => ['required', 'string'],
-            'paid_amount'       => ['required', 'string'],
-            'invoice_notes'     => ['required', 'string'],
-            'status'            => ['required', 'string'],
+            'paid_amount'       => ['nullable', 'string'],
+            'invoice_notes'     => ['nullable', 'string'],
+            'status'            => ['nullable', 'string'],
         ]);
 
         if ($validator->fails())
@@ -139,7 +139,7 @@ class InvoicesController extends Controller
             $request->session()->flash('success', 'You have modified invoices!');
             return redirect()->route('admin.invoices.index');
         }
-        
+
         $request->session()->flash('error', 'There was an error modifying invoices');
         return redirect()->route('admin.invoices.edit', $invoice);
     }
@@ -205,7 +205,7 @@ class InvoicesController extends Controller
 
         $date_added_obj	= new DateTime($date_added);
 		$current_date_obj = new DateTime($current_date);
-				
+
         $months = $current_date_obj->diff($date_added_obj)->m;
         $late_fee = ($months - 1) * 20;
         $total_amount = $invoice->total_amount - $invoice->late_fee + $late_fee;

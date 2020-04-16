@@ -27,7 +27,8 @@
 
                         <div class = "form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="income_file" class="col-form-label font-weight-bold">Income CSV File:</label>
+                                <label for="income_file" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Income CSV File:</label>
                             </div>
 
                             <div class = "col-3 d-flex align-items-center">
@@ -38,7 +39,8 @@
 
                         <div class = "form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="expense_file" class="col-form-label font-weight-bold">Expense CSV File:</label>
+                                <label for="expense_file" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Expense CSV File:</label>
                             </div>
 
                             <div class = "col-3 d-flex align-items-center">

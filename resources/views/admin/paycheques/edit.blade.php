@@ -19,7 +19,7 @@
                                 {{$paycheque->users()->first()['fname'].' '.$paycheque->users()->first()['lname']}}
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
                                 <label class="col-form-label font-weight-bold">Address:</label>
@@ -47,7 +47,7 @@
 
                         @csrf
                         {{method_field('PUT')}}
-                        
+
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end">
                                 <label for="num_of_sessions" class="col-form-label font-weight-bold">No. of sessions:</label>
@@ -105,7 +105,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end">
-                                <label for="total_amount" class="col-form-label font-weight-bold">Total Amount:</label>
+                                <label for="total_amount" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Total Amount:
+                                </label>
                             </div>
 
                             <div class="col-6">

@@ -21,7 +21,7 @@
                                 </a>{{' ( '. $invoice->user_id . ' )'}}
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end">
                                 <label class="col-form-label font-weight-bold">Invoice Number:</label>
@@ -39,16 +39,17 @@
 
                             <div class="col-6 d-flex align-items-center">
                                 <input id="invoice_date" type="date" class="form-control"
-                                 name="invoice_date" value="{{ $invoice->invoice_date }}" required autofocus>
+                                 name="invoice_date" value="{{ $invoice->invoice_date }}" autofocus>
                             </div>
                         </div>
 
                         @csrf
                         {{method_field('PUT')}}
-                        
+
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end">
-                                <label for="num_of_sessions" class="col-form-label font-weight-bold">No. of sessions:</label>
+                                <label for="num_of_sessions" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> No. of sessions:</label>
                             </div>
 
                             <div class="col-6">
@@ -59,7 +60,8 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end">
-                                <label for="total_hours" class="col-form-label font-weight-bold">Total Hours:</label>
+                                <label for="total_hours" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Total Hours:</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -70,7 +72,18 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end">
-                                <label for="total_amount" class="col-form-label font-weight-bold">Total Amount:</label>
+                                <label for="hour_charged" class="col-form-label font-weight-bold">Hour Charged:</label>
+                            </div>
+
+                            <div class="col-6 d-flex align-items-center">
+                                {{$invoice->hour_charged}}
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-3 d-flex justify-content-end">
+                                <label for="total_amount" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Total Amount:</label>
                             </div>
 
                             <div class="col-6">
@@ -86,7 +99,7 @@
 
                             <div class="col-6">
                                 <input id="paid_amount" type="text" class="form-control"
-                                 name="paid_amount" value="{{ $invoice->paid_amount }}" required autofocus>
+                                 name="paid_amount" value="{{ $invoice->paid_amount }}" autofocus>
                             </div>
                         </div>
 
@@ -98,7 +111,7 @@
 
                             <div class="col-6 d-flex align-items-center">
                                 <textarea id="invoice_notes" class="form-control inputstl"
-                                 name="invoice_notes" required autocomplete="invoice_notes" autofocus>{{$invoice->invoice_notes}}</textarea>
+                                 name="invoice_notes" autocomplete="invoice_notes" autofocus>{{$invoice->invoice_notes}}</textarea>
                             </div>
                         </div>
 
@@ -138,7 +151,7 @@
                             </div>
                             <div class="col-8 d-flex align-items-center">
                                 <textarea id="invoice_mail" class="form-control inputstl"
-                                 name="invoice_mail" required autocomplete="invoice_mail" autofocus>
+                                 name="invoice_mail" autocomplete="invoice_mail" autofocus>
                                  <?php echo html_entity_decode($invoice->invoice_format); ?></textarea>
                             </div>
                         </div>
@@ -154,7 +167,7 @@
                                 </a>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>

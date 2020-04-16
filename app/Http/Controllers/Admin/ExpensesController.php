@@ -39,9 +39,9 @@ class ExpensesController extends Controller
         } else $request_data['expense_date'] = "";
 
         $expenses_search = Expense::whereRaw($q)->get();
-        
+
         $expenses_searchdate = Expense::all();
-        
+
         if (isset($request_data['start_date']) && isset($request_data['end_date']))
         {
             $expenses_searchdate = Expense::whereBetween('date', [
@@ -51,12 +51,12 @@ class ExpensesController extends Controller
             $request_data['start_date'] = isset($request_data['start_date']) ? $request_data['start_date'] : "";
             $request_data['end_date'] = isset($request_data['end_date']) ? $request_data['end_date'] : "";
         }
-        
-        
+
+
 
         if ($request->input('action') == 'search') {
             $expenses = $expenses_search;
-            
+
         } else {
             $expenses = $expenses_searchdate;
         }
@@ -101,6 +101,7 @@ class ExpensesController extends Controller
         }
 
         $data = $request->all();
+        if (!isset($data['notes'])) $data['notes'] = '';
         $expense = Expense::create([
             'name'              => $data['e_name'],
             'date'              => $data['expense_date'],
@@ -160,7 +161,7 @@ class ExpensesController extends Controller
             $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.expenses.edit', $expense);
         }
-        
+
         $data = $request->all();
         $expense->name = $data['e_name'];
         $expense->date = $data['expense_date'];

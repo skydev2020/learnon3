@@ -41,7 +41,7 @@ class OtherIncomesController extends Controller
             'i_name'        => ['required', 'string'],
             'income_date'   => ['required', 'date'],
             'amount'        => ['required', 'string'],
-            'notes'         => ['required', 'string'],
+            'notes'         => ['nullable', 'string'],
         ]);
 
         if ($validator->fails())
@@ -51,6 +51,7 @@ class OtherIncomesController extends Controller
         }
 
         $data = $request->all();
+        if (!isset($data['notes'])) $data['notes'] = '';
         $otherincome = OtherIncome::create([
             'name'              => $data['i_name'],
             'date'              => $data['income_date'],
