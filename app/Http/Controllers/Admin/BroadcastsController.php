@@ -47,7 +47,7 @@ class BroadcastsController extends Controller
             'title'             => ['required', 'string', 'min:3', 'max:64'],
             'subject'           => ['required', 'string', 'min:3', 'max:64'],
             'mail_template'     => ['required', 'string'],
-            'status'            => ['required', 'integer'],
+            'status'            => ['nullable', 'integer'],
         ]);
 
         if ($validator->fails())
@@ -55,7 +55,7 @@ class BroadcastsController extends Controller
             $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.broadcasts.create');
         }
-        
+
         $data = $request->all();
         $broadcast = Broadcast::create([
             'title'             => $data['title'],
@@ -63,7 +63,7 @@ class BroadcastsController extends Controller
             'content'           => $data['mail_template'],
             'status'            => $data['status'],
         ]);
- 
+
         if($broadcast == NULL) {
             $request->session()->flash('error', 'There is an error creating information!');
             return redirect()->route('admin.broadcasts.create');
@@ -112,7 +112,7 @@ class BroadcastsController extends Controller
             'title'             => ['required', 'string'],
             'subject'           => ['required', 'string'],
             'mail_template'     => ['required', 'string'],
-            'status'            => ['required', 'integer'],
+            'status'            => ['nullable', 'integer'],
         ]);
 
         if ($validator->fails())
@@ -120,13 +120,13 @@ class BroadcastsController extends Controller
             $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.broadcasts.edit', $broadcast);
         }
-        
+
         $data = $request->all();
         $broadcast->title = $data['title'];
         $broadcast->subject = $data['subject'];
         $broadcast->content = $data['mail_template'];
         $broadcast->status = $data['status'];
- 
+
         if(!$broadcast->save()) {
             $request->session()->flash('error', 'There is an error modifying information!');
             return redirect()->route('admin.broadcasts.edit', $broadcast);

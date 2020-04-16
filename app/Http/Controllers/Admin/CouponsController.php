@@ -47,13 +47,13 @@ class CouponsController extends Controller
             'c_name'        => ['required', 'string'],
             'description'   => ['required', 'string'],
             'code'          => ['required', 'string'],
-            'c_type'          => ['nullable', 'string'],
-            'discount'      => ['required', 'string'],
-            'date_start'    => ['required', 'date'],
-            'date_end'      => ['required', 'date'],
-            'uses_total'    => ['required', 'integer'],
-            'uses_customer' => ['required', 'integer'],
-            'status'        => ['required', 'integer'],
+            'c_type'        => ['nullable', 'string'],
+            'discount'      => ['nullable', 'string'],
+            'date_start'    => ['nullable', 'date'],
+            'date_end'      => ['nullable', 'date'],
+            'uses_total'    => ['nullable', 'integer'],
+            'uses_customer' => ['nullable', 'integer'],
+            'status'        => ['nullable', 'integer'],
         ]);
 
         if ($validator->fails())
@@ -61,7 +61,7 @@ class CouponsController extends Controller
             $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.coupons.create');
         }
-        
+
         $data = $request->all();
         $coupon = Coupon::create([
             'name'          => $data['c_name'],
@@ -124,13 +124,13 @@ class CouponsController extends Controller
             'c_name'        => ['required', 'string'],
             'description'   => ['required', 'string'],
             'code'          => ['required', 'string'],
-            'c_type'          => ['nullable', 'string'],
-            'discount'      => ['required', 'string'],
-            'date_start'    => ['required', 'date'],
-            'date_end'      => ['required', 'date'],
-            'uses_total'    => ['required', 'integer'],
-            'uses_customer' => ['required', 'integer'],
-            'status'        => ['required', 'integer'],
+            'c_type'        => ['nullable', 'string'],
+            'discount'      => ['nullable', 'string'],
+            'date_start'    => ['nullable', 'date'],
+            'date_end'      => ['nullable', 'date'],
+            'uses_total'    => ['nullable', 'integer'],
+            'uses_customer' => ['nullable', 'integer'],
+            'status'        => ['nullable', 'integer'],
         ]);
 
         if ($validator->fails())
@@ -138,7 +138,7 @@ class CouponsController extends Controller
             $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.coupons.edit', $coupon);
         }
-        
+
         $data = $request->all();
         $coupon->name = $data['c_name'];
         $coupon->description = $data['description'];
@@ -150,7 +150,7 @@ class CouponsController extends Controller
         $coupon->uses_total = $data['uses_total'];
         $coupon->uses_customer = $data['uses_customer'];
         $coupon->status = $data['status'];
- 
+
         if(!$coupon->save()) {
             $request->session()->flash('error', 'There is an error modifying the coupon!');
             return redirect()->route('admin.coupons.edit', $coupon);

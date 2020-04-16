@@ -15,17 +15,21 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="title" class="col-form-label font-weight-bold">{{ __('Information Title:') }}</label>
+                                <label for="title" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span>{{ __(' Information Title:') }}
+                                </label>
                             </div>
                             <div class="col-6">
-                                <input id="title" type="text" class="form-control" name="title"
+                                <input id="title" type="text" class="form-control" name="title" required
                                 autocomplete="title" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="description" class="col-form-label font-weight-bold">{{ __('Description:') }}</label>
+                                <label for="description" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> {{ __(' Description:') }}
+                                </label>
                             </div>
                             <div class="col-8 d-flex align-items-center">
                                 <textarea id = "description" name = "description" class="form-control inputstl"
@@ -39,7 +43,7 @@
                             </div>
                             <div class="col-6 d-flex">
                                 <input type = "text" name = "keyword" id = "keyword" class = "form-control"
-                                autocomplete="keyword" autofocus></input>
+                                autocomplete="keyword" autofocus>
                             </div>
                         </div>
 

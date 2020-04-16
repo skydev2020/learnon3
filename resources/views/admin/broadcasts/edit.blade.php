@@ -15,7 +15,8 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="title" class="col-form-label font-weight-bold">{{ __('Title:') }}</label>
+                                <label for="title" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span>{{ __(' Title:') }}</label>
                             </div>
                             <div class="col-6">
                                 <input id="title" type="text" class="form-control" name="title" value="{{ $broadcast->title }}"
@@ -25,7 +26,8 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="subject" class="col-form-label font-weight-bold">{{ __('Subject:') }}</label>
+                                <label for="subject" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span>{{ __(' Subject:') }}</label>
                             </div>
                             <div class="col-6 d-flex">
                                 <input id="subject" type="text" class="form-control" name="subject"
@@ -35,7 +37,8 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="mail_template" class="col-form-label font-weight-bold">{{ __('Template:') }}</label>
+                                <label for="mail_template" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span>{{ __(' Template:') }}</label>
                             </div>
                             <div class="col-8 d-flex align-items-center">
                                 <textarea id="mail_template" class="form-control inputstl"
@@ -44,7 +47,7 @@
                             </div>
                         </div>
 
-                        
+
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
