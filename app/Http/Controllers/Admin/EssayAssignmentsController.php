@@ -79,7 +79,7 @@ class EssayAssignmentsController extends Controller
         } else $request_data['t_name'] = "";
 
         if (isset($request_data['a_date_from']) && isset($request_data['a_date_to'])) {
-            $essay_assignments = $essay_assignments->whereBetween('date_assigned', 
+            $essay_assignments = $essay_assignments->whereBetween('date_assigned',
             [ $request_data['a_date_from'], $request_data['a_date_to'] ]);
         }
 
@@ -87,7 +87,7 @@ class EssayAssignmentsController extends Controller
         if (!isset($request_data['a_date_to'])) $request_data['a_date_to'] = "";
         if (!isset($request_data['c_date_from'])) $request_data['c_date_from'] = "";
         if (!isset($request_data['c_date_to'])) $request_data['c_date_to'] = "";
-        
+
         $essay_assignments = $essay_assignments->get();
         $statuses = EssayStatus::all();
         $data = [
@@ -100,7 +100,7 @@ class EssayAssignmentsController extends Controller
         {
             return view('admin.essayassignments.index')->with('data', $data);
         }
-        
+
         // request()->session()->flash('error', null);
         if (count($essay_assignments) == 0) {
             request()->session()->flash('error', "No search results!");
@@ -139,17 +139,17 @@ class EssayAssignmentsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'assignment_num'    => ['required', 'integer', 'unique:essay_assignments'],
-            'tutor_id'          => ['required', 'integer'],
-            'student_id'        => ['required', 'integer'],
+            'tutor_id'          => ['nullable', 'integer'],
+            'student_id'        => ['nullable', 'integer'],
             'topic'             => ['required', 'string'],
             'description'       => ['required', 'string'],
-            'file_format'       => ['required', 'string'],
-            'price_owed'        => ['required', 'integer'],
-            'paid_to_tutor'     => ['required', 'integer'],
-            'date_assigned'     => ['required', 'date'],
-            'date_completed'    => ['required', 'date'],
-            'date_due'          => ['required', 'date'],
-            'status_id'         => ['required', 'integer'],
+            'file_format'       => ['nullable', 'string'],
+            'price_owed'        => ['nullable', 'integer'],
+            'paid_to_tutor'     => ['nullable', 'integer'],
+            'date_assigned'     => ['nullable', 'date'],
+            'date_completed'    => ['nullable', 'date'],
+            'date_due'          => ['nullable', 'date'],
+            'status_id'         => ['nullable', 'integer'],
         ]);
 
         if ($validator->fails())
@@ -265,17 +265,17 @@ class EssayAssignmentsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'assignment_num'    => ['required', 'integer'],
-            'tutor_id'          => ['required', 'int'],
-            'student_id'        => ['required', 'int'],
+            'tutor_id'          => ['nullable', 'int'],
+            'student_id'        => ['nullable', 'int'],
             'topic'             => ['required', 'string'],
             'description'       => ['required', 'string'],
-            'file_format'       => ['required', 'string'],
-            'paid_to_tutor'     => ['required', 'string'],
-            'price_owed'        => ['required', 'string'],
-            'date_assigned'     => ['required', 'date'],
-            'date_completed'    => ['required', 'date'],
-            'date_due'          => ['required', 'date'],
-            'status_id'         => ['required', 'integer'],
+            'file_format'       => ['nullable', 'string'],
+            'paid_to_tutor'     => ['nullable', 'string'],
+            'price_owed'        => ['nullable', 'string'],
+            'date_assigned'     => ['nullable', 'date'],
+            'date_completed'    => ['nullable', 'date'],
+            'date_due'          => ['nullable', 'date'],
+            'status_id'         => ['nullable', 'integer'],
         ]);
 
         if ($validator->fails())
@@ -302,7 +302,7 @@ class EssayAssignmentsController extends Controller
             $request->session()->flash('success', 'The Homework Assignmnet has been updated successfully');
             return redirect()->route('admin.essayassignments.index');
         }
-        
+
         $request->session()->flash('error', 'There was an error updating the homework assignment');
         return redirect()->route('admin.essayassignments.edit');
     }

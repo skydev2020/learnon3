@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
                     <i class="fas fa-user-tie" style="font-size:24px"> Update Tutor Details</i>
@@ -12,10 +12,11 @@
                     <form action="{{route('admin.rejectedtutors.update', $tutor)}}" method="POST">
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="email" class="col-form-label font-weight-bold">Username</label>
+                                <label for="email" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> E-Mail:</label>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                  name="email" value="{{$tutor->email }}" required autocomplete="email" autofocus>
 
@@ -26,13 +27,14 @@
                                 @enderror
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="fname" class="col-form-label font-weight-bold">First Name</label>
+                                <label for="fname" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> First Name:</label>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror"
                                  name="fname" value="{{ $tutor->fname }}" required autofocus>
 
@@ -46,10 +48,11 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="lname" class="col-form-label font-weight-bold">Last Name</label>
+                                <label for="lname" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Last Name:</label>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"
                                  name="lname" value="{{ $tutor->lname }}" required autofocus>
 
@@ -66,10 +69,11 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="home_phone" class="col-form-label font-weight-bold">Home Phone:</label>
+                                <label for="home_phone" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Home Phone:</label>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <input id="home_phone" type="text" class="form-control"
                                  name="home_phone" value="{{ $tutor->home_phone }}" required autofocus>
                             </div>
@@ -80,7 +84,7 @@
                                 <label for="cell_phone" class="col-form-label font-weight-bold">Cell/Work Phone:</label>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <input id="cell_phone" type="text" class="form-control"
                                  name="cell_phone" value="{{ $tutor->cell_phone }}" required autofocus>
                             </div>
@@ -92,7 +96,7 @@
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
-                                <input id="password" type="password" 
+                                <input id="password" type="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
@@ -108,7 +112,7 @@
                                 <label for="password-confirm" class="col-form-label font-weight-bold">{{ __('Confirm') }}</label>
                             </div>
                             <div class="col-6 d-flex align-items-center">
-                                <input id="password-confirm" type="password" 
+                                <input id="password-confirm" type="password"
                                 class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
@@ -116,7 +120,7 @@
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
                                 <label for="address" class="col-form-label font-weight-bold">
-                                {{ __('Home Address:') }}</label>
+                                    <span class="required">*</span>{{ __(' Home Address:') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -127,7 +131,8 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="city" class="col-form-label font-weight-bold">{{ __('City') }}</label>
+                                <label for="city" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> {{ __(' City:') }}</label>
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <input id="city" type="text" class="form-control @error('city') is-invalid @enderror"
@@ -143,7 +148,8 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="state_id" class="col-form-label font-weight-bold">{{ __('Province / State') }}</label>
+                                <label for="state_id" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> {{ __(' Province / State:') }}</label>
                             </div>
                             <div class="col-6 d-flex align-items-center">
                                 <select name="state_id" id="state_id">
@@ -151,7 +157,7 @@
                                     $states = State::all();
                                     ?>
                                     @foreach($states as $state)
-                                        <option value = {{$state->id}} 
+                                        <option value = {{$state->id}}
                                         <?=$state->id == $tutor->state_id ? "selected" : ""?>>
                                         {{ $state->name }}</option>
                                     @endforeach
@@ -168,7 +174,8 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="pcode" class="col-form-label font-weight-bold">{{ __('Pcode') }}</label>
+                                <label for="pcode" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> {{ __(' PostalZip Code:') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -185,7 +192,8 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end">
-                                <label for="country_id" class="col-form-label font-weight-bold">{{ __('Country') }}</label>
+                                <label for="country_id" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> {{ __(' Country:') }}</label>
                             </div>
 
                             <div class="col-6 d-flex align-items-center">
@@ -194,7 +202,7 @@
                                     $countries = Country::all();
                                     ?>
                                     @foreach($countries as $country)
-                                        <option value = {{$country->id}} 
+                                        <option value = {{$country->id}}
                                         <?=$country->id == $tutor->country_id ? "selected" : ""?>>
                                         {{ $country->name }}</option>
                                     @endforeach
@@ -212,22 +220,24 @@
                         <h4 style="text-align: center">{{ __('Other Details') }}</h4>
 
                         <div class="form-group row col-12">
-                            <label for = "other_notes" class="font-weight-bold">{{ __('Other Notes') }}</label>
+                            <label for = "other_notes" class="font-weight-bold">
+                                <span class="required">*</span>{{ __(' Other Notes:') }}</label>
                             <textarea class="form-control inputstl" id = "other_notes" name = "other_notes"
                             required autocomplete="other_notes" autofocus>{{$tutor->other_notes}}</textarea>
                         </div>
 
 
                         <div class="form-group row col-12">
-                            <label for = "post_secondary_edu" class="font-weight-bold">{{ __('Post Secondary Education attending/attended') }}</label>
-                            <textarea class="form-control inputstl" id = "post_secondary_edu" name = "post_secondary_edu" 
+                            <label for = "post_secondary_edu" class="font-weight-bold">
+                                <span class="required">*</span> Post Secondary Education attending/attended:</label>
+                            <textarea class="form-control inputstl" id = "post_secondary_edu" name = "post_secondary_edu"
                             required autocomplete="post_secondary_edu" autofocus>{{$tutor->post_secondary_edu}}
                             </textarea>
                         </div>
 
                         <div class="form-group row col-12">
                             <label for = "area_of_concentration" class="font-weight-bold">
-                            {{ __('Subjects studied/major area of concentration (please indicate grades and grade point averages)') }}
+                                <span class="required">*</span> Subjects studied/major area of concentration (please indicate grades and grade point averages:
                             </label>
                             <textarea class="form-control inputstl" id = "area_of_concentration" name = "area_of_concentration"
                             required autocomplete="area_of_concentration" autofocus>{{$tutor->area_of_concentration}}</textarea>
@@ -235,25 +245,37 @@
 
                         <div class="form-group row col-12">
                             <label for = "tutoring_courses" class="font-weight-bold">
-                            {{ __('Courses you can tutor for each grade level (list each course, please be as detailed as possible)') }}
+                                <span class="required">*</span> Courses you can tutor for each grade level (list each course, please be as detailed as possible:
                             </label>
                             <textarea class="form-control inputstl" id = "tutoring_courses" name = "tutoring_courses"
                             required autocomplete="tutoring_courses" autofocus> {{ $tutor->tutoring_courses }} </textarea>
                         </div>
 
                         <div class="form-group row col-12">
-                            <label for = "work_experience" class="font-weight-bold">{{ __('Please provide past job/work experience(N/A for none)') }}</label>
+                            <label for = "work_experience" class="font-weight-bold">
+                                <span class="required">*</span> Please provide past job/work experience:
+                            </label>
                             <textarea class="form-control inputstl" id = "work_experience" name = "work_experience"
                             required autocomplete="work_experience" autofocus>{{$tutor->work_experience}}</textarea>
                         </div>
 
                         <div class="form-group row col-12">
-                            <label for = "tutoring_areas" class="font-weight-bold">{{ __('City/suburbs/area you can tutor') }}</label>
+                            <label for = "tutoring_areas" class="font-weight-bold">
+                                <span class="required">*</span> City/suburbs/area you can tutor:
+                            </label>
                             <textarea class="form-control inputstl" id = "tutoring_areas" name = "tutoring_areas"
                             required autocomplete="tutoring_areas" autofocus>{{$tutor->tutoring_areas}}</textarea>
                         </div>
 
-                        <div class="form-group col-md-4 row">
+                        <div class="form-group row col-12">
+                            <label for = "references" class="font-weight-bold">
+                                <span class="required">*</span> Please provide 3 references (name, phone and email, and how they know you):
+                            </label>
+                            <textarea class="form-control inputstl" id = "references" name = "references"
+                            required autocomplete="references" autofocus>{{$tutor->references}}</textarea>
+                        </div>
+
+                        <div class="form-group col-4 row">
                             <label for = "sex_val" class="font-weight-bold">Please indicate Male/Female</label>
                             <select name="sex_val" style="display: block;" class="form-control" required>
                                 <option value="Male" <?= $tutor -> gender == "Male" ? "selected" : "" ?> >
@@ -263,7 +285,9 @@
                         </div>
 
                         <div class="form-group col-12 row">
-                            <label class="font-weight-bold">Are you a certified teacher?&nbsp; &nbsp;</label>
+                            <label class="font-weight-bold">
+                                <span class="required">*</span> Are you a certified teacher?&nbsp; &nbsp;
+                            </label>
                             <label class="radio-inline d-flex align-items-center">
                                 <input type="radio" name="certified" value="Yes"
                                 <?= $tutor -> certified_teacher == "Yes" ? "checked" : ""; ?> >&nbsp;Yes
@@ -275,7 +299,9 @@
                         </div>
 
                         <div class="form-group col-12 row">
-                            <label class="font-weight-bold">Have you ever had a criminal conviction (disregarding minor traffic violations)?&nbsp; &nbsp; </label>
+                            <label class="font-weight-bold">
+                                <span class="required">*</span> Have you ever had a criminal conviction (disregarding minor traffic violations)?&nbsp; &nbsp;
+                            </label>
                             <label class="radio-inline d-flex align-items-center">
                                 <input type="radio" name="cr_radio" value="Yes" checked >&nbsp;Yes
                             </label>&nbsp;&nbsp;
@@ -286,7 +312,9 @@
                         </div>
 
                         <div class="form-group col-12 row">
-                            <label class="font-weight-bold" >Would you be willing to provide a background criminal check? &nbsp; &nbsp;</label>
+                            <label class="font-weight-bold">
+                                <span class="required">*</span> Would you be willing to provide a background criminal check? &nbsp; &nbsp;
+                            </label>
                             <label class="radio-inline d-flex align-items-center">
                                 <input type="radio" name="cc_radio" value="Yes"
                                 <?= $tutor -> criminal_check == "Yes" ? "checked" : "" ?> >&nbsp;Yes
@@ -303,11 +331,11 @@
                             </div>
 
                             <div class="col-4 d-flex align-items-center">
-                                <select name="approved" style="display: block;" class="form-control" 
+                                <select name="approved" style="display: block;" class="form-control"
                                 required id = "approved">
                                     <option value="1" <?= $tutor -> approved == "1" ? "selected" : "" ?> >Enabled</option>
                                     <option value="0" <?= $tutor -> gender == "0" ? "selected" : "" ?> >Disabled</option>
-                                </select>    
+                                </select>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">

@@ -26,7 +26,7 @@ class RejectedTutorsController extends Controller
 
         $q = "1=1 ";
 
-        $q.= " and (status is NULL or 0) ";
+        $q.= " and status like 0";
 
         if (isset($request_data['t_name'])) {
             $q.= " and (fname like '%".$request_data['t_name']."%' or lname like '%" .$request_data['t_name'] . "%') ";
@@ -42,14 +42,14 @@ class RejectedTutorsController extends Controller
 
         $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()
         ->whereRaw($q)->get();
-        
+
         $data = [
             'tutors'            => $tutors,
             'old'               => $request_data,
         ];
 
         if( count($tutors) != 0 ) return view('admin.rejectedtutors.index')->with('data', $data);
-        
+
         request()->session()->flash('error', "No search results!");
         return view('admin.rejectedtutors.index')->with('data', $data);
     }
@@ -116,7 +116,7 @@ class RejectedTutorsController extends Controller
             'fname'             => ['required', 'string'],
             'lname'             => ['required', 'string'],
             'home_phone'        => ['required', 'string'],
-            'cell_phone'        => ['required', 'string'],
+            'cell_phone'        => ['nullable', 'string'],
             'password'          => ['required', 'string', 'min:1', 'confirmed'],
             'address'           => ['required', 'string'],
             'city'              => ['required', 'string'],
@@ -127,16 +127,17 @@ class RejectedTutorsController extends Controller
             'post_secondary_edu'=> ['required', 'string'],
             'area_of_concentration'=> ['required', 'string'],
             'tutoring_courses'  => ['required', 'string'],
-            'sex_val'           => ['required', 'string'],
+            'sex_val'           => ['nullable', 'string'],
             'certified'         => ['required', 'string'],
             'cr_radio'          => ['required', 'string'],
             'cc_radio'          => ['required', 'string'],
-            'approved'          => ['required', 'integer'],
+            'status'            => ['nullable', 'integer'],
+            'approved'          => ['nullable', 'integer'],
         ]);
 
         if ($validator->fails())
         {
-            
+
             $request->session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.rejectedtutors.edit', $rejectedtutor);
         }
@@ -169,7 +170,7 @@ class RejectedTutorsController extends Controller
             $request->session()->flash('success', 'The tutor has been updated successfully');
             return redirect()->route('admin.rejectedtutors.index');
         }
-        
+
         $request->session()->flash('error', 'There was an error updating the tutor');
         return redirect()->route('admin.rejectedtutors.edit', $rejectedtutor);
     }
@@ -183,11 +184,11 @@ class RejectedTutorsController extends Controller
     public function destroy(User $rejectedtutor)
     {
         if (Gate::denies('manage-tutors')) {
-            
+
             return redirect(route('admin.rejectedtutors.index'));
         }
 
         $rejectedtutor->delete();
-        return redirect(route('admin.rejectedtutors.index'));    
+        return redirect(route('admin.rejectedtutors.index'));
     }
 }

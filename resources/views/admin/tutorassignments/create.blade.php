@@ -26,7 +26,9 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end font-weight-bold">
-                                <label for="tutor_val" class="col-form-label text-right">Select Tutor:</label>
+                                <label for="tutor_val" class="col-form-label text-right">
+                                    <span class="required">*</span> Select Tutor:
+                                </label>
                             </div>
 
                             <div class="col-2">
@@ -38,10 +40,12 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end font-weight-bold">
-                                <label for="student_val" class="col-form-label text-right">Select Student:</label>
+                                <label for="student_val" class="col-form-label text-right">
+                                    <span class="required">*</span> Select Student:
+                                </label>
                             </div>
 
                             <div class="col-2">
@@ -56,7 +60,9 @@
 
                         <div class="form-group row">
                             <div class="col-4 d-flex justify-content-end font-weight-bold" >
-                                <label for="tpay_value" class="col-form-label text-right">Tutor Pay Rate($):</label>
+                                <label for="tpay_value" class="col-form-label text-right">
+                                    <span class="required">*</span> Tutor Pay Rate($):
+                                </label>
                             </div>
                             <div class="col-2">
                                 <input type="text" name="tpay_value" id="tpay_value" class="form-control">
@@ -65,13 +71,15 @@
 
                         <div class = "form-group row">
                             <div class = "col-4 d-flex justify-content-end font-weight-bold">
-                                <label for="spay_value" class="col-form-label">Student Invoice Rate($) per hour:</label>
+                                <label for="spay_value" class="col-form-label">
+                                    <span class="required">*</span> Student Invoice Rate($) per hour:
+                                </label>
                             </div>
                             <div class = "col-2">
                                 <input  type = "text" name = "spay_value" id = "spay_value" class="form-control">
                             </div>
                         </div>
-                        
+
                         <div class = "form-group row">
                             <div class = "col-4 d-flex align-items-center justify-content-end font-weight-bold">
                                 <label for="subjects_box" class="col-form-label">Subjects:</label>
@@ -120,7 +128,7 @@
                     </form>
                 </div>
 
-                
+
             </div>
         </div>
     </div>

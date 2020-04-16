@@ -12,7 +12,8 @@
                     <form action="{{route('admin.sessions.update', $data['session'])}}" method="POST">
 
                         <div class="form-group row">
-                            <label for="assignment_id" class="col-4 col-form-label text-right">{{ __('Select Tutor: ') }}</label>
+                            <label for="assignment_id" class="col-4 col-form-label text-right">
+                                <span class="required">*</span> {{ __(' Select Tutor => Student: ') }}</label>
 
                             <div class="col-5">
                                 <select name = "assignment_id" id = "assignment_id" class = "form-control">
@@ -28,9 +29,10 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="form-group row">
-                            <label for="session_date" class="col-4 col-form-label text-right">{{ __('Date of Session:') }}</label>
+                            <label for="session_date" class="col-4 col-form-label text-right">
+                                <span class="required">*</span> {{ __(' Date of Session:') }}</label>
 
                             <div class="col-5">
                                 <input type = "date" value = {{ $data['session']->session_date }} id = "session_date"
@@ -43,7 +45,8 @@
 
                         <div class="form-group row">
                             <label for="session_duration" class="col-4 col-form-label text-right">
-                            {{ __('Duration of Session:') }} </label>
+                                <span class="required">*</span>{{ __(' Duration of Session:') }}
+                            </label>
 
                             <div class="col-5">
                                 <input type = "text" value = {{ $data['session']->session_duration }} id = "session_duration"
@@ -65,7 +68,7 @@
                     </form>
                 </div>
 
-                
+
             </div>
         </div>
     </div>
