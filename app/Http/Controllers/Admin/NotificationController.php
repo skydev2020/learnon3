@@ -92,7 +92,7 @@ class NotificationController extends Controller
                     break;
                     default:
                         session()->flash('error', "There is an error sending messages!");
-                        return redirect()->route('admin.notification.index');                        
+                        return redirect()->route('admin.notification.index');
                 }
             break;
 

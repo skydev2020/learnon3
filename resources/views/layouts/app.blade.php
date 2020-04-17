@@ -41,10 +41,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @auth
-                            <li class="nav-item">
-                                <a class="tc-white nav-link {{Request::is('home') ? 'active' : '' }} font-weight-bold" href="{{route('home')}}">Home</a>
-                            </li>
                             @can('manage-users')
+                            <li class="nav-item">
+                                <a class="tc-white nav-link {{Request::segment(2) == 'home' ? 'active' : '' }} font-weight-bold" href="{{route('admin.home')}}">Home</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="tc-white nav-link {{Request::segment(2) == 'myprofile' ? 'active' : '' }} font-weight-bold" href="{{route('admin.myprofile.index')}}">My Profile</a>
                             </li>
@@ -113,10 +113,16 @@
                             @endcan
                             @can('manage-tutor-students')
                             <li class="nav-item">
+                                <a class="tc-white nav-link {{Request::is('home') ? 'active' : '' }} font-weight-bold" href="{{route('home')}}">Home</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="tc-white font-weight-bold nav-link" href="{{route('tutor.students.index')}}">List Students</a>
                             </li>
                             @endcan
                             @can('manage-student-tutors')
+                            <li class="nav-item">
+                                <a class="tc-white nav-link {{Request::is('home') ? 'active' : '' }} font-weight-bold" href="{{route('home')}}">Home</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="tc-white font-weight-bold nav-link" href="{{route('student.myprofile.index')}}">Account info</a>
                             </li>
