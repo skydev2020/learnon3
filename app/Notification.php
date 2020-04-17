@@ -10,6 +10,11 @@ class Notification extends Model
         'notification_from', 'notification_to', 'headers', 'subject', 'message'
     ];
 
+    public function from_user()
+    {
+        return $this->belongsTo('App\User', 'notification_from')->first();
+    }
+
     public static function addInformation($from, $to, $subject, $message)
     {
         return Notification::create([

@@ -80,6 +80,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     //Help Menu
     Route::resource('/help','HelpController');
 
+    Route::resource('/notifications', 'NotificationsController');
     //Custom Route
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
