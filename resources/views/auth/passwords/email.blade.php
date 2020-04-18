@@ -32,18 +32,18 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                            <div class="col-md-1">
+                            <div class="col-md-4 text-md-right">
                                 <a href="{{route('login')}}">
                                     <button type="button" class="btn btn-primary">
                                         {{ __('Back') }}
                                     </button>
                                 </a>
                             </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Send Password Reset Link') }}
+                                </button>
+                            </div>                            
                         </div>
                     </form>
                 </div>
