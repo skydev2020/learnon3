@@ -12,7 +12,7 @@
                     <form action="{{route('admin.myprofile.update', $myuser)}}" method="POST">
 
                         <div class="form-group row">
-                            <div class="col-1 offset-10">
+                            <div class="col-1 offset-10 text-right">
                                 <button type="submit" class="btn btn-primary">Save</button>
                             </div>
                             <div clas="col-1">
