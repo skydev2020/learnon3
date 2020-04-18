@@ -24,7 +24,9 @@ div#app {
   }
 
   nav#title-bar {
-    background-color: $title_back !important;
+    background-color: $title_back;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   a.tc-white {

@@ -94,7 +94,7 @@
                         <tbody>
                         @foreach ($data['tutors'] as $tutor)
                             <tr>
-                                <th scope="row">{{$tutor->id}}</th>
+                                <th scope="row" class="font-weight-normal">{{$tutor->id}}</th>
                                 <td scope="col">{{$tutor->fname . ' ' . $tutor->lname}}</td>
                                 <td scope="col">{{$tutor->email}}</td>
                                 <td scope="col" value = {{$tutor->status}}> <?=$tutor->status == 1? 'Enabled' : 'Disabled';?> </td>
