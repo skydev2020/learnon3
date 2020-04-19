@@ -22,20 +22,21 @@
                         <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <th scope="row">{{$user->id}}</th>
+                                <th scope="row" class="font-weight-normal">{{$user->id}}</th>
                                 <td scope="col">{{$user->fname . ' ' . $user->lname}}</td>
                                 <td scope="col">{{$user->email}}</td>
                                 <td scope="col">{{implode(', ', $user->roles()->get()->pluck('name')->toArray())}}</td>
                                 <td scope="col">
                                     @can('edit-users')
-                                        <a href="{{route('admin.users.edit', $user->id)}}"><button type="button" class="btn btn-primary float-left">Edit</button></a>
+                                        [<a href="{{route('admin.users.edit', $user->id)}}">Edit</a>]
                                     @endcan
                                     @can('delete-users')
-                                    <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="float-left">
-                                        @csrf
-                                        {{method_field('DELETE')}}
-                                        <button type="submit" class="btn btn-warning">Delete</button>
-                                    </form>
+                                        &nbsp;[<a href="#" onclick="return user_del_confirm({{$user->id}})" >Delete</a>]
+                                        <form action="{{ route('admin.users.destroy', $user) }}" id="del_form_{{$user->id}}" method="POST" class="float-left d-none">
+                                            @csrf
+                                            {{method_field('DELETE')}}
+                                            <button type="submit" class="btn btn-warning">Delete</button>
+                                        </form>
                                     @endcan
                                 </td>
                             </tr>
@@ -49,3 +50,15 @@
     </div>
 </div>
 @endsection
+<!-- Scripts -->
+@section("jssection")
+<script>
+    function user_del_confirm(id) {
+        var r=confirm('Are you sure?');
+        if (r == true) {
+            $("#del_form_" + id).submit();
+        }
+    }
+
+</script>
+@stop
