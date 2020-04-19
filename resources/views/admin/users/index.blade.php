@@ -9,7 +9,7 @@
                     <i class="fas fa-user-tie" style="font-size:24px"> Users</i>
                 </div>
                 <div class="card-body">
-                    <table class="table">
+                    <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th scope="col">#</th>

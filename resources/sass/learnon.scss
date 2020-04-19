@@ -21,29 +21,38 @@ body {
 
 div#app {
     background-color: grey !important;
-  }
+}
 
-  nav#title-bar {
+nav#title-bar {
     background-color: $title_back;
     padding-top: 0;
     padding-bottom: 0;
-  }
+}
 
-  a.tc-white {
+a.tc-white {
     color: $white_normal !important;
-  }
+}
 
-  a.tc-white:hover,
-  a.tc-white:focus {
+a.tc-white:hover,
+a.tc-white:focus {
     color: $white_focus !important;
-  }
+}
 
-  .nav-link.active {
-      background-color: $red;
-      color: $white_focus !important;
-  }
+.nav-link.active {
+    background-color: $red;
+    color: $white_focus !important;
+}
 
-  span.required {
+span.required {
     color: $red;
     font-weight: bold;
-  }
+}
+
+
+// Table StyleSheet adjust
+.table {
+    thead th, tbody td, tbody th{
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
+    }
+}

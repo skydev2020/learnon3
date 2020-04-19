@@ -88,7 +88,7 @@
                             <th scope="col">Status</th>
                             <th scope="col">Approved</th>
                             <th scope="col">Date Added</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col" class="text-right">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -100,7 +100,7 @@
                                 <td scope="col" value = {{$tutor->status}}> <?=$tutor->status == 1? 'Enabled' : 'Disabled';?> </td>
                                 <td scope="col"> <?=$tutor->approved == 1? 'Yes' : 'NO'; ?> </td>
                                 <td scope="col">{{$tutor->created_at}}</td>
-                                <td scope="col">
+                                <td scope="col" class="text-right">
                                     @can('edit-users')
                                         [<a href="{{route('admin.tutors.edit', $tutor)}}">Edit</a>]
                                     @endcan
