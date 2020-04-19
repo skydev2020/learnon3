@@ -29,7 +29,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" id = "title-bar">
             <div class="container" >
-                <a class="navbar-brand" href="{{ url('/') }}" src = "{{ asset('/images/logo3.png') }}">
+                <a class="navbar-brand pt-0 pb-0" href="{{ url('/') }}" src = "{{ asset('/images/logo3.png') }}">
                     <img src = "{{ asset('/images/logo3.png') }}" alt = "Learnon" style = "width:97px; height:40px;">
                     {{-- {{ config('app.name', 'Laravel') }} --}}
                 </a>
@@ -43,136 +43,136 @@
                         @auth
                             @can('manage-users')
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0 {{Request::segment(2) == 'home' ? 'active' : '' }}" href="{{route('admin.home')}}">Home</a>
+                                <a class="tc-white nav-link {{Request::segment(2) == 'home' ? 'active' : '' }}" href="{{route('admin.home')}}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0 {{Request::segment(2) == 'myprofile' ? 'active' : '' }}" href="{{route('admin.myprofile.index')}}">My Profile</a>
+                                <a class="tc-white nav-link {{Request::segment(2) == 'myprofile' ? 'active' : '' }}" href="{{route('admin.myprofile.index')}}">My Profile</a>
                             </li>
                             @endcan
                             @can('manage-students')
                             <li class="nav-item dropdown">
-                                <a class="tc-white nav-link pt-0 pb-0 {{in_array(Request::segment(2), ["students", "assignments", "student_packages", "packages"]) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white nav-link {{in_array(Request::segment(2), ['students', 'assignments', 'student_packages', 'packages']) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Students
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item {{Request::segment(2)=="students" ? 'active' : '' }}" href="{{route('admin.students.index')}}">Student List</a>
-                                    <a class="dropdown-item {{Request::segment(2)=="assignments" ? 'active' : '' }}" href="{{route('admin.assignments.index')}}">Student Assignment</a>
-                                    <a class="dropdown-item {{Request::segment(2)=="student_packages" ? 'active' : '' }}" href="{{route('admin.student_packages.index')}}">Student Packages</a>
-                                    <a class="dropdown-item {{Request::segment(2)=="packages" ? 'active' : '' }}" href="{{route('admin.packages.index')}}">Packages</a>
+                                    <a class="dropdown-item {{Request::segment(2)=='students' ? 'active' : '' }}" href="{{route('admin.students.index')}}">Student List</a>
+                                    <a class="dropdown-item {{Request::segment(2)=='assignments' ? 'active' : '' }}" href="{{route('admin.assignments.index')}}">Student Assignment</a>
+                                    <a class="dropdown-item {{Request::segment(2)=='student_packages' ? 'active' : '' }}" href="{{route('admin.student_packages.index')}}">Student Packages</a>
+                                    <a class="dropdown-item {{Request::segment(2)=='packages' ? 'active' : '' }}" href="{{route('admin.packages.index')}}">Packages</a>
                                 </div>
                             </li>
                             @endcan
                             @can('manage-tutors')
                             <li class="nav-item dropdown">
-                                <a class="tc-white nav-link pt-0 pb-0 {{in_array(Request::segment(2), ["tutors", "sessions", "tutorassignments"
-                                , "essayassignments", "rejectedtutors"]) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white nav-link {{in_array(Request::segment(2), ['tutors', 'sessions', 'tutorassignments'
+                                , 'essayassignments', 'rejectedtutors']) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Tutors
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item {{Request::segment(2)=="tutors" ? 'active' : '' }}" href="{{route('admin.tutors.index')}}">Tutors List</a>
-                                    <a class="dropdown-item {{Request::segment(2)=="sessions" ? 'active' : '' }}" href="{{route('admin.sessions.index')}}">Sessions</a>
-                                    <a class="dropdown-item {{Request::segment(2)=="tutorassignments" ? 'active' : '' }}" href="{{route('admin.tutorassignments.index')}}">Tutor Assignment</a>
-                                    <a class="dropdown-item {{Request::segment(2)=="essayassignments" ? 'active' : '' }}" href="{{route('admin.essayassignments.index')}}">Homework Assignments</a>
-                                    <a class="dropdown-item {{Request::segment(2)=="rejectedtutors" ? 'active' : '' }}" href="{{route('admin.rejectedtutors.index')}}">Rejected Tutors</a>
+                                    <a class="dropdown-item {{Request::segment(2)=='tutors' ? 'active' : '' }}" href="{{route('admin.tutors.index')}}">Tutors List</a>
+                                    <a class="dropdown-item {{Request::segment(2)=='sessions' ? 'active' : '' }}" href="{{route('admin.sessions.index')}}">Sessions</a>
+                                    <a class="dropdown-item {{Request::segment(2)=='tutorassignments' ? 'active' : '' }}" href="{{route('admin.tutorassignments.index')}}">Tutor Assignment</a>
+                                    <a class="dropdown-item {{Request::segment(2)=='essayassignments' ? 'active' : '' }}" href="{{route('admin.essayassignments.index')}}">Homework Assignments</a>
+                                    <a class="dropdown-item {{Request::segment(2)=='rejectedtutors' ? 'active' : '' }}" href="{{route('admin.rejectedtutors.index')}}">Rejected Tutors</a>
                                 </div>
                             </li>
                             @endcan
                             @can('manage-payments')
                             <li class="nav-item dropdown">
-                                <a class="tc-white nav-link nav-link pt-0 pb-0 {{in_array(Request::segment(2), ["process", "invoices", "paycheques"
-                                , "receivedpayments", "expenses", "otherincomes", "csvupload", "defaultwages"]) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white nav-link nav-link {{in_array(Request::segment(2), ['process', 'invoices', 'paycheques'
+                                , 'receivedpayments', 'expenses', 'otherincomes', 'csvupload', 'defaultwages']) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Payments
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item {{Request::segment(2)=="process" ? 'active' : '' }}"
+                                    <a class="dropdown-item {{Request::segment(2)=='process' ? 'active' : '' }}"
                                      href="{{route('admin.process.index')}}">Billing Process</a>
-                                    <a class="dropdown-item {{Request::segment(2)=="invoices" ? 'active' : '' }}"
+                                    <a class="dropdown-item {{Request::segment(2)=='invoices' ? 'active' : '' }}"
                                     href="{{route('admin.invoices.index')}}">Student Invoices</a>
-                                    <a class="dropdown-item {{Request::segment(2)=="paycheques" ? 'active' : '' }}"
+                                    <a class="dropdown-item {{Request::segment(2)=='paycheques' ? 'active' : '' }}"
                                      href="{{route('admin.paycheques.index')}}">Tutors Paycheques</a>
-                                    <a class="dropdown-item {{Request::segment(2) == "receivedpayments" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'receivedpayments' ? 'active' : ''}}"
                                      href="{{route('admin.receivedpayments.index')}}">Payment Received</a>
-                                    <a class="dropdown-item {{Request::segment(2) == "expenses" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'expenses' ? 'active' : ''}}"
                                      href="{{route('admin.expenses.index')}}">Monthly Expenses</a>
-                                    <a class="dropdown-item {{Request::segment(2) == "otherincomes" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'otherincomes' ? 'active' : ''}}"
                                      href="{{route('admin.otherincomes.create')}}">Other Income</a>
-                                    <a class="dropdown-item {{Request::segment(2) == "csvupload" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'csvupload' ? 'active' : ''}}"
                                      href="{{route('admin.csvupload.index')}}">CSV Upload</a>
-                                    <a class="dropdown-item {{Request::segment(2) == "defaultwages" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'defaultwages' ? 'active' : ''}}"
                                      href="{{route('admin.defaultwages.index')}}">Base Invoice Rates</a>
                                 </div>
                             </li>
                             @endcan
                             @can('manage-payment-records')
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('tutor.myprofile.index')}}">My Profile</a>
+                                <a class="tc-white nav-link" href="{{route('tutor.myprofile.index')}}">My Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('tutor.paymentrecords.index')}}">Payment Records</a>
+                                <a class="tc-white nav-link" href="{{route('tutor.paymentrecords.index')}}">Payment Records</a>
                             </li>
                             @endcan
                             @can('manage-tutor-students')
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0 {{Request::is('home') ? 'active' : '' }}" href="{{route('home')}}">Home</a>
+                                <a class="tc-white nav-link {{Request::is('home') ? 'active' : '' }}" href="{{route('home')}}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('tutor.students.index')}}">List Students</a>
+                                <a class="tc-white nav-link" href="{{route('tutor.students.index')}}">List Students</a>
                             </li>
                             @endcan
                             @can('manage-student-tutors')
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0 {{Request::is('home') ? 'active' : '' }}" href="{{route('home')}}">Home</a>
+                                <a class="tc-white nav-link {{Request::is('home') ? 'active' : '' }}" href="{{route('home')}}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('student.myprofile.index')}}">Account info</a>
+                                <a class="tc-white nav-link" href="{{route('student.myprofile.index')}}">Account info</a>
                             </li>
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('student.tutors.index')}}">My Tutors</a>
+                                <a class="tc-white nav-link" href="{{route('student.tutors.index')}}">My Tutors</a>
                             </li>
                             @endcan
                             @can('manage-invoices')
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('student.invoices.index')}}">Invoices</a>
+                                <a class="tc-white nav-link" href="{{route('student.invoices.index')}}">Invoices</a>
                             </li>
                             @endcan
                             @can('manage-add-student')
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('student.children.index')}}">Add Student</a>
+                                <a class="tc-white nav-link" href="{{route('student.children.index')}}">Add Student</a>
                             </li>
                             @endcan
                             @can('manage-cms')
                             <li class="nav-item dropdown">
-                                <a class="tc-white nav-link pt-0 pb-0 {{in_array(Request::segment(2), ["informations", "coupons", "broadcasts"
-                                , "maillogs", "activitylogs", "emailsend", "notification"]) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white nav-link {{in_array(Request::segment(2), ['informations', 'coupons', 'broadcasts'
+                                , 'maillogs', 'activitylogs', 'emailsend', 'notification']) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     CMS
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item {{Request::segment(2) == "informations" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'informations' ? 'active' : ''}}"
                                      href="{{route('admin.informations.index')}}">Information</a>
-                                    <a class="dropdown-item {{Request::segment(2) == "coupons" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'coupons' ? 'active' : ''}}"
                                      href="{{route('admin.coupons.index')}}">Coupons</a>
-                                    <a class="dropdown-item {{Request::segment(2) == "broadcasts" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'broadcasts' ? 'active' : ''}}"
                                      href="{{route('admin.broadcasts.index')}}">Email Templates</a>
-                                    <a class="dropdown-item {{Request::segment(2) == "maillogs" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'maillogs' ? 'active' : ''}}"
                                      href="{{route('admin.maillogs.index')}}">Mail Log</a>
-                                    <a class="dropdown-item {{Request::segment(2) == "activitylogs" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'activitylogs' ? 'active' : ''}}"
                                      href="{{route('admin.activitylogs.index')}}">Activity Log</a>
-                                    <a class="dropdown-item {{Request::segment(2) == "emailsend" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'emailsend' ? 'active' : ''}}"
                                      href="{{route('admin.emailsend.index')}}">Send Email</a>
-                                    <a class="dropdown-item {{Request::segment(2) == "notification" ? 'active' : ''}}"
+                                    <a class="dropdown-item {{Request::segment(2) == 'notification' ? 'active' : ''}}"
                                      href="{{route('admin.notification.index')}}">Send Notification</a>
                                 </div>
                             </li>
                             @endcan
                             @can('manage-essay')
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('tutor.essays.index')}}">Essays</a>
+                                <a class="tc-white nav-link" href="{{route('tutor.essays.index')}}">Essays</a>
                             </li>
                             @endcan
                             @can('manage-reports')
                             <li class="nav-item dropdown">
-                                <a class="tc-white nav-link pt-0 pb-0 {{in_array(Request::segment(2), ["progressreports", "monthlydata", "tutorreports"
-                                , "studentreports"]) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white nav-link {{in_array(Request::segment(2), ['progressreports', 'monthlydata', 'tutorreports'
+                                , 'studentreports']) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Reports
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -189,13 +189,13 @@
                             @endcan
                             @can('manage-sessions')
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('tutor.sessions.index')}}">My Sessions</a>
+                                <a class="tc-white nav-link" href="{{route('tutor.sessions.index')}}">My Sessions</a>
                             </li>
                             @endcan
                             @can('manage-system')
                             <li class="nav-item dropdown">
-                                <a class="tc-white  nav-link pt-0 pb-0 {{in_array(Request::segment(2), ["settings", "users", "countries"
-                                , "states", "subjects", "grades", "errorlogs"]) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white  nav-link {{in_array(Request::segment(2), ['settings', 'users', 'countries'
+                                , 'states', 'subjects', 'grades', 'errorlogs']) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     System
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -219,26 +219,26 @@
                             @endcan
                             @can('manage-discount-package')
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('student.packages.index')}}">Buy Discount Package</a>
+                                <a class="tc-white nav-link" href="{{route('student.packages.index')}}">Buy Discount Package</a>
                             </li>
                             @endcan
                             @can('manage-student-reports')
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('student.progressreports.index')}}">Report Cards</a>
+                                <a class="tc-white nav-link" href="{{route('student.progressreports.index')}}">Report Cards</a>
                             </li>
                             @endcan
                             @can('manage-report-cards')
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('tutor.reportcards.index')}}">Report Cards</a>
+                                <a class="tc-white nav-link" href="{{route('tutor.reportcards.index')}}">Report Cards</a>
                             </li>
                             @endcan
                             @can('manage-tutoring-resource')
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" target="_blank" href="http://learnon.ca/tutor-help-center/">Tutoring Resources</a>
+                                <a class="tc-white nav-link" target="_blank" href="http://learnon.ca/tutor-help-center/">Tutoring Resources</a>
                             </li>
                             @endcan
                                 <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{route('admin.help.index')}}">Help</a>
+                                <a class="tc-white nav-link" href="{{route('admin.help.index')}}">Help</a>
                             </li>
                         @endauth
                     </ul>
@@ -248,21 +248,21 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="tc-white nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{ route('register') }}">{{ __('Student Registration') }}</a>
+                                <a class="tc-white nav-link" href="{{ route('register') }}">{{ __('Student Registration') }}</a>
                             </li>
                             @endif
                             @if (Route::has('register_tutor'))
                             <li class="nav-item">
-                                <a class="tc-white nav-link pt-0 pb-0" href="{{ route('register_tutor') }}">{{ __('Tutor Registration') }}</a>
+                                <a class="tc-white nav-link" href="{{ route('register_tutor') }}">{{ __('Tutor Registration') }}</a>
                             </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="tc-white nav-link dropdown-toggle pt-0 pb-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="tc-white nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->fname . Auth::user()->lname }} <span class="caret"></span>
                                 </a>
 
