@@ -16,8 +16,8 @@
                                 <tr>
                                     <th scope="col">Notification From</th>
                                     <th scope="col">Subject</th>
-                                    <th scope="col">Date Received</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col" class="text-center">Date Received</th>
+                                    <th scope="col" class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -28,8 +28,8 @@
                                     $notification->from_user()['lname'] . ' [' .
                                     $notification->from_user()->roles()->first()['name'] . ']'?></td>
                                     <td scope="col">{{$notification->subject}}</td>
-                                    <td scope="col">{{date('d/m/Y', strtotime($notification->created_at))}}</td>
-                                    <td scope="col">
+                                    <td scope="col" class="text-center">{{date('d/m/Y', strtotime($notification->created_at))}}</td>
+                                    <td scope="col" class="text-center">
                                         @can('manage-cms')
                                             [<a href="{{route('admin.notifications.show', $notification)}}"
                                             >View</a>]

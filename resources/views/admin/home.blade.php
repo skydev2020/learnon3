@@ -17,7 +17,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" colspan="3"> Latest Notifications</th>
-                                        <th scope="col">
+                                        <th scope="col" class="text-right">
                                             <a href="{{route('admin.notifications.index')}}">
                                                 View All
                                             </a>
@@ -26,8 +26,8 @@
                                 <tr>
                                     <th scope="col">Notification From</th>
                                     <th scope="col">Subject</th>
-                                    <th scope="col">Date Received</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col" class="text-center">Date Received</th>
+                                    <th scope="col" class="text-right">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -50,8 +50,8 @@
                                             <?php echo html_entity_decode($notification->message); ?>
                                             @endif
                                         </td>
-                                        <td scope="col">{{date('d/m/Y', strtotime($notification->created_at))}}</td>
-                                        <td scope="col">
+                                        <td scope="col" class="text-center">{{date('d/m/Y', strtotime($notification->created_at))}}</td>
+                                        <td scope="col" class="text-right">
                                             @if (isset($notification->username))
                                                 [<a href="{{route('admin.students.edit', $notification)}}"
                                                 >Edit</a>]
