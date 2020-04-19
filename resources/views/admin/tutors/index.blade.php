@@ -107,18 +107,20 @@
                                     @can('manage-tutors')
                                         [<a href="{{route('admin.tutors.show', $tutor)}}" target="_blank">Contract</a>]
                                     @endcan
+
                                     @can('manage-tutors')
-                                    <form action="{{ route('admin.tutors.destroy', $tutor) }}" method="POST" class="float-left">
-                                        @csrf
-                                        {{method_field('DELETE')}}
-                                        [<a href="javascript:;" onclick="parentNode.submit();">View Work</a>]
-                                    </form>
-                                    @endcan
-                                    @can('manage-tutors')
-                                    <form action="{{ route('admin.tutors.destroy', $tutor) }}" method="POST" class="float-left">
+                                    <form action="{{ route('admin.tutors.destroy', $tutor) }}" method="POST" class="float-right">
                                         @csrf
                                         {{method_field('DELETE')}}
                                         [<a href="javascript:;" onclick="parentNode.submit();">View Paycheques</a>]
+                                    </form>
+                                    @endcan
+
+                                    @can('manage-tutors')
+                                    <form action="{{ route('admin.tutors.destroy', $tutor) }}" method="POST" class="float-right">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                        [<a href="javascript:;" onclick="parentNode.submit();">View Work</a>]
                                     </form>
                                     @endcan
                                 </td>
