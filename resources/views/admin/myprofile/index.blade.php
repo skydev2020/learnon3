@@ -12,10 +12,8 @@
                     <form action="{{route('admin.myprofile.update', $myuser)}}" method="POST">
 
                         <div class="form-group row">
-                            <div class="col-1 offset-10 text-right">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                            <div clas="col-1">
+                            <div class="offset-3 col-6 text-right">
+                                <button type="submit" class="btn btn-primary">Save</button>&nbsp;&nbsp;
                                 <a href = "{{route('home')}}">
                                     <button type = "button" class = "btn btn-primary">Cancel</button>
                                 </a>
@@ -23,7 +21,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-2 col-form-label text-md-right">
+                            <label for="email" class="col-3 col-form-label text-right">
                                 <span class="required">*</span> E-Mail:
                             </label>
 
@@ -40,7 +38,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="fname" class="col-2 col-form-label text-md-right">
+                            <label for="fname" class="col-3 col-form-label text-right">
                                 <span class="required">*</span> First Name
                             </label>
 
@@ -57,7 +55,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="fname" class="col-2 col-form-label text-md-right">
+                            <label for="fname" class="col-3 col-form-label text-right">
                                 <span class="required">*</span> Last Name
                             </label>
 
@@ -76,7 +74,7 @@
                         @csrf
                         {{method_field('PUT')}}
                         <div class="form-group row">
-                            <label for="password" class="col-2 col-form-label text-md-right">Password</label>
+                            <label for="password" class="col-3 col-form-label text-right">Password</label>
 
                             <div class="col-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror"
@@ -91,7 +89,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-conform" class="col-2 col-form-label text-md-right">{{ __('Confirm') }}</label>
+                            <label for="password-conform" class="col-3 col-form-label text-right">{{ __('Confirm') }}</label>
                             <div class="col-6 d-flex align-items-center">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
