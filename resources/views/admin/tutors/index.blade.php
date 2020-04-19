@@ -87,8 +87,7 @@
 
                                 <input type="checkbox" name = "referrers" id = "referrers" value = "yes">
                                 <label class="form-check-label" for="referrers"> Contract/Agreement </label>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-primary" onclick="exportToExcel('tutors')">Export</button>
+                                <button class="btn btn-primary" onclick="exportToExcel('tutors')" id="tutor_export">Export</button>
                             </div>
                         </div>
                     </form>
