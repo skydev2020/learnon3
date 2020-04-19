@@ -16,7 +16,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Roles</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col" class="text-right">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -26,7 +26,7 @@
                                 <td scope="col">{{$user->fname . ' ' . $user->lname}}</td>
                                 <td scope="col">{{$user->email}}</td>
                                 <td scope="col">{{implode(', ', $user->roles()->get()->pluck('name')->toArray())}}</td>
-                                <td scope="col">
+                                <td scope="col" class="text-right">
                                     @can('edit-users')
                                         [<a href="{{route('admin.users.edit', $user->id)}}">Edit</a>]
                                     @endcan
