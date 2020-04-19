@@ -88,7 +88,7 @@
                             <th scope="col">Status</th>
                             <th scope="col">Approved</th>
                             <th scope="col">Date Added</th>
-                            <th scope="col" class="text-right">Actions</th>
+                            <th scope="col" class="text-right">Action</th>
                         </tr>
                         </thead>
                         <tbody>
