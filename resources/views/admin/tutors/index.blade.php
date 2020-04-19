@@ -59,16 +59,35 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row">
                             <div class="col-1 offset-4">
                                 <button type = "submit" class="btn btn-primary" >
                                     {{ __('Search') }}
                                 </button>
                             </div>
-                            <div class="col-1 offset-4 text-right">
+                            <div class="col-2 offset-5 text-right">
+                                <a href="{{route('admin.tutors.create')}}">
+                                    <button type = "button" class="btn btn-primary">Approve</button>
+                                </a>
                                 <a href="{{route('admin.tutors.create')}}">
                                     <button type = "button" class="btn btn-primary">Add</button>
                                 </a>
+                                <a href="{{route('admin.tutors.create')}}">
+                                    <button type = "button" class="btn btn-primary">Delete</button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class = "form-group row mb-0">
+                            <div class = "col-3 offset-9  align-items-center">
+                                <input type="checkbox" name = "names" id = "names" value = "yes">
+                                <label class="form-check-label" for="names"> Tutor list </label>
+
+                                <input type="checkbox" name = "emails" id = "emails" value = "yes">
+                                <label class="form-check-label" for="emails"> Tutor emails </label>
+
+                                <input type="checkbox" name = "referrers" id = "referrers" value = "yes">
+                                <label class="form-check-label" for="referrers"> Contract/Agreement </label>
+                                <button class="btn btn-primary" onclick="exportToExcel('tutors')" id="tutor_export">Export</button>
                             </div>
                         </div>
                     </form>
@@ -79,7 +98,7 @@
                 <div class="card-header"></div>
                 <div class="card-body">
 
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped" id="tutors">
                         <thead>
                         <tr>
                             <th scope="col">ID</th>
