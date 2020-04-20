@@ -9,6 +9,16 @@
                     <i class="fas fa-user-tie" style="font-size:24px"> Users</i>
                 </div>
                 <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-2 offset-10">
+                            <a href="{{route('admin.users.create')}}">
+                                <button class="btn btn-primary left_margin">Add</button>
+                            </a>
+                            <a href="{{route('admin.users.create')}}">
+                                <button class="btn btn-primary">Delete</button>
+                            </a>
+                        </div>
+                    </div>
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
