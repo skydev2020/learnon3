@@ -11,9 +11,20 @@
 
                 <div class="card-body">
                     <div class="col-12">
+                        <div class="form-group row">
+                            <div class="col-1 offset-11">
+                                <a href="#">
+                                    <button class="btn btn-primary">Delete</button>
+                                </a>
+                            </div>
+                        </div>
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
+                                    <th scope="col">
+                                        <input type="checkbox" class="text-center"
+                                        onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
+                                    </th>
                                     <th scope="col">Notification From</th>
                                     <th scope="col">Subject</th>
                                     <th scope="col" class="text-center">Date Received</th>
@@ -23,6 +34,10 @@
                             <tbody>
                                 @foreach ($notifications as $notification)
                                 <tr>
+                                    <th scope="row">
+                                        <input type="checkbox" name="selected[]" value="{{$notification->id}}"
+                                        class="text-center"/>
+                                    </th>
                                     <td scope="col"><?= $notification->from_user() == NULL ? '' :
                                     $notification->from_user()['fname'] . ' ' .
                                     $notification->from_user()['lname'] . ' [' .
