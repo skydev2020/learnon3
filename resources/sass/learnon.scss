@@ -60,3 +60,12 @@ span.required {
 button#tutor_export {
     margin-left: 39px;
 }
+
+.home-page {
+    .notification-panel {
+        border: 1px solid $home_panel_border_color;
+    }
+    .notification-header {
+        background-color: $home_panel_header_bg_color;        
+    }
+}
