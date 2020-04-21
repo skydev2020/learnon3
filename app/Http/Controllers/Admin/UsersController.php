@@ -7,6 +7,8 @@ use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -33,6 +35,12 @@ class UsersController extends Controller
      */
     public function create()
     {
+        if (Gate::denies('manage-users')) {
+            return redirect(route('admin.users.index'));
+        }
+
+        $roles = Role::all();
+        return view('admin.users.create')->with('roles', $roles);
     }
 
     /**
@@ -43,7 +51,58 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (Gate::denies('manage-users')) return redirect()->route('admin.users.create');
+
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'fname'         => ['required', 'string', 'max:255'],
+            'lname'         => ['required', 'string', 'max:255'],
+            'email'         => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'      => ['required', 'string', 'min:8', 'confirmed'],
+            'roles'         => ['required', 'array'],
+            'approved'      => ['nullable', 'integer'],
+            'status'        => ['nullable', 'integer']
+        ]);
+
+        if ($validator->fails())
+        {
+            session()->flash('error', $validator->messages()->first());
+            return redirect()->route('admin.users.create');
+        }
+
+        $user = User::create([
+            'fname'                 => $data['fname'],
+            'lname'                 => $data['lname'],
+            'email'                 => $data['email'],
+            'password'              => Hash::make($data['password']),
+            'home_phone'            => '',
+            'cell_phone'            => '',
+            'address'               => '',
+            'city'                  => '',
+            'state_id'              => 1,
+            'pcode'                 => '',
+            'country_id'            => 1,
+            'grade_id'              => 1,
+            'parent_fname'          => '',
+            'parent_lname'          => '',
+            'school'                => '',
+            'referrer_id'           => 1,
+            'service_method'        => ''
+        ]);
+
+        if ($user == NULL)
+        {
+            session()->flash('error', "There is an error creating the user!");
+            return redirect()->route('admin.users.create');
+        }
+
+        foreach ($data['roles'] as $role) {
+            $user->roles()->attach($role);
+        }
+        $user->save();
+
+        session()->flash('success', $user->fname . $user->lname . " has been created successfully");
+        return redirect()->route('admin.users.index');
     }
 
     /**
