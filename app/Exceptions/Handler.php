@@ -54,6 +54,10 @@ class Handler extends ExceptionHandler
             $request->session()->flush();
             return redirect()->route('login');            
         }
+        if ($exception instanceof \Illuminate\Auth\Access\AuthorizationException) {            
+            return redirect()->route('login');            
+        }
+        
         return parent::render($request, $exception);
     }
 }
