@@ -292,8 +292,9 @@
 
         <main class="py-4">
             @include('partials.alerts')
-            @yield('content')
+            @yield('content')            
         </main>
+        @include('partials.footer')
     </div>
     @yield('jssection')
 </body>
