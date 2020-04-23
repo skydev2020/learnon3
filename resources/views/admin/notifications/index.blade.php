@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <div class="col-12">
                         <div class="form-group row">
-                            <div class="col-1 offset-11 text-right">
+                            <div class="col-2 offset-10 text-right">
                                 <form action="{{ route('admin.notifications.multiDelete') }}" method="post" id="multi_del_form">
                                     @csrf
                                    <input type="hidden" name="sids" id="sids">
