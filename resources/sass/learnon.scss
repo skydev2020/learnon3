@@ -62,10 +62,13 @@ button.left_margin {
 }
 
 .home-page {
-    .notification-panel {
+    .notification-panel, .overview-panel {
         border: 1px solid $home_panel_border_color;
-    }
-    .notification-header {
+        table thead th {
+            background-color: $home_table_header_bg_color;
+        }
+    }    
+    .notification-header, .overview-header {
         background-color: $home_panel_header_bg_color;        
     }
 }
