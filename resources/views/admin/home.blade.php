@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="col-6">
-                            <div class="container-fluid notification-header pt-1 pb-1 font-weight-bold text-white">
+                            <div class="container-fluid notification-header pt-1 pb-1 text-white">
                                 <div class="row">
                                     <div class="col-9">Latest Notifications</div>
                                     <div class="col-3 text-right">
@@ -22,7 +22,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="container-fluid pt-3 notification-panel">                            
+                            <div class="container-fluid pt-3 notification-panel panel">                            
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
@@ -69,21 +69,23 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <table class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th scope="col" colspan="2">Overview</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach ($data['overview'] as $key => $value)
-                                    <tr>
-                                        <td scope="col">{{$key}}</td>
-                                        <td scope="col" class="text-right">{{$value}}</td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                            <div class="container-fluid overview-header pt-1 pb-1 text-white">
+                                <div class="row">
+                                    <div class="col-12">Overview</div>
+                                </div>
+                            </div>
+                            <div class="container-fluid pt-3 overview-panel">                            
+                                <table class="table table-bordered table-striped">                                  
+                                    <tbody>
+                                    @foreach ($data['overview'] as $key => $value)
+                                        <tr>
+                                            <td scope="col">{{$key}}</td>
+                                            <td scope="col" class="text-right">{{$value}}</td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

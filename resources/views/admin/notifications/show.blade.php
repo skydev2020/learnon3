@@ -65,7 +65,7 @@
                         </div>
 
                         <div class="col-6 d-flex align-items-center">
-                            <?php echo html_entity_decode($notification->message); ?>
+                            <span><?php echo html_entity_decode($notification->message); ?></span>
                         </div>
                     </div>
                 </div>

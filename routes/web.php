@@ -80,7 +80,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     //Help Menu
     Route::resource('/help','HelpController');
 
+    // Dashboard, Notifcation
     Route::resource('/notifications', 'NotificationsController');
+    Route::post('notifications/multi_del', 'NotificationsController@multiDelete') -> name('notifications.multiDelete');
+    
     //Custom Route
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/students/invoices/{student}', 'StudentsController@manageInvoices')->name('students.invoices');
