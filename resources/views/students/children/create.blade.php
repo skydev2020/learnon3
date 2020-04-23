@@ -297,5 +297,4 @@
 
 </script>
 <script src="{{ asset('js/register/register.js')}}"></script>
-
 @stop

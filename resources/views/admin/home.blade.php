@@ -22,7 +22,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="container-fluid pt-3 notification-panel">                            
+                            <div class="container-fluid pt-3 notification-panel panel">                            
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
