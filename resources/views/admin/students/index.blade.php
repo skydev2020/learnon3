@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="GET" action="{{ route('admin.students.index') }}">
+                    <form method="GET" action="{{ route('admin.students.index') }}" id="student_form">
                         @csrf
                         {{method_field('GET')}}
                         <div class="form-group row">
@@ -69,6 +69,12 @@
                                 <a href = "{{route('admin.students.create')}}">
                                     <button type = "button" class="btn btn-primary" >Add</button>
                                 </a>
+                                
+                                <input type="hidden" name="sids" id="sids">
+                                <a href="#">                                
+                                    <button class="btn btn-primary">Delete</button>
+                                </a>
+                                
                             </div>
                         </div>
 
@@ -168,5 +174,27 @@
 @endsection
 <!-- Scripts -->
 @section("jssection")
+<script>
+    window.addEventListener('load', function() {
+        jQuery( "#student_form" ).submit(function( event ) {
+            var sel_objs = jQuery('input[name*=\'selected\']:checked');
+
+            // clear all selected id 
+            var sel_obj_ids = [];
+            
+            for (var i=0; i < sel_objs.length ; ++i) {
+                sel_obj_ids.push(sel_objs[i].value);
+            }
+            jQuery("#sids").val(sel_obj_ids.toString());
+
+            if (sel_objs.length==0) {
+                return false;
+            }
+            else {
+                return true;
+            }            
+        });
+    });
+</script>
 <script src="{{ asset('js/export.js')}}"></script>
 @stop
