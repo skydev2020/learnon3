@@ -109,7 +109,15 @@
                                     onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
                                 </th>
                                 <th scope="col" style="width: 50px;" class="text-center">ID</th>
-                                <th scope="col" style="width: 120px;" class="text-center">Student Name</th>
+                                <th scope="col" style="width: 120px;" class="text-center">
+                                    @if ($data['order']['field'] == 'fname' && $data['order']['dir'] == 'asc')
+                                        <a href="{{route('admin.students.index') }}?field=fname&dir=desc&{{$data['url']}}" class="asc order">Student Name</a>
+                                    @elseif ($data['order']['field'] == 'fname' && $data['order']['dir'] == 'desc')
+                                        <a href="{{route('admin.students.index') }}?field=fname&dir=asc&{{$data['url']}}" class="desc order">Student Name</a>
+                                    @else
+                                    <a href="{{route('admin.students.index') }}?field=fname&dir=asc&{{$data['url']}}" class="order">Student Name</a>
+                                    @endif
+                                </th>
                                 <th scope="col" style="width: 100px;" class="text-center">Email</th>
                                 <th scope="col" style="width: 50px;" class="text-center">City</th>
                                 <th scope="col" class="text-center">Subjects</th>

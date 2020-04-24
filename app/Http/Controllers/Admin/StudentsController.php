@@ -43,45 +43,70 @@ class StudentsController extends Controller
         $s_date = isset($_GET['s_date']) ? trim($_GET['s_date']) : "";
         $s_sub = isset($_GET['s_sub']) ? trim($_GET['s_sub']) : "";
         $s_status_id = isset($_GET['s_status_id']) ? trim($_GET['s_status_id']) : "";
+        $field = isset($_GET['field']) ? trim($_GET['field']) : "";
+        $dir = isset($_GET['dir']) ? trim($_GET['dir']) : "asc";
 
         $q = "1=1 ";
+        $url = "";
+        
+        if ($field!="") {
+            // $url = "?field=".$field."&dir=".$dir;
+        }
 
         if ($s_city) {
             $q.= " and city like '%".$s_city."%'";
+            $url.= "&s_city=".$s_city;
         }
 
         if ($s_date) {
             $q.= " and created_at like '%".$s_date."%'";
+            $url.= "&s_date=".$s_date;
         }
 
         $q.= " and grade_id >= '1'";
 
         if ($s_status_id) {
             $q.= " and student_status_id like '%".$s_status_id."%'";
+            $url.= "&s_status_id=".$s_status_id;
         }
 
         if ($s_name) {
             $q.= " and (fname like '%".$s_name."%' or lname like '%" .$s_name . "%') ";
+            $url.= "&s_name=".$s_name;
         }
-
-
+        
+        
         $students = Role::find(config('global.STUDENT_ROLE_ID'))->users()
         ->whereRaw($q);
 
+        if ($field!="") {
+            // $q.= " order by ".$field." ".$dir;
+            $students = $students->orderBy($field, $dir);
+        }
+        
         if ($s_sub) {
+            $url.= "&s_sub=".$s_sub;
             $students = $students->whereHas('subjects', function($subject) use ($s_sub) {
                 return $subject->where('name', 'like', "%" . $s_sub . "%");
             });
         }
-
-        $students = $students->get();
-
+        
+        if ($url !="") {
+            $url = substr($url, 1);
+        }
+        
+        $students = $students->get();        
         $student_statuses = StudentStatus::all();
         $subjects = Subject::all();
         $data = [
             'students'          => $students,
             'student_statuses'  => $student_statuses,
             'subjects'          => $subjects,
+            'url'               => $url,
+            'order'  => [
+                'field' => $field,
+                'dir' => $dir
+            ],
             'old' => [
                 's_name' => $s_name,
                 's_city' => $s_city,
