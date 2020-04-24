@@ -71,6 +71,7 @@
 <script>
     window.addEventListener('load', function() {
         jQuery( "#multi_del_form" ).submit(function( event ) {
+            
             var sel_objs = jQuery('input[name*=\'selected\']:checked');
 
             // clear all selected id 
@@ -82,11 +83,12 @@
             jQuery("#sids").val(sel_obj_ids.toString());
 
             if (sel_objs.length==0) {
+                alert('Please select the row.')
                 return false;
             }
             else {
-                return true;
-            }            
+                return confirm("Do you want to delete selected rows.");
+            }
         });
     });
 </script>

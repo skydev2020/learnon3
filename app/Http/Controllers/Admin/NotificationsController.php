@@ -101,7 +101,7 @@ class NotificationsController extends Controller
                 $obj->delete();				
 			}
 			            
-            $request->session()->flash('success', 'You have modified information!');
+            $request->session()->flash('success', 'You have deleted information!');
 			// $url = '';
 			
 			// if (isset($this->request->get['page'])) {
