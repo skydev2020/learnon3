@@ -109,21 +109,54 @@
                                     onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
                                 </th>
                                 <th scope="col" style="width: 50px;" class="text-center">ID</th>
-                                <th scope="col" style="width: 120px;" class="text-center">
+                                <th scope="col" style="width: 150px;" class="text-center">
                                     @if ($data['order']['field'] == 'fname' && $data['order']['dir'] == 'asc')
                                         <a href="{{route('admin.students.index') }}?field=fname&dir=desc&{{$data['url']}}" class="asc order">Student Name</a>
                                     @elseif ($data['order']['field'] == 'fname' && $data['order']['dir'] == 'desc')
                                         <a href="{{route('admin.students.index') }}?field=fname&dir=asc&{{$data['url']}}" class="desc order">Student Name</a>
                                     @else
-                                    <a href="{{route('admin.students.index') }}?field=fname&dir=asc&{{$data['url']}}" class="order">Student Name</a>
+                                        <a href="{{route('admin.students.index') }}?field=fname&dir=asc&{{$data['url']}}" class="order">Student Name</a>
                                     @endif
                                 </th>
-                                <th scope="col" style="width: 100px;" class="text-center">Email</th>
-                                <th scope="col" style="width: 50px;" class="text-center">City</th>
+                                <th scope="col" style="width: 100px;" class="text-center">                                    
+                                    @if ($data['order']['field'] == 'email' && $data['order']['dir'] == 'asc')
+                                        <a href="{{route('admin.students.index') }}?field=email&dir=desc&{{$data['url']}}" class="asc order">Email</a>
+                                    @elseif ($data['order']['field'] == 'email' && $data['order']['dir'] == 'desc')
+                                        <a href="{{route('admin.students.index') }}?field=email&dir=asc&{{$data['url']}}" class="desc order">Email</a>
+                                    @else
+                                        <a href="{{route('admin.students.index') }}?field=email&dir=asc&{{$data['url']}}" class="order">Email</a>
+                                    @endif
+                                </th>
+                                <th scope="col" style="width: 50px;" class="text-center">
+                                    @if ($data['order']['field'] == 'city' && $data['order']['dir'] == 'asc')
+                                        <a href="{{route('admin.students.index') }}?field=city&dir=desc&{{$data['url']}}" class="asc order">City</a>
+                                    @elseif ($data['order']['field'] == 'city' && $data['order']['dir'] == 'desc')
+                                        <a href="{{route('admin.students.index') }}?field=city&dir=asc&{{$data['url']}}" class="desc order">City</a>
+                                    @else
+                                        <a href="{{route('admin.students.index') }}?field=city&dir=asc&{{$data['url']}}" class="order">City</a>
+                                    @endif
+                                </th>
                                 <th scope="col" class="text-center">Subjects</th>
                                 <th scope="col" style="width: 140px;" class="text-center">Status</th>
-                                <th scope="col" style="width: 130px;" class="text-center">Tutoring Service</th>
-                                <th scope="col" style="width: 130px;" class="text-center">Date Registered</th>
+                                <th scope="col" style="width: 165px;" class="text-center">                                    
+                                    @if ($data['order']['field'] == 'service_method' && $data['order']['dir'] == 'asc')
+                                        <a href="{{route('admin.students.index') }}?field=service_method&dir=desc&{{$data['url']}}" class="asc order">Tutoring Service</a>
+                                    @elseif ($data['order']['field'] == 'service_method' && $data['order']['dir'] == 'desc')
+                                        <a href="{{route('admin.students.index') }}?field=service_method&dir=asc&{{$data['url']}}" class="desc order">Tutoring Service</a>
+                                    @else
+                                        <a href="{{route('admin.students.index') }}?field=service_method&dir=asc&{{$data['url']}}" class="order">Tutoring Service</a>
+                                    @endif
+                                </th>
+                                <th scope="col" style="width: 160px;" class="text-center">
+                                    
+                                    @if ($data['order']['field'] == 'created_at' && $data['order']['dir'] == 'asc')
+                                        <a href="{{route('admin.students.index') }}?field=created_at&dir=desc&{{$data['url']}}" class="asc order">Date Registered</a>
+                                    @elseif ($data['order']['field'] == 'created_at' && $data['order']['dir'] == 'desc')
+                                        <a href="{{route('admin.students.index') }}?field=created_at&dir=asc&{{$data['url']}}" class="desc order">Date Registered</a>
+                                    @else
+                                        <a href="{{route('admin.students.index') }}?field=created_at&dir=asc&{{$data['url']}}" class="order">Date Registered</a>
+                                    @endif
+                                </th>
                                 <th scope="col" class="text-right" style="width: 295px;">Actions</th>
                             </tr>
                         </thead>
