@@ -94,28 +94,37 @@
             </div>
             <div class="card">
                 <div class="card-header"></div>
-                <div class="card-body">
-
-                    <table class="table table-bordered table-striped" id = "students">
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered table-striped"  id = "students">
                         <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Student Name</th>
-                            <th scope="col">City</th>
-                            <th scope="col">Subjects</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Tutoring Service</th>
-                            <th scope="col">Date Registered</th>
-                            <th scope="col">Actions</th>
-                        </tr>
+                            <tr>
+                                <th scope="col" class="text-center pt-0 pl-1 pr-1" style="width: 20px;">
+                                    <input type="checkbox" class="text-center"
+                                    onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
+                                </th>
+                                <th scope="col" style="width: 50px;" class="text-center">ID</th>
+                                <th scope="col" style="width: 120px;" class="text-center">Student Name</th>
+                                <th scope="col" style="width: 100px;" class="text-center">Email</th>
+                                <th scope="col" style="width: 50px;" class="text-center">City</th>
+                                <th scope="col" class="text-center">Subjects</th>
+                                <th scope="col" style="width: 140px;" class="text-center">Status</th>
+                                <th scope="col" style="width: 130px;" class="text-center">Tutoring Service</th>
+                                <th scope="col" style="width: 130px;" class="text-center">Date Registered</th>
+                                <th scope="col" class="text-right" style="width: 295px;">Actions</th>
+                            </tr>
                         </thead>
                         <tbody>
                         @foreach ($data['students'] as $student)
                             <tr>
-                                <th scope="row">{{$student->id}}</th>
-                                <td scope="col">{{$student->fname . ' ' . $student->lname}}</td>
-                                <td scope="col">{{$student->city}}</td>
-                                <td scope="col"><?php
+                                <th scope="row" class="text-center pr-0 pl-0">
+                                    <input type="checkbox" name="selected[]" value="{{$student->id}}"
+                                    class="text-center"/>
+                                </th>
+                                <th scope="col" class="font-weight-normal pl-1 pr-1 text-center">{{$student->id}}</th>
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{$student->fname . ' ' . $student->lname}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{$student->email}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{$student->city}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1 "><?php
                                     $subjects = "";
                                     foreach ($student->subjects()->get() as $subject)
                                     {
@@ -123,10 +132,10 @@
                                     }
                                     $subjects = rtrim($subjects, ', ');
                                     echo $subjects;?></td>
-                                <td scope="col">{{$student->studentStatus()->first()['title']}}</td>
-                                <td scope="col">{{$student->service_method}}</td>
-                                <td scope="col">{{date('d/m/Y', strtotime($student->created_at))}}</td>
-                                <td scope="col">
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{$student->studentStatus()->first()['title']}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{$student->service_method}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{date('d/m/Y', strtotime($student->created_at))}}</td>
+                                <td scope="col" class="text-right">
                                     @can('manage-students')
                                         [<a href="{{route('admin.students.show', $student->id)}}">View</a>]
                                     @endcan
