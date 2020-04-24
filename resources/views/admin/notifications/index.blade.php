@@ -87,7 +87,7 @@
                 return false;
             }
             else {
-                return confirm("Do you want to delete selected rows.");
+                return confirm("Do you want to delete selected rows?");
             }
         });
     });

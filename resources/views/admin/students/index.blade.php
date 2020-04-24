@@ -69,12 +69,9 @@
                                 <a href = "{{route('admin.students.create')}}">
                                     <button type = "button" class="btn btn-primary" >Add</button>
                                 </a>
-                                
-                                <input type="hidden" name="sids" id="sids">
-                                <a href="#">                                
-                                    <button class="btn btn-primary">Delete</button>
-                                </a>
-                                
+                                <a href="javascript:;">                                
+                                    <button class="btn btn-primary" id="del_btn">Delete</button>    
+                                </a>                                
                             </div>
                         </div>
 
@@ -95,7 +92,10 @@
                             </div>
                         </div>
                     </form>
-
+                    <form action="{{ route('admin.students.multiDelete') }}" class="d-none" method="post" id="multi_del_form">
+                        @csrf
+                        <input type="hidden" name="sids" id="sids">                       
+                    </form>
                 </div>
             </div>
             <div class="card">
@@ -158,7 +158,7 @@
                                     <form action="{{ route('admin.students.destroy', $student) }}" method="POST" class="float-left">
                                         @csrf
                                         {{method_field('DELETE')}}
-                                        [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
+                                        [<a href="javascript:;" onclick="del(this)">Delete</a>]
                                     </form>
                                     @endcan
                                 </td>
@@ -175,8 +175,17 @@
 <!-- Scripts -->
 @section("jssection")
 <script>
+    
+    function del(ele) {
+        var r= confirm("Do you want to delete selected row?");
+        if (r != true) {
+            return false;
+        }
+        ele.parentNode.submit();
+    }
+
     window.addEventListener('load', function() {
-        jQuery( "#student_form" ).submit(function( event ) {
+        jQuery( "#del_btn" ).click(function( event ) {
             var sel_objs = jQuery('input[name*=\'selected\']:checked');
 
             // clear all selected id 
@@ -188,11 +197,18 @@
             jQuery("#sids").val(sel_obj_ids.toString());
 
             if (sel_objs.length==0) {
+                alert('Please select the row.')
                 return false;
             }
             else {
-                return true;
-            }            
+                var r= confirm("Do you want to delete selected rows?");
+                if (r != true) {
+                    return false;
+                }
+                event.preventDefault();
+                document.getElementById('multi_del_form').submit();
+                // jQuery("#multi_del_form").submit();
+            }   
         });
     });
 </script>

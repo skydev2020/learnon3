@@ -96,12 +96,17 @@ class NotificationsController extends Controller
             $sids = $data['sids'];
             $obj_ids = explode(",", $sids);
 
+            if (count($obj_ids) ==0 ) {
+                session()->flash('error', 'Nothing has been selected!');
+                return redirect()->route('admin.students.index');
+            }
+            
 			foreach ($obj_ids as $id) {
                 $obj = Notification::find($id);
                 $obj->delete();				
 			}
 			            
-            $request->session()->flash('success', 'You have deleted information!');
+            $request->session()->flash('success', 'You have removed notifications!');
 			// $url = '';
 			
 			// if (isset($this->request->get['page'])) {
@@ -117,7 +122,7 @@ class NotificationsController extends Controller
             // $this->redirect(HTTPS_SERVER . 'index.php?route=cms/notifications&token=' . $this->session->data['token'] . $url);
             return redirect()->route('admin.notifications.index');
 		}
-        $request->session()->flash('error', 'No id is selected!');
+        $request->session()->flash('error', 'Nothing has been selected!');
         return redirect()->route('admin.notifications.index');
     }
 

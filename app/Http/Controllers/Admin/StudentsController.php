@@ -91,7 +91,7 @@ class StudentsController extends Controller
                 ]
         ];
 
-        session()->flash('error', null);
+        // session()->flash('error', null);
         if (count($students) == 0) {
             session()->flash('error', "No search results!");
         }
@@ -320,7 +320,7 @@ class StudentsController extends Controller
         $student->subjects()->detach();
         $student->roles()->detach();
         $student->delete();
-        session()->flash('success', "You have modified student!");
+        session()->flash('success', "You have removed student!");
         return redirect() -> route('admin.students.index');
     }
 
@@ -367,5 +367,67 @@ class StudentsController extends Controller
     public function export(Request $request, User $student)
     {
         dd($request['names']);
+    }
+
+    /**
+     * Remove multiple notifications from database
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function multiDelete(Request $request)
+    {
+        $data = $request->all();
+        
+        if (Gate::denies('manage-students')) {
+            session()->flash('error', "You don't have enough permission.");
+            return redirect()->route('admin.students.index');
+        }
+        // dd(isset($data['sids']) && $this->validateMultiDelete());
+        
+		if (isset($data['sids']) && $this->validateMultiDelete()) {
+            $sids = $data['sids'];
+            $obj_ids = explode(",", $sids);
+            
+            
+            if (count($obj_ids) ==0 ) {
+                session()->flash('error', 'Nothing has been selected!');
+                return redirect()->route('admin.students.index');
+            }
+
+			foreach ($obj_ids as $id) {
+                $obj = User::find($id);
+
+                $obj->subjects()->detach();
+                $obj->roles()->detach();
+                $obj->delete();
+			}
+			            
+            session()->flash('success', 'You have deleted students!');
+			// $url = '';
+			
+			// if (isset($this->request->get['page'])) {
+			// 	$url .= '&page=' . $this->request->get['page'];
+			// }
+			// if (isset($this->request->get['sort'])) {
+			// 	$url .= '&sort=' . $this->request->get['sort'];
+			// }
+			// if (isset($this->request->get['order'])) {
+			// 	$url .= '&order=' . $this->request->get['order'];
+			// }
+			
+            // $this->redirect(HTTPS_SERVER . 'index.php?route=cms/notifications&token=' . $this->session->data['token'] . $url);
+                       
+            return redirect() -> route('admin.students.index');
+        }
+        session()->flash('error', 'Nothing has been selected!');
+        return redirect()->route('admin.students.index');
+    }
+
+    /**
+     * Check Multi Delete Permission, not implemented at the moment
+     */
+    public function validateMultiDelete()
+    {
+        return true;
     }
 }
