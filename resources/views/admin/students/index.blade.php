@@ -65,7 +65,7 @@
                                     {{ __('Search') }}
                                 </button>
                             </div>
-                            <div class="col-2 offset-5 text-right">
+                            <div class="col-7 text-right">
                                 <a href = "{{route('admin.students.create')}}">
                                     <button type = "button" class="btn btn-primary" >Add</button>
                                 </a>
