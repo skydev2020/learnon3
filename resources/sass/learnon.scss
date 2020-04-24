@@ -53,6 +53,21 @@ a.tc-white:focus {
     color: $white_focus !important;
 }
 
+/*
+* Liast Box Ascending and Descending
+*/
+a.order {
+    text-decoration: none;
+    padding-right: 15px;
+    color: initial;
+}
+a.asc{    
+    background: url(../images/asc.png) right center no-repeat;    
+}
+a.desc{    
+    background: url(../images/desc.png) right center no-repeat;    
+}
+
 .nav-link.active {
     background-color: $red;
     color: $white_focus !important;
