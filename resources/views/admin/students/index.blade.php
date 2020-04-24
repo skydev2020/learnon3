@@ -60,31 +60,32 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-1 offset-5">
+                            <div class="col-1 offset-4">
                                 <button type = "submit" class="btn btn-primary" >
                                     {{ __('Search') }}
                                 </button>
                             </div>
-                            <div class="col-1 offset-5">
+                            <div class="col-2 offset-5 text-right">
                                 <a href = "{{route('admin.students.create')}}">
                                     <button type = "button" class="btn btn-primary" >Add</button>
                                 </a>
                             </div>
                         </div>
 
-                        <div class = "form-group row mb-0">
-                        
-                            <div class = "col-4 offset-8  align-items-center">
-                                <input type="checkbox" name = "names" id = "names" value = "yes">
-                                <label class="form-check-label" for="names"> Student list </label>
+                        <div class = "form-group row mb-0">                        
+                            <div class = "col-12 d-flex align-items-center justify-content-end">
+                                <input type="checkbox" name = "names" id = "names" value = "yes">&nbsp;&nbsp;
+                                <label class="form-check-label" for="names"> Student list </label>&nbsp;&nbsp;
                             
-                                <input type="checkbox" name = "emails" id = "emails" value = "yes">
-                                <label class="form-check-label" for="emails"> Student emails </label>
+                                <input type="checkbox" name = "emails" id = "emails" value = "yes">&nbsp;&nbsp;
+                                <label class="form-check-label" for="emails"> Student emails </label>&nbsp;&nbsp;
                             
-                                <input type="checkbox" name = "referrers" id = "referrers" value = "yes">
-                                <label class="form-check-label" for="referrers">Where they heard about us?</label>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-primary" onclick="exportToExcel('students')">Export</button>
+                                <input type="checkbox" name = "referrers" id = "referrers" value = "yes">&nbsp;&nbsp;
+                                <label class="form-check-label" for="referrers">Where they heard about us?</label>&nbsp;&nbsp;
+                                
+                                <input type="checkbox" name = "contract" id = "contract" value = "yes">&nbsp;&nbsp;
+                                <label class="form-check-label" for="contract"> Contract/Agreement </label>
+                                <button class="btn btn-primary left_margin" onclick="exportToExcel('students')">Export</button>                                
                             </div>
                         </div>
                     </form>
