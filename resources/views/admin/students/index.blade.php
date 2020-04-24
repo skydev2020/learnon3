@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="GET" action="{{ route('admin.students.index') }}">
+                    <form method="GET" action="{{ route('admin.students.index') }}" id="student_form">
                         @csrf
                         {{method_field('GET')}}
                         <div class="form-group row">
@@ -60,61 +60,77 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-1 offset-5">
+                            <div class="col-1 offset-4">
                                 <button type = "submit" class="btn btn-primary" >
                                     {{ __('Search') }}
                                 </button>
                             </div>
-                            <div class="col-1 offset-5">
+                            <div class="col-7 text-right">
                                 <a href = "{{route('admin.students.create')}}">
                                     <button type = "button" class="btn btn-primary" >Add</button>
                                 </a>
+                                <a href="javascript:;">                                
+                                    <button class="btn btn-primary" id="del_btn">Delete</button>    
+                                </a>                                
                             </div>
                         </div>
 
-                        <div class = "form-group row mb-0">
-                        
-                            <div class = "col-4 offset-8  align-items-center">
-                                <input type="checkbox" name = "names" id = "names" value = "yes">
-                                <label class="form-check-label" for="names"> Student list </label>
+                        <div class = "form-group row mb-0">                        
+                            <div class = "col-12 d-flex align-items-center justify-content-end">
+                                <input type="checkbox" name = "names" id = "names" value = "yes">&nbsp;&nbsp;
+                                <label class="form-check-label" for="names"> Student list </label>&nbsp;&nbsp;
                             
-                                <input type="checkbox" name = "emails" id = "emails" value = "yes">
-                                <label class="form-check-label" for="emails"> Student emails </label>
+                                <input type="checkbox" name = "emails" id = "emails" value = "yes">&nbsp;&nbsp;
+                                <label class="form-check-label" for="emails"> Student emails </label>&nbsp;&nbsp;
                             
-                                <input type="checkbox" name = "referrers" id = "referrers" value = "yes">
-                                <label class="form-check-label" for="referrers">Where they heard about us?</label>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-primary" onclick="exportToExcel('students')">Export</button>
+                                <input type="checkbox" name = "referrers" id = "referrers" value = "yes">&nbsp;&nbsp;
+                                <label class="form-check-label" for="referrers">Where they heard about us?</label>&nbsp;&nbsp;
+                                
+                                <input type="checkbox" name = "contract" id = "contract" value = "yes">&nbsp;&nbsp;
+                                <label class="form-check-label" for="contract"> Contract/Agreement </label>
+                                <button class="btn btn-primary left_margin" onclick="exportToExcel('students')">Export</button>                                
                             </div>
                         </div>
                     </form>
-
+                    <form action="{{ route('admin.students.multiDelete') }}" class="d-none" method="post" id="multi_del_form">
+                        @csrf
+                        <input type="hidden" name="sids" id="sids">                       
+                    </form>
                 </div>
             </div>
             <div class="card">
                 <div class="card-header"></div>
-                <div class="card-body">
-
-                    <table class="table table-bordered table-striped" id = "students">
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered table-striped"  id = "students">
                         <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Student Name</th>
-                            <th scope="col">City</th>
-                            <th scope="col">Subjects</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Tutoring Service</th>
-                            <th scope="col">Date Registered</th>
-                            <th scope="col">Actions</th>
-                        </tr>
+                            <tr>
+                                <th scope="col" class="text-center pt-0 pl-1 pr-1" style="width: 20px;">
+                                    <input type="checkbox" class="text-center"
+                                    onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
+                                </th>
+                                <th scope="col" style="width: 50px;" class="text-center">ID</th>
+                                <th scope="col" style="width: 120px;" class="text-center">Student Name</th>
+                                <th scope="col" style="width: 100px;" class="text-center">Email</th>
+                                <th scope="col" style="width: 50px;" class="text-center">City</th>
+                                <th scope="col" class="text-center">Subjects</th>
+                                <th scope="col" style="width: 140px;" class="text-center">Status</th>
+                                <th scope="col" style="width: 130px;" class="text-center">Tutoring Service</th>
+                                <th scope="col" style="width: 130px;" class="text-center">Date Registered</th>
+                                <th scope="col" class="text-right" style="width: 295px;">Actions</th>
+                            </tr>
                         </thead>
                         <tbody>
                         @foreach ($data['students'] as $student)
                             <tr>
-                                <th scope="row">{{$student->id}}</th>
-                                <td scope="col">{{$student->fname . ' ' . $student->lname}}</td>
-                                <td scope="col">{{$student->city}}</td>
-                                <td scope="col"><?php
+                                <th scope="row" class="text-center pr-0 pl-0">
+                                    <input type="checkbox" name="selected[]" value="{{$student->id}}"
+                                    class="text-center"/>
+                                </th>
+                                <th scope="col" class="font-weight-normal pl-1 pr-1 text-center">{{$student->id}}</th>
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{$student->fname . ' ' . $student->lname}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{$student->email}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{$student->city}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1 "><?php
                                     $subjects = "";
                                     foreach ($student->subjects()->get() as $subject)
                                     {
@@ -122,10 +138,10 @@
                                     }
                                     $subjects = rtrim($subjects, ', ');
                                     echo $subjects;?></td>
-                                <td scope="col">{{$student->studentStatus()->first()['title']}}</td>
-                                <td scope="col">{{$student->service_method}}</td>
-                                <td scope="col">{{date('d/m/Y', strtotime($student->created_at))}}</td>
-                                <td scope="col">
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{$student->studentStatus()->first()['title']}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{$student->service_method}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{date('d/m/Y', strtotime($student->created_at))}}</td>
+                                <td scope="col" class="text-right">
                                     @can('manage-students')
                                         [<a href="{{route('admin.students.show', $student->id)}}">View</a>]
                                     @endcan
@@ -142,7 +158,7 @@
                                     <form action="{{ route('admin.students.destroy', $student) }}" method="POST" class="float-left">
                                         @csrf
                                         {{method_field('DELETE')}}
-                                        [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
+                                        [<a href="javascript:;" onclick="del(this)">Delete</a>]
                                     </form>
                                     @endcan
                                 </td>
@@ -158,5 +174,43 @@
 @endsection
 <!-- Scripts -->
 @section("jssection")
+<script>
+    
+    function del(ele) {
+        var r= confirm("Do you want to delete selected row?");
+        if (r != true) {
+            return false;
+        }
+        ele.parentNode.submit();
+    }
+
+    window.addEventListener('load', function() {
+        jQuery( "#del_btn" ).click(function( event ) {
+            var sel_objs = jQuery('input[name*=\'selected\']:checked');
+
+            // clear all selected id 
+            var sel_obj_ids = [];
+            
+            for (var i=0; i < sel_objs.length ; ++i) {
+                sel_obj_ids.push(sel_objs[i].value);
+            }
+            jQuery("#sids").val(sel_obj_ids.toString());
+
+            if (sel_objs.length==0) {
+                alert('Please select the row.')
+                return false;
+            }
+            else {
+                var r= confirm("Do you want to delete selected rows?");
+                if (r != true) {
+                    return false;
+                }
+                event.preventDefault();
+                document.getElementById('multi_del_form').submit();
+                // jQuery("#multi_del_form").submit();
+            }   
+        });
+    });
+</script>
 <script src="{{ asset('js/export.js')}}"></script>
 @stop

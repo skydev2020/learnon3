@@ -88,9 +88,9 @@
                                 <input type="checkbox" name = "referrers" id = "referrers" value = "yes">
                                 <label class="form-check-label" for="referrers"> Contract/Agreement </label>
                                 <button class="btn btn-primary left_margin" onclick="exportToExcel('tutors')">Export</button>
-      <button class="btn btn-primary" onclick="exportToExcel('tutors')">Export</button>
->
-
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="card">
@@ -99,15 +99,15 @@
 
                     <table class="table table-bordered table-striped" id="tutors">
                         <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Tutor Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Approved</th>
-                            <th scope="col">Date Added</th>
-                            <th scope="col" class="text-right">Action</th>
-                        </tr>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Tutor Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Approved</th>
+                                <th scope="col">Date Added</th>
+                                <th scope="col" class="text-right">Action</th>
+                            </tr>
                         </thead>
                         <tbody>
                         @foreach ($data['tutors'] as $tutor)

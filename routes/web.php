@@ -26,7 +26,10 @@ Route::post('register_tutor', 'auth\RegisterTutorController@register');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
     Route::resource('/users', 'UsersController');
+    
     Route::resource('/students', 'StudentsController');
+    Route::post('students/multi_del', 'StudentsController@multiDelete') -> name('students.multiDelete');
+
     Route::resource('/assignments', 'AssignmentsController');
     Route::resource('/packages', 'PackagesController');
     Route::resource('/student_packages', 'Student_PackagesController');
