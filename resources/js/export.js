@@ -1,5 +1,5 @@
 function exportToExcel(tableID){
-    console.log("asdf");
+    
     var tab_text="<table border='2px'><tr bgcolor='#87AFC6' style='height: 75px; text-align: center; width: 250px'>";
     var textRange; var j=0;
     tab = document.getElementById(tableID); // id of table
@@ -32,7 +32,7 @@ function exportToExcel(tableID){
     }
 
     else {
-    sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
     }
     
     return (sa);

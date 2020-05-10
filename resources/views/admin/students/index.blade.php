@@ -88,7 +88,7 @@
                                 
                                 <input type="checkbox" name = "contract" id = "contract" value = "yes">&nbsp;&nbsp;
                                 <label class="form-check-label" for="contract"> Contract/Agreement </label>
-                                <button class="btn btn-primary left_margin" onclick="exportToExcel('students')">Export</button>                                
+                                <button class="btn btn-primary left_margin" onclick="exportToExcel('students');  return false;">Export</button>                                
                             </div>
                         </div>
                     </form>
@@ -215,8 +215,7 @@
 @endsection
 <!-- Scripts -->
 @section("jssection")
-<script>
-    
+<script>    
     function del(ele) {
         var r= confirm("Do you want to delete selected row?");
         if (r != true) {
@@ -252,6 +251,7 @@
             }   
         });
     });
+
 </script>
 <script src="{{ asset('js/export.js')}}"></script>
 @stop
