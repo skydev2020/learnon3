@@ -3,13 +3,27 @@ function exportToExcel(tableID){
     var tab_text="<table border='2px'><tr bgcolor='#87AFC6' style='height: 75px; text-align: center; width: 250px'>";
     var textRange; var j=0;
     tab = document.getElementById(tableID); // id of table
+    var ecols= $('input[name ="ecols"]:checked') 
+    console.log(ecols);
 
     for(j = 0 ; j < tab.rows.length ; j++)
     {
 
-        tab_text=tab_text;
-
-        tab_text=tab_text+tab.rows[j].innerHTML.toUpperCase()+"</tr>";
+        // tab_text=tab_text;
+        if (ecols.length==0) {
+            tab_text=tab_text+tab.rows[j].innerHTML.toUpperCase()+"</tr>";
+        } else {
+            // only add selected columns
+            if (j!==0) {
+                tab_text=tab_text+"<tr>";
+            }
+            
+            for (i = 0 ; i < ecols.length ; i++) {
+                var colIndex = parseInt(ecols[i].value, 10);
+                tab_text=tab_text+"<td>"+tab.rows[j].cells[colIndex].innerHTML.toUpperCase()+"</td>";
+            }
+            tab_text=tab_text+"</tr>";
+        } 
         //tab_text=tab_text+"</tr>";
     }
 

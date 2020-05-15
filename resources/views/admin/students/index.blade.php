@@ -77,17 +77,17 @@
 
                         <div class = "form-group row mb-0">                        
                             <div class = "col-12 d-flex align-items-center justify-content-end">
-                                <input type="checkbox" name = "names" id = "names" value = "yes">&nbsp;&nbsp;
+                                <input type="checkbox" name = "ecols" id = "names" value = "2">&nbsp;&nbsp;
                                 <label class="form-check-label" for="names"> Student list </label>&nbsp;&nbsp;
                             
-                                <input type="checkbox" name = "emails" id = "emails" value = "yes">&nbsp;&nbsp;
+                                <input type="checkbox" name = "ecols" id = "emails" value = "3">&nbsp;&nbsp;
                                 <label class="form-check-label" for="emails"> Student emails </label>&nbsp;&nbsp;
                             
-                                <input type="checkbox" name = "referrers" id = "referrers" value = "yes">&nbsp;&nbsp;
+                                <!-- <input type="checkbox" name = "ecols" id = "referrers" value = "yes">&nbsp;&nbsp;
                                 <label class="form-check-label" for="referrers">Where they heard about us?</label>&nbsp;&nbsp;
                                 
-                                <input type="checkbox" name = "contract" id = "contract" value = "yes">&nbsp;&nbsp;
-                                <label class="form-check-label" for="contract"> Contract/Agreement </label>
+                                <input type="checkbox" name = "ecols" id = "contract" value = "yes">&nbsp;&nbsp;
+                                <label class="form-check-label" for="contract"> Contract/Agreement </label> -->
                                 <button class="btn btn-primary left_margin" onclick="exportToExcel('students');  return false;">Export</button>                                
                             </div>
                         </div>
@@ -253,5 +253,5 @@
     });
 
 </script>
-<script src="{{ asset('js/export.js')}}"></script>
+<script src="{{ asset('js/export/export.js')}}"></script>
 @stop
