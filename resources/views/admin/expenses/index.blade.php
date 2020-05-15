@@ -152,7 +152,6 @@
 
         for(j = 0 ; j < tab.rows.length ; j++)
         {
-
             tab_text=tab_text;
 
             tab_text=tab_text+tab.rows[j].innerHTML.toUpperCase()+"</tr>";
@@ -168,7 +167,6 @@
         var msie = ua.indexOf("MSIE ");
 
         if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
-
         {
             txtArea1.document.open("txt/html","replace");
             txtArea1.document.write( 'sep=,\r\n' + tab_text);

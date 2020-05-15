@@ -35,8 +35,8 @@
                                             @elseif ($data['order']['field'] == 'notification_from' && $data['order']['dir'] == 'desc')
                                                 <a href="{{route('admin.notifications.index') }}?field=notification_from&dir=asc" class="desc order">Notification From</a>
                                             @else
-                                            <a href="{{route('admin.notifications.index') }}?field=notification_from&dir=asc" class="order">Notification From</a>
-                                            @endif                                            
+                                                <a href="{{route('admin.notifications.index') }}?field=notification_from&dir=asc" class="order">Notification From</a>
+                                            @endif
                                         </th>
                                         <th scope="col">
                                             @if ($data['order']['field'] == 'subject' && $data['order']['dir'] == 'asc')
