@@ -358,6 +358,6 @@
     var grades = eval(grades_json);
 
 </script>
-<script src="{{ asset('js/register/subjects.js')}}"></script>
+<script src="{{ asset('js/students/subjects.js')}}"></script>
 
 @stop
