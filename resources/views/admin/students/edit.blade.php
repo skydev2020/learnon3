@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.students.update', $student) }}">
+                    <form method="POST" name="student_frm" action="{{ route('admin.students.update', $student) }}">
                         @csrf
                         {{method_field('PUT')}}
                         <div class="form-group row">
@@ -62,9 +62,9 @@
                             <div class = "col-3 d-flex justify-content-end align-items-center">
                                 <label for = "password" class="col-form-label text-md-right font-weight-bold">Password:</label>
                             </div>
-                            <div class="col-8 col-md-6">
-                                <input id="password" type="password" name="password" required autocomplete="new-password"
-                                class="form-control @error('password') is-invalid @enderror">
+                            <div class="col-8 col-md-6">                                
+                                <input id="password" type="password" name="password" pattern="^\S{8,}$"  autocomplete="on" oninput="checkPwd();"                               
+                                class="form-control @error('password') is-invalid @enderror" title="Must have at least 8 characters">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -77,9 +77,9 @@
                             <div class = "col-3 d-flex justify-content-end align-items-center">
                                 <label for="password-confirm" class="col-form-label font-weight-bold">Confirm:</label>
                             </div>
-                            <div class="col-8 col-md-6">
-                                <input id="password-confirm" type="password" class="form-control"
-                                name="password_confirmation" required autocomplete="new-password">
+                            <div class="col-8 col-md-6">                            
+                                <input id="password-confirm" name="password_confirmation"  type="password" class="form-control" 
+                                oninput="checkPwd();"  autocomplete="on">
                             </div>
                         </div>
 
@@ -361,6 +361,7 @@
     var subjects_json = '<?php echo json_encode($student->subjects()->get(), JSON_HEX_APOS) ?>';
     var subjects = eval(subjects_json);    
 
+    
 </script>
 <script src="{{ asset('js/students/subjects.js')}}"></script>
 

@@ -274,7 +274,7 @@ class StudentsController extends Controller
             'fname'                 => ['required', 'string', 'max:255'],
             'lname'                 => ['required', 'string', 'max:255'],
             'email'                 => ['required', 'email', 'max:255'],
-            'password'              => ['required', 'string', 'min:8', 'confirmed'],
+            'password'              => ['nullable', 'string', 'min:8', 'confirmed'],
             'grade_id'              => ['required', 'integer'],
             'subjects'              => ['required', 'Array'],
             'home_phone'            => ['required', 'string'],
@@ -302,7 +302,9 @@ class StudentsController extends Controller
         }
         $data = $request->all();
         $student-> email = $data['email'];
-        $student-> password = Hash::make($data['password']);
+        if ($data['password']) {
+            $student-> password = Hash::make($data['password']);
+        }        
         $student-> fname = $data['fname'];
         $student-> lname = $data['lname'];
         $student-> grade_id = $data['grade_id'];

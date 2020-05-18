@@ -32,6 +32,27 @@ function getSubjects(gradeId) {
     }
 }
 
+function submitOnValid(){
+    //document.getElementById("dup_email_prob").style.display = "block";
+    if (document.student_frm.password.value != document.student_frm.password_confirmation.value) {
+        document.student_frm.password_confirmation.setCustomValidity('Password should be matched');
+        return false;
+    }
+    else {
+        return true;
+    }
+   
+}
+
+function checkPwd() {
+    if (document.student_frm.password.value != document.student_frm.password_confirmation.value) {
+        document.student_frm.password_confirmation.setCustomValidity('Password should be matched');            
+    }
+    else {
+        document.student_frm.password_confirmation.setCustomValidity('');
+    }
+}
+
 window.addEventListener('load', function() {
     // select initial subjects: after loading pages
    
