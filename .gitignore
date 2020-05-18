@@ -3,6 +3,8 @@
 /public/storage
 /public/css/app.css
 /public/js/register/
+/public/js/students/
+/public/js/export/
 /public/js/app.js
 /storage/*.key
 /storage/logs/
