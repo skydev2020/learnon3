@@ -185,6 +185,7 @@ class StudentsController extends Controller
         $student = User::create([
             'fname'                 => $data['fname'],
             'lname'                 => $data['lname'],
+            'username'                 => $data['email'],
             'email'                 => $data['email'],
             'password'              => Hash::make($data['password']),
             'grade_id'              => $data['grade_id'],
@@ -205,6 +206,7 @@ class StudentsController extends Controller
             'student_status_id'     => $data['student_status_id'],
             'approved'              => $data['approved'],
             'status'                => $data['status'],
+            'user_group_id'         => 0
         ]);
         if ($student == NULL)
         {
@@ -220,7 +222,7 @@ class StudentsController extends Controller
         }
         $student -> save();
         ActivityLog::log_activity(Auth::user()->id, "Student Added", "A new student added.");
-        session()->flash('success', "You have modified student!");
+        session()->flash('success', "You have created student!");
         return redirect()->route('admin.students.index');
     }
 
