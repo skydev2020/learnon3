@@ -19,7 +19,7 @@ function getSubjects(gradeId) {
                     }
                 }
 
-                $("#subjects_box").append("<div class='"+className+"'><input type='checkbox' name='subjects' value='"
+                $("#subjects_box").append("<div class='"+className+"'><input type='checkbox' name='subjects[]' value='"
                 +subject['id'] + " '" + checked + ">&nbsp;"+subject['name']+"</div>");
                 if (className=='even') {
                     className = 'odd';

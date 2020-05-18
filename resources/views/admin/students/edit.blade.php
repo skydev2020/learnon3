@@ -231,7 +231,7 @@
                                 <select id = "country_id" name = "country_id" class = "form-control">
                                     @foreach ($countries as $country)
                                     <option <?= $country->id == $student->country_id ? "selected" : "" ?>
-                                        value = "{{$state->id}}"> {{$country->name}} </option>
+                                        value = "{{$country->id}}"> {{$country->name}} </option>
                                     @endforeach
                                 </select>
                             </div>
