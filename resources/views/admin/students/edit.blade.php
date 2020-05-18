@@ -356,6 +356,10 @@
 <script>
     var grades_json = '<?php echo json_encode($grades_array, JSON_HEX_APOS) ?>';
     var grades = eval(grades_json);
+    var grade_id = <?php echo $student->grade_id; ?>;
+    
+    var subjects_json = '<?php echo json_encode($student->subjects()->get(), JSON_HEX_APOS) ?>';
+    var subjects = eval(subjects_json);    
 
 </script>
 <script src="{{ asset('js/students/subjects.js')}}"></script>
