@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-8 col-md-6">                            
                                 <input id="password-confirm" name="password_confirmation"  type="password" class="form-control" 
-                                oninput="checkPwd();"  autocomplete="on">
+                                oninput="checkPwd();"  pattern="^\S{8,}$" autocomplete="on">
                             </div>
                         </div>
 
