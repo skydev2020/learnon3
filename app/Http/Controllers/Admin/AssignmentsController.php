@@ -97,11 +97,44 @@ class AssignmentsController extends Controller
             $s_data['t_name'] = "";
         }
 
-        // dd( $assignments->join('users', 'assignments.student_id', '=', 'users.id')->select('assignments.*', 'users.fname')->orderBy("users.fname")->toSql());
-        $assignments = $assignments->get();
         // dd( $assignments->toSql());
+        $assignments = $assignments->get();
+        $objs = [];
+
+        foreach ($assignments as $assignment) {            
+            $obj = [];
+            $obj['id'] = $assignment->id;
+            $obj['created_at'] = $assignment->created_at;
+
+            if ($assignment->student()) {
+                $obj['student_name'] = $assignment->student()['fname']. " ". $assignment->student()['lname'] ;
+            }
+            else {
+                $obj['student_name'] = "" ;
+            }
+
+            if ($assignment->tutor()) {
+                $obj['tutor_name'] = $assignment->tutor()['fname']. " ". $assignment->tutor()['lname'] ;
+            }
+            else {
+                $obj['tutor_name'] = "" ;
+            }
+
+            $subjects = "";
+            foreach ($assignment->subjects()->get() as $subject)
+            {
+                $subjects .= $subject->name . ', ';
+            }
+            $subjects = rtrim($subjects, ', ');
+            $obj['subjects'] = $subjects;
+            
+            $objs[]=(object)$obj;
+        }
+        
+        // dd($objs);
+
         $data = [
-            'assignments'   => $assignments,
+            'assignments'   => $objs,
             'search'           => $s_data,
         ];
 
