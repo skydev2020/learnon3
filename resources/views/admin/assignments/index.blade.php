@@ -61,52 +61,52 @@
 
             <div class="card">
                 <div class="card-header"></div>
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <table class="table table-bordered table-striped">
                         <thead>
-                        <tr>
-                            <th scope="col" class="text-center pt-0 pl-1 pr-1" style="width: 20px;">
-                                <input type="checkbox" class="text-center"
-                                onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
-                            </th>
-                            <th scope="col">                                
-                                @if ($data['order']['field'] == 'student_name' && $data['order']['dir'] == 'asc')
-                                    <a href="{{route('admin.assignments.index') }}?field=student_name&dir=desc&{{$data['url']}}" class="asc order">Student Name</a>
-                                @elseif ($data['order']['field'] == 'student_name' && $data['order']['dir'] == 'desc')
-                                    <a href="{{route('admin.assignments.index') }}?field=student_name&dir=asc&{{$data['url']}}" class="desc order">Student Name</a>
-                                @else
-                                    <a href="{{route('admin.assignments.index') }}?field=student_name&dir=asc&{{$data['url']}}" class="order">Student Name</a>
-                                @endif
-                            </th>
-                            <th scope="col">
-                                @if ($data['order']['field'] == 'tutor_name' && $data['order']['dir'] == 'asc')
-                                    <a href="{{route('admin.assignments.index') }}?field=tutor_name&dir=desc&{{$data['url']}}" class="asc order">Tutor Name</a>
-                                @elseif ($data['order']['field'] == 'tutor_name' && $data['order']['dir'] == 'desc')
-                                    <a href="{{route('admin.assignments.index') }}?field=tutor_name&dir=asc&{{$data['url']}}" class="desc order">Tutor Name</a>
-                                @else
-                                    <a href="{{route('admin.assignments.index') }}?field=tutor_name&dir=asc&{{$data['url']}}" class="order">Tutor Name</a>
-                                @endif
-                            </th>
-                            <th scope="col">                                
-                                @if ($data['order']['field'] == 'subjects' && $data['order']['dir'] == 'asc')
-                                    <a href="{{route('admin.assignments.index') }}?field=subjects&dir=desc&{{$data['url']}}" class="asc order">Subjects</a>
-                                @elseif ($data['order']['field'] == 'subjects' && $data['order']['dir'] == 'desc')
-                                    <a href="{{route('admin.assignments.index') }}?field=subjects&dir=asc&{{$data['url']}}" class="desc order">Subjects</a>
-                                @else
-                                    <a href="{{route('admin.assignments.index') }}?field=subjects&dir=asc&{{$data['url']}}" class="order">Subjects</a>
-                                @endif
-                            </th>
-                            <th scope="col">
-                                @if ($data['order']['field'] == 'created_at' && $data['order']['dir'] == 'asc')
-                                    <a href="{{route('admin.assignments.index') }}?field=created_at&dir=desc&{{$data['url']}}" class="asc order">Date Assigned</a>
-                                @elseif ($data['order']['field'] == 'created_at' && $data['order']['dir'] == 'desc')
-                                    <a href="{{route('admin.assignments.index') }}?field=created_at&dir=asc&{{$data['url']}}" class="desc order">Date Assigned</a>
-                                @else
-                                    <a href="{{route('admin.assignments.index') }}?field=created_at&dir=asc&{{$data['url']}}" class="order">Date Assigned</a>
-                                @endif
-                            </th>
-                            <th scope="col">Actions</th>
-                        </tr>
+                            <tr>
+                                <th scope="col" class="text-center pt-0 pl-1 pr-1" style="width: 20px;">
+                                    <input type="checkbox" class="text-center"
+                                    onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
+                                </th>
+                                <th scope="col" style="width: 150px;" class="text-center">                               
+                                    @if ($data['order']['field'] == 'student_name' && $data['order']['dir'] == 'asc')
+                                        <a href="{{route('admin.assignments.index') }}?field=student_name&dir=desc&{{$data['url']}}" class="asc order">Student Name</a>
+                                    @elseif ($data['order']['field'] == 'student_name' && $data['order']['dir'] == 'desc')
+                                        <a href="{{route('admin.assignments.index') }}?field=student_name&dir=asc&{{$data['url']}}" class="desc order">Student Name</a>
+                                    @else
+                                        <a href="{{route('admin.assignments.index') }}?field=student_name&dir=asc&{{$data['url']}}" class="order">Student Name</a>
+                                    @endif
+                                </th>
+                                <th scope="col" style="width: 150px;" class="text-center">
+                                    @if ($data['order']['field'] == 'tutor_name' && $data['order']['dir'] == 'asc')
+                                        <a href="{{route('admin.assignments.index') }}?field=tutor_name&dir=desc&{{$data['url']}}" class="asc order">Tutor Name</a>
+                                    @elseif ($data['order']['field'] == 'tutor_name' && $data['order']['dir'] == 'desc')
+                                        <a href="{{route('admin.assignments.index') }}?field=tutor_name&dir=asc&{{$data['url']}}" class="desc order">Tutor Name</a>
+                                    @else
+                                        <a href="{{route('admin.assignments.index') }}?field=tutor_name&dir=asc&{{$data['url']}}" class="order">Tutor Name</a>
+                                    @endif
+                                </th>
+                                <th scope="col" class="text-center">                                
+                                    @if ($data['order']['field'] == 'subjects' && $data['order']['dir'] == 'asc')
+                                        <a href="{{route('admin.assignments.index') }}?field=subjects&dir=desc&{{$data['url']}}" class="asc order">Subjects</a>
+                                    @elseif ($data['order']['field'] == 'subjects' && $data['order']['dir'] == 'desc')
+                                        <a href="{{route('admin.assignments.index') }}?field=subjects&dir=asc&{{$data['url']}}" class="desc order">Subjects</a>
+                                    @else
+                                        <a href="{{route('admin.assignments.index') }}?field=subjects&dir=asc&{{$data['url']}}" class="order">Subjects</a>
+                                    @endif
+                                </th>
+                                <th scope="col" style="width: 160px;" class="text-center">
+                                    @if ($data['order']['field'] == 'created_at' && $data['order']['dir'] == 'asc')
+                                        <a href="{{route('admin.assignments.index') }}?field=created_at&dir=desc&{{$data['url']}}" class="asc order">Date Assigned</a>
+                                    @elseif ($data['order']['field'] == 'created_at' && $data['order']['dir'] == 'desc')
+                                        <a href="{{route('admin.assignments.index') }}?field=created_at&dir=asc&{{$data['url']}}" class="desc order">Date Assigned</a>
+                                    @else
+                                        <a href="{{route('admin.assignments.index') }}?field=created_at&dir=asc&{{$data['url']}}" class="order">Date Assigned</a>
+                                    @endif
+                                </th>
+                                <th scope="col" class="text-right" style="width: 120px;">Actions</th>
+                            </tr>
                         </thead>
                         <tbody>
                         @foreach ($data['assignments'] as $assignment)
@@ -115,13 +115,13 @@
                                     <input type="checkbox" name="selected[]" value="{{$assignment['id']}}"
                                     class="text-center"/>
                                 </th>
-                                <td scope="col">
+                                <td scope="col" class="text-center pl-1 pr-1 ">
                                     {{$assignment['student_name']}}
                                 </td>
-                                <td scope="col">{{$assignment['tutor_name']}}</td>
-                                <td scope="col">{{$assignment['subjects']}}</td>
-                                <td scope="col">{{date('d/m/Y', strtotime($assignment['created_at']))}}</td>
-                                <td scope="col">
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{$assignment['tutor_name']}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{$assignment['subjects']}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1 ">{{date('d/m/Y', strtotime($assignment['created_at']))}}</td>
+                                <td scope="col" class="text-right">
                                     @can('manage-students')
                                     [<a href="{{route('admin.assignments.edit', $assignment['id'])}}">Edit</a>]
                                     @endcan
