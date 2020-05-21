@@ -8,15 +8,14 @@ function exportToExcel(tableID){
 
     for(j = 0 ; j < tab.rows.length ; j++)
     {
-
+        if (j!==0) {
+            tab_text=tab_text+"<tr>";
+        }
         // tab_text=tab_text;
         if (ecols.length==0) {
             tab_text=tab_text+tab.rows[j].innerHTML.toUpperCase()+"</tr>";
         } else {
             // only add selected columns
-            if (j!==0) {
-                tab_text=tab_text+"<tr>";
-            }
             
             for (i = 0 ; i < ecols.length ; i++) {
                 var colIndex = parseInt(ecols[i].value, 10);

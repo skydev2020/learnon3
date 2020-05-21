@@ -185,6 +185,7 @@ class StudentsController extends Controller
         $student = User::create([
             'fname'                 => $data['fname'],
             'lname'                 => $data['lname'],
+            'username'                 => $data['email'],
             'email'                 => $data['email'],
             'password'              => Hash::make($data['password']),
             'grade_id'              => $data['grade_id'],
@@ -205,6 +206,7 @@ class StudentsController extends Controller
             'student_status_id'     => $data['student_status_id'],
             'approved'              => $data['approved'],
             'status'                => $data['status'],
+            'user_group_id'         => 0
         ]);
         if ($student == NULL)
         {
@@ -220,7 +222,7 @@ class StudentsController extends Controller
         }
         $student -> save();
         ActivityLog::log_activity(Auth::user()->id, "Student Added", "A new student added.");
-        session()->flash('success', "You have modified student!");
+        session()->flash('success', "You have created student!");
         return redirect()->route('admin.students.index');
     }
 
@@ -272,7 +274,7 @@ class StudentsController extends Controller
             'fname'                 => ['required', 'string', 'max:255'],
             'lname'                 => ['required', 'string', 'max:255'],
             'email'                 => ['required', 'email', 'max:255'],
-            'password'              => ['required', 'string', 'min:8', 'confirmed'],
+            'password'              => ['nullable', 'string', 'min:8', 'confirmed'],
             'grade_id'              => ['required', 'integer'],
             'subjects'              => ['required', 'Array'],
             'home_phone'            => ['required', 'string'],
@@ -300,7 +302,9 @@ class StudentsController extends Controller
         }
         $data = $request->all();
         $student-> email = $data['email'];
-        $student-> password = Hash::make($data['password']);
+        if ($data['password']) {
+            $student-> password = Hash::make($data['password']);
+        }        
         $student-> fname = $data['fname'];
         $student-> lname = $data['lname'];
         $student-> grade_id = $data['grade_id'];

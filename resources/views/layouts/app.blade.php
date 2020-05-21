@@ -51,7 +51,7 @@
                             @endcan
                             @can('manage-students')
                             <li class="nav-item dropdown">
-                                <a class="tc-white nav-link {{in_array(Request::segment(2), ['students', 'assignments', 'student_packages', 'packages']) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="tc-white nav-link {{in_array(Request::segment(2), ['students', 'assignments', 'student_packages', 'packages']) ? 'active' : '' }} dropdown-toggle" href="{{route('admin.students.index')}}"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Students
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -65,7 +65,7 @@
                             @can('manage-tutors')
                             <li class="nav-item dropdown">
                                 <a class="tc-white nav-link {{in_array(Request::segment(2), ['tutors', 'sessions', 'tutorassignments'
-                                , 'essayassignments', 'rejectedtutors']) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                , 'essayassignments', 'rejectedtutors']) ? 'active' : '' }} dropdown-toggle" href="{{route('admin.tutors.index')}}"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Tutors
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -80,7 +80,7 @@
                             @can('manage-payments')
                             <li class="nav-item dropdown">
                                 <a class="tc-white nav-link nav-link {{in_array(Request::segment(2), ['process', 'invoices', 'paycheques'
-                                , 'receivedpayments', 'expenses', 'otherincomes', 'csvupload', 'defaultwages']) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                , 'receivedpayments', 'expenses', 'otherincomes', 'csvupload', 'defaultwages']) ? 'active' : '' }} dropdown-toggle" href="{{route('admin.process.index')}}"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Payments
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -143,7 +143,7 @@
                             @can('manage-cms')
                             <li class="nav-item dropdown">
                                 <a class="tc-white nav-link {{in_array(Request::segment(2), ['informations', 'coupons', 'broadcasts'
-                                , 'maillogs', 'activitylogs', 'emailsend', 'notification']) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                , 'maillogs', 'activitylogs', 'emailsend', 'notification']) ? 'active' : '' }} dropdown-toggle" href="{{route('admin.informations.index')}}"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     CMS
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -172,7 +172,7 @@
                             @can('manage-reports')
                             <li class="nav-item dropdown">
                                 <a class="tc-white nav-link {{in_array(Request::segment(2), ['progressreports', 'monthlydata', 'tutorreports'
-                                , 'studentreports']) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                , 'studentreports']) ? 'active' : '' }} dropdown-toggle" href="{{route('admin.progressreports.index')}}"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Reports
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -195,7 +195,7 @@
                             @can('manage-system')
                             <li class="nav-item dropdown">
                                 <a class="tc-white  nav-link {{in_array(Request::segment(2), ['settings', 'users', 'countries'
-                                , 'states', 'subjects', 'grades', 'errorlogs']) ? 'active' : '' }} dropdown-toggle" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                , 'states', 'subjects', 'grades', 'errorlogs']) ? 'active' : '' }} dropdown-toggle" href="{{route('admin.settings.index')}}"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     System
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

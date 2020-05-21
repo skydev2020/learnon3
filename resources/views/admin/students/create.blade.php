@@ -227,7 +227,7 @@
                             <div class="col-8 col-md-6">
                                 <select id = "country_id" name = "country_id" class = "form-control">
                                     @foreach ($countries as $country)
-                                    <option value = "{{$state->id}}"> {{$country->name}} </option>
+                                    <option value = "{{$country->id}}"> {{$country->name}} </option>
                                     @endforeach
                                 </select>
                             </div>
