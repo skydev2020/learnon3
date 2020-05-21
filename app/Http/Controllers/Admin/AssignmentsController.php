@@ -21,7 +21,7 @@ class AssignmentsController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->validate($request, [
+        $s_data = $this->validate($request, [
             's_name' => 'nullable|string',
             't_name' => 'nullable|string',
             'a_date' => 'nullable|date',
@@ -33,33 +33,61 @@ class AssignmentsController extends Controller
 
         $q = "1=1 ";
 
-        if (isset($data['a_date'])) {
-            $q.= " and created_at like '%".$data['a_date']."%'";
-        } else $data['a_date'] = "";
+        if (isset($s_data['a_date'])) {
+            $q.= " and created_at like '%".$s_data['a_date']."%'";
+        } else $s_data['a_date'] = "";
 
         $assignments = Assignment::whereRaw($q);
 
-        if (isset($data['s_name']))
-        {
-            $assignments = $assignments->whereHas('students', function($student) use ($data) {
-                return $student->where('fname', 'like', "%" . $data['s_name'] . "%")
-                ->orwhere('lname', 'like', "%" . $data['s_name'] . "%");
+        if (isset($s_data['s_name']) && isset($s_data['t_name'])) {
+            $assignments = $assignments->whereHas('students', function($student) use ($s_data) {
+                return $student->where('fname', 'like', "%" . $s_data['s_name'] . "%")
+                ->orwhere('lname', 'like', "%" . $s_data['s_name'] . "%");
             });
-        } else $data['s_name'] = "";
-
-        if (isset($data['t_name']))
-        {
-            $assignments = $assignments->whereHas('tutors', function($tutor) use ($data) {
-                return $tutor->where('fname', 'like', "%" . $data['t_name'] . "%")
-                ->orwhere('lname', 'like', "%" . $data['t_name'] . "%");
+            
+            $assignments = $assignments->whereHas('tutors', function($tutor) use ($s_data) {
+                return $tutor->where('fname', 'like', "%" . $s_data['t_name'] . "%")
+                ->orwhere('lname', 'like', "%" . $s_data['t_name'] . "%");
             });
-        } else $data['t_name'] = "";
 
+            $assignments->join('users', function ($join) {
+                $join->on('users.id', '=', 'assignments.student_id')
+                     ->on('users.id', '=', 'assignments.student_id');
+            });
+
+            $assignments = $assignments->select('assignments.*', 'users.fname');
+        } 
+        else if (isset($s_data['s_name'])) {
+            $assignments = $assignments->whereHas('students', function($student) use ($s_data) {
+                return $student->where('fname', 'like', "%" . $s_data['s_name'] . "%")
+                ->orwhere('lname', 'like', "%" . $s_data['s_name'] . "%");
+            });
+
+            $assignments = $assignments->join('users', 'assignments.student_id', '=', 'users.id')->select('assignments.*', 'users.fname');
+        }
+        else if (isset($s_data['t_name'])) {
+            $assignments = $assignments->whereHas('tutors', function($tutor) use ($s_data) {
+                return $tutor->where('fname', 'like', "%" . $s_data['t_name'] . "%")
+                ->orwhere('lname', 'like', "%" . $s_data['t_name'] . "%");
+            });
+
+            $assignments = $assignments->join('users', 'assignments.tutor_id', '=', 'users.id')->select('assignments.*', 'users.fname');
+        }
+        
+        if (!isset($s_data['s_name'])) {
+            $s_data['s_name'] = "";
+        }
+
+        if (!isset($s_data['t_name'])) {
+            $s_data['t_name'] = "";
+        }
+
+        // dd( $assignments->join('users', 'assignments.student_id', '=', 'users.id')->select('assignments.*', 'users.fname')->orderBy("users.fname")->toSql());
         $assignments = $assignments->get();
-
+        // dd( $assignments->toSql());
         $data = [
             'assignments'   => $assignments,
-            'old'           => $data,
+            'search'           => $s_data,
         ];
 
         if( count($assignments) != 0 )
