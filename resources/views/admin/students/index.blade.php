@@ -147,8 +147,7 @@
                                         <a href="{{route('admin.students.index') }}?field=service_method&dir=asc&{{$data['url']}}" class="order">Tutoring Service</a>
                                     @endif
                                 </th>
-                                <th scope="col" style="width: 160px;" class="text-center">
-                                    
+                                <th scope="col" style="width: 160px;" class="text-center">                                    
                                     @if ($data['order']['field'] == 'created_at' && $data['order']['dir'] == 'asc')
                                         <a href="{{route('admin.students.index') }}?field=created_at&dir=desc&{{$data['url']}}" class="asc order">Date Registered</a>
                                     @elseif ($data['order']['field'] == 'created_at' && $data['order']['dir'] == 'desc')
