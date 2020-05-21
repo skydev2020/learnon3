@@ -35,65 +35,34 @@ class AssignmentsController extends Controller
         $dir = isset($_GET['dir']) ? trim($_GET['dir']) : "asc";
 
         $q = "1=1 ";
+        $url = "";
 
         if (isset($s_data['a_date'])) {
             $q.= " and created_at like '%".$s_data['a_date']."%'";
+            $url.= "&a_date=".$s_data['a_date'];
         } else $s_data['a_date'] = "";
 
         $assignments = Assignment::whereRaw($q);
-
-        if (isset($s_data['s_name']) && isset($s_data['t_name'])) {
-            $assignments = $assignments->whereHas('students', function($student) use ($s_data) {
-                return $student->where('fname', 'like', "%" . $s_data['s_name'] . "%")
-                ->orwhere('lname', 'like', "%" . $s_data['s_name'] . "%");
-            });
-            
-            $assignments = $assignments->whereHas('tutors', function($tutor) use ($s_data) {
-                return $tutor->where('fname', 'like', "%" . $s_data['t_name'] . "%")
-                ->orwhere('lname', 'like', "%" . $s_data['t_name'] . "%");
-            });
-
-            $assignments->join('users', function ($join) {
-                $join->on('users.id', '=', 'assignments.student_id')
-                     ->on('users.id', '=', 'assignments.student_id');
-            });
-
-            $assignments = $assignments->select('assignments.*', 'users.fname');
-            if ($field!="") {
-                // $q.= " order by ".$field." ".$dir;
-                $assignments = $assignments->orderBy($field, $dir);
-            }
-        } 
-        else if (isset($s_data['s_name'])) {
-            $assignments = $assignments->whereHas('students', function($student) use ($s_data) {
-                return $student->where('fname', 'like', "%" . $s_data['s_name'] . "%")
-                ->orwhere('lname', 'like', "%" . $s_data['s_name'] . "%");
-            });
-
-            $assignments = $assignments->join('users', 'assignments.student_id', '=', 'users.id')->select('assignments.*', 'users.fname');
-            if ($field!="") {
-                // $q.= " order by ".$field." ".$dir;
-                $assignments = $assignments->orderBy($field, $dir);
-            }
-        }
-        else if (isset($s_data['t_name'])) {
-            $assignments = $assignments->whereHas('tutors', function($tutor) use ($s_data) {
-                return $tutor->where('fname', 'like', "%" . $s_data['t_name'] . "%")
-                ->orwhere('lname', 'like', "%" . $s_data['t_name'] . "%");
-            });
-
-            $assignments = $assignments->join('users', 'assignments.tutor_id', '=', 'users.id')->select('assignments.*', 'users.fname');
-            if ($field!="") {
-                // $q.= " order by ".$field." ".$dir;
-                $assignments = $assignments->orderBy($field, $dir);
-            }
-        }
         
-        if (!isset($s_data['s_name'])) {
+        if (isset($s_data['s_name'])) {
+            $assignments = $assignments->whereHas('students', function($student) use ($s_data) {
+                return $student->where('fname', 'like', "%" . $s_data['s_name'] . "%")
+                ->orwhere('lname', 'like', "%" . $s_data['s_name'] . "%");
+            });
+            $url.= "&s_name=".$s_data['s_name'];
+        }
+        else {
             $s_data['s_name'] = "";
         }
 
-        if (!isset($s_data['t_name'])) {
+        if (isset($s_data['t_name'])) {
+            $assignments = $assignments->whereHas('tutors', function($tutor) use ($s_data) {
+                return $tutor->where('fname', 'like', "%" . $s_data['t_name'] . "%")
+                ->orwhere('lname', 'like', "%" . $s_data['t_name'] . "%");
+            });
+            $url.= "&t_name=".$s_data['t_name'];
+        }
+        else {
             $s_data['t_name'] = "";
         }
 
@@ -128,14 +97,31 @@ class AssignmentsController extends Controller
             $subjects = rtrim($subjects, ', ');
             $obj['subjects'] = $subjects;
             
-            $objs[]=(object)$obj;
+            $objs[]=$obj;
+        }
+
+        if ($field!="") {
+            $fields  = array_column($objs, $field);
+            if ($dir == 'asc') {
+                array_multisort($fields, SORT_ASC, $objs);
+            }
+            else {
+                array_multisort($fields, SORT_DESC, $objs);
+            }
+        }      
+
+        if ($url !="") {
+            $url = substr($url, 1);
         }
         
-        // dd($objs);
-
         $data = [
             'assignments'   => $objs,
-            'search'           => $s_data,
+            'search'        => $s_data,
+            'url'           => $url,
+            'order'  => [
+                'field' => $field,
+                'dir' => $dir
+            ],
         ];
 
         if( count($assignments) != 0 )

@@ -69,10 +69,42 @@
                                 <input type="checkbox" class="text-center"
                                 onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
                             </th>
-                            <th scope="col">Student Name</th>
-                            <th scope="col">Tutor Name</th>
-                            <th scope="col">Subjects</th>
-                            <th scope="col">Date Assigned</th>
+                            <th scope="col">                                
+                                @if ($data['order']['field'] == 'student_name' && $data['order']['dir'] == 'asc')
+                                    <a href="{{route('admin.assignments.index') }}?field=student_name&dir=desc&{{$data['url']}}" class="asc order">Student Name</a>
+                                @elseif ($data['order']['field'] == 'student_name' && $data['order']['dir'] == 'desc')
+                                    <a href="{{route('admin.assignments.index') }}?field=student_name&dir=asc&{{$data['url']}}" class="desc order">Student Name</a>
+                                @else
+                                    <a href="{{route('admin.assignments.index') }}?field=student_name&dir=asc&{{$data['url']}}" class="order">Student Name</a>
+                                @endif
+                            </th>
+                            <th scope="col">
+                                @if ($data['order']['field'] == 'tutor_name' && $data['order']['dir'] == 'asc')
+                                    <a href="{{route('admin.assignments.index') }}?field=tutor_name&dir=desc&{{$data['url']}}" class="asc order">Tutor Name</a>
+                                @elseif ($data['order']['field'] == 'tutor_name' && $data['order']['dir'] == 'desc')
+                                    <a href="{{route('admin.assignments.index') }}?field=tutor_name&dir=asc&{{$data['url']}}" class="desc order">Tutor Name</a>
+                                @else
+                                    <a href="{{route('admin.assignments.index') }}?field=tutor_name&dir=asc&{{$data['url']}}" class="order">Tutor Name</a>
+                                @endif
+                            </th>
+                            <th scope="col">                                
+                                @if ($data['order']['field'] == 'subjects' && $data['order']['dir'] == 'asc')
+                                    <a href="{{route('admin.assignments.index') }}?field=subjects&dir=desc&{{$data['url']}}" class="asc order">Subjects</a>
+                                @elseif ($data['order']['field'] == 'subjects' && $data['order']['dir'] == 'desc')
+                                    <a href="{{route('admin.assignments.index') }}?field=subjects&dir=asc&{{$data['url']}}" class="desc order">Subjects</a>
+                                @else
+                                    <a href="{{route('admin.assignments.index') }}?field=subjects&dir=asc&{{$data['url']}}" class="order">Subjects</a>
+                                @endif
+                            </th>
+                            <th scope="col">
+                                @if ($data['order']['field'] == 'created_at' && $data['order']['dir'] == 'asc')
+                                    <a href="{{route('admin.assignments.index') }}?field=created_at&dir=desc&{{$data['url']}}" class="asc order">Date Assigned</a>
+                                @elseif ($data['order']['field'] == 'created_at' && $data['order']['dir'] == 'desc')
+                                    <a href="{{route('admin.assignments.index') }}?field=created_at&dir=asc&{{$data['url']}}" class="desc order">Date Assigned</a>
+                                @else
+                                    <a href="{{route('admin.assignments.index') }}?field=created_at&dir=asc&{{$data['url']}}" class="order">Date Assigned</a>
+                                @endif
+                            </th>
                             <th scope="col">Actions</th>
                         </tr>
                         </thead>
@@ -80,19 +112,21 @@
                         @foreach ($data['assignments'] as $assignment)
                             <tr>
                                 <th scope="row" class="text-center pr-0 pl-0">
-                                    <input type="checkbox" name="selected[]" value="{{$assignment->id}}"
+                                    <input type="checkbox" name="selected[]" value="{{$assignment['id']}}"
                                     class="text-center"/>
                                 </th>
-                                <td scope="col">{{$assignment->student_name}}</td>
-                                <td scope="col">{{$assignment->tutor_name}}</td>
-                                <td scope="col">{{$assignment->subjects}}</td>
-                                <td scope="col">{{date('d/m/Y', strtotime($assignment->created_at))}}</td>
+                                <td scope="col">
+                                    {{$assignment['student_name']}}
+                                </td>
+                                <td scope="col">{{$assignment['tutor_name']}}</td>
+                                <td scope="col">{{$assignment['subjects']}}</td>
+                                <td scope="col">{{date('d/m/Y', strtotime($assignment['created_at']))}}</td>
                                 <td scope="col">
                                     @can('manage-students')
-                                    [<a href="{{route('admin.assignments.edit', $assignment->id)}}">Edit</a>]
+                                    [<a href="{{route('admin.assignments.edit', $assignment['id'])}}">Edit</a>]
                                     @endcan
                                     @can('manage-students')
-                                    <form action="{{ route('admin.assignments.destroy', $assignment->id) }}" method="POST" class="float-left">
+                                    <form action="{{ route('admin.assignments.destroy', $assignment['id']) }}" method="POST" class="float-left">
                                         @csrf
                                         {{method_field('DELETE')}}
                                         <!-- [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>] -->
