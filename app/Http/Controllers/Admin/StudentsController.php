@@ -345,7 +345,11 @@ class StudentsController extends Controller
      */
     public function destroy(User $student)
     {
-        if (Gate::denies('manage-students')) return redirect()->route('admin.students.index');
+        if (Gate::denies('manage-students')) {
+            session()->flash('error', "You don't have enough permission.");
+            return redirect()->route('admin.students.index');
+        }
+
         $student->subjects()->detach();
         $student->roles()->detach();
         $student->delete();
@@ -399,7 +403,7 @@ class StudentsController extends Controller
     }
 
     /**
-     * Remove multiple notifications from database
+     * Remove multiple students from database
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -411,8 +415,7 @@ class StudentsController extends Controller
             session()->flash('error', "You don't have enough permission.");
             return redirect()->route('admin.students.index');
         }
-        // dd(isset($data['sids']) && $this->validateMultiDelete());
-        
+            
 		if (isset($data['sids']) && $this->validateMultiDelete()) {
             $sids = $data['sids'];
             $obj_ids = explode(",", $sids);
@@ -448,7 +451,7 @@ class StudentsController extends Controller
                        
             return redirect() -> route('admin.students.index');
         }
-        session()->flash('error', 'Nothing has been selected!');
+        session()->flash('error', 'Nothing has been selected or invalid request!');
         return redirect()->route('admin.students.index');
     }
 

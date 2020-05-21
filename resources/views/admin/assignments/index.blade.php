@@ -37,17 +37,24 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-1 offset-5">
+                            <div class="col-1 offset-4">
                                 <button type = "submit" class="btn btn-primary" >
                                     {{ __('Search') }}
                                 </button>
                             </div>
-                            <div class="col-1 offset-5">
+                            <div class="col-7 text-right">
                                 <a href = "{{ route('admin.assignments.create') }}"> 
                                     <button class="btn btn-primary" type = "button">{{ __('Add') }}</button>
                                 </a>
+                                <a href="javascript:;">                                
+                                    <button class="btn btn-primary" id="del_btn">Delete</button>    
+                                </a> 
                             </div>
                         </div>
+                    </form>
+                    <form action="{{ route('admin.assignments.multiDelete') }}" class="d-none" method="post" id="multi_del_form">
+                        @csrf
+                        <input type="hidden" name="sids" id="sids">                       
                     </form>
                 </div>
             </div>
@@ -58,6 +65,10 @@
                     <table class="table table-bordered table-striped">
                         <thead>
                         <tr>
+                            <th scope="col" class="text-center pt-0 pl-1 pr-1" style="width: 20px;">
+                                <input type="checkbox" class="text-center"
+                                onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" />
+                            </th>
                             <th scope="col">Student Name</th>
                             <th scope="col">Tutor Name</th>
                             <th scope="col">Subjects</th>
@@ -68,6 +79,10 @@
                         <tbody>
                         @foreach ($data['assignments'] as $assignment)
                             <tr>
+                                <th scope="row" class="text-center pr-0 pl-0">
+                                    <input type="checkbox" name="selected[]" value="{{$assignment->id}}"
+                                    class="text-center"/>
+                                </th>
                                 <td scope="col">{{$assignment->student() != null ? $assignment->student()['fname'] 
                                 . ' ' . $assignment->student()['lname'] . ' ( ' . $assignment->student()['id'] . ' )' : "" }}</td>
                                 <td scope="col">{{$assignment->tutor() != null ? $assignment->tutor()['fname'] 
@@ -89,7 +104,8 @@
                                     <form action="{{ route('admin.assignments.destroy', $assignment) }}" method="POST" class="float-left">
                                         @csrf
                                         {{method_field('DELETE')}}
-                                        [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
+                                        <!-- [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>] -->
+                                        [<a href="javascript:;" onclick="del(this)">Delete</a>]
                                     </form>
                                     @endcan
                                 </td>
@@ -103,3 +119,43 @@
     </div>
 </div>
 @endsection
+@section("jssection")
+<script>    
+    function del(ele) {
+        var r= confirm("Do you want to delete selected row?");
+        if (r != true) {
+            return false;
+        }
+        ele.parentNode.submit();
+    }
+
+    window.addEventListener('load', function() {
+        jQuery( "#del_btn" ).click(function( event ) {
+            var sel_objs = jQuery('input[name*=\'selected\']:checked');
+
+            // clear all selected id 
+            var sel_obj_ids = [];
+            
+            for (var i=0; i < sel_objs.length ; ++i) {
+                sel_obj_ids.push(sel_objs[i].value);
+            }
+            jQuery("#sids").val(sel_obj_ids.toString());
+
+            if (sel_objs.length==0) {
+                alert('Please select the row.')
+                return false;
+            }
+            else {
+                var r= confirm("Do you want to delete selected rows?");
+                if (r != true) {
+                    return false;
+                }
+                event.preventDefault();
+                document.getElementById('multi_del_form').submit();
+                // jQuery("#multi_del_form").submit();
+            }   
+        });
+    });
+
+</script>
+@stop

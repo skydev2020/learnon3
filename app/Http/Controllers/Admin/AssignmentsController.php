@@ -219,10 +219,59 @@ class AssignmentsController extends Controller
      */
     public function destroy(Assignment $assignment)
     {
-        if (Gate::denies('manage-students')) return redirect()->route('admin.assignments.index');
-
+        if (Gate::denies('manage-students')) {
+            session()->flash('error', "You don't have enough permission.");
+            return redirect()->route('admin.assignments.index');
+        }
+        
         $assignment->delete();
         session() -> flash('success', "Student assignment details has been successfully deleted.");
         return redirect()->route('admin.assignments.index');
     }
+
+    /**
+     * Remove multiple objects from database
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function multiDelete(Request $request)
+    {
+        $data = $request->all();
+        
+        if (Gate::denies('manage-students')) {
+            session()->flash('error', "You don't have enough permission.");
+            return redirect()->route('admin.assignments.index');
+        }       
+        
+		if (isset($data['sids']) && $this->validateMultiDelete()) {
+            $sids = $data['sids'];
+            $obj_ids = explode(",", $sids);            
+            
+            if (count($obj_ids) ==0 ) {
+                session()->flash('error', 'Nothing has been selected!');
+                return redirect()->route('admin.assignments.index');
+            }
+
+			foreach ($obj_ids as $id) {
+                $obj = Assignment::find($id);
+                $obj->delete();
+			}
+			            
+            session()->flash('success', 'You have deleted student assignments!');		
+                       
+            return redirect() -> route('admin.assignments.index');
+        }
+
+        session()->flash('error', 'Nothing has been selected or invalid request!');
+        return redirect()->route('admin.assignments.index');
+    }
+
+    /**
+     * Check Multi Delete Permission, not implemented at the moment
+     */
+    public function validateMultiDelete()
+    {
+        return true;
+    }
+
 }
