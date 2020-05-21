@@ -30,6 +30,9 @@ class AssignmentsController extends Controller
         // $t_name =  isset($_GET['t_name']) ? trim($_GET['t_name']) : "";
         // $a_id = isset($_GET['a_id']) ? trim($_GET['a_id']) : "";
         // $a_date = isset($_GET['a_date']) ? trim($_GET['a_date']) : "";
+        
+        $field = isset($_GET['field']) ? trim($_GET['field']) : "";
+        $dir = isset($_GET['dir']) ? trim($_GET['dir']) : "asc";
 
         $q = "1=1 ";
 
@@ -56,6 +59,10 @@ class AssignmentsController extends Controller
             });
 
             $assignments = $assignments->select('assignments.*', 'users.fname');
+            if ($field!="") {
+                // $q.= " order by ".$field." ".$dir;
+                $assignments = $assignments->orderBy($field, $dir);
+            }
         } 
         else if (isset($s_data['s_name'])) {
             $assignments = $assignments->whereHas('students', function($student) use ($s_data) {
@@ -64,6 +71,10 @@ class AssignmentsController extends Controller
             });
 
             $assignments = $assignments->join('users', 'assignments.student_id', '=', 'users.id')->select('assignments.*', 'users.fname');
+            if ($field!="") {
+                // $q.= " order by ".$field." ".$dir;
+                $assignments = $assignments->orderBy($field, $dir);
+            }
         }
         else if (isset($s_data['t_name'])) {
             $assignments = $assignments->whereHas('tutors', function($tutor) use ($s_data) {
@@ -72,6 +83,10 @@ class AssignmentsController extends Controller
             });
 
             $assignments = $assignments->join('users', 'assignments.tutor_id', '=', 'users.id')->select('assignments.*', 'users.fname');
+            if ($field!="") {
+                // $q.= " order by ".$field." ".$dir;
+                $assignments = $assignments->orderBy($field, $dir);
+            }
         }
         
         if (!isset($s_data['s_name'])) {
