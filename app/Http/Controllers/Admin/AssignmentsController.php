@@ -195,10 +195,6 @@ class AssignmentsController extends Controller
             {
                 $assignment->subjects()->attach($subject);
             }
-            // foreach($data['subjects'] as $subject)
-            // {
-            //     $student -> subjects() -> attach($subject);
-            // }
 
             $assignment->save();
         }

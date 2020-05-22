@@ -9,27 +9,29 @@
                 <div class="card-header">
                     <i class="fa fa-info-circle" style="font-size:24px"> Student Packages</i>
                 </div>
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <table class="table table-bordered table-striped" id = "mytable">
                         <thead>
-                        <tr>
-                            <th scope="col">Student Name</th>
-                            <th scope="col">Package</th>
-                            <th scope="col">Total Hours</th>
-                            <th scope="col">Left Hours</th>
-                            <th scope="col">Date Purchased</th>
-                            <th scope="col">Action</th>
-                        </tr>
+                            <tr>
+                                <th scope="col" style="width: 150px;" class="text-center">
+                                    Student Name
+                                </th>
+                                <th scope="col" class="text-center">Package</th>
+                                <th scope="col" style="width: 150px;" class="text-center">Total Hours</th>
+                                <th scope="col" style="width: 150px;" class="text-center">Left Hours</th>
+                                <th scope="col" style="width: 160px;" class="text-center">Date Purchased</th>
+                                <th scope="col" style="width: 140px;" class="text-right" >Action</th>
+                            </tr>
                         </thead>
                         <tbody>
                         @foreach ($orders as $order)
                             <tr>
-                                <td scope="col">{{$order->firstname . ' ' . $order->lastname}}</td>
-                                <td scope="col">{{$order->package()['name']}}</td>
-                                <td scope="col">{{$order->total_hours}}</td>
-                                <td scope="col">{{$order->left_hours}}</td>
-                                <td scope="col">{{date('d/m/Y', strtotime($order->created_at))}}</td>
-                                <td scope="col">
+                                <td scope="col" class="text-center pl-1 pr-1">{{$order->firstname . ' ' . $order->lastname}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1">{{$order->package()['name']}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1">{{$order->total_hours}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1">{{$order->left_hours}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1">{{date('d/m/Y', strtotime($order->created_at))}}</td>
+                                <td scope="col" class="text-right">
                                     @can('edit-users')
                                         [<a href="{{route('admin.student_packages.show', $order)}}">Send Reminder</a>]
                                     @endcan
