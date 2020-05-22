@@ -113,7 +113,7 @@ class AssignmentsController extends Controller
         if ($url !="") {
             $url = substr($url, 1);
         }
-        
+
         $data = [
             'assignments'   => $objs,
             'search'        => $s_data,
@@ -159,6 +159,7 @@ class AssignmentsController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('manage-students')) return redirect()->route('admin.assignments.index');
         $validator = Validator::make($request->all(), [
             'tutor_val'             => ['required', 'integer'],
             'student_val'           => ['required', 'integer'],
@@ -192,8 +193,13 @@ class AssignmentsController extends Controller
         {
             foreach ($data['subjects'] as $subject)
             {
-                $assignment->attach($subject);
+                $assignment->subjects()->attach($subject);
             }
+            // foreach($data['subjects'] as $subject)
+            // {
+            //     $student -> subjects() -> attach($subject);
+            // }
+
             $assignment->save();
         }
         session() -> flash('success', "The assignment has been created successfully");
@@ -241,7 +247,7 @@ class AssignmentsController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
-        if (Gate::denies('manage-students')) return redirect()->route('admin.students.index');
+        if (Gate::denies('manage-students')) return redirect()->route('admin.assignments.index');
 
         $validator = Validator::make($request->all(), [
             'tutor_val'         => ['required', 'integer'],
