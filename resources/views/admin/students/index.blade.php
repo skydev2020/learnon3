@@ -167,7 +167,7 @@
                                     class="text-center"/>
                                 </th>
                                 <th scope="col" class="font-weight-normal pl-1 pr-1 text-center">{{$student->id}}</th>
-                                <td scope="col" class="text-center pl-1 pr-1 ">{{$student->fname . ' ' . $student->lname}}</td>
+                                <td scope="col" class="text-center pl-1 pr-1">{{$student->fname . ' ' . $student->lname}}</td>
                                 <td scope="col" class="text-center pl-1 pr-1 ">{{$student->email}}</td>
                                 <td scope="col" class="text-center pl-1 pr-1 ">{{$student->city}}</td>
                                 <td scope="col" class="text-center pl-1 pr-1 "><?php

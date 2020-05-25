@@ -19,8 +19,30 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        $packages = Package::all();
-        return view('admin.packages.index')->with('packages', $packages);
+        $field = isset($_GET['field']) ? trim($_GET['field']) : "";
+        $dir = isset($_GET['dir']) ? trim($_GET['dir']) : "asc";
+        $url = "";
+        $objs = null;
+
+        if ($field!="") {
+            // $q.= " order by ".$field." ".$dir;
+            $objs = Package::orderBy($field, $dir)->get()->toArray();            
+        }
+        else {
+            $objs=Package::all()->toArray();
+        }        
+
+        $data = [
+            'packages'   => $objs,            
+            'url'           => $url,
+            'order'  => [
+                'field' => $field,
+                'dir' => $dir
+            ],
+        ];   
+
+        
+        return view('admin.packages.index')->with('data', $data);
     }
 
     /**
