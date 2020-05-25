@@ -21,7 +21,7 @@ class AssignmentsController extends Controller
      */
     public function index(Request $request)
     {
-        $data = $this->validate($request, [
+        $s_data = $this->validate($request, [
             's_name' => 'nullable|string',
             't_name' => 'nullable|string',
             'a_date' => 'nullable|date',
@@ -30,36 +30,98 @@ class AssignmentsController extends Controller
         // $t_name =  isset($_GET['t_name']) ? trim($_GET['t_name']) : "";
         // $a_id = isset($_GET['a_id']) ? trim($_GET['a_id']) : "";
         // $a_date = isset($_GET['a_date']) ? trim($_GET['a_date']) : "";
+        
+        $field = isset($_GET['field']) ? trim($_GET['field']) : "";
+        $dir = isset($_GET['dir']) ? trim($_GET['dir']) : "asc";
 
         $q = "1=1 ";
+        $url = "";
 
-        if (isset($data['a_date'])) {
-            $q.= " and created_at like '%".$data['a_date']."%'";
-        } else $data['a_date'] = "";
+        if (isset($s_data['a_date'])) {
+            $q.= " and created_at like '%".$s_data['a_date']."%'";
+            $url.= "&a_date=".$s_data['a_date'];
+        } else $s_data['a_date'] = "";
 
         $assignments = Assignment::whereRaw($q);
-
-        if (isset($data['s_name']))
-        {
-            $assignments = $assignments->whereHas('students', function($student) use ($data) {
-                return $student->where('fname', 'like', "%" . $data['s_name'] . "%")
-                ->orwhere('lname', 'like', "%" . $data['s_name'] . "%");
+        
+        if (isset($s_data['s_name'])) {
+            $assignments = $assignments->whereHas('students', function($student) use ($s_data) {
+                return $student->where('fname', 'like', "%" . $s_data['s_name'] . "%")
+                ->orwhere('lname', 'like', "%" . $s_data['s_name'] . "%");
             });
-        } else $data['s_name'] = "";
+            $url.= "&s_name=".$s_data['s_name'];
+        }
+        else {
+            $s_data['s_name'] = "";
+        }
 
-        if (isset($data['t_name']))
-        {
-            $assignments = $assignments->whereHas('tutors', function($tutor) use ($data) {
-                return $tutor->where('fname', 'like', "%" . $data['t_name'] . "%")
-                ->orwhere('lname', 'like', "%" . $data['t_name'] . "%");
+        if (isset($s_data['t_name'])) {
+            $assignments = $assignments->whereHas('tutors', function($tutor) use ($s_data) {
+                return $tutor->where('fname', 'like', "%" . $s_data['t_name'] . "%")
+                ->orwhere('lname', 'like', "%" . $s_data['t_name'] . "%");
             });
-        } else $data['t_name'] = "";
+            $url.= "&t_name=".$s_data['t_name'];
+        }
+        else {
+            $s_data['t_name'] = "";
+        }
 
+        // dd( $assignments->toSql());
         $assignments = $assignments->get();
+        $objs = [];
+
+        foreach ($assignments as $assignment) {            
+            $obj = [];
+            $obj['id'] = $assignment->id;
+            $obj['created_at'] = $assignment->created_at;
+
+            if ($assignment->student()) {
+                $obj['student_name'] = $assignment->student()['fname']. " ". $assignment->student()['lname'] ;
+            }
+            else {
+                $obj['student_name'] = "" ;
+            }
+
+            if ($assignment->tutor()) {
+                $obj['tutor_name'] = $assignment->tutor()['fname']. " ". $assignment->tutor()['lname'] ;
+            }
+            else {
+                $obj['tutor_name'] = "" ;
+            }
+
+            $subjects = "";
+            foreach ($assignment->subjects()->get() as $subject)
+            {
+                $subjects .= $subject->name . ', ';
+            }
+            $subjects = rtrim($subjects, ', ');
+            $obj['subjects'] = $subjects;
+            
+            $objs[]=$obj;
+        }
+
+        if ($field!="") {
+            $fields  = array_column($objs, $field);
+            if ($dir == 'asc') {
+                array_multisort($fields, SORT_ASC, $objs);
+            }
+            else {
+                array_multisort($fields, SORT_DESC, $objs);
+            }
+        }      
+
+        if ($url !="") {
+            $url = substr($url, 1);
+        }
 
         $data = [
-            'assignments'   => $assignments,
-            'old'           => $data,
+            'assignments'   => $objs,
+            'search'        => $s_data,
+            'url'           => $url,
+            'order'  => [
+                'field' => $field,
+                'dir' => $dir
+            ],
         ];
 
         if( count($assignments) != 0 )
@@ -97,6 +159,7 @@ class AssignmentsController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('manage-students')) return redirect()->route('admin.assignments.index');
         $validator = Validator::make($request->all(), [
             'tutor_val'             => ['required', 'integer'],
             'student_val'           => ['required', 'integer'],
@@ -130,8 +193,9 @@ class AssignmentsController extends Controller
         {
             foreach ($data['subjects'] as $subject)
             {
-                $assignment->attach($subject);
+                $assignment->subjects()->attach($subject);
             }
+
             $assignment->save();
         }
         session() -> flash('success', "The assignment has been created successfully");
@@ -179,7 +243,7 @@ class AssignmentsController extends Controller
      */
     public function update(Request $request, Assignment $assignment)
     {
-        if (Gate::denies('manage-students')) return redirect()->route('admin.students.index');
+        if (Gate::denies('manage-students')) return redirect()->route('admin.assignments.index');
 
         $validator = Validator::make($request->all(), [
             'tutor_val'         => ['required', 'integer'],
@@ -219,10 +283,59 @@ class AssignmentsController extends Controller
      */
     public function destroy(Assignment $assignment)
     {
-        if (Gate::denies('manage-students')) return redirect()->route('admin.assignments.index');
-
+        if (Gate::denies('manage-students')) {
+            session()->flash('error', "You don't have enough permission.");
+            return redirect()->route('admin.assignments.index');
+        }
+        
         $assignment->delete();
         session() -> flash('success', "Student assignment details has been successfully deleted.");
         return redirect()->route('admin.assignments.index');
     }
+
+    /**
+     * Remove multiple objects from database
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function multiDelete(Request $request)
+    {
+        $data = $request->all();
+        
+        if (Gate::denies('manage-students')) {
+            session()->flash('error', "You don't have enough permission.");
+            return redirect()->route('admin.assignments.index');
+        }       
+        
+		if (isset($data['sids']) && $this->validateMultiDelete()) {
+            $sids = $data['sids'];
+            $obj_ids = explode(",", $sids);            
+            
+            if (count($obj_ids) ==0 ) {
+                session()->flash('error', 'Nothing has been selected!');
+                return redirect()->route('admin.assignments.index');
+            }
+
+			foreach ($obj_ids as $id) {
+                $obj = Assignment::find($id);
+                $obj->delete();
+			}
+			            
+            session()->flash('success', 'You have deleted student assignments!');		
+                       
+            return redirect() -> route('admin.assignments.index');
+        }
+
+        session()->flash('error', 'Nothing has been selected or invalid request!');
+        return redirect()->route('admin.assignments.index');
+    }
+
+    /**
+     * Check Multi Delete Permission, not implemented at the moment
+     */
+    public function validateMultiDelete()
+    {
+        return true;
+    }
+
 }

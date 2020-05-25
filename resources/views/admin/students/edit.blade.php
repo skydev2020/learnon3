@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fas fa-user-tie" style="font-size:24px"> Students</i>
+                    <i class="fas fa-user-tie" style="font-size:24px"> Edit Student</i>
                 </div>
 
                 <div class="card-body">
