@@ -18,8 +18,50 @@ class Student_PackagesController extends Controller
      */
     public function index()
     {
-        $orders = Order::has('packages')->has('users')->get(); 
-        return view('admin.student_packages.index')->with('orders', $orders);
+        $field = isset($_GET['field']) ? trim($_GET['field']) : "";
+        $dir = isset($_GET['dir']) ? trim($_GET['dir']) : "asc";
+        $url = "";
+
+        $orders = Order::has('packages')->has('users');
+        
+        if (($field=="firstname") || ($field=="total_hours") || ($field=="left_hours") || ($field=="created_at")) {
+            // $q.= " order by ".$field." ".$dir;
+            $orders = $orders->orderBy($field, $dir);            
+        }
+        $objs=[];
+        $orders=$orders->get();
+        // dd($orders);
+        foreach ($orders as $order) {                        
+            $obj= $order->toArray();
+            
+            if ($order->package()) {
+                $obj['package_name'] = $order->package()['name'];
+            }
+            else {
+                $obj['package_name'] = "" ;
+            }                       
+            $objs[]=$obj;
+        }
+
+        if ($field=="package_name") {
+            $fields  = array_column($objs, $field);
+            if ($dir == 'asc') {
+                array_multisort($fields, SORT_ASC, $objs);
+            }
+            else {
+                array_multisort($fields, SORT_DESC, $objs);
+            }
+        }   
+
+        $data = [
+            'orders'   => $objs,            
+            'url'           => $url,
+            'order'  => [
+                'field' => $field,
+                'dir' => $dir
+            ],
+        ];        
+        return view('admin.student_packages.index')->with('data', $data);
     }
 
     /**
