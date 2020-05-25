@@ -62,7 +62,7 @@
                             </div>
                             <div class="col-8 col-md-6 d-flex">
                                 <input type = "text" id = "base_invoice" name = "base_invoice" class = "col-8 form-control"
-                                    autocomplete= "base_invoice" autofocus/>
+                                    autocomplete= "on" autofocus/>
                                 <label for = "base_invoice" class="col-form-label">&nbsp; per hour</label>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                             </div>
                             <div class="col-8 col-md-6 d-flex">
                                 <input type = "text" id = "base_wage" name = "base_wage" class = "col-8 form-control"
-                                autocomplete= "base_wage" autofocus/>
+                                autocomplete= "on" autofocus/>
                                 <label for = "base_wage" class="col-form-label">&nbsp; per hour</label>
                             </div>
                         </div>

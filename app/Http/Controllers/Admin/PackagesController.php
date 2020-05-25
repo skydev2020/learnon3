@@ -25,7 +25,6 @@ class PackagesController extends Controller
         $objs = null;
 
         if ($field!="") {
-            // $q.= " order by ".$field." ".$dir;
             $objs = Package::orderBy($field, $dir)->get()->toArray();            
         }
         else {
@@ -40,8 +39,7 @@ class PackagesController extends Controller
                 'dir' => $dir
             ],
         ];   
-
-        
+     
         return view('admin.packages.index')->with('data', $data);
     }
 
