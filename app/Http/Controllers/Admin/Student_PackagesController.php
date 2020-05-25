@@ -22,7 +22,7 @@ class Student_PackagesController extends Controller
         $dir = isset($_GET['dir']) ? trim($_GET['dir']) : "asc";
         $url = "";
 
-        $orders = Order::has('packages')->has('users');
+        $orders = Order::has('package')->has('user');
         
         if (($field=="firstname") || ($field=="total_hours") || ($field=="left_hours") || ($field=="created_at")) {
             // $q.= " order by ".$field." ".$dir;
@@ -30,12 +30,11 @@ class Student_PackagesController extends Controller
         }
         $objs=[];
         $orders=$orders->get();
-        // dd($orders);
+        
         foreach ($orders as $order) {                        
-            $obj= $order->toArray();
-            
-            if ($order->package()) {
-                $obj['package_name'] = $order->package()['name'];
+            $obj= $order->toArray();            
+            if ($order->package) {
+                $obj['package_name'] = $order->package['name'];
             }
             else {
                 $obj['package_name'] = "" ;
@@ -102,7 +101,7 @@ class Student_PackagesController extends Controller
 			
         // Here you can define keys for replace before sending mail to Student
         $replace_info = Array(
-            'STUDENT_NAME' => $student_package->users()->first()['fname'].' '.$student_package->users()->first()['lname'], 
+            'STUDENT_NAME' => $student_package->user['fname'].' '.$student_package->user['lname'], 
         );
         
         foreach($replace_info as $rep_key => $rep_text) {
@@ -113,7 +112,8 @@ class Student_PackagesController extends Controller
             'subject'   => $subject,
             'message'   => $message
         ];
-        Mail::to($student_package->users()->first()['email']) -> send(new sendmail($data));
+        // dd($student_package->user['email']);
+        Mail::to($student_package->user['email']) -> send(new sendmail($data));
         session()->flash('success', "Reminder sent successfully!");
         return redirect()->route('admin.student_packages.index');
     }

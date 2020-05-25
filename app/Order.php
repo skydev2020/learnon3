@@ -6,13 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    //
-    public function packages() {
-        return $this->belongsTo('App\Package', 'package_id');
-    }
-
+    //   
     public function package() {
-        return $this->packages()->first();
+        return $this->belongsTo('App\Package', 'package_id');
     }
 
     public function isExist() {
@@ -21,7 +17,7 @@ class Order extends Model
         return false;
     }
 
-    public function users() {
+    public function user() {
         return $this->belongsTo('App\User', 'user_id');
     }
 
