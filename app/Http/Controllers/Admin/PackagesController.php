@@ -71,21 +71,21 @@ class PackagesController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'              => ['required', 'string'],
-            'hours'             => ['required', 'string'],
+            'hours'             => ['required', 'numeric'],
             'prepaid'           => ['required', 'integer'],
             'student'           => ['nullable', 'integer'],
-            'grades'            => ['required', 'Array'],
-            'description'       => ['required', 'string'],
-            'price_canada'      => ['required', 'string'],
-            'price_usa'         => ['required', 'string'],
-            'price_others'      => ['required', 'string'],
+            'grades'            => ['nullable', 'Array'],
+            'description'       => ['nullable', 'string'],
+            'price_canada'      => ['required', 'numeric'],
+            'price_usa'         => ['required', 'numeric'],
+            'price_others'      => ['required', 'numeric'],
             'status'            => ['required', 'integer'],
         ]);
 
         if ($validator->fails())
         {
             $request->session()->flash('error', $validator->messages()->first());
-            return redirect(route('admin.users.assignments.create'));
+            return redirect(route('admin.packages.create'));
         }
 
         $data = $request->all();
@@ -106,15 +106,17 @@ class PackagesController extends Controller
             $request->session()->flash('error', "There was an error creating the package");
             return redirect(route('admin.packages.create'));
         }
-
-        foreach ($data['grades'] as $grade)
-        {
-            $package->grades()->attach($grade);
+        if (isset($data['grades'])) {
+            foreach ($data['grades'] as $grade)
+            {
+                $package->grades()->attach($grade);
+            }
         }
+        
         $package->save();
         $request->session()->flash('success', "The Package has been created successfully");
-        $packages = Package::all();
-        return view('admin.packages.index')->with('packages', $packages);
+        
+        return redirect()->route('admin.packages.index');
     }
 
     /**

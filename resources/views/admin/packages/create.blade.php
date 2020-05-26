@@ -29,7 +29,7 @@
                                 </label>
                             </div>                            
                             <div class="col-8 col-md-6">
-                                <input  class="form-control" name="name" id = "name"
+                                <input  class="form-control" name="name" id = "name" required
                                  autocomplete="on" autofocus>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                             </div>
                             <div class="col-8 col-md-6">
                                 <input  class="form-control" name="hours" id = "hours" value="1"
-                                 autocomplete="hours" autofocus>
+                                 autocomplete="hours" autofocus type="number" step="0.01" min="0">
                             </div>
                         </div>
 
@@ -55,10 +55,10 @@
 
                             <div class="col-8 col-md-6 d-flex align-items-center">
                                 <label class = "radio-inline mb-0">
-                                    <input type="radio" name="prepaid" id="prepaid" value="1">&nbsp;Yes
+                                    <input type="radio" name="prepaid" id="prepaid" value="1" required>&nbsp;Yes
                                 </label> &nbsp; &nbsp;
                                 <label class = "radio-inline mb-0">
-                                    <input type="radio" name="prepaid" id="prepaid" value="0">&nbsp;No
+                                    <input type="radio" name="prepaid" id="prepaid" value="0" required>&nbsp;No
                                 </label>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
 
                             <div class="col-8 col-md-6 d-flex align-items-center">
                                 <select id="student" name="student" class="form-control">
-                                    <option></option>
+                                    <option value="0"></option>
                                     @foreach ($data['students'] as $student)
                                     <option value = "{{$student->id}}">{{$student->fname . ' ' . $student->lname}}</option>
                                     @endforeach
@@ -80,7 +80,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
-                                <label for="grades" class="col-form-label font-weight-bold">Grades:</label>
+                                <label for="grades" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> Grades:
+                                </label>
                             </div>
 
                             <div class="col-8 col-md-6 d-flex flex-column">
@@ -108,7 +110,7 @@
                                 </label>
                             </div>
                             <div class = "col-8 col-md-6">
-                                <textarea class = "form-control inputstl" name="description" id="description" autofocus
+                                <textarea class = "form-control inputstl" required name="description" required id="description" autofocus
                                 ></textarea>
                             </div>
                         </div>
@@ -116,36 +118,36 @@
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">                                
                                 <label for="price_usa" class="col-form-label font-weight-bold">
-                                    {{ __(' Price USA') }}
+                                    <span class="required">*</span>{{ __(' Price USA') }}
                                 </label>                                
                             </div>
                             <div class = "col-8 col-md-6">
-                                <input class="form-control" name="price_usa" id = "price_usa"
-                                autocomplete="on" autofocus>
+                                <input class="form-control" name="price_usa" id = "price_usa" required
+                                autocomplete="on" autofocus type="number" step="0.01" min="0">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
                                 <label for="price_canada" class="col-form-label font-weight-bold">
-                                    {{ __(' Price Canada') }}
+                                    <span class="required">*</span>{{ __(' Price Canada') }}
                                 </label>                                
                             </div>
                             <div class = "col-8 col-md-6">
-                                <input class="form-control" name="price_canada" id = "price_canada"
-                                autocomplete="on" autofocus>
+                                <input class="form-control" name="price_canada" id = "price_canada" required
+                                autocomplete="on" autofocus type="number" step="0.01" min="0">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">
                                 <label for="price_others" class="col-form-label font-weight-bold">
-                                    {{ __(' Price Others') }}
+                                    <span class="required">*</span>{{ __(' Price Others') }}
                                 </label>                                
                             </div>
                             <div class="col-8 col-md-6">
-                                <input class="form-control" name="price_others" id="price_others"
-                                autocomplete="on" autofocus>
+                                <input class="form-control" name="price_others" id="price_others" required
+                                autocomplete="on" autofocus type="number" step="0.01" min="0">
                             </div>
                         </div>
 
@@ -157,10 +159,10 @@
                             </div>
                             <div class="col-8 col-md-6 d-flex align-items-center">
                                 <label class = "radio-inline mb-0">
-                                    <input type="radio" name="status" id="status" value="1">&nbsp;Enable
+                                    <input type="radio" name="status" id="status" value="1" required>&nbsp;Enable
                                 </label> &nbsp; &nbsp;
                                 <label class = "radio-inline mb-0">
-                                    <input type="radio" name="status" id="status" value="0">&nbsp;Disable
+                                    <input type="radio" name="status" id="status" value="0" required>&nbsp;Disable
                                 </label>
                             </div>
                         </div>
