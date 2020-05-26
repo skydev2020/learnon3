@@ -26,11 +26,7 @@ class AssignmentsController extends Controller
             't_name' => 'nullable|string',
             'a_date' => 'nullable|date',
         ]);
-        // $s_name = isset($_GET['s_name']) ? trim($_GET['s_name']) : "";
-        // $t_name =  isset($_GET['t_name']) ? trim($_GET['t_name']) : "";
-        // $a_id = isset($_GET['a_id']) ? trim($_GET['a_id']) : "";
-        // $a_date = isset($_GET['a_date']) ? trim($_GET['a_date']) : "";
-        
+
         $field = isset($_GET['field']) ? trim($_GET['field']) : "";
         $dir = isset($_GET['dir']) ? trim($_GET['dir']) : "asc";
 

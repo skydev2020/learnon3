@@ -107,7 +107,7 @@ class StudentsController extends Controller
                 'field' => $field,
                 'dir' => $dir
             ],
-            'old' => [
+            'search' => [
                 's_name' => $s_name,
                 's_city' => $s_city,
                 's_date' => $s_date,
@@ -326,7 +326,7 @@ class StudentsController extends Controller
         $student-> approved = $data['approved'];
         $student-> status = $data['status'];
 
-        $student-> subjects() -> sync($data['subjects']);
+        $student-> subjects()->sync($data['subjects']);
         if (!$student->save())
         {
             session()->flash('error', "There is an error modifying student!");

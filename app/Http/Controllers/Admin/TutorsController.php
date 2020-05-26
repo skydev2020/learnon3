@@ -20,58 +20,91 @@ class TutorsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $t_name = isset($_GET['t_name']) ? trim($_GET['t_name']) : "";
-        $email = isset($_GET['email']) ? trim($_GET['email']) : "";
-        $status = isset($_GET['status']) ? trim($_GET['status']) : "";
-        $approved = isset($_GET['approved']) ? trim($_GET['approved']) : "";
-        $t_date = isset($_GET['t_date']) ? trim($_GET['t_date']) : "";
+        $s_data = $this->validate($request, [            
+            't_name' => 'nullable|string',
+            'email' => 'nullable|string',
+            'status' => 'nullable|integer',
+            'approved' => 'nullable|integer',
+            't_date' => 'nullable|date',
+        ]);
+
+        $field = isset($_GET['field']) ? trim($_GET['field']) : "";
+        $dir = isset($_GET['dir']) ? trim($_GET['dir']) : "asc";
+        
+        // $t_name = isset($_GET['t_name']) ? trim($_GET['t_name']) : "";
+        // $email = isset($_GET['email']) ? trim($_GET['email']) : "";
+        // $status = isset($_GET['status']) ? trim($_GET['status']) : "";
+        // $approved = isset($_GET['approved']) ? trim($_GET['approved']) : "";
+        // $t_date = isset($_GET['t_date']) ? trim($_GET['t_date']) : "";
 
         $q = "1=1 ";
+        $url = "";
 
-        if ($email) {
-            $q.= " and email like '%".$email."%'";
+        if (isset($s_data['email'])) {
+            $q.= " and email like '%".$s_data['email']."%'";
+            $url.= "&email=".$s_data['email'];
+        }
+        else {
+            $s_data['email'] = "";
         }
 
-        if ($status) {
-            if ($status == "Enabled")
-                $q.= " and status like 1";
-            else
-            {
-                $q.= " and (status is NULL or 0)";
-            }
+        if (isset($s_data['status'])) {        
+            $q.= " and status like ".$s_data['status'];
+            $url.= "&status=".$s_data['status'];
+        }
+        else {
+            $s_data['status'] = "";
         }
 
-        if ($approved) {
-            if ($approved == "Yes")
-                $q.= " and approved like 1";
-            else
-                $q.= " and (approved is NULL or 0)";
+        if (isset($s_data['approved'])) {
+            $q.= " and approved like ".$s_data['approved'];
+            $url.= "&approved=".$s_data['approved'];
+        }
+        else {
+            $s_data['approved'] = "";
         }
 
-        if ($t_date) {
-            $q.= " and created_at like '%".$t_date."%'";
+        if (isset($s_data['t_date'])) {
+            $q.= " and created_at like '%".$s_data['t_date']."%'";
+            $url.= "&t_date=".$s_data['t_date'];
+        }
+        else {
+            $s_data['t_date'] = "";
         }
 
-        if ($t_name) {
-            $q.= " and (fname like '%".$t_name."%' or lname like '%" .$t_name . "%') ";
+        if (isset($s_data['t_name'])) {        
+            $q.= " and (fname like '%".$s_data['t_name']."%' or lname like '%" .$s_data['t_name'] . "%') ";
+            $url.= "&t_name=".$s_data['t_name'];
+        }
+        else {
+            $s_data['t_name'] = "";
         }
 
+
+        $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()
+        ->whereRaw($q);
+
+        if ($field!="") {            
+            $tutors = $tutors->orderBy($field, $dir);
+        }
+
+        if ($url !="") {
+            $url = substr($url, 1);
+        }
 
         //$q = "1=1  and (approved is NULL or 0) and (fname like '%learnon%' or lname like '%learnon%')";
-        $tutors = Role::find(config('global.TUTOR_ROLE_ID'))->users()
-        ->whereRaw($q)->get();
+        $tutors = $tutors->get();
 
         $data = [
             'tutors' => $tutors,
-            'old' => [
-                't_name' => $t_name,
-                'email' => $email,
-                'status' => $status,
-                'approved' => $approved,
-                't_date' => $t_date,
-                ]
+            'search' => $s_data,
+            'url'    => $url,
+            'order'  => [
+                'field' => $field,
+                'dir' => $dir
+            ]
         ];
 
         session()->flash('error', null);
