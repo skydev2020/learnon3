@@ -210,10 +210,58 @@ class PackagesController extends Controller
      */
     public function destroy(Package $package)
     {
-        if (Gate::denies('manage-students')) return redirect()->route('admin.packages.index');
-
+        if (Gate::denies('manage-students')) {
+            session()->flash('error', "You don't have enough permission.");
+            return redirect()->route('admin.packages.index');
+        }
+        
+        $package->grades()->detach();
         $package->delete();
         session()->flash('success', "The Package has been deleted successfully");
         return redirect()->route('admin.packages.index');
+    }
+
+    /**
+     * Remove multiple packages from database
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function multiDelete(Request $request)
+    {
+        $data = $request->all();
+        
+        if (Gate::denies('manage-students')) {
+            session()->flash('error', "You don't have enough permission.");
+            return redirect()->route('admin.packages.index');
+        }
+            
+		if (isset($data['sids']) && $this->validateMultiDelete()) {
+            $sids = $data['sids'];
+            $obj_ids = explode(",", $sids);
+                        
+            if (count($obj_ids) ==0 ) {
+                session()->flash('error', 'Nothing has been selected!');
+                return redirect()->route('admin.packages.index');
+            }
+
+			foreach ($obj_ids as $id) {
+                $obj = Package::find($id);                
+                $obj->grades()->detach();
+                $obj->delete();
+			}
+			            
+            session()->flash('success', 'You have deleted packages!');		                       
+            return redirect()->route('admin.packages.index');
+        }
+        session()->flash('error', 'Nothing has been selected or invalid request!');
+        return redirect()->route('admin.packages.index');
+    }
+
+    /**
+     * Check Multi Delete Permission, not implemented at the moment
+     */
+    public function validateMultiDelete()
+    {
+        return true;
     }
 }

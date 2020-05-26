@@ -26,6 +26,10 @@
                             </div>
                         </div>
                     </form>
+                    <form action="{{ route('admin.packages.multiDelete') }}" class="d-none" method="post" id="multi_del_form">
+                        @csrf
+                        <input type="hidden" name="sids" id="sids">                       
+                    </form>
                 </div>
             </div>
 
@@ -101,7 +105,7 @@
                         @foreach ($data['packages'] as $package)
                             <tr>
                                 <th scope="row" class="text-center pr-0 pl-0">
-                                    <input type="checkbox" name="selected[]" value="$package['id']"
+                                    <input type="checkbox" name="selected[]" value="{{$package['id']}}"
                                     class="text-center"/>
                                 </th>
                                 <th scope="row" class="font-weight-normal pl-1 pr-1 text-center">{{$package['id']}}</th>
@@ -119,7 +123,7 @@
                                     <form action="{{ route('admin.packages.destroy', $package['id']) }}" method="POST" class="float-left">
                                         @csrf
                                         {{method_field('DELETE')}}
-                                        [<a href="javascript:;" onclick="parentNode.submit();">Delete</a>]
+                                        [<a href="javascript:;" onclick="del(this)">Delete</a>]
                                     </form>
                                     @endcan
                                 </td>
@@ -133,45 +137,45 @@
         </div>
     </div>
 </div>
-
-<script type = "text/javascript">
-    function exportToExcel(tableID){
-        var tab_text="<table border='2px'><tr bgcolor='#87AFC6' style='height: 75px; text-align: center; width: 250px'>";
-        var textRange; var j=0;
-        tab = document.getElementById(tableID); // id of table
-
-        for(j = 0 ; j < tab.rows.length ; j++)
-        {
-
-            tab_text=tab_text;
-
-            tab_text=tab_text+tab.rows[j].innerHTML.toUpperCase()+"</tr>";
-            //tab_text=tab_text+"</tr>";
-        }
-
-        tab_text= tab_text+"</table>";
-        tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, ""); //remove if u want links in your table
-        tab_text= tab_text.replace(/<img[^>]*>/gi,""); //remove if u want images in your table
-        tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); //remove input params
-
-        var ua = window.navigator.userAgent;
-        var msie = ua.indexOf("MSIE ");
-
-        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
-
-        {
-            txtArea1.document.open("txt/html","replace");
-            txtArea1.document.write( 'sep=,\r\n' + tab_text);
-            txtArea1.document.close();
-            txtArea1.focus();
-            sa=txtArea1.document.execCommand("SaveAs",true,"sudhir123.txt");
-        }
-
-        else {
-        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
-        }
-        
-        return (sa);
-    }
-</script>
 @endsection
+@section("jssection")
+<script>    
+    function del(ele) {
+        var r= confirm("Do you want to delete selected row?");
+        if (r != true) {
+            return false;
+        }
+        ele.parentNode.submit();
+    }
+
+    window.addEventListener('load', function() {
+        jQuery( "#del_btn" ).click(function( event ) {
+            var sel_objs = jQuery('input[name*=\'selected\']:checked');
+
+            // clear all selected id 
+            var sel_obj_ids = [];
+            
+            for (var i=0; i < sel_objs.length ; ++i) {
+                sel_obj_ids.push(sel_objs[i].value);
+            }
+            jQuery("#sids").val(sel_obj_ids.toString());
+
+            if (sel_objs.length==0) {
+                alert('Please select the row.')
+                return false;
+            }
+            else {
+                var r= confirm("Do you want to delete selected rows?");
+                if (r != true) {
+                    return false;
+                }
+                event.preventDefault();
+                document.getElementById('multi_del_form').submit();
+                // jQuery("#multi_del_form").submit();
+            }   
+        });
+    });
+
+</script>
+<script src="{{ asset('js/export/export.js')}}"></script>
+@stop

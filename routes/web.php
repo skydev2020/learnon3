@@ -34,6 +34,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::post('assignments/multi_del', 'AssignmentsController@multiDelete') -> name('assignments.multiDelete');
 
     Route::resource('/packages', 'PackagesController');
+    Route::post('packages/multi_del', 'PackagesController@multiDelete') -> name('packages.multiDelete');
+
     Route::resource('/student_packages', 'Student_PackagesController');
     Route::resource('/tutors', 'TutorsController');
     Route::resource('/tutorassignments', 'TutorAssignmentsController');
