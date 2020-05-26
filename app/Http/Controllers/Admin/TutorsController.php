@@ -156,7 +156,7 @@ class TutorsController extends Controller
             'state_id'              => ['required', 'integer'],
             'pcode'                 => ['required', 'string'],
             'country_id'            => ['required', 'integer'],
-            'other_notes'           => ['required', 'string'],
+            'other_notes'           => ['nullable', 'string'],
             'post_secondary_edu'    => ['required', 'string'],
             'subjects_studied'      => ['required', 'string'],
             'tutoring_courses'      => ['required', 'string'],

@@ -22,6 +22,23 @@
                                 </a>
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                            <div class = "col-3 d-flex justify-content-end align-items-center">
+                                <label for = "email" class="col-form-label font-weight-bold">
+                                    <span class="required">*</span> E-Mail:
+                                </label>
+                            </div>
+                            <div class="col-8 col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" onblur="checkMailStatus()">
+                                <span style="color: red; display: none;" id="dup_email_prob"><b>Email already Exists !</b></span>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <div class = "col-3 d-flex justify-content-end align-items-center">
@@ -49,27 +66,10 @@
 
                         <div class="form-group row">
                             <div class = "col-3 d-flex justify-content-end align-items-center">
-                                <label for = "email" class="col-form-label font-weight-bold">
-                                    <span class="required">*</span> E-Mail:
-                                </label>
-                            </div>
-                            <div class="col-8 col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" onblur="checkMailStatus()">
-                                <span style="color: red; display: none;" id="dup_email_prob"><b>Email already Exists !</b></span>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class = "col-3 d-flex justify-content-end align-items-center">
                                 <label for = "password" class="col-form-label text-md-right font-weight-bold">Password:</label>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input id="password" type="password" name="password" required autocomplete="new-password"
+                                <input id="password" type="password" name="password" required autocomplete="on"
                                 class="form-control @error('password') is-invalid @enderror">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -85,7 +85,7 @@
                             </div>
                             <div class="col-8 col-md-6">
                                 <input id="password-confirm" type="password" class="form-control"
-                                name="password_confirmation" required autocomplete="new-password">
+                                name="password_confirmation" required autocomplete="on">
                             </div>
                         </div>
 
