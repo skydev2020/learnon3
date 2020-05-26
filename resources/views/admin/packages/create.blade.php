@@ -41,7 +41,7 @@
                                 </label>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input  class="form-control" name="hours" id = "hours" value="1"
+                                <input class="form-control" name="hours" id = "hours" value="1"
                                  autocomplete="hours" autofocus type="number" step="0.01" min="0">
                             </div>
                         </div>
@@ -52,7 +52,6 @@
                                     <span class="required">*</span> Pre-paid:
                                 </label>
                             </div>
-
                             <div class="col-8 col-md-6 d-flex align-items-center">
                                 <label class = "radio-inline mb-0">
                                     <input type="radio" name="prepaid" id="prepaid" value="1" required>&nbsp;Yes
@@ -84,14 +83,13 @@
                                     <span class="required">*</span> Grades:
                                 </label>
                             </div>
-
                             <div class="col-8 col-md-6 d-flex flex-column">
                                 <div id="grades_box" class="scrollbox pl-1 pt-1 overflow-auto">
                                     <?php $i=0; ?>
                                     @foreach ($data['grades'] as $grade)
                                     <div class="<?php echo $i%2 == 0  ? "even" : "odd"; ?>">
                                         <input type="checkbox" value = "{{$grade->id}}"
-                                        name = "grades[]" id="grades[]">&nbsp;{{$grade->name}}
+                                        name = "grades[]">&nbsp;{{$grade->name}}
                                     </div>
                                     <?php $i++; ?>
                                     @endforeach
@@ -106,7 +104,7 @@
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end align-items-center">                                
                                 <label for="description" class="col-form-label font-weight-bold">
-                                    <span class="required">*</span>{{ __(' Description') }}
+                                    {{ __(' Description') }}
                                 </label>
                             </div>
                             <div class = "col-8 col-md-6">

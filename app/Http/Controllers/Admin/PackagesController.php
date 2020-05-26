@@ -159,14 +159,14 @@ class PackagesController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name'              => ['required', 'string'],
-            'hours'             => ['required', 'string'],
+            'hours'             => ['required', 'numeric'],
             'prepaid'           => ['required', 'integer'],
             'student'           => ['nullable', 'integer'],
-            'grades'            => ['required', 'Array'],
-            'description'       => ['required', 'string'],
-            'price_canada'      => ['required', 'string'],
-            'price_usa'         => ['required', 'string'],
-            'price_others'      => ['required', 'string'],
+            'grades'            => ['nullable', 'Array'],
+            'description'       => ['nullable', 'string'],
+            'price_canada'      => ['required', 'numeric'],
+            'price_usa'         => ['required', 'numeric'],
+            'price_others'      => ['required', 'numeric'],
             'status'            => ['required', 'integer'],
         ]);
 
@@ -186,20 +186,22 @@ class PackagesController extends Controller
         $package->price_alb     = $data['price_others'];
         $package->hours         = $data['hours'];        
         $package->status        = $data['status'];
-        foreach ($data['grades'] as $grade)
-        {
-            $package->grades()->attach($grade);
+
+        if (isset($data['grades'])) {
+            $package->grades()->sync($data['grades']);
+        }
+        else {
+            $package->grades()->detach();
         }
 
         if (!$package->save())
         {
             $request->session()->flash('error', "There was an error modifying package!");
-            return redirect(route('admin.users.assignments.create'));
+            return redirect()->route('admin.packages.edit', $package);
         }
 
         $request->session()->flash('success', "You have modified information!");
-        $packages = Package::all();
-        return view('admin.packages.index')->with('packages', $packages);
+        return redirect()->route('admin.packages.index');
     }
 
     /**
