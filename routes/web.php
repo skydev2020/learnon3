@@ -28,7 +28,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/users', 'UsersController');
     
     Route::resource('/students', 'StudentsController');
-    Route::post('students/multi_del', 'StudentsController@multiDelete') -> name('students.multiDelete');
+    Route::post('students/multi_del', 'StudentsController@multiDelete')->name('students.multiDelete');
 
     Route::resource('/assignments', 'AssignmentsController');
     Route::post('assignments/multi_del', 'AssignmentsController@multiDelete') -> name('assignments.multiDelete');
@@ -37,7 +37,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::post('packages/multi_del', 'PackagesController@multiDelete') -> name('packages.multiDelete');
 
     Route::resource('/student_packages', 'Student_PackagesController');
+    
     Route::resource('/tutors', 'TutorsController');
+    Route::post('tutors/multi_del', 'TutorsController@multiDelete')->name('tutors.multiDelete');
+
     Route::resource('/tutorassignments', 'TutorAssignmentsController');
     Route::resource('/essayassignments', 'EssayAssignmentsController');
     Route::resource('/sessions', 'SessionsController');

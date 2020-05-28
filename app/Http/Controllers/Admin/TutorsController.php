@@ -359,4 +359,50 @@ class TutorsController extends Controller
         session()->flash('success', "You have removed tutor!");
         return redirect() -> route('admin.tutors.index');
     }
+
+    /**
+     * Remove multiple students from database
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function multiDelete(Request $request)
+    {
+        $data = $request->all();
+        
+        if (Gate::denies('manage-tutors')) {
+            session()->flash('error', "You don't have enough permission.");
+            return redirect()->route('admin.tutors.index');
+        }
+            
+		if (isset($data['sids']) && $this->validateMultiDelete()) {
+            $sids = $data['sids'];
+            $obj_ids = explode(",", $sids);
+            
+            
+            if (count($obj_ids) ==0 ) {
+                session()->flash('error', 'Nothing has been selected!');
+                return redirect()->route('admin.tutors.index');
+            }
+
+			foreach ($obj_ids as $id) {
+                $obj = User::find($id);
+                
+                $obj->roles()->detach();
+                $obj->delete();
+			}
+			            
+            session()->flash('success', 'You have deleted tutors!');
+            return redirect() -> route('admin.tutors.index');
+        }
+        session()->flash('error', 'Nothing has been selected or invalid request!');
+        return redirect()->route('admin.tutors.index');
+    }
+
+    /**
+     * Check Multi Delete Permission, not implemented at the moment
+     */
+    public function validateMultiDelete()
+    {
+        return true;
+    }
 }

@@ -91,6 +91,10 @@
                             </div>
                         </div>
                     </form>
+                    <form action="{{ route('admin.tutors.multiDelete') }}" class="d-none" method="post" id="multi_del_form">
+                        @csrf
+                        <input type="hidden" name="sids" id="sids">                       
+                    </form>
                 </div>
             </div>
             <div class="card">
@@ -240,7 +244,6 @@
                 }
                 event.preventDefault();
                 document.getElementById('multi_del_form').submit();
-                // jQuery("#multi_del_form").submit();
             }   
         });
     });
