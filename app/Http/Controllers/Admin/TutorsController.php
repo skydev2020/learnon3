@@ -149,8 +149,8 @@ class TutorsController extends Controller
         $validator = Validator::make($request->all(), [
             'fname'                 => ['required', 'string', 'max:255'],
             'lname'                 => ['required', 'string', 'max:255'],
-            'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'              => ['required', 'string', 'min:1', 'confirmed'],
+            'email'                 => ['required', 'email', 'max:255', 'unique:users'],
+            'password'              => ['required', 'string', 'min:8', 'confirmed'],
             'home_phone'            => ['nullable', 'string'],
             'cell_phone'            => ['nullable', 'string'],
             'address'               => ['required', 'string'],
@@ -267,9 +267,9 @@ class TutorsController extends Controller
         $validator = Validator::make($request->all(), [
             'fname'                 => ['required', 'string', 'max:255'],
             'lname'                 => ['required', 'string', 'max:255'],
-            'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'              => ['required', 'string', 'min:1', 'confirmed'],
-            'home_phone'            => ['required', 'string'],
+            'email'                 => ['required', 'email',  'max:255'],
+            'password'              => ['nullable', 'string', 'min:8', 'confirmed'],
+            'home_phone'            => ['nullable', 'string'],
             'cell_phone'            => ['nullable', 'string'],
             'address'               => ['required', 'string'],
             'city'                  => ['required', 'string'],
@@ -289,18 +289,27 @@ class TutorsController extends Controller
             'criminal_check'        => ['required', 'string'],
             'approved'              => ['nullable', 'integer'],
             'status'                => ['nullable', 'integer'],
-        ]);
+        ]);        
         if ($validator->fails())
         {
             session()->flash('error', $validator->messages()->first());
             return redirect()->route('admin.tutors.edit', $tutor);
         }
+        
         $data = $request->all();
+        // Check user exists with same email except current user
+        $user = User::where('email', '=', $data['email'])->first();
+        if ($user && $user->id != $tutor->id) {
+            session()->flash('error', "User with same email exists");
+            return redirect()->route('admin.tutors.edit', $tutor);
+        }
 
         $tutor->fname = $data['fname'];
         $tutor->lname = $data['lname'];
         $tutor->email = $data['email'];
-        $tutor->password = Hash::make($data['password']);
+        if ($data['password']) {
+            $tutor->password = Hash::make($data['password']);
+        }
         $tutor->home_phone = $data['home_phone'];
         $tutor->cell_phone = $data['cell_phone'];
         $tutor->address = $data['address'];

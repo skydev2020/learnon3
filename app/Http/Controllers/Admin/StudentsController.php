@@ -210,7 +210,7 @@ class StudentsController extends Controller
         ]);
         if ($student == NULL)
         {
-            session()->flash('error', "There is an error modifying student!");
+            session()->flash('error', "There is an error creating student!");
             return redirect()->route('admin.students.create');
         }
 
@@ -300,7 +300,16 @@ class StudentsController extends Controller
             session()->flash('error', $validator -> messages() -> first());
             return redirect()->route('admin.students.edit', $student);
         }
+        
         $data = $request->all();
+        
+        // Check user exists with same email except current user
+        $user = User::where('email', '=', $data['email'])->first();
+        if ($user && $user->id != $student->id) {
+            session()->flash('error', "User with same email exists");
+            return redirect()->route('admin.students.edit', $student);
+        }
+
         $student-> email = $data['email'];
         if ($data['password']) {
             $student-> password = Hash::make($data['password']);

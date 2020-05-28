@@ -100,7 +100,9 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="password" class="col-form-label">Password:</label>
+                                <label for="password" class="col-form-label">
+                                    <span class="required">*</span> Password:
+                                </label>
                             </div>
                             <div class="col-8 col-md-6">
                                 <input id="password" type="password" name="password" required pattern="^\S{8,}$" autocomplete="on" oninput="checkPwd();" 
@@ -115,11 +117,13 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="password-confirm" class="col-form-label">Confirm:</label>
+                                <label for="password-confirm" class="col-form-label">
+                                    <span class="required">*</span> Confirm:
+                                </label>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input id="password-confirm" type="password" class="form-control"
-                                name="password_confirmation" required autocomplete="on" oninput="checkPwd();"  pattern="^\S{8,}$">
+                                <input id="password-confirm" type="password" class="form-control" pattern="^\S{8,}$"
+                                name="password_confirmation" required autocomplete="on" oninput="checkPwd();"  >
                             </div>
                         </div>
 
@@ -291,48 +295,48 @@
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="certified_teacher" class="col-form-label">
+                                <label for="certified_teacher_yes" class="col-form-label">
                                     <span class="required">*</span> Are you a "certified teacher"?
                                 </label>
                             </div>
                             <div class="col-8 col-md-6 d-flex align-items-center">
                                 <label class="radio-inline mb-0">
-                                    <input type="radio" name="certified_teacher" required id="certified_teacher" value="1">&nbsp;Yes
+                                    <input type="radio" name="certified_teacher" required id="certified_teacher_yes" value="1">&nbsp;Yes
                                 </label> &nbsp; &nbsp;
                                 <label class="radio-inline mb-0">
-                                    <input type="radio" name="certified_teacher" required id="certified_teacher" value="0">&nbsp;No
+                                    <input type="radio" name="certified_teacher" required id="certified_teacher_no" value="0">&nbsp;No
                                 </label>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="criminal_record" class="col-form-label  text-center">
+                                <label for="criminal_record_yes" class="col-form-label  text-center">
                                     <span class="required">*</span> Have you ever had a criminal conviction (disregarding minor traffic violations)?
                                 </label>
                             </div>
                             <div class="col-8 col-md-6 d-flex align-items-center">
                                 <label class="radio-inline mb-0">
-                                    <input type="radio" name="criminal_record" required id="criminal_record" value="1">&nbsp;Yes
+                                    <input type="radio" name="criminal_record" required id="criminal_record_yes" value="1">&nbsp;Yes
                                 </label> &nbsp; &nbsp;
                                 <label class="radio-inline mb-0">
-                                    <input type="radio" name="criminal_record" required id="criminal_record" value="0">&nbsp;No
+                                    <input type="radio" name="criminal_record" required id="criminal_record_no" value="0">&nbsp;No
                                 </label>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
-                                <label for="criminal_check" class="col-form-label">
+                                <label for="criminal_check_yes" class="col-form-label">
                                     <span class="required">*</span> Would you be willing to provide a background criminal check?
                                 </label>
                             </div>
                             <div class="col-8 col-md-6 d-flex align-items-center">
                                 <label class="radio-inline">
-                                    <input type="radio" name="criminal_check" required id="criminal_check" value="1">&nbsp;Yes
+                                    <input type="radio" name="criminal_check" required id="criminal_check_yes" value="1">&nbsp;Yes
                                 </label> &nbsp; &nbsp;
                                 <label class="radio-inline">
-                                    <input type="radio" name="criminal_check" required id="criminal_check" value="0">&nbsp;No
+                                    <input type="radio" name="criminal_check" required id="criminal_check_no" value="0">&nbsp;No
                                 </label>
                             </div>
                         </div>
@@ -373,5 +377,5 @@
 @endsection
 <!-- Scripts -->
 @section("jssection")
-<script src="{{ asset('js/admin/register_tutor.js')}}"></script>
+<script src="{{ asset('js/admin/tutor_register.js')}}"></script>
 @stop

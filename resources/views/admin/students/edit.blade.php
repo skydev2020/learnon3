@@ -363,6 +363,6 @@
 
     
 </script>
-<script src="{{ asset('js/students/subjects.js')}}"></script>
+<script src="{{ asset('js/admin/student_edit.js')}}"></script>
 
 @stop
