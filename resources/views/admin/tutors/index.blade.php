@@ -207,3 +207,44 @@
     </div>
 </div>
 @endsection
+@section("jssection")
+<script>    
+    function del(ele) {
+        var r= confirm("Do you want to delete selected row?");
+        if (r != true) {
+            return false;
+        }
+        ele.parentNode.submit();
+    }
+
+    window.addEventListener('load', function() {
+        jQuery( "#del_btn" ).click(function( event ) {
+            var sel_objs = jQuery('input[name*=\'selected\']:checked');
+
+            // clear all selected id 
+            var sel_obj_ids = [];
+            
+            for (var i=0; i < sel_objs.length ; ++i) {
+                sel_obj_ids.push(sel_objs[i].value);
+            }
+            jQuery("#sids").val(sel_obj_ids.toString());
+
+            if (sel_objs.length==0) {
+                alert('Please select the row.')
+                return false;
+            }
+            else {
+                var r= confirm("Do you want to delete selected rows?");
+                if (r != true) {
+                    return false;
+                }
+                event.preventDefault();
+                document.getElementById('multi_del_form').submit();
+                // jQuery("#multi_del_form").submit();
+            }   
+        });
+    });
+
+</script>
+<script src="{{ asset('js/export/export.js')}}"></script>
+@stop

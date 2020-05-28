@@ -347,8 +347,16 @@ class TutorsController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $tutor)
     {
-        //
+        if (Gate::denies('manage-tutors')) {
+            session()->flash('error', "You don't have enough permission.");
+            return redirect()->route('admin.tutors.index');
+        }
+        
+        $tutor->roles()->detach();
+        $tutor->delete();
+        session()->flash('success', "You have removed tutor!");
+        return redirect() -> route('admin.tutors.index');
     }
 }
