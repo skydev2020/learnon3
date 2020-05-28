@@ -11,7 +11,6 @@ function checkMailStatus(){
           url:'/api/checkEmail',// put your real file name
           data:{email: email},
           success:function(msg){
-            //alert(msg); // your message will come here.
             var obj = eval(msg);
             if (obj.exist =="no"){
                 errors.duplicateEmail = false;
@@ -20,8 +19,6 @@ function checkMailStatus(){
                 errors.duplicateEmail = true;
                 document.getElementById("dup_email_prob").style.display = "block";
             }
-
-            console.log(msg);
         }
    });
 }

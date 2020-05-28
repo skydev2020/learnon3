@@ -16,3 +16,4 @@ mix.js('resources/js/app.js', 'public/js')
 mix.copyDirectory('resources/js/register', 'public/js/register');
 mix.copyDirectory('resources/js/students', 'public/js/students');
 mix.copyDirectory('resources/js/export', 'public/js/export');
+mix.copyDirectory('resources/js/admin', 'public/js/admin');

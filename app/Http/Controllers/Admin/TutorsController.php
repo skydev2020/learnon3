@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ActivityLog;
 use App\Country;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -9,6 +10,7 @@ use App\Role;
 use App\State;
 use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -149,7 +151,7 @@ class TutorsController extends Controller
             'lname'                 => ['required', 'string', 'max:255'],
             'email'                 => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'              => ['required', 'string', 'min:1', 'confirmed'],
-            'home_phone'            => ['required', 'string'],
+            'home_phone'            => ['nullable', 'string'],
             'cell_phone'            => ['nullable', 'string'],
             'address'               => ['required', 'string'],
             'city'                  => ['required', 'string'],
@@ -204,13 +206,15 @@ class TutorsController extends Controller
             'status'                => $data['status'],
         ]);
 
-        if ($tutor != NULL){
-            $request->session()->flash('success', $tutor->fname . ' ' . $tutor->lname .' has been updated');
-        } else {
-            $request->session()->flash('error', 'There was an error updating the tutor');
+        if ($tutor == NULL) {
+            session()->flash('error', "There is an error creating tutor!");
             return redirect()->route('admin.tutors.create');
         }
 
+        $role = Role::select('id')->where('name', 'Tutor')->first();
+        $tutor->roles()->attach($role);
+        ActivityLog::log_activity(Auth::user()->id, "Tutor Added", "A new tutor added.");
+        session()->flash('success', $tutor->fname . ' ' . $tutor->lname .' has been updated');
         return redirect()->route('admin.tutors.index');
     }
 

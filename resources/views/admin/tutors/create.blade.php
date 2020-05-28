@@ -9,7 +9,7 @@
                     <i class="fas fa-user-tie" style="font-size:24px"> Add Tutor</i>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('admin.tutors.store')}}" method="POST" onsubmit="return submitOnValid()">
+                    <form name="tutor_frm" action="{{route('admin.tutors.store')}}" method="POST" onsubmit="return submitOnValid()">
                         @csrf
                         {{method_field('POST')}}
                         <div class="form-group row">
@@ -30,7 +30,7 @@
 
                             <div class="col-8 col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                 name="email" required autocomplete="email" autofocus>
+                                 name="email" required autocomplete="email" autofocus onblur="checkMailStatus()">
                                  <span style="color: red; display: none;" id="dup_email_prob"><b>Email already Exists !</b></span>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -79,11 +79,11 @@
                         <div class="form-group row">
                             <div class="col-3 d-flex justify-content-end font-weight-bold align-items-center">
                                 <label for="home_phone" class="col-form-label">
-                                    <span class="required">*</span> Home Phone:
+                                     Home Phone:
                                 </label>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input type="text" name="home_phone" required id="home_phone"
+                                <input type="text" name="home_phone" id="home_phone"
                                 class="form-control" autocomplete="home_phone" autofocus>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                                 <label for="cell_phone" class="col-form-label">Cell/Work Phone:</label>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input type="text" name="cell_phone" required id="cell_phone"
+                                <input type="text" name="cell_phone" id="cell_phone"
                                 class="form-control" autocomplete="cell_phone" autofocus>
                             </div>
                         </div>
@@ -103,8 +103,8 @@
                                 <label for="password" class="col-form-label">Password:</label>
                             </div>
                             <div class="col-8 col-md-6">
-                                <input id="password" type="password" name="password" required autocomplete="on"
-                                class="form-control @error('password') is-invalid @enderror">
+                                <input id="password" type="password" name="password" required pattern="^\S{8,}$" autocomplete="on" oninput="checkPwd();" 
+                                class="form-control @error('password') is-invalid @enderror" title="Must have at least 8 characters">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -119,7 +119,7 @@
                             </div>
                             <div class="col-8 col-md-6">
                                 <input id="password-confirm" type="password" class="form-control"
-                                name="password_confirmation" required autocomplete="on">
+                                name="password_confirmation" required autocomplete="on" oninput="checkPwd();"  pattern="^\S{8,}$">
                             </div>
                         </div>
 
@@ -155,7 +155,7 @@
                             </div>
                             <div class="col-8 col-md-6">
                                 <select name="state_id" id="state_id" class="form-control" required>
-                                    <option>--Select A Province / State--</option>
+                                    <option value="">--Select A Province / State--</option>
                                     @foreach ($data['states'] as $state)
                                     <option value="{{$state->id}}">{{$state->name}}</option>
                                     @endforeach
@@ -183,7 +183,7 @@
                             </div>
                             <div class="col-8 col-md-6">
                                 <select name="country_id" id="country_id" class="form-control" required>
-                                    <option>--Select Country--</option>
+                                    <option value="">--Select Country--</option>
                                     @foreach ($data['countries'] as $country)
                                     <option value="{{$country->id}}">{{$country->name}}</option>
                                     @endforeach
@@ -356,7 +356,7 @@
                                 <label for="status" class="col-form-label text-right">
                                     {{ __('Status') }}
                                 </label>
-                            </div>                            
+                            </div>
                             <div class="col-8 col-md-6">
                                 <select style="display: inline-block;" id="status" name="status" class = "form-control">
                                     <option value = "1">Enabled</option>
@@ -371,3 +371,7 @@
     </div>
 </div>
 @endsection
+<!-- Scripts -->
+@section("jssection")
+<script src="{{ asset('js/admin/register_tutor.js')}}"></script>
+@stop
